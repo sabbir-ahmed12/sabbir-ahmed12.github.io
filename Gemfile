@@ -17,7 +17,7 @@ group :jekyll_plugins do
     gem 'jekyll-twitter-plugin'
     gem 'jemoji'
     # gem 'mini_racer'  # uncomment it before deploying
-    gem 'unicode_utils'
+    gem 'unicode_utils' # uncomment it before deploying
     gem 'webrick'
 end
 group :other_plugins do
