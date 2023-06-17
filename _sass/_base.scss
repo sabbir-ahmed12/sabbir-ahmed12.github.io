@@ -380,6 +380,19 @@ footer.sticky-bottom {
   color: var(--global-text-color);
 }
 
+.item-title {
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.item {
+  font-size: 0.9rem;
+}
+
+.subitem {
+  font-size: 0.8rem;
+}
+
 // Repositories
 
 @media (min-width: 768px) {
@@ -562,13 +575,14 @@ footer.sticky-bottom {
     }
   }
 
-  h2.year {
+  h5.year {
     color: var(--global-divider-color);
     border-top: 1px solid var(--global-divider-color);
     padding-top: 1rem;
     margin-top: 2rem;
     margin-bottom: -2rem;
     text-align: right;
+    font-weight: bold;
   }
 
   ol.bibliography {

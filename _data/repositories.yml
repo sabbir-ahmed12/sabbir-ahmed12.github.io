@@ -1,12 +1,12 @@
 github_users:
-  - torvalds
-  - alshedivat
+  - sabbir-ahmed12
 
 github_repos:
-  - alshedivat/al-folio
-  - twbs/bootstrap
-  - jekyll/jekyll
-  - jquery/jquery
-  - FortAwesome/Font-Awesome
-  - jpswalsh/academicons
-  - mathjax/MathJax
+  - sabbir-ahmed12/ML-speech-enhancement
+  - sabbir-ahmed12/ML-speaker-identification
+  - sabbir-ahmed12/ML-capuchinbird-calls-prediction
+  - sabbir-ahmed12/ML-bangla-digit-classification
+  - sabbir-ahmed12/EDA-Ford-used-car-analysis
+  - sabbir-ahmed12/ML-malaria-detection
+  - sabbir-ahmed12/react-github-finder
+  - sabbir-ahmed12/sxad21m5y23

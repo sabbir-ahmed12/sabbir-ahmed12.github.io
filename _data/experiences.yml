@@ -1,0 +1,31 @@
+# A TEMPLATE TO UNDERSTAND THE STRUCTURE OF CONTENTS
+# - title: Job Experience
+#   type: time_table
+#   contents:
+#     - title: Junior Sr. Engineer
+#       institution: Optimizely
+#       year: 2024-2026
+#       credential_link: "https://www.xyz.com"
+#       description:
+#         - Description 1.
+#         - Description 2.
+#         - title: Description 3.
+#           contents:
+#             - Sub-description 1.
+#             - Sub-description 2.
+
+- title: Research Experience
+  type: time_table
+  contents:
+    - title: Undergraduate Thesis
+      institution: Chittagong University of Engineering and Technology, Chattogram, BD
+      year: 2020-2022
+      credential_link:
+      description:
+        - title: Responsibilites
+          contents:
+            - To get familiar with how to conduct research.
+            - To learn how to find research gaps.
+            - To learn how to write research articles.
+            - To learn how to present research.
+            - To write a thesis of approx. 10,000 words.

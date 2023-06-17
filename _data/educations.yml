@@ -1,0 +1,92 @@
+# A TEMPLATE TO UNDERSTAND THE STRUCTURE OF CONTENTS
+# - title: Education
+#   type: time_table
+#   contents:
+#     - title: PhD
+#       institution: University of Zurich, Zurich, Switzerland
+#       year: 1905
+#       credential_link: "https://www.xyz.com"
+#       description:
+#         - Description 1.
+#         - Description 2.
+#         - title: Description 3.
+#           contents:
+#             - Sub-description 1.
+#             - Sub-description 2.
+
+# ACADEMIC EDUCATION
+- title: Academic Credentials
+  type: time_table
+  contents:
+    - title: B.Sc. in Electronics and Telecommunication Engineering
+      institution: Chittagong University of Engineering and Technology, Chattogram, BD
+      year: 2017-2022
+
+    - title: Higher Secondary Level
+      institution: Ispahani Public School and College, Cumilla, BD
+      year: 2014-2016
+
+    - title: Secondary School Level
+      institution: Ispahani Public School and College, Cumilla, BD
+      year: 2012-2014
+
+# PROFESSIONAL EDUCATION
+# - title: Professional Courses
+#   type: time_table
+#   contents:
+#     - title: Cisco Certified Network Associate
+#       institution: Cisco
+#       year: 2019
+
+# MASSIVE ONLINE COURSES
+- title: MOOCs
+  type: time_table
+  contents:
+    - title: Learn to Code with Python
+      institution: Udemy
+      year: 2020
+      credential_link: "https://www.udemy.com/certificate/UC-1ea49862-38bc-4f6c-998a-664b926b34d1/"
+
+    - title: AWS Machine Learning Fundamentals
+      institution: Udacity
+      year: 2020
+      credential_link: "https://s3-us-west-2.amazonaws.com/udacity-printer/production/certificates/15c38f1d-aa7d-4168-99ce-c55a99ae631e.pdf"
+
+    - title: Complete Tensorflow 2 and Keras Deep Learning Bootcamp
+      institution: Udemy
+      year: 2020
+      credential_link: "https://www.udemy.com/certificate/UC-f68de615-408e-4138-9edf-53620b43ae07/"
+
+    - title: Deep Learning Specialization
+      institution: Coursera
+      year: 2020
+      credential_link: "https://www.coursera.org/account/accomplishments/specialization/certificate/R5BZJZYULDYN"
+
+    - title: Digital Signal Processing
+      institution: Coursera
+      year: 2020
+      credential_link: "https://www.coursera.org/account/accomplishments/verify/QJW86M2VVWQP"
+
+    - title: Machine Learning
+      institution: Coursera
+      year: 2019
+      credential_link: "https://www.coursera.org/account/accomplishments/verify/HYA9ZN4RQ3Y3"
+
+# TRAININGS AND WORKSHOPS ATTENDED
+- title: Trainings and Workshops
+  type: time_table
+  contents:
+    - title: Fundamentals of Research Methodology
+      institution: Scholarship School BD
+      year: 2022
+      credential_link: "https://drive.google.com/file/d/1TEhCiIpuE5EL38ahfDJmaYV6wO6YJICc/view?usp=sharing"
+
+    - title: AI and Machine Learning in Python
+      institution: Sheikh Kamal IT Business Incubator, CUET, BD
+      year: 2022
+      credential_link: "https://drive.google.com/file/d/1AaYvrIRvVrlCDE5tyqnzgIq3V3tW39PY/view?usp=sharing"
+
+    - title: Foundations in Digital Forensics with Magnet Axiom
+      institution: Sheikh Kamal IT Business Incubator, CUET, BD
+      year: 2019
+      credential_link: "https://drive.google.com/file/d/1QmxdqiW2SgOKo6pPYUHfwKjIDJGzNRS-/view?usp=sharing"
