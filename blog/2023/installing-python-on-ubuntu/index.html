@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <!-- Head -->
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    <!-- Metadata, OpenGraph and Schema.org -->
+    
+
+    <!-- Standard metadata -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>How Can You Run Multiple Versions of Python on Ubuntu and Create Virtual Environments? | Sabbir  Ahmed</title>
+    <meta name="author" content="Sabbir  Ahmed">
+    <meta name="description" content="Tutorial post on installing and maintaining multiple versions of python along with system python.">
+    <meta name="keywords" content="sabbir-ahmed, website, portfolio, cuet, ete">
+
+
+    <!-- Bootstrap & MDB -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-DF7Zhf293AJxJNTmh5zhoYYIMs2oXitRfBjY+9L//AY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous">
+
+    <!-- Bootstrap Table -->
+    <link defer rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.21.4/dist/bootstrap-table.min.css">
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+
+    <!-- Code Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/github.css" media="" id="highlight_theme_light">
+
+    
+
+    <!-- Styles -->
+    
+    <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%A7%94&lt;/text&gt;&lt;/svg&gt;">
+    
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="canonical" href="https://sabbir-ahmed12.github.io/blog/2023/installing-python-on-ubuntu/">
+
+    <!-- Dark Mode -->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/native.css" media="none" id="highlight_theme_dark">
+
+    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/dark_mode.js"></script>
+    
+
+  </head>
+
+  <!-- Body -->
+  <body class="fixed-top-nav ">
+
+    <!-- Header -->
+    <header>
+
+      <!-- Nav Bar -->
+      <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+        <div class="container">
+          <a class="navbar-brand title font-weight-lighter" href="/"><span class="font-weight-bold">Sabbir </span>Ahmed</a>
+          <!-- Navbar Toggle -->
+          <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar top-bar"></span>
+            <span class="icon-bar middle-bar"></span>
+            <span class="icon-bar bottom-bar"></span>
+          </button>
+
+          <div class="collapse navbar-collapse text-right" id="navbarNav">
+            <ul class="navbar-nav ml-auto flex-nowrap">
+
+              <!-- About -->
+              <li class="nav-item ">
+                <a class="nav-link" href="/">About</a>
+              </li>
+              
+              <!-- Blog -->
+              <li class="nav-item active">
+                <a class="nav-link" href="/blog/">Blog<span class="sr-only">(current)</span></a>
+              </li>
+
+              <!-- Other pages -->
+              <li class="nav-item ">
+                <a class="nav-link" href="/education/">Education</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/experiences/">Experiences</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/research/">Research</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/skills/">Skills</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/projects/">Projects</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/_pages/misc/">Misc</a>
+              </li>
+
+              <!-- Toogle theme mode -->
+              <li class="toggle-container">
+                <button id="light-toggle" title="Change theme">
+                  <i class="fas fa-moon"></i>
+                  <i class="fas fa-sun"></i>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Scrolling Progress Bar -->
+      <progress id="progress" value="0">
+        <div class="progress-container">
+          <span class="progress-bar"></span>
+        </div>
+      </progress>
+    </header>
+
+
+    <!-- Content -->
+    <div class="container mt-5">
+      
+        <!-- _layouts/post.html -->
+
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">How Can You Run Multiple Versions of Python on Ubuntu and Create Virtual Environments?</h1>
+    <p class="post-meta">June 17, 2023</p>
+    <p class="post-tags">
+      <a href="/blog/2023"> <i class="fas fa-calendar fa-sm"></i> 2023 </a>
+        ·  
+        <a href="/blog/tag/linux">
+          <i class="fas fa-hashtag fa-sm"></i> linux</a>  
+          
+        ·  
+        <a href="/blog/category/tutorial">
+          <i class="fas fa-tag fa-sm"></i> tutorial</a>  
+          
+
+    </p>
+  </header>
+
+  <article class="post-content">
+    
+    <div id="markdown-content">
+      <p>Maintaining multiple python versions of python on ubuntu becomes a issue of headache sometimes as Ubuntu OS already comes with a pre-installed python. Therefore, changing the system python may affect your Ubuntu OS functionality. In this tutorial, I’ll use <code class="language-plaintext highlighter-rouge">pyenv</code> to work with multiple versions of python.</p>
+
+<h2 id="why-should-you-use-pyenv-and-virtual-python-environments">Why should you use <code class="language-plaintext highlighter-rouge">pyenv</code> and Virtual Python Environments?</h2>
+
+<p>As a programmer or as a hobbyist you may want to work on several python projects simultaneously. And most of the projects require different Python versions and some project may require a specific version of a package e.g. specific version of numpy or django. In such cases you’ll need to install multiple versions of python and will have to install several versions of a specific package and that is when virtual environment is required to maintain several python ecosystems based on various projects in isolation. <code class="language-plaintext highlighter-rouge">pyenv</code> makes it easier to maintain various versions of python on ubuntu and unix based systems as those systems by default contains a python version which they uses for various system operations and we don’t wanna mess up with that python version.</p>
+
+<h2 id="how-to-install-pyenv-on-your-ubuntu">How to install <code class="language-plaintext highlighter-rouge">pyenv</code> on your ubuntu?</h2>
+
+<p>To install <code class="language-plaintext highlighter-rouge">pyenv</code> on Debian or Ubuntu based Linux distributions, you’ll have to install several libraries and packages necessary for building Python from scratch. Enter the following command into your terminal to install all the necessary packages.<br></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt install -y make build-essential libssl-dev zlib1g-dev \
+libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev \
+libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl \
+git
+</code></pre></div></div>
+
+<p>To install <code class="language-plaintext highlighter-rouge">pyenv</code> you can clone it directly from <a href="https://github.com/pyenv/pyenv" rel="external nofollow noopener" target="_blank">github</a> repository.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+</code></pre></div></div>
+
+<p>After that you need to enter the following commands to add <code class="language-plaintext highlighter-rouge">pyenv</code> to your <code class="language-plaintext highlighter-rouge">$PATH</code>. To see the effect you’ll have to open a new terminal.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo 'export PYENV_ROOT="$HOME/.pyenv"' &gt;&gt; ~/.bashrc
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' &gt;&gt; ~/.bashrc
+echo 'eval "$(pyenv init --path)"' &gt;&gt; ~/.bashrc
+</code></pre></div></div>
+
+<p><strong>If you use <code class="language-plaintext highlighter-rouge">zsh</code>, use <code class="language-plaintext highlighter-rouge">.zshrc</code> instead of <code class="language-plaintext highlighter-rouge">.bashrc</code>.</strong></p>
+
+<h2 id="using-pyenv">Using <code class="language-plaintext highlighter-rouge">pyenv</code>
+</h2>
+
+<p>If you followed the previous steps successfully, you should be able to use <code class="language-plaintext highlighter-rouge">pyenv</code> from your terminal. Type the following command on your terminal to check whether <code class="language-plaintext highlighter-rouge">pyenv</code> successfully installed or not. It should print the pyenv version.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv --version
+</code></pre></div></div>
+
+<p>It you get the <code class="language-plaintext highlighter-rouge">pyenv</code> version, congratulations!. Next step is to install Python of your desired version. First check which Python versions are available to you. For that use the following command.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv install -l
+</code></pre></div></div>
+
+<p>This command will display the various CPython versions(displays just the versions) along with other Python distributions such as Miniconda and Anaconda. In this tutorial we’ll install a CPython version. Let’s say you want to install CPython version 3.9.7. For that execute the following command on you terminal.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv install 3.9.7
+</code></pre></div></div>
+
+<p>It’ll take some time to build and install the desired Python version. However after completion of installation, type the following command to see the available python versions on your system.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv versions
+</code></pre></div></div>
+
+<p>You’ll find all the Python versions currently installed on your system and the current global version is indicated by an <code class="language-plaintext highlighter-rouge">*</code> on the left. To change the default global version of Python on your system type the following command.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv global [PYTHON_VERSION]
+</code></pre></div></div>
+
+<p>Or if you want to use a specific version of python for a specific folder i.e. project, navigate to that directory and execute the command below.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv local [PYTHON_VERSION]
+</code></pre></div></div>
+
+<p>Or if you want to set a specific Python version for your current terminal session use.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv shell [PYTHON_VERSION]
+</code></pre></div></div>
+
+<p>This will set the Python version only as long as your session is active. So after you close your terminal, everything will be back to default.</p>
+
+<h2 id="method-1-creating-virtual-environment-and-installing-package-on-that-environment">Method-1 Creating Virtual Environment and Installing Package on that Environment</h2>
+
+<p>Python installation includes some basic packages and modules. Your Python version should include <code class="language-plaintext highlighter-rouge">pip</code> module by default. So, set the specific Python version as global Python version. After that open a new terminal and you can close the previous session.</p>
+
+<p>After that install <code class="language-plaintext highlighter-rouge">pipenv</code> using <code class="language-plaintext highlighter-rouge">pip</code> command. It will install some dependencies along with <code class="language-plaintext highlighter-rouge">pipenv</code>. Creating and maintaining virtual environment using <code class="language-plaintext highlighter-rouge">pipenv</code> is much easier.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pipenv
+</code></pre></div></div>
+
+<p>You can check the installed packages on your current Python version using <code class="language-plaintext highlighter-rouge">pip list</code> command.</p>
+
+<p>To create virtual environment navigate to your preferred directory and create a folder. Suppose you want to start a django project, type the following command to install django under a virtual environment.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pipenv install django
+</code></pre></div></div>
+
+<p>It’ll create an environment at first and then install the latest django version for that environment. It should successfully install django on a virtual environment. You can activate the environment by navigating to that folder and then executing the following command.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pipenv shell
+</code></pre></div></div>
+
+<p>After activating the environment, you can run django command. e.g. you can try the following command -</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>django-admin
+</code></pre></div></div>
+
+<p>For installation of more packages, run the following command keeping the environment activated.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pipenv install [PACKAGE_NAME]
+</code></pre></div></div>
+
+<p>Exit the environment by just typing <code class="language-plaintext highlighter-rouge">exit</code>.</p>
+
+<h3 id="deleting-virtual-environment">Deleting Virtual Environment</h3>
+
+<p>You can delete a specific virtual environment from <code class="language-plaintext highlighter-rouge">~/.local/share/virtualenvs/</code> folder. Or you can delete all the virtual environments using -</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rm -rf ~/.local/share/virtualenvs
+</code></pre></div></div>
+
+<h2 id="method-2-creating-virtual-environment-and-installing-package-on-that-environment">Method-2 Creating Virtual Environment and Installing Package on that Environment</h2>
+
+<p><code class="language-plaintext highlighter-rouge">pyenv</code> has a wonderful plugin called <code class="language-plaintext highlighter-rouge">pyenv-virtualenv</code> that makes working with multiple environments easy. Please visit the <a href="https://github.com/pyenv/pyenv-virtualenv" rel="external nofollow noopener" target="_blank">link</a> to install <code class="language-plaintext highlighter-rouge">pyenv-virtualenv</code>. After installation, check if it installed properly by running the command <code class="language-plaintext highlighter-rouge">pyenv commands</code>. You should see the commands <code class="language-plaintext highlighter-rouge">virtualenv, virtualenv-delete, virtualenv-init, virtualenv-prefix, virtualenv</code> listed along with the other commands. You can also update your <code class="language-plaintext highlighter-rouge">.bashrc</code> file as mentioned in the documentation of <code class="language-plaintext highlighter-rouge">pyenv-virtualenv</code>.</p>
+
+<p>To create a virtual environment, first create a directory in your preferred place and go to that directory. Then run the following command.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv virtualenv &lt;python_version&gt; &lt;environment_name&gt;
+</code></pre></div></div>
+
+<p>If you’ve updated your <code class="language-plaintext highlighter-rouge">.bashrc</code> file, you can activate your environment by running the following command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv local &lt;environment_name&gt;
+</code></pre></div></div>
+
+<p>It creates a <code class="language-plaintext highlighter-rouge">.python-version</code> file in the directory because it internally runs the bash command `eval “$(pyenv virtualenv-init -)”. You can verify it by running the following command.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv which python
+</code></pre></div></div>
+
+<p>You can see a new version has been created called <environment_name> and the python executable is pointing to that version.</environment_name></p>
+
+<p>If you didn’t modify your <code class="language-plaintext highlighter-rouge">.bashrc</code> file by adding the command <code class="language-plaintext highlighter-rouge">eval "$(pyenv virtualenv-init -)</code>, you can manually activate/deactivate your python versions with this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv activate &lt;environment_name&gt;
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv deactivate
+</code></pre></div></div>
+
+<div>
+  <b>NOTE: Setting a specific version of python as global python version may sometime cause problems. I found method-2 more friendly and easier to manage different python versions and python environments.</b>
+</div>
+
+<h2 id="removing-a-specific-version-of-python">Removing a Specific Version of Python</h2>
+
+<p>You can uninstall a specific python version using <code class="language-plaintext highlighter-rouge">pyenv</code> using -</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv uninstall [PYTHON_VERSION]
+</code></pre></div></div>
+
+<p><strong>Before deleting the active Python version, set the Python version to system default.</strong></p>
+
+<h2 id="updating-packages">Updating packages</h2>
+
+<p>If you want a list of outdated packages, run this to see all the packages needing an upgrade.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pipenv update --outdated
+</code></pre></div></div>
+
+<p>You can choose to blindly update all packages.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pipenv update
+</code></pre></div></div>
+
+<p>Or you can update a specific package one at a time.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pipenv update pandas
+</code></pre></div></div>
+
+<h2 id="installing-from-requirementstxt-file">Installing from Requirements.txt file</h2>
+
+<p>If you have a legacy requirements.txt file, <code class="language-plaintext highlighter-rouge">pipenv</code> can be used for that.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pipenv install -r requirements.txt
+</code></pre></div></div>
+
+<p>If you want a generate a requirements.txt file, you can run the following command after activating the environment from you project directory.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip freeze &gt; requirements.txt
+</code></pre></div></div>
+
+<h2 id="using-virtual-environment-with-vscode">Using Virtual Environment with VSCode</h2>
+
+<p>Open the directory using VS Code. After that open the workspace using <code class="language-plaintext highlighter-rouge">Ctrl + Shift + p</code> and type <code class="language-plaintext highlighter-rouge">settings.json</code>. Select <code class="language-plaintext highlighter-rouge">Preferences: Open Workspace Settings (JSON)</code> and hit <code class="language-plaintext highlighter-rouge">Enter</code> on your keyboard. It should open an empty JSON file. Now inside the file type the following command.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "python.terminal.activateEnvironment": true
+}
+</code></pre></div></div>
+
+<p>Then go to option <code class="language-plaintext highlighter-rouge">run</code> and select <code class="language-plaintext highlighter-rouge">run without debugging</code>. It should automatically activate the environment everytime you run from that directory.</p>
+
+    </div>
+  </article><div id="giscus_thread" style="max-width: 800px; margin: 0 auto;">
+  <script>
+    let giscusTheme = localStorage.getItem("theme");
+    let giscusAttributes = {
+        "src": "https://giscus.app/client.js",
+        "data-repo": "sabbir-ahmed12/sabbir-ahmed12.github.io",
+        "data-repo-id": "R_kgDOJwEP_g",
+        "data-category": "Comments",
+        "data-category-id": "DIC_kwDOJwEP_s4CXSNz",
+        "data-mapping": "title",
+        "data-strict": "1",
+        "data-reactions-enabled": "1",
+        "data-emit-metadata": "0",
+        "data-input-position": "bottom",
+        "data-theme": giscusTheme,
+        "data-lang": "en",
+        "crossorigin": "anonymous",
+        "async": "",
+    };
+
+
+    let giscusScript = document.createElement("script");
+    Object.entries(giscusAttributes).forEach(([key, value]) => giscusScript.setAttribute(key, value));
+    document.getElementById("giscus_thread").appendChild(giscusScript);
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://giscus.app/?ref_noscript" rel="external nofollow noopener" target="_blank">comments powered by giscus.</a>
+</noscript>
+</div>
+</div>
+
+      
+    </div>
+
+    <!-- Footer -->    
+    <footer class="fixed-bottom">
+      <div class="container mt-0">
+        © Copyright 2023 Sabbir  Ahmed. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>.
+Last updated: June 17, 2023.
+      </div>
+    </footer>
+
+    <!-- JavaScripts -->
+    <!-- jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- Bootsrap & MDB scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha256-fgLAgv7fyCGopR/gBNq2iW3ZKIdqIcyshnUULC4vex8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script>
+
+    <!-- Masonry & imagesLoaded -->
+  <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+  <script defer src="/assets/js/masonry.js" type="text/javascript"></script>
+    
+  <!-- Medium Zoom JS -->
+  <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.8/dist/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+  <script defer src="/assets/js/zoom.js"></script>
+
+  <!-- Bootstrap Table -->
+  <script defer src="https://unpkg.com/bootstrap-table@1.21.4/dist/bootstrap-table.min.js"></script>
+
+  <!-- Load Common JS -->
+  <script src="/assets/js/no_defer.js"></script>
+  <script defer src="/assets/js/common.js"></script>
+  <script defer src="/assets/js/copy_code.js" type="text/javascript"></script>
+
+    
+  <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
+  <script async src="https://badge.dimensions.ai/badge.js"></script>
+
+    <!-- MathJax -->
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+  <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+    
+    
+
+<!-- Scrolling Progress Bar -->
+<script type="text/javascript">
+  /*
+   * This JavaScript code has been adapted from the article 
+   * https://css-tricks.com/reading-position-indicator/ authored by Pankaj Parashar, 
+   * published on the website https://css-tricks.com on the 7th of May, 2014.
+   * Couple of changes were made to the original code to make it compatible 
+   * with the `al-foio` theme.
+   */
+  const progressBar = $("#progress");
+  /*
+   * We set up the bar after all elements are done loading.
+   * In some cases, if the images in the page are larger than the intended
+   * size they'll have on the page, they'll be resized via CSS to accomodate
+   * the desired size. This mistake, however, breaks the computations as the
+   * scroll size is computed as soon as the elements finish loading.
+   * To account for this, a minimal delay was introduced before computing the
+   * values.
+   */
+  window.onload = function () {
+    setTimeout(progressBarSetup, 50);
+  };
+  /*
+   * We set up the bar according to the browser.
+   * If the browser supports the progress element we use that.
+   * Otherwise, we resize the bar thru CSS styling
+   */
+  function progressBarSetup() {
+    if ("max" in document.createElement("progress")) {
+      initializeProgressElement();
+      $(document).on("scroll", function() {
+        progressBar.attr({ value: getCurrentScrollPosition() });
+      });
+      $(window).on("resize", initializeProgressElement);
+    } else {
+      resizeProgressBar();
+      $(document).on("scroll", resizeProgressBar);
+      $(window).on("resize", resizeProgressBar);
+    }
+  }
+  /*
+   * The vertical scroll position is the same as the number of pixels that
+   * are hidden from view above the scrollable area. Thus, a value > 0 is
+   * how much the user has scrolled from the top
+   */
+  function getCurrentScrollPosition() {
+    return $(window).scrollTop();
+  }
+
+  function initializeProgressElement() {
+    let navbarHeight = $("#navbar").outerHeight(true);
+    $("body").css({ "padding-top": navbarHeight });
+    $("progress-container").css({ "padding-top": navbarHeight });
+    progressBar.css({ top: navbarHeight });
+    progressBar.attr({
+      max: getDistanceToScroll(),
+      value: getCurrentScrollPosition(),
+    });
+  }
+  /*
+   * The offset between the html document height and the browser viewport
+   * height will be greater than zero if vertical scroll is possible.
+   * This is the distance the user can scroll
+   */
+  function getDistanceToScroll() {
+    return $(document).height() - $(window).height();
+  }
+
+  function resizeProgressBar() {
+    progressBar.css({ width: getWidthPercentage() + "%" });
+  }
+  // The scroll ratio equals the percentage to resize the bar
+  function getWidthPercentage() {
+    return (getCurrentScrollPosition() / getDistanceToScroll()) * 100;
+  }
+</script>
+
+  </body>
+</html>
