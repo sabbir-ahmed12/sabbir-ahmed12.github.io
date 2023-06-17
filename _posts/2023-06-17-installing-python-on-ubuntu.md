@@ -1,9 +1,10 @@
 ---
 layout: post
 title: How Can You Run Multiple Versions of Python on Ubuntu and Create Virtual Environments?
-date: 2023-06-18 12:15:00-0400
-description: an example of a blog post with giscus comments
-categories: linux
+date: 2023-06-17 12:15:00-0400
+description: Tutorial post on installing and maintaining multiple versions of python along with system python.
+tags: linux
+categories: tutorial
 giscus_comments: true
 related_posts: false
 ---
