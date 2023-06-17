@@ -426,6 +426,19 @@ footer.sticky-bottom {
   color: var(--global-text-color);
 }
 
+.item-title {
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.item {
+  font-size: 0.9rem;
+}
+
+.subitem {
+  font-size: 0.8rem;
+}
+
 @media (min-width: 768px) {
   .repo {
     max-width: 50%;
@@ -562,13 +575,14 @@ footer.sticky-bottom {
 .publications h2 span {
   font-size: 1.5rem;
 }
-.publications h2.year {
+.publications h5.year {
   color: var(--global-divider-color);
   border-top: 1px solid var(--global-divider-color);
   padding-top: 1rem;
   margin-top: 2rem;
   margin-bottom: -2rem;
   text-align: right;
+  font-weight: bold;
 }
 .publications ol.bibliography {
   list-style: none;
@@ -845,11 +859,13 @@ progress::-moz-progress-bar {
 .btn-group.dropdown .dropdown-item:hover {
   color: var(--global-hover-color);
 }
-.btn-group.dropdown .dropdown-item.active, .btn-group.dropdown .dropdown-item:active {
+.btn-group.dropdown .dropdown-item.active,
+.btn-group.dropdown .dropdown-item:active {
   background-color: var(--global-hover-color);
   color: var(--global-hover-text-color) !important;
 }
-.btn-group.dropdown .dropdown-item.active:hover, .btn-group.dropdown .dropdown-item:active:hover {
+.btn-group.dropdown .dropdown-item.active:hover,
+.btn-group.dropdown .dropdown-item:active:hover {
   color: var(--global-hover-text-color);
 }
 
@@ -895,7 +911,12 @@ nav[data-toggle=toc] .nav-link.active:hover {
 .post .post-content blockquote.block-tip p {
   color: var(--global-tip-block-text);
 }
-.post .post-content blockquote.block-tip h1, .post .post-content blockquote.block-tip h2, .post .post-content blockquote.block-tip h3, .post .post-content blockquote.block-tip h4, .post .post-content blockquote.block-tip h5, .post .post-content blockquote.block-tip h6 {
+.post .post-content blockquote.block-tip h1,
+.post .post-content blockquote.block-tip h2,
+.post .post-content blockquote.block-tip h3,
+.post .post-content blockquote.block-tip h4,
+.post .post-content blockquote.block-tip h5,
+.post .post-content blockquote.block-tip h6 {
   color: var(--global-tip-block-title);
 }
 .post .post-content blockquote.block-warning {
@@ -905,7 +926,12 @@ nav[data-toggle=toc] .nav-link.active:hover {
 .post .post-content blockquote.block-warning p {
   color: var(--global-warning-block-text);
 }
-.post .post-content blockquote.block-warning h1, .post .post-content blockquote.block-warning h2, .post .post-content blockquote.block-warning h3, .post .post-content blockquote.block-warning h4, .post .post-content blockquote.block-warning h5, .post .post-content blockquote.block-warning h6 {
+.post .post-content blockquote.block-warning h1,
+.post .post-content blockquote.block-warning h2,
+.post .post-content blockquote.block-warning h3,
+.post .post-content blockquote.block-warning h4,
+.post .post-content blockquote.block-warning h5,
+.post .post-content blockquote.block-warning h6 {
   color: var(--global-warning-block-title);
 }
 .post .post-content blockquote.block-danger {
@@ -915,7 +941,12 @@ nav[data-toggle=toc] .nav-link.active:hover {
 .post .post-content blockquote.block-danger p {
   color: var(--global-danger-block-text);
 }
-.post .post-content blockquote.block-danger h1, .post .post-content blockquote.block-danger h2, .post .post-content blockquote.block-danger h3, .post .post-content blockquote.block-danger h4, .post .post-content blockquote.block-danger h5, .post .post-content blockquote.block-danger h6 {
+.post .post-content blockquote.block-danger h1,
+.post .post-content blockquote.block-danger h2,
+.post .post-content blockquote.block-danger h3,
+.post .post-content blockquote.block-danger h4,
+.post .post-content blockquote.block-danger h5,
+.post .post-content blockquote.block-danger h6 {
   color: var(--global-danger-block-title);
 }
 
