@@ -1,5 +1,6 @@
 ---
 layout: page
+permalink: /misc/
 title: Misc
 nav: true
 nav_order: 5
