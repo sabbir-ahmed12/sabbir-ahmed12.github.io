@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 group :jekyll_plugins do
-    gem 'wdm', '>=0.1.0' # uncomment it before deploying
+    # gem 'wdm', '>=0.1.0' # comment it before deploying
     gem 'classifier-reborn'
     gem 'jekyll'
     gem 'jekyll-archives'
@@ -16,8 +16,8 @@ group :jekyll_plugins do
     gem 'jekyll-toc'
     gem 'jekyll-twitter-plugin'
     gem 'jemoji'
-    # gem 'mini_racer'  # uncomment it before deploying
-    # gem 'unicode_utils' # uncomment it before deploying
+    gem 'mini_racer'  # uncomment it before deploying
+    gem 'unicode_utils' # uncomment it before deploying
     gem 'webrick'
 end
 group :other_plugins do
