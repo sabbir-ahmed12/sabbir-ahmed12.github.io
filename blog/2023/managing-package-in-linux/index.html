@@ -3,17 +3,16 @@
 
   <!-- Head -->
   <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="refresh" content="3; url=/">    <!-- Metadata, OpenGraph and Schema.org -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    <!-- Metadata, OpenGraph and Schema.org -->
     
 
     <!-- Standard metadata -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page not found | Sabbir  Ahmed</title>
+    <title>How to Install App in Linux? | Sabbir  Ahmed</title>
     <meta name="author" content="Sabbir  Ahmed">
-    <meta name="description" content="Looks like there has been a mistake. Nothing exists here.">
+    <meta name="description" content="Tutorial on installing and removing package in linux.">
     <meta name="keywords" content="sabbir-ahmed, website, portfolio, cuet, ete">
 
 
@@ -39,7 +38,7 @@
     <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%A7%94&lt;/text&gt;&lt;/svg&gt;">
     
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="https://sabbir-ahmed12.github.io/404.html">
+    <link rel="canonical" href="https://sabbir-ahmed12.github.io/blog/2023/managing-package-in-linux/">
 
     <!-- Dark Mode -->
     
@@ -78,8 +77,8 @@
               </li>
               
               <!-- Blog -->
-              <li class="nav-item ">
-                <a class="nav-link" href="/blog/">Blog</a>
+              <li class="nav-item active">
+                <a class="nav-link" href="/blog/">Blog<span class="sr-only">(current)</span></a>
               </li>
 
               <!-- Other pages -->
@@ -126,20 +125,99 @@
     <!-- Content -->
     <div class="container mt-5">
       
-        <!-- page.html -->
-        <div class="post">
+        <!-- _layouts/post.html -->
 
-          <header class="post-header">
-            <h1 class="post-title">Page not found</h1>
-            <p class="post-description">Looks like there has been a mistake. Nothing exists here.</p>
-          </header>
+<div class="post">
 
-          <article>
-            <p>You will be redirected to the main page within 3 seconds. If not redirected, please go back to the <a href="/">home page</a>.</p>
+  <header class="post-header">
+    <h1 class="post-title">How to Install App in Linux?</h1>
+    <p class="post-meta">June 19, 2023</p>
+    <p class="post-tags">
+      <a href="/blog/2023"> <i class="fas fa-calendar fa-sm"></i> 2023 </a>
+        ·  
+        <a href="/blog/tag/linux">
+          <i class="fas fa-hashtag fa-sm"></i> linux</a>  
+          
+        ·  
+        <a href="/blog/category/tutorial">
+          <i class="fas fa-tag fa-sm"></i> tutorial</a>  
+          
 
-          </article>
+    </p>
+  </header>
 
-        </div>
+  <article class="post-content">
+    
+    <div id="markdown-content">
+      <p>Unlike windows, linux and unix operating systems (OS) uses package managers to install app. Development platforms like <code class="language-plaintext highlighter-rouge">Node.js</code>, <code class="language-plaintext highlighter-rouge">Python</code> also use package managers (e.g., <code class="language-plaintext highlighter-rouge">npm</code>, <code class="language-plaintext highlighter-rouge">pip</code>) to install packages. A package manager keeps track of what package is installed and helps automate the process of installing, upgrading, configuring, and removing packages in a consistent mannner. Linux uses a package manager called <code class="language-plaintext highlighter-rouge">apt</code> in short form. It stands for <code class="language-plaintext highlighter-rouge">advanced packaging tool</code>. <code class="language-plaintext highlighter-rouge">apt</code> is the newer package manager for linux. We can also use <code class="language-plaintext highlighter-rouge">apt-get</code> which is mostly seen in online tutorials. We’ll use <code class="language-plaintext highlighter-rouge">apt</code> as it is easier to use.</p>
+
+<p>Let’s say we want to install a package called <code class="language-plaintext highlighter-rouge">nano</code>. Nano is an editor mostly used in linux for editing text or code. If <code class="language-plaintext highlighter-rouge">nano</code> is already installed in your system, it will open when you type <code class="language-plaintext highlighter-rouge">nano</code> in your terminal and hit enter. However, if <code class="language-plaintext highlighter-rouge">nano</code> is not available in your system, an error <code class="language-plaintext highlighter-rouge">nano: command not found</code> will appear.</p>
+
+<p>Now if you type <code class="language-plaintext highlighter-rouge">apt install nano</code> in your terminal and hit enter, you’re most likely to get an error such as <code class="language-plaintext highlighter-rouge">Unable to locate package nano</code>. This is because linux did not find that package in the package index list. Apt packages index is a database that stores the list of software packages from the repository. You can check the list of packages by running the command <code class="language-plaintext highlighter-rouge">apt list</code> in your terminal.</p>
+
+<p>To get the updated list of packages, either run <code class="language-plaintext highlighter-rouge">apt update</code> or <code class="language-plaintext highlighter-rouge">sudo apt update</code> to run under the sudo privileges. It will collect the latest packages information from all configured sources defined in the <code class="language-plaintext highlighter-rouge">/etc/apt/sources.list</code> file and the <code class="language-plaintext highlighter-rouge">/etc/apt/sources.list.d</code> directory and download the information about all packages for your repository and PPA’s from the internet. The <code class="language-plaintext highlighter-rouge">apt update</code> command only updates the list of packages, and no package is upgraded by it.</p>
+
+<p>We have an updated list of packages. You can always check whether the list contains <code class="language-plaintext highlighter-rouge">nano</code> package using the <code class="language-plaintext highlighter-rouge">apt list</code> command. In order to install the <code class="language-plaintext highlighter-rouge">nano</code> package, you need to run the <code class="language-plaintext highlighter-rouge">sudo apt install nano</code> command. It will download and install the nano editor. After that you can verify that by typing <code class="language-plaintext highlighter-rouge">nano</code> in the terminal and pressing enter to open the nano editor.</p>
+
+<p>Finally, to remove nano, you need to use the command <code class="language-plaintext highlighter-rouge">sudo apt remove nano</code>. It will remove the package along with its dependencies. To check the list of available <code class="language-plaintext highlighter-rouge">apt</code> soft commands, you can run the <code class="language-plaintext highlighter-rouge">apt</code> command in your terminal.</p>
+
+<p>That’s it. You should now be comfortable with the <code class="language-plaintext highlighter-rouge">apt</code> package manager. Best of luck!</p>
+
+    </div>
+  </article>
+
+
+  
+    
+    <br>
+    <hr>
+    <br>
+    <ul class="list-disc pl-8"></ul>
+
+    <!-- Adds related posts to the end of an article -->
+    <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2>
+    <p class="mb-2">Here are some more articles you might like to read next:</p>
+  
+
+  <li class="my-2">
+    <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2023/formatting-pendrive-forcefully/">Formatting Infected Pendrive Forcefully.</a>
+  </li>
+
+  
+
+  <li class="my-2">
+    <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2023/installing-python-on-ubuntu/">How Can You Run Multiple Versions of Python on Ubuntu and Create Virtual Environments?</a>
+  </li>
+
+<div id="giscus_thread" style="max-width: 800px; margin: 0 auto;">
+  <script>
+    let giscusTheme = localStorage.getItem("theme");
+    let giscusAttributes = {
+        "src": "https://giscus.app/client.js",
+        "data-repo": "sabbir-ahmed12/sabbir-ahmed12.github.io",
+        "data-repo-id": "R_kgDOJwEP_g",
+        "data-category": "Comments",
+        "data-category-id": "DIC_kwDOJwEP_s4CXSNz",
+        "data-mapping": "title",
+        "data-strict": "1",
+        "data-reactions-enabled": "1",
+        "data-emit-metadata": "0",
+        "data-input-position": "bottom",
+        "data-theme": giscusTheme,
+        "data-lang": "en",
+        "crossorigin": "anonymous",
+        "async": "",
+    };
+
+
+    let giscusScript = document.createElement("script");
+    Object.entries(giscusAttributes).forEach(([key, value]) => giscusScript.setAttribute(key, value));
+    document.getElementById("giscus_thread").appendChild(giscusScript);
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://giscus.app/?ref_noscript" rel="external nofollow noopener" target="_blank">comments powered by giscus.</a>
+</noscript>
+</div>
+</div>
 
       
     </div>
