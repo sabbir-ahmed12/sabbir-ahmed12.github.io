@@ -22,7 +22,7 @@ nav_order: 3
 | **Programming Languages**  | `Python`, `MATLAB`, `C/C++`, `Javascript`, `Java`                                                                  |
 | **Libraries & Frameworks** | `Scikit-learn`, `Librosa`, `Keras`, `TensorFlow`, `Matplotlib`, `OpenCV`, `Flask`, `React`, `Bootstrap`, `PyTorch` |
 |  **Tools & Technologies**  | `MS Office`, `Simulink`, `Packet Tracer`, `Multisim`, `Cadence`, `Ubuntu`                                          |
-|         **Misc.**          | `LaTeX`, `Git & GitHub`, `Arduino Programmin (UNO)`                                                                |
+|         **Misc.**          | `LaTeX`, `Git & GitHub`, `Arduino Programming (UNO)`                                                               |
 
 <br />
 
