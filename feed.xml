@@ -1,5 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://sabbir-ahmed12.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sabbir-ahmed12.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2023-06-19T13:52:01+00:00</updated><id>https://sabbir-ahmed12.github.io/feed.xml</id><title type="html">blank</title><subtitle>This is Sabbir Ahmed&apos;s personal website.
-</subtitle><entry><title type="html">How Can You Run Multiple Versions of Python on Ubuntu and Create Virtual Environments?</title><link href="https://sabbir-ahmed12.github.io/blog/2023/installing-python-on-ubuntu/" rel="alternate" type="text/html" title="How Can You Run Multiple Versions of Python on Ubuntu and Create Virtual Environments?" /><published>2023-06-17T16:15:00+00:00</published><updated>2023-06-17T16:15:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2023/installing-python-on-ubuntu</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2023/installing-python-on-ubuntu/"><![CDATA[<p>Maintaining multiple python versions of python on ubuntu becomes a issue of headache sometimes as Ubuntu OS already comes with a pre-installed python. Therefore, changing the system python may affect your Ubuntu OS functionality. In this tutorial, I’ll use <code class="language-plaintext highlighter-rouge">pyenv</code> to work with multiple versions of python.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://sabbir-ahmed12.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sabbir-ahmed12.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2023-06-19T14:24:34+00:00</updated><id>https://sabbir-ahmed12.github.io/feed.xml</id><title type="html">blank</title><subtitle>This is Sabbir Ahmed&apos;s personal website.
+</subtitle><entry><title type="html">Formatting Infected Pendrive Forcefully.</title><link href="https://sabbir-ahmed12.github.io/blog/2023/formatting-pendrive-forcefully/" rel="alternate" type="text/html" title="Formatting Infected Pendrive Forcefully." /><published>2023-06-19T08:00:00+00:00</published><updated>2023-06-19T08:00:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2023/formatting-pendrive-forcefully</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2023/formatting-pendrive-forcefully/"><![CDATA[<p>Sometimes when we connect our pendrive to a virus infected device, it gets infected. As a result, some files are created automatically inside the pendrive that cannot be deleted when we try to format it. Moreover, virus may also partition the drive the automatically. This problem can be solved by the following method.</p>
+
+<ul>
+  <li>
+    <p>Go to search option and type <code class="language-plaintext highlighter-rouge">cmd</code>. You should see <code class="language-plaintext highlighter-rouge">Command Prompt</code> option in the dialog box. Right click on the option and select <code class="language-plaintext highlighter-rouge">Run as administrator</code>.</p>
+  </li>
+  <li>
+    <p>On the command prompt window type <code class="language-plaintext highlighter-rouge">diskpart</code> which will turn on the <code class="language-plaintext highlighter-rouge">DISKPART</code> prompt.</p>
+  </li>
+  <li>
+    <p>Type <code class="language-plaintext highlighter-rouge">list disk</code> on the DISKPART prompt. It should list all the available disks. Find out the drive you want to format. <strong><em>Note:</em></strong> Be careful when you select the drive. Once you perform the operation, it cannot be undone.</p>
+  </li>
+  <li>
+    <p>Type <code class="language-plaintext highlighter-rouge">select disk disk_number</code> (e.g., select disk 1). The disk number represents the drive you want to format.</p>
+  </li>
+  <li>
+    <p>Type <code class="language-plaintext highlighter-rouge">clean</code> and hit enter.</p>
+  </li>
+  <li>
+    <p>After that type <code class="language-plaintext highlighter-rouge">create part primary</code> and hit enter and finally type <code class="language-plaintext highlighter-rouge">active</code> and hit enter.</p>
+  </li>
+</ul>
+
+<p>Voila! Your pendrive should work just fine now. Exit the command prompt and check the pendrive again.</p>]]></content><author><name></name></author><category term="tutorial" /><category term="misc" /><summary type="html"><![CDATA[Tutorial post on formatting an external storage forcefully.]]></summary></entry><entry><title type="html">How Can You Run Multiple Versions of Python on Ubuntu and Create Virtual Environments?</title><link href="https://sabbir-ahmed12.github.io/blog/2023/installing-python-on-ubuntu/" rel="alternate" type="text/html" title="How Can You Run Multiple Versions of Python on Ubuntu and Create Virtual Environments?" /><published>2023-06-17T16:15:00+00:00</published><updated>2023-06-17T16:15:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2023/installing-python-on-ubuntu</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2023/installing-python-on-ubuntu/"><![CDATA[<p>Maintaining multiple python versions of python on ubuntu becomes a issue of headache sometimes as Ubuntu OS already comes with a pre-installed python. Therefore, changing the system python may affect your Ubuntu OS functionality. In this tutorial, I’ll use <code class="language-plaintext highlighter-rouge">pyenv</code> to work with multiple versions of python.</p>
 
 <h2 id="why-should-you-use-pyenv-and-virtual-python-environments">Why should you use <code class="language-plaintext highlighter-rouge">pyenv</code> and Virtual Python Environments?</h2>
 
