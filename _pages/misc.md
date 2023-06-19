@@ -17,7 +17,9 @@ nav_order: 5
 ---
 
 - **Higher Secondary School Level Scholarship** (2017-2022): Awarded Talent Pool scholarship for obtaining 9th position in Cumilla Board at HSC examination.
+
 - **Secondary School Level Scholarship** (2014-2016): Awarded Talent Pool scholarship for obtaining 119th position in Cumilla Board at HSC examination.
+
 - **Higher Secondary School Level Scholarship** (2017-2022): Awarded Talent Pool scholarship for outstanding performance in JSC examination.
 
 <br />
@@ -27,9 +29,13 @@ nav_order: 5
 ---
 
 - **Assistant Publication Secretary** (2021-2022): Selected for the Assistant Publication Secretary post at CUET Cumilla Student's Forum.
-- **Honda Young Engineer and Scientist's (Y-E-S) Award** (2019): Got selected as top three students for essay round from CUET.
-- **The Duke of Edinburgh's International Award (Bronze Medal)** (2015): Awarded by The Duke of Duke of Edinburgh's International Award Foundation for voluntary works.[Link]
+
+- **Honda Young Engineer and Scientist's (Y-E-S) Award** (2019): Got selected as top three students for essay round from CUET.<a class="badge rounded-pill bg-success mx-2" href="https://drive.google.com/file/d/1A_zuSLGM8Noa0mLLQ1wETl3_k3K5d-KX/view?usp=sharing" target="_blank">Link</a>
+
+- **The Duke of Edinburgh's International Award (Bronze Medal)** (2015): Awarded by The Duke of Duke of Edinburgh's International Award Foundation for voluntary works.<a class="badge rounded-pill bg-success mx-2" href="https://drive.google.com/file/d/1PwiOXnZSZE-H6n5lxNtgcLlhgZX5c0LQ/view?usp=sharing" target="_blank">Link</a>
+
 - Participated at inter-department debate competition.
+
 - Organized ETE Day 2017 and Telemesh 1.0.
 
 <br />
