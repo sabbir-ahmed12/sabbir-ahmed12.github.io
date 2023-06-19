@@ -46,31 +46,71 @@
       institution: Udemy
       year: 2020
       credential_link: "https://www.udemy.com/certificate/UC-1ea49862-38bc-4f6c-998a-664b926b34d1/"
+      description:
+        - title: Learning Outcomes
+          contents:
+            - Learned about data structures in python.
+            - Learned python code debuggging and testing.
+            - Got familiar with object oriented programming in python.
+            - Learned to handle exceptions.
+            - Got familiar with web scrapping and regular expressions.
 
     - title: AWS Machine Learning Fundamentals
       institution: Udacity
       year: 2020
       credential_link: "https://s3-us-west-2.amazonaws.com/udacity-printer/production/certificates/15c38f1d-aa7d-4168-99ce-c55a99ae631e.pdf"
+      description:
+        - title: Learning Outcomes
+          contents:
+            - Learned about software engineering principles and how they apply in data science.
+            - Got familiar with generative AI and AWS DeepComposer.
 
     - title: Complete Tensorflow 2 and Keras Deep Learning Bootcamp
       institution: Udemy
       year: 2020
       credential_link: "https://www.udemy.com/certificate/UC-f68de615-408e-4138-9edf-53620b43ae07/"
+      description:
+        - title: Learning Outcomes
+          contents:
+            - Learned about TensorFlow 2.0.
+            - Learned to leverage Keras API to quickly build models.
+            - Learned to apply deep learning in medical imaging.
+            - Learned to build Generative Adversarial Networks (GNN).
+            - Got familiar with Autoencoders.
+            - Learned to deploy ML model.
 
     - title: Deep Learning Specialization
       institution: Coursera
       year: 2020
       credential_link: "https://www.coursera.org/account/accomplishments/specialization/certificate/R5BZJZYULDYN"
+      description:
+        - title: Learning Outcomes
+          contents:
+            - Got fundamental knowledge of how neural networks (NNs) work.
+            - Learned the mathematics working behind backpropagation, gradient descent algorithms etc.
+            - Learned to tune hyperparameters of NNs.
+            - Learned about model evaluation metrics
+            - Got hands-on experience in building NNs.
 
     - title: Digital Signal Processing
       institution: Coursera
       year: 2020
       credential_link: "https://www.coursera.org/account/accomplishments/verify/QJW86M2VVWQP"
+      description:
+        - title: Learning Outcomes
+          contents:
+            - Learned about various signal properties.
+            - Got familiar with various operations and transformation techniques in signal processing.
 
     - title: Machine Learning
       institution: Coursera
       year: 2019
       credential_link: "https://www.coursera.org/account/accomplishments/verify/HYA9ZN4RQ3Y3"
+      description:
+        - title: Learning Outcomes
+          contents:
+            - Gathered in an in-depth understanding of some supervised and unsupervised ML algorithms.
+            - Learned the best practices in ML while studying a number of cases.
 
 # TRAININGS AND WORKSHOPS ATTENDED
 - title: Trainings and Workshops
@@ -80,13 +120,31 @@
       institution: Scholarship School BD
       year: 2022
       credential_link: "https://drive.google.com/file/d/1TEhCiIpuE5EL38ahfDJmaYV6wO6YJICc/view?usp=sharing"
+      description:
+        - title: Learning Outcomes
+          contents:
+            - Learned how to read research papers effectively.
+            - Learned how to write research papers using LaTeX and MS Word.
+            - Learned about finding research articles online.
+            - Got hands-on experience in writing resarch paper using mendeley.
 
     - title: AI and Machine Learning in Python
       institution: Sheikh Kamal IT Business Incubator, CUET, BD
       year: 2022
       credential_link: "https://drive.google.com/file/d/1AaYvrIRvVrlCDE5tyqnzgIq3V3tW39PY/view?usp=sharing"
+      description:
+        - title: Learning Outcomes
+          contents:
+            - Got familiar with various NLP libraries e.g., nltk, GloVe, spacy etc.
+            - Learned to code neural networks combining multiple modalities.
 
     - title: Foundations in Digital Forensics with Magnet Axiom
       institution: Sheikh Kamal IT Business Incubator, CUET, BD
       year: 2019
       credential_link: "https://drive.google.com/file/d/1QmxdqiW2SgOKo6pPYUHfwKjIDJGzNRS-/view?usp=sharing"
+      description:
+        - title: Learning Outcomes
+          contents:
+            - Got familiar with Magnet Axiom.
+            - Learned to perform digital forensics using Magnet Axiom.
+            - Learned to prepare forensic report using Magnet Axiom.

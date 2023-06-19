@@ -38,9 +38,10 @@ nav_order: 5
 
 ---
 
-|                                                   |                                                 |                                                                                                                                                     |
-| :-----------------------------------------------: | :---------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <span class="badge bg-secondary">2021-2022</span> | **General Member**<br/>IEEE CUET Student Branch | **Responsibilities:** <br />- To attend workshops arranged by IEEE.<br />- To help fellow researchers grow and to learn current trends in research. |
+- **Member of IEEE**(2021-2022)
+  - **_Responsibilities:_**
+    - To attend workshops arranged by IEEE.
+    - To help fellow researchers grow and to learn current trends in research.
 
 <br />
 
