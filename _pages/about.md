@@ -6,7 +6,7 @@ subtitle: <code>Electronics & Telecommunication Engineer || Researcher || ML & C
 
 profile:
   align: right
-  image: prof_pic.jpg
+  image: prof_pic.webp
   image_circular: false # crops the image to make it circular
   address:
 
