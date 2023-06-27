@@ -69,3 +69,8 @@ nav_order: 5
 > - Believe You can and You're Halfway There.
 > - The Darkest Hour of the Night Comes Just Before the Dawn.
 > - Life is an Echo: 'We Get Back What We Give'.
+> - The lust for comfort murders the passions of the soul.
+> - Faith is a knowledge within the heart, beyond the reach of proof.
+> - Beauty is not in the face; beauty is a light in the heart.
+> - The teacher who is indeed wise does not bid you to enter the house of his wisdom but rather leads you to the threshold of your mind.
+> - A truth can walk naked but a lie always needs to be dressed.
