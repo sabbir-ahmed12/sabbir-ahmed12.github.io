@@ -1,8 +1,8 @@
 ---
 layout: post
-date: 2023-04-16 07:59:00-0400
+date: 2023-07-29 00:00:00-0400
 inline: true
 related_posts: false
 ---
 
-Submitted a journal titled, "Cochleagram Based Noise Adapted Speaker Identification for Distorted Speech" in Elsevier Digital Signal Processing.
+Contributed to submit the technical report titled "Prediction of Behavioral Speech Intelligibility using a Computational Model of the Auditory System" in [ISCA Clarity - 2023 Workshop](https://claritychallenge.org/clarity2023-workshop/).
