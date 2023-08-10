@@ -13,6 +13,7 @@ nav_order: 3
 My research interests broadly lies in the area of Signal Processing and Deep Learning. Some of the areas I wish to work are:
 
 - Audio Signal Processing, Signal Denoising, Speech Enhancement, Speech Recognition, Speaker Recognition, Speech Disorder, Speech Emotion Recognition, Speaker Diarization.
+- Image Recognition, Image Processing, Medical Imaging, Image Segmentation.
 - Sentiment and Emotion Analysis, QA Answering, Conversational AI.
 - Multimodal Signal Processing (combining textual, acoustic & visual features) to build intelligent system.
 - Audio Steganalysis, Audio Steganography, DeepFake Detecion.
