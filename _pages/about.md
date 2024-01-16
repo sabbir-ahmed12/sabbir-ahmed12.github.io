@@ -2,7 +2,7 @@
 layout: about
 title: About
 permalink: /
-subtitle: <code>Electronics & Telecommunication Engineer || Researcher || ML & Cyber Security Enthusiast</code>
+subtitle: <code>Ph.D. Student/Research Assistant at UIowa</code>
 
 profile:
   align: right
@@ -22,7 +22,7 @@ He likes to explore new technologies, loves to learn new things and always feels
 
 Apart from educational activities, he reads blogs on programming, watches travel blogs, works on exciting hobby projects. He also loves travelling and exploring new places.
 
-<div class='alert alert-warning' role='alert'>
+<!-- <div class='alert alert-warning' role='alert'>
 <b>Open to Work:</b>
 Looking for a full-time job or a research assistant position in any one of the above mentioned fields.
-</div>
+</div> -->
