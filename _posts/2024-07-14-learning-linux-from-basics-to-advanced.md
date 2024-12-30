@@ -45,7 +45,7 @@ The kernel is loaded into memory first when an operating system starts and remai
 
 <div class='row mt-3'>
     <div class='col-sm mt-3 mt-md-0'>
-    {% include figure.liquid loading="eager" path="assets/posts_img/2024_07_14_learning_linux/kernel_layout.jpg" class="img-fluid rounded z-depth-1" zoomable=true %}
+    {% include figure loading="eager" path="assets/posts_img/2024_07_14_learning_linux/kernel_layout.jpg" class="img-fluid rounded z-depth-1" zoomable=true %}
     </div>
 </div>
 
