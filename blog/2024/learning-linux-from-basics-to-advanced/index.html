@@ -10,10 +10,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>linux | Sabbir  Ahmed</title>
+    <title>Learning Linux from Basics to Advanced | Sabbir  Ahmed</title>
     <meta name="author" content="Sabbir  Ahmed">
-    <meta name="description" content="This is Sabbir Ahmed's personal website.
-">
+    <meta name="description" content="Tutorial post on linux operating system.">
     <meta name="keywords" content="sabbir-ahmed, website, portfolio, cuet, ete">
 
 
@@ -39,7 +38,7 @@
     <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%A7%94&lt;/text&gt;&lt;/svg&gt;">
     
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="https://sabbir-ahmed12.github.io/blog/tag/linux/">
+    <link rel="canonical" href="https://sabbir-ahmed12.github.io/blog/2024/learning-linux-from-basics-to-advanced/">
 
     <!-- Dark Mode -->
     
@@ -126,42 +125,138 @@
     <!-- Content -->
     <div class="container mt-5">
       
-        <div class="post">
+        <!-- _layouts/post.html -->
+
+<div class="post">
 
   <header class="post-header">
-    <h1 class="post-title"> <i class="fas fa-hashtag fa-sm"></i> linux </h1>
-    <p class="post-description"> an archive of posts with this tag </p>
+    <h1 class="post-title">Learning Linux from Basics to Advanced</h1>
+    <p class="post-meta">July 14, 2024</p>
+    <p class="post-tags">
+      <a href="/blog/2024"> <i class="fas fa-calendar fa-sm"></i> 2024 </a>
+        ·  
+        <a href="/blog/tag/linux">
+          <i class="fas fa-hashtag fa-sm"></i> linux</a>  
+          
+        ·  
+        <a href="/blog/category/tutorial">
+          <i class="fas fa-tag fa-sm"></i> tutorial</a>  
+          
+
+    </p>
   </header>
 
-  <article>
-    <div class="table-responsive">
-      <table class="table table-sm table-borderless">
-        
-        <tr>
-          <th scope="row">Jul 14, 2024</th>
-          <td>
-              <a class="post-link" href="/blog/2024/learning-linux-from-basics-to-advanced/">Learning Linux from Basics to Advanced</a>
-          </td>
-        </tr>
-      
-        <tr>
-          <th scope="row">Jun 19, 2023</th>
-          <td>
-              <a class="post-link" href="/blog/2023/managing-package-in-linux/">How to Install App in Linux?</a>
-          </td>
-        </tr>
-      
-        <tr>
-          <th scope="row">Jun 17, 2023</th>
-          <td>
-              <a class="post-link" href="/blog/2023/installing-python-on-ubuntu/">How Can You Run Multiple Versions of Python on Ubuntu and Create Virtual Environments?</a>
-          </td>
-        </tr>
-      
-      </table>
-    </div>
-  </article>
+  <article class="post-content">
+    
+    <div id="markdown-content">
+      <p>Learning Linux is one of the most valuable skills in the tech industry. It helps doing things faster and more efficiently. Many of the world’s powerful servers and supercomputers run on Linux.</p>
 
+<p>In this post, we’ll learn the basics of Linux command line, and then transition to more advanced topics like shell scripting and system administration.</p>
+
+<p><strong>Important Note:</strong> All examples of this post are demonstrated in Ubuntu 22.04 LTS. This blog was written assuming that you’ve a Linux OS already setup for you.</p>
+
+<h2 id="part-1-introduction-to-linux">Part 1: Introduction to Linux</h2>
+
+<h3 id="11-getting-started-with-linux">1.1. Getting Started with Linux</h3>
+
+<h4 id="what-is-linux">What is Linux?</h4>
+
+<p>Linux is an open-source operating system that is based on the Unix Operating System (OS). It was created by Linus Torvalds in 1991. Open source means that the source code of the operating system is available to the public. This allows you to modify the original code, customize it, and distribute the new operating system to potential users.</p>
+
+<h4 id="why-should-you-learn-linux">Why should you learn linux?</h4>
+
+<p>In today’s data center landscape, Linux and Microsoft Windows stand out as the primary contenders, with Linux having a major share.</p>
+
+<p>Some of the compelling reasons to learn Linux are:</p>
+
+<ul>
+  <li>
+    <p>Given the prevalence of Linux hosting, there is a high chance that your application will be hosted on Linux. So, learning Linux as a developer becomes increasingly valuable.</p>
+  </li>
+  <li>
+    <p>With cloud computing becoming the norm, chances are high that your cloud instance will rely on Linux.</p>
+  </li>
+  <li>
+    <p>Linux serves as the foundation for many operating systems for the Internet of Things (IoT) and mobile applications.</p>
+  </li>
+  <li>
+    <p>Most of the commands you’ll learn can also used in MacOS. Moreover, knowledge of Linux will open many opportunities for you.</p>
+  </li>
+</ul>
+
+<h4 id="what-is-a-linux-kernel">What is a Linux Kernel?</h4>
+
+<p>The kernel is the central component of an operating system that manages the computer and its hardware operations. It handles memory operations and CPU time. It acts as a bridge between applications and the hardware-level data processing using inter-process communication and system calls.</p>
+
+<p>The kernel is loaded into memory first when an operating system starts and remains there until the system shuts down. It is responsible for tasks like disk management, task management, and memory management.</p>
+
+<p>If you’re curious about learning Linux kernel, you can check the GitHub link [here].(https://github.com/torvalds/linux)</p>
+
+<h4 id="what-is-a-linux-distribution">What is a Linux Distribution?</h4>
+
+<p>By this point, you know that you can re-use the Linux kernel code, modify it, and create a new kernel. You can further combine different utilities and software to create a completely new operating system. A Linux distribution or distro is a version of the Linux operating system that includes the Linux kernel, system utilities, and other software. Being open source, a Linux distribution is a collaborative effort involving multiple independent open-source development communities. So, Linux distributions are different flavors of the Linux OS.</p>
+
+<p><strong><em>What does it mean that a distribution is derived?</em></strong>
+When you say that a distribution is “derived” from another, the newer distro is built upon the base or foundation of the original distro. This derivation can include using the same package management system (more on this later), kernel version, and sometimes the same configuration tools. Today, there are thousands of Linux distributions to choose from, offering differing goals and criteria for selecting and supporting the software provided by their distribution.</p>
+
+<p>Distributions vary from one to the other, but they generally have several common characteristics:</p>
+
+<ul>
+  <li>A distribution consists of a Linux kernel.</li>
+  <li>It supports user space programs.</li>
+  <li>A distribution may be small and single-purpose or include thousands of open-source programs.</li>
+  <li>Some means of installing and updating the distribution and its components should be provided.</li>
+</ul>
+
+<p>If you view the <a href="https://upload.wikimedia.org/wikipedia/commons/1/1b/Linux_Distribution_Timeline.svg" rel="external nofollow noopener" target="_blank">Linux Distributions Timeline</a>, you’ll see two major distros: Slackware and Debian. Several distributions are derived from them. For example, Ubuntu and Kali are derived from Debian.</p>
+
+<p>There are various advantages of derivation. Derived distributions can leverage the stability, security, and large software repositories of the parent distribution.</p>
+
+<p>When building on an existing foundation, developers can drive their focus and effort entirely on the specialized features of the new distribution. Users of derived distributions can benefit from the documentation, community support, and resources already available for the parent distribution.</p>
+
+<p>Some popular Linux distributions are: <code class="language-plaintext highlighter-rouge">Ubuntu</code>, <code class="language-plaintext highlighter-rouge">Linux Mint</code>, <code class="language-plaintext highlighter-rouge">Arch Linux</code>, <code class="language-plaintext highlighter-rouge">Manjaro</code>, <code class="language-plaintext highlighter-rouge">Kali Linux</code> etc.</p>
+
+<h2 id="part-2-introduction-to-terminal-console-shell-and-system-commands">Part 2: Introduction to Terminal, Console, Shell and System Commands</h2>
+
+<h3 id="21-introduction-to-terminal-console-and-shell">2.1. Introduction to Terminal, Console and Shell</h3>
+
+<h4 id="what-is-a-terminal">What is a Terminal?</h4>
+
+<p>A terminal is a text-based user interface that allows users to interact with a computer by entering commands and viewing the results. A terminal can be connected to a local or a remote system, depending on the protocol of the network.</p>
+
+<h4 id="what-is-console">What is Console?</h4>
+
+<p>A console is a special type of terminal that is directly attached to the computer system. It is usually the primary interface for system administration and maintenance. It can be a physical device such as a keyboard and a monitor, or a virtual device such as a serial port or graphical window. A console gives you access to the low-level functions and settings of the computer system such as the BIOS, the boot loader or the kernel.</p>
+
+    </div>
+  </article><div id="giscus_thread" style="max-width: 800px; margin: 0 auto;">
+  <script>
+    let giscusTheme = localStorage.getItem("theme");
+    let giscusAttributes = {
+        "src": "https://giscus.app/client.js",
+        "data-repo": "sabbir-ahmed12/sabbir-ahmed12.github.io",
+        "data-repo-id": "R_kgDOJwEP_g",
+        "data-category": "Comments",
+        "data-category-id": "DIC_kwDOJwEP_s4CXSNz",
+        "data-mapping": "title",
+        "data-strict": "1",
+        "data-reactions-enabled": "1",
+        "data-emit-metadata": "0",
+        "data-input-position": "bottom",
+        "data-theme": giscusTheme,
+        "data-lang": "en",
+        "crossorigin": "anonymous",
+        "async": "",
+    };
+
+
+    let giscusScript = document.createElement("script");
+    Object.entries(giscusAttributes).forEach(([key, value]) => giscusScript.setAttribute(key, value));
+    document.getElementById("giscus_thread").appendChild(giscusScript);
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://giscus.app/?ref_noscript" rel="external nofollow noopener" target="_blank">comments powered by giscus.</a>
+</noscript>
+</div>
 </div>
 
       

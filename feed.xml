@@ -1,5 +1,82 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://sabbir-ahmed12.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sabbir-ahmed12.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2024-01-16T19:45:41+00:00</updated><id>https://sabbir-ahmed12.github.io/feed.xml</id><title type="html">blank</title><subtitle>This is Sabbir Ahmed&apos;s personal website.
-</subtitle><entry><title type="html">A Hands-on Introduction to Audio Data</title><link href="https://sabbir-ahmed12.github.io/blog/2023/a-hands-on-introduction-to-audio-data/" rel="alternate" type="text/html" title="A Hands-on Introduction to Audio Data" /><published>2023-06-26T08:57:00+00:00</published><updated>2023-06-26T08:57:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2023/a-hands-on-introduction-to-audio-data</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2023/a-hands-on-introduction-to-audio-data/"><![CDATA[]]></content><author><name></name></author><category term="tutorial" /><category term="audio" /><summary type="html"><![CDATA[A practical approach to learn about audio data.]]></summary></entry><entry><title type="html">Formatting Infected Pendrive Forcefully.</title><link href="https://sabbir-ahmed12.github.io/blog/2023/formatting-pendrive-forcefully/" rel="alternate" type="text/html" title="Formatting Infected Pendrive Forcefully." /><published>2023-06-19T08:00:00+00:00</published><updated>2023-06-19T08:00:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2023/formatting-pendrive-forcefully</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2023/formatting-pendrive-forcefully/"><![CDATA[<p>Sometimes when we connect our pendrive to a virus infected device, it gets infected. As a result, some files are created automatically inside the pendrive that cannot be deleted when we try to format it. Moreover, virus may also partition the drive the automatically. This problem can be solved by the following method.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://sabbir-ahmed12.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sabbir-ahmed12.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2024-12-30T02:19:40+00:00</updated><id>https://sabbir-ahmed12.github.io/feed.xml</id><title type="html">blank</title><subtitle>This is Sabbir Ahmed&apos;s personal website.
+</subtitle><entry><title type="html">Learning Linux from Basics to Advanced</title><link href="https://sabbir-ahmed12.github.io/blog/2024/learning-linux-from-basics-to-advanced/" rel="alternate" type="text/html" title="Learning Linux from Basics to Advanced" /><published>2024-07-14T15:03:00+00:00</published><updated>2024-07-14T15:03:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2024/learning-linux-from-basics-to-advanced</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2024/learning-linux-from-basics-to-advanced/"><![CDATA[<p>Learning Linux is one of the most valuable skills in the tech industry. It helps doing things faster and more efficiently. Many of the world’s powerful servers and supercomputers run on Linux.</p>
+
+<p>In this post, we’ll learn the basics of Linux command line, and then transition to more advanced topics like shell scripting and system administration.</p>
+
+<p><strong>Important Note:</strong> All examples of this post are demonstrated in Ubuntu 22.04 LTS. This blog was written assuming that you’ve a Linux OS already setup for you.</p>
+
+<h2 id="part-1-introduction-to-linux">Part 1: Introduction to Linux</h2>
+
+<h3 id="11-getting-started-with-linux">1.1. Getting Started with Linux</h3>
+
+<h4 id="what-is-linux">What is Linux?</h4>
+
+<p>Linux is an open-source operating system that is based on the Unix Operating System (OS). It was created by Linus Torvalds in 1991. Open source means that the source code of the operating system is available to the public. This allows you to modify the original code, customize it, and distribute the new operating system to potential users.</p>
+
+<h4 id="why-should-you-learn-linux">Why should you learn linux?</h4>
+
+<p>In today’s data center landscape, Linux and Microsoft Windows stand out as the primary contenders, with Linux having a major share.</p>
+
+<p>Some of the compelling reasons to learn Linux are:</p>
+
+<ul>
+  <li>
+    <p>Given the prevalence of Linux hosting, there is a high chance that your application will be hosted on Linux. So, learning Linux as a developer becomes increasingly valuable.</p>
+  </li>
+  <li>
+    <p>With cloud computing becoming the norm, chances are high that your cloud instance will rely on Linux.</p>
+  </li>
+  <li>
+    <p>Linux serves as the foundation for many operating systems for the Internet of Things (IoT) and mobile applications.</p>
+  </li>
+  <li>
+    <p>Most of the commands you’ll learn can also used in MacOS. Moreover, knowledge of Linux will open many opportunities for you.</p>
+  </li>
+</ul>
+
+<h4 id="what-is-a-linux-kernel">What is a Linux Kernel?</h4>
+
+<p>The kernel is the central component of an operating system that manages the computer and its hardware operations. It handles memory operations and CPU time. It acts as a bridge between applications and the hardware-level data processing using inter-process communication and system calls.</p>
+
+<p>The kernel is loaded into memory first when an operating system starts and remains there until the system shuts down. It is responsible for tasks like disk management, task management, and memory management.</p>
+
+<p>If you’re curious about learning Linux kernel, you can check the GitHub link [here].(https://github.com/torvalds/linux)</p>
+
+<h4 id="what-is-a-linux-distribution">What is a Linux Distribution?</h4>
+
+<p>By this point, you know that you can re-use the Linux kernel code, modify it, and create a new kernel. You can further combine different utilities and software to create a completely new operating system. A Linux distribution or distro is a version of the Linux operating system that includes the Linux kernel, system utilities, and other software. Being open source, a Linux distribution is a collaborative effort involving multiple independent open-source development communities. So, Linux distributions are different flavors of the Linux OS.</p>
+
+<p><strong><em>What does it mean that a distribution is derived?</em></strong>
+When you say that a distribution is “derived” from another, the newer distro is built upon the base or foundation of the original distro. This derivation can include using the same package management system (more on this later), kernel version, and sometimes the same configuration tools. Today, there are thousands of Linux distributions to choose from, offering differing goals and criteria for selecting and supporting the software provided by their distribution.</p>
+
+<p>Distributions vary from one to the other, but they generally have several common characteristics:</p>
+
+<ul>
+  <li>A distribution consists of a Linux kernel.</li>
+  <li>It supports user space programs.</li>
+  <li>A distribution may be small and single-purpose or include thousands of open-source programs.</li>
+  <li>Some means of installing and updating the distribution and its components should be provided.</li>
+</ul>
+
+<p>If you view the <a href="https://upload.wikimedia.org/wikipedia/commons/1/1b/Linux_Distribution_Timeline.svg">Linux Distributions Timeline</a>, you’ll see two major distros: Slackware and Debian. Several distributions are derived from them. For example, Ubuntu and Kali are derived from Debian.</p>
+
+<p>There are various advantages of derivation. Derived distributions can leverage the stability, security, and large software repositories of the parent distribution.</p>
+
+<p>When building on an existing foundation, developers can drive their focus and effort entirely on the specialized features of the new distribution. Users of derived distributions can benefit from the documentation, community support, and resources already available for the parent distribution.</p>
+
+<p>Some popular Linux distributions are: <code class="language-plaintext highlighter-rouge">Ubuntu</code>, <code class="language-plaintext highlighter-rouge">Linux Mint</code>, <code class="language-plaintext highlighter-rouge">Arch Linux</code>, <code class="language-plaintext highlighter-rouge">Manjaro</code>, <code class="language-plaintext highlighter-rouge">Kali Linux</code> etc.</p>
+
+<h2 id="part-2-introduction-to-terminal-console-shell-and-system-commands">Part 2: Introduction to Terminal, Console, Shell and System Commands</h2>
+
+<h3 id="21-introduction-to-terminal-console-and-shell">2.1. Introduction to Terminal, Console and Shell</h3>
+
+<h4 id="what-is-a-terminal">What is a Terminal?</h4>
+
+<p>A terminal is a text-based user interface that allows users to interact with a computer by entering commands and viewing the results. A terminal can be connected to a local or a remote system, depending on the protocol of the network.</p>
+
+<h4 id="what-is-console">What is Console?</h4>
+
+<p>A console is a special type of terminal that is directly attached to the computer system. It is usually the primary interface for system administration and maintenance. It can be a physical device such as a keyboard and a monitor, or a virtual device such as a serial port or graphical window. A console gives you access to the low-level functions and settings of the computer system such as the BIOS, the boot loader or the kernel.</p>]]></content><author><name></name></author><category term="tutorial" /><category term="linux" /><summary type="html"><![CDATA[Tutorial post on linux operating system.]]></summary></entry><entry><title type="html">A Hands-on Introduction to Audio Data</title><link href="https://sabbir-ahmed12.github.io/blog/2023/a-hands-on-introduction-to-audio-data/" rel="alternate" type="text/html" title="A Hands-on Introduction to Audio Data" /><published>2023-06-26T08:57:00+00:00</published><updated>2023-06-26T08:57:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2023/a-hands-on-introduction-to-audio-data</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2023/a-hands-on-introduction-to-audio-data/"><![CDATA[]]></content><author><name></name></author><category term="tutorial" /><category term="audio" /><summary type="html"><![CDATA[A practical approach to learn about audio data.]]></summary></entry><entry><title type="html">Formatting Infected Pendrive Forcefully.</title><link href="https://sabbir-ahmed12.github.io/blog/2023/formatting-pendrive-forcefully/" rel="alternate" type="text/html" title="Formatting Infected Pendrive Forcefully." /><published>2023-06-19T08:00:00+00:00</published><updated>2023-06-19T08:00:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2023/formatting-pendrive-forcefully</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2023/formatting-pendrive-forcefully/"><![CDATA[<p>Sometimes when we connect our pendrive to a virus infected device, it gets infected. As a result, some files are created automatically inside the pendrive that cannot be deleted when we try to format it. Moreover, virus may also partition the drive the automatically. This problem can be solved by the following method.</p>
 
 <ul>
   <li>
