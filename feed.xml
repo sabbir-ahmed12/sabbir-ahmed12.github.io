@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://sabbir-ahmed12.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sabbir-ahmed12.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2024-12-30T02:19:40+00:00</updated><id>https://sabbir-ahmed12.github.io/feed.xml</id><title type="html">blank</title><subtitle>This is Sabbir Ahmed&apos;s personal website.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://sabbir-ahmed12.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sabbir-ahmed12.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-01-11T06:35:58+00:00</updated><id>https://sabbir-ahmed12.github.io/feed.xml</id><title type="html">blank</title><subtitle>This is Sabbir Ahmed&apos;s personal website.
 </subtitle><entry><title type="html">Learning Linux from Basics to Advanced</title><link href="https://sabbir-ahmed12.github.io/blog/2024/learning-linux-from-basics-to-advanced/" rel="alternate" type="text/html" title="Learning Linux from Basics to Advanced" /><published>2024-07-14T15:03:00+00:00</published><updated>2024-07-14T15:03:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2024/learning-linux-from-basics-to-advanced</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2024/learning-linux-from-basics-to-advanced/"><![CDATA[<p>Learning Linux is one of the most valuable skills in the tech industry. It helps doing things faster and more efficiently. Many of the world’s powerful servers and supercomputers run on Linux.</p>
 
 <p>In this post, we’ll learn the basics of Linux command line, and then transition to more advanced topics like shell scripting and system administration.</p>
@@ -40,6 +40,23 @@
 
 <p>The kernel is loaded into memory first when an operating system starts and remains there until the system shuts down. It is responsible for tasks like disk management, task management, and memory management.</p>
 
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/posts_img/2024_07_14_learning_linux/kernel_layout.png" class="img-fluid rounded z-depth-1" width="auto" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+    </div>
+</div>
+
 <p>If you’re curious about learning Linux kernel, you can check the GitHub link [here].(https://github.com/torvalds/linux)</p>
 
 <h4 id="what-is-a-linux-distribution">What is a Linux Distribution?</h4>
@@ -76,7 +93,7 @@ When you say that a distribution is “derived” from another, the newer distro
 
 <h4 id="what-is-console">What is Console?</h4>
 
-<p>A console is a special type of terminal that is directly attached to the computer system. It is usually the primary interface for system administration and maintenance. It can be a physical device such as a keyboard and a monitor, or a virtual device such as a serial port or graphical window. A console gives you access to the low-level functions and settings of the computer system such as the BIOS, the boot loader or the kernel.</p>]]></content><author><name></name></author><category term="tutorial" /><category term="linux" /><summary type="html"><![CDATA[Tutorial post on linux operating system.]]></summary></entry><entry><title type="html">A Hands-on Introduction to Audio Data</title><link href="https://sabbir-ahmed12.github.io/blog/2023/a-hands-on-introduction-to-audio-data/" rel="alternate" type="text/html" title="A Hands-on Introduction to Audio Data" /><published>2023-06-26T08:57:00+00:00</published><updated>2023-06-26T08:57:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2023/a-hands-on-introduction-to-audio-data</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2023/a-hands-on-introduction-to-audio-data/"><![CDATA[]]></content><author><name></name></author><category term="tutorial" /><category term="audio" /><summary type="html"><![CDATA[A practical approach to learn about audio data.]]></summary></entry><entry><title type="html">Formatting Infected Pendrive Forcefully.</title><link href="https://sabbir-ahmed12.github.io/blog/2023/formatting-pendrive-forcefully/" rel="alternate" type="text/html" title="Formatting Infected Pendrive Forcefully." /><published>2023-06-19T08:00:00+00:00</published><updated>2023-06-19T08:00:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2023/formatting-pendrive-forcefully</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2023/formatting-pendrive-forcefully/"><![CDATA[<p>Sometimes when we connect our pendrive to a virus infected device, it gets infected. As a result, some files are created automatically inside the pendrive that cannot be deleted when we try to format it. Moreover, virus may also partition the drive the automatically. This problem can be solved by the following method.</p>
+<p>A console is a special type of terminal that is directly attached to the computer system. It is usually the primary interface for system administration and maintenance. It can be a physical device such as a keyboard and a monitor, or a virtual device such as a serial port or graphical window. A console gives you access to the low-level functions and settings of the computer system such as the BIOS, the boot loader or the kernel.</p>]]></content><author><name></name></author><category term="tutorial" /><category term="linux" /><summary type="html"><![CDATA[Tutorial post on linux operating system.]]></summary></entry><entry><title type="html">Formatting Infected Pendrive Forcefully.</title><link href="https://sabbir-ahmed12.github.io/blog/2023/formatting-pendrive-forcefully/" rel="alternate" type="text/html" title="Formatting Infected Pendrive Forcefully." /><published>2023-06-19T08:00:00+00:00</published><updated>2023-06-19T08:00:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2023/formatting-pendrive-forcefully</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2023/formatting-pendrive-forcefully/"><![CDATA[<p>Sometimes when we connect our pendrive to a virus infected device, it gets infected. As a result, some files are created automatically inside the pendrive that cannot be deleted when we try to format it. Moreover, virus may also partition the drive the automatically. This problem can be solved by the following method.</p>
 
 <ul>
   <li>
