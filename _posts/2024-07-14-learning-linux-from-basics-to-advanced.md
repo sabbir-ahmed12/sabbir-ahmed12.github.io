@@ -43,6 +43,12 @@ The kernel is the central component of an operating system that manages the comp
 
 The kernel is loaded into memory first when an operating system starts and remains there until the system shuts down. It is responsible for tasks like disk management, task management, and memory management.
 
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/posts_img/2024_07_14_learning_linux/kernel_layout.png" class="img-fluid rounded z-depth-1" zoomable=true %}
+    </div>
+</div>
+
 If you're curious about learning Linux kernel, you can check the GitHub link [here].(https://github.com/torvalds/linux)
 
 #### What is a Linux Distribution?
