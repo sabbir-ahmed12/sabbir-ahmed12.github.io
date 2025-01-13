@@ -2,11 +2,17 @@
 layout: page
 permalink: /research/
 title: Research
-description: <i>Visit my google scholar page if you find the date of last update of this site is a long ago.</i>
+description: <i>Feel free to visit my Google Scholar profile if the information here seems outdated.</i>
 years: [2021]
 nav: true
 nav_order: 3
 ---
+
+#### **Current Research Areas:**
+- Motion Compensation in Free Breathing Pulmonary MRI
+- Medical Imaging and Machine Learning
+- Algorithm Development and Optimizations
+- Inverse Problems and MR Image Reconstruction
 
 #### **Research Interests:**
 
