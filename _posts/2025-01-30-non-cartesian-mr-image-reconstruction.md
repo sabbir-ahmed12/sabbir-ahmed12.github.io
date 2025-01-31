@@ -3,7 +3,7 @@ layout: post
 title: Non-Cartesian MR Image Reconstruction
 date: 2025-01-30 09:24:00-0400
 description: Tutorial post on non-cartesian MR image reconstruction.
-tags: image
+tags: linux
 categories: tutorial
 giscus_comments: true
 related_posts: false
