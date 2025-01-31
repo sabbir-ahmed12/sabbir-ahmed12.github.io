@@ -219,6 +219,7 @@ plugins:
   - jekyll-diagrams
   - jekyll-email-protect
   - jekyll-feed
+  - jekyll-jupyter-notebook
   - jekyll-imagemagick
   - jekyll-link-attributes
   - jekyll-minifier
