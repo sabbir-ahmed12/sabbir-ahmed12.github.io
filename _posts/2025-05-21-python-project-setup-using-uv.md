@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Python Project Setup Using UV
-date: 2025-05-21 12:19:00-0400
+date: 2025-05-21 00:19:00-0400
 description: Tutorial Post on Python Project Setup Using UV
 tags: python
 categories: tutorial
