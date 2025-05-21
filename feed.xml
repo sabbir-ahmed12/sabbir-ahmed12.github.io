@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://sabbir-ahmed12.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sabbir-ahmed12.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-05-21T05:44:26+00:00</updated><id>https://sabbir-ahmed12.github.io/feed.xml</id><title type="html">blank</title><subtitle>This is Sabbir Ahmed&apos;s personal website.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://sabbir-ahmed12.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sabbir-ahmed12.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-05-21T06:15:58+00:00</updated><id>https://sabbir-ahmed12.github.io/feed.xml</id><title type="html">blank</title><subtitle>This is Sabbir Ahmed&apos;s personal website.
 </subtitle><entry><title type="html">Python Project Setup Using UV</title><link href="https://sabbir-ahmed12.github.io/blog/2025/python-project-setup-using-uv/" rel="alternate" type="text/html" title="Python Project Setup Using UV" /><published>2025-05-21T04:19:00+00:00</published><updated>2025-05-21T04:19:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2025/python-project-setup-using-uv</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2025/python-project-setup-using-uv/"><![CDATA[<h2 id="uv">UV</h2>
 
 <p>UV is a new and an extremely fast Python package and project manager, written in Rust.</p>
@@ -8,6 +8,54 @@
 <p>There are different ways to install UV. You can find different ways of installing UV from <a href="https://docs.astral.sh/uv/#installation">here</a>. However, in this tutorial, we’ll use <code class="language-plaintext highlighter-rouge">Homebrew</code> to install UV as it is easier to install packages using <code class="language-plaintext highlighter-rouge">Homebrew</code> in MacOS and Linux. You can install <code class="language-plaintext highlighter-rouge">Homebrew</code> from <a href="https://brew.sh/">here</a>. You can install <code class="language-plaintext highlighter-rouge">uv</code> using <code class="language-plaintext highlighter-rouge">Homebrew</code> using the following command:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew install uv
+</code></pre></div></div>
+
+<p>Once it is installed successfully, you can run the following command to check if that works fine.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv --version
+</code></pre></div></div>
+
+<p>It should print the version of <code class="language-plaintext highlighter-rouge">uv</code>.</p>
+
+<h2 id="setup-project-using-uv">Setup Project Using UV</h2>
+
+<p>Let’s say you want to create a project named <code class="language-plaintext highlighter-rouge">new_project</code> in your Desktop. For that, change your current directory to <code class="language-plaintext highlighter-rouge">Desktop</code> and write the following command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv init new_project
+</code></pre></div></div>
+
+<p>If the command works fine, it’ll show a message with the location where it initialized that project. This command will create a new directory in the Desktop called <code class="language-plaintext highlighter-rouge">new_project</code>. However, if you want to use an existing directory to setup your application, you can run the command below:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv init
+</code></pre></div></div>
+
+<p>We aren’t using any options in the above commands. However, <code class="language-plaintext highlighter-rouge">uv</code> has some options to choose from to create project. <code class="language-plaintext highlighter-rouge">--app</code> is the default option when we run <code class="language-plaintext highlighter-rouge">uv init &lt;project_name&gt;</code>. That means, it instead runs the command <code class="language-plaintext highlighter-rouge">uv init &lt;project_name&gt; --app</code> by default. Most of the time we want to use the default option as it creates a simple project structure. We can also use another option <code class="language-plaintext highlighter-rouge">--lib</code> if we want to work on a project that will be built and distributed as a python package.</p>
+
+<p>The default option will create some files initially in the desired directory. It’ll initialize the directory as a <code class="language-plaintext highlighter-rouge">git</code> repository. So, there will be a <code class="language-plaintext highlighter-rouge">.git</code> directory in there. The other files are:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">.gitignore</code>: contains the files and directories to ignore in the commit.</li>
+  <li><code class="language-plaintext highlighter-rouge">.python-version</code>: file containing information about the version of python the app is using.</li>
+  <li><code class="language-plaintext highlighter-rouge">main.py</code>: the main python file of the project.</li>
+  <li><code class="language-plaintext highlighter-rouge">pyproject.toml</code>: contains information about the project e.g., name, version, description, dependencies etc.</li>
+  <li><code class="language-plaintext highlighter-rouge">README.md</code>: to add documentation for the project.</li>
+</ul>
+
+<h2 id="install-package-to-the-project">Install Package to the Project</h2>
+
+<p>Instead of using <code class="language-plaintext highlighter-rouge">pip</code>, we’ll install required package using the following command in <code class="language-plaintext highlighter-rouge">uv</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv add &lt;package_name&gt;
+</code></pre></div></div>
+
+<p>For example, if you want to install <code class="language-plaintext highlighter-rouge">flask</code> and <code class="language-plaintext highlighter-rouge">requests</code> library using <code class="language-plaintext highlighter-rouge">uv</code>, you can run the following command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv add flask requests
+</code></pre></div></div>
+
+<p>It’ll automatically create a virtual environment for the project and show the path of the environment. It’ll create a directory called <code class="language-plaintext highlighter-rouge">.venv</code> in the root directory and update the <code class="language-plaintext highlighter-rouge">pyproject.toml</code> file to list the dependencies. Moreover, it’ll create a new file called <code class="language-plaintext highlighter-rouge">uv.lock</code> which records the exact version of all the dependencies of the project. It ensures that our environment is perfectly reproducible. You can run the following command from your project directory to visualize and understand the dependencies of your project:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv tree
 </code></pre></div></div>]]></content><author><name></name></author><category term="tutorial" /><category term="python" /><summary type="html"><![CDATA[Tutorial Post on Python Project Setup Using UV]]></summary></entry><entry><title type="html">Non-Cartesian MR Image Reconstruction</title><link href="https://sabbir-ahmed12.github.io/blog/2025/non-cartesian-mr-image-reconstruction/" rel="alternate" type="text/html" title="Non-Cartesian MR Image Reconstruction" /><published>2025-01-30T13:24:00+00:00</published><updated>2025-01-30T13:24:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2025/non-cartesian-mr-image-reconstruction</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2025/non-cartesian-mr-image-reconstruction/"><![CDATA[<div
   class="jupyter-notebook"
   style="position: relative; width: 100%; margin: 0 auto;">
