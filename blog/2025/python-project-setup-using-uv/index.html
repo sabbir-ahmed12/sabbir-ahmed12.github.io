@@ -150,33 +150,36 @@
     
     <div id="markdown-content">
       <h2 id="uv">UV</h2>
+<hr>
 
-<p>UV is a new and an extremely fast Python package and project manager, written in Rust.</p>
+<p><code class="language-plaintext highlighter-rouge">uv</code> is a new and an extremely fast <code class="language-plaintext highlighter-rouge">Python</code> package and project manager, written in Rust. <code class="language-plaintext highlighter-rouge">uv</code> uses a global caching system which makes it more efficient in terms of storage and package installation time. Unlike <code class="language-plaintext highlighter-rouge">pip</code> and other package managers, if there are multiple projects that needs a package (for example - <code class="language-plaintext highlighter-rouge">flask</code>) at a time, <code class="language-plaintext highlighter-rouge">uv</code> will install it once and use the same package for all the current projects without any issue which saves storage space by avoiding duplicate installation and also saves time.</p>
 
 <h2 id="installation">Installation</h2>
+<hr>
 
 <p>There are different ways to install UV. You can find different ways of installing UV from <a href="https://docs.astral.sh/uv/#installation" rel="external nofollow noopener" target="_blank">here</a>. However, in this tutorial, we’ll use <code class="language-plaintext highlighter-rouge">Homebrew</code> to install UV as it is easier to install packages using <code class="language-plaintext highlighter-rouge">Homebrew</code> in MacOS and Linux. You can install <code class="language-plaintext highlighter-rouge">Homebrew</code> from <a href="https://brew.sh/" rel="external nofollow noopener" target="_blank">here</a>. You can install <code class="language-plaintext highlighter-rouge">uv</code> using <code class="language-plaintext highlighter-rouge">Homebrew</code> using the following command:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew install uv
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>uv
 </code></pre></div></div>
 
 <p>Once it is installed successfully, you can run the following command to check if that works fine.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv --version
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv <span class="nt">--version</span>
 </code></pre></div></div>
 
 <p>It should print the version of <code class="language-plaintext highlighter-rouge">uv</code>.</p>
 
 <h2 id="setup-project-using-uv">Setup Project Using UV</h2>
+<hr>
 
 <p>Let’s say you want to create a project named <code class="language-plaintext highlighter-rouge">new_project</code> in your Desktop. For that, change your current directory to <code class="language-plaintext highlighter-rouge">Desktop</code> and write the following command:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv init new_project
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv init new_project
 </code></pre></div></div>
 
 <p>If the command works fine, it’ll show a message with the location where it initialized that project. This command will create a new directory in the Desktop called <code class="language-plaintext highlighter-rouge">new_project</code>. However, if you want to use an existing directory to setup your application, you can run the command below:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv init
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv init
 </code></pre></div></div>
 
 <p>We aren’t using any options in the above commands. However, <code class="language-plaintext highlighter-rouge">uv</code> has some options to choose from to create project. <code class="language-plaintext highlighter-rouge">--app</code> is the default option when we run <code class="language-plaintext highlighter-rouge">uv init &lt;project_name&gt;</code>. That means, it instead runs the command <code class="language-plaintext highlighter-rouge">uv init &lt;project_name&gt; --app</code> by default. Most of the time we want to use the default option as it creates a simple project structure. We can also use another option <code class="language-plaintext highlighter-rouge">--lib</code> if we want to work on a project that will be built and distributed as a python package.</p>
@@ -196,22 +199,123 @@
 <code class="language-plaintext highlighter-rouge">README.md</code>: to add documentation for the project.</li>
 </ul>
 
-<h2 id="install-package-to-the-project">Install Package to the Project</h2>
+<h2 id="install-and-remove-python-package">Install and Remove Python Package</h2>
+<hr>
 
 <p>Instead of using <code class="language-plaintext highlighter-rouge">pip</code>, we’ll install required package using the following command in <code class="language-plaintext highlighter-rouge">uv</code>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv add &lt;package_name&gt;
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv add &lt;package_name&gt;
 </code></pre></div></div>
 
 <p>For example, if you want to install <code class="language-plaintext highlighter-rouge">flask</code> and <code class="language-plaintext highlighter-rouge">requests</code> library using <code class="language-plaintext highlighter-rouge">uv</code>, you can run the following command:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv add flask requests
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv add flask requests
 </code></pre></div></div>
 
 <p>It’ll automatically create a virtual environment for the project and show the path of the environment. It’ll create a directory called <code class="language-plaintext highlighter-rouge">.venv</code> in the root directory and update the <code class="language-plaintext highlighter-rouge">pyproject.toml</code> file to list the dependencies. Moreover, it’ll create a new file called <code class="language-plaintext highlighter-rouge">uv.lock</code> which records the exact version of all the dependencies of the project. It ensures that our environment is perfectly reproducible. You can run the following command from your project directory to visualize and understand the dependencies of your project:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv tree
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv tree
 </code></pre></div></div>
+
+<p>Now, to remove a <code class="language-plaintext highlighter-rouge">python</code> package from your environment, use the following command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv remove &lt;package_name&gt;
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">uv</code> will automatically update the <code class="language-plaintext highlighter-rouge">uv.lock</code> and <code class="language-plaintext highlighter-rouge">pyproject.toml</code> file when you add and remove a package.</p>
+
+<h2 id="run-python-script-in-uv-environment">Run Python Script in UV Environment</h2>
+<hr>
+
+<p>Now we have a <code class="language-plaintext highlighter-rouge">python</code> environment setup for our project. In old system, to run a <code class="language-plaintext highlighter-rouge">python</code> script, we used to use the command <code class="language-plaintext highlighter-rouge">python &lt;script.py&gt;</code>. However, as you’ve noticed that we don’t activate any environment in <code class="language-plaintext highlighter-rouge">uv</code>. Therefore, in order to run a script in <code class="language-plaintext highlighter-rouge">uv</code> we use the command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv run &lt;script_name.py&gt;
+</code></pre></div></div>
+
+<p>For example - to run <code class="language-plaintext highlighter-rouge">main.py</code> file in your project, you’ll write <code class="language-plaintext highlighter-rouge">uv run main.py</code>. Now, to make sure that <code class="language-plaintext highlighter-rouge">uv</code> is using the python environment created for that particular project, you can write the following code in your <code class="language-plaintext highlighter-rouge">main.py</code> file and then run the <code class="language-plaintext highlighter-rouge">uv run main.py</code> command:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sys</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">executable</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">"</span><span class="s">__main__</span><span class="sh">"</span><span class="p">:</span>
+    <span class="nf">main</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>If you run your <code class="language-plaintext highlighter-rouge">main.py</code> file now, you’ll see that the python executable path is <code class="language-plaintext highlighter-rouge">&lt;path&gt;/&lt;your_app_name&gt;/.venv/bin/python3</code> which means that <code class="language-plaintext highlighter-rouge">uv</code> is using the correct <code class="language-plaintext highlighter-rouge">python</code>.</p>
+
+<p><strong>NOTE:</strong> <strong><em>The good thing about <code class="language-plaintext highlighter-rouge">uv</code> is that even if you delete the <code class="language-plaintext highlighter-rouge">.venv/</code> directory from the project directory and then you run the <code class="language-plaintext highlighter-rouge">uv run main.py</code> command, <code class="language-plaintext highlighter-rouge">uv</code> will automatically create the environment and install the required packages using the <code class="language-plaintext highlighter-rouge">uv.lock</code> file and run the command.</em></strong></p>
+
+<h2 id="replicate-uv-python-environment">Replicate UV Python Environment</h2>
+<hr>
+
+<p>Let’s say you want to share your code with others. Whoever wants to run your code, that person needs to create the same environment in order to run the code successfully in the new machine. However, you don’t ship your virtual environment with your code because it’ll increase the size of the repository.</p>
+
+<p><code class="language-plaintext highlighter-rouge">uv</code> can create the exact environment using the <code class="language-plaintext highlighter-rouge">uv.lock</code> and <code class="language-plaintext highlighter-rouge">pyproject.toml</code> file shipped along with the code. To do that, use the following command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv <span class="nb">sync</span>
+</code></pre></div></div>
+
+<h2 id="migrate-from-pip-to-uv">Migrate from <code class="language-plaintext highlighter-rouge">pip</code> to <code class="language-plaintext highlighter-rouge">uv</code>
+</h2>
+<hr>
+
+<p>If you’ve an existing project created either using <code class="language-plaintext highlighter-rouge">pip</code> or other package managers with a <code class="language-plaintext highlighter-rouge">requirements.txt</code> file and you want to migrate that project to <code class="language-plaintext highlighter-rouge">uv</code> environment, you can migrate using the following commands:</p>
+
+<ol>
+  <li>Create the <code class="language-plaintext highlighter-rouge">uv</code> environment project structure.</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv init
+</code></pre></div></div>
+
+<ol>
+  <li>Install the packages</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv add <span class="nt">-r</span> requirements.txt
+</code></pre></div></div>
+
+<p>Now, if you want to rely solely on <code class="language-plaintext highlighter-rouge">uv</code> in future, you can delete the <code class="language-plaintext highlighter-rouge">requirements.txt</code> file.</p>
+
+<h2 id="replace-pipx-with-uv">Replace <code class="language-plaintext highlighter-rouge">pipx</code> with <code class="language-plaintext highlighter-rouge">uv</code>
+</h2>
+<hr>
+
+<p><code class="language-plaintext highlighter-rouge">pipx</code> is used to install tools such as formatter, linter etc in to format and write python code following best practices since we don’t want to install those tools for a particular project separately. So, <code class="language-plaintext highlighter-rouge">pipx</code> installs those tools globally which we can now do using <code class="language-plaintext highlighter-rouge">uv</code>.</p>
+
+<p>For example - if you want to install <code class="language-plaintext highlighter-rouge">ruff</code> using <code class="language-plaintext highlighter-rouge">uv</code>, you run the following command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv tool <span class="nb">install </span>ruff
+</code></pre></div></div>
+<p>This command installs ruff and will add to the <code class="language-plaintext highlighter-rouge">PATH</code>. You can check the path using <code class="language-plaintext highlighter-rouge">which ruff</code> command.</p>
+
+<p>If you want to uninstall a tool such as <code class="language-plaintext highlighter-rouge">ruff</code> installed using <code class="language-plaintext highlighter-rouge">uv</code>, you can run the command below:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv tool uninstall ruff
+</code></pre></div></div>
+<p>You can list the tools installed in your machine using <code class="language-plaintext highlighter-rouge">uv</code> using the command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv tool list
+</code></pre></div></div>
+<p>You can also upgrade all of your tools at once using the following command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv tool upgrade <span class="nt">--all</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">uv</code> can also use tools like <code class="language-plaintext highlighter-rouge">ruff</code> without installing it permanently on your device. If you want to use tools for some of your project only a few times, <code class="language-plaintext highlighter-rouge">uv</code> will make your life easier. You can run the following command to run <code class="language-plaintext highlighter-rouge">ruff check</code> command without installing <code class="language-plaintext highlighter-rouge">ruff</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv tool run ruff check
+</code></pre></div></div>
+<p>Alternatively, you can use the short command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uvx ruff check
+</code></pre></div></div>
+
+<p>That’s all for this blog. Although <code class="language-plaintext highlighter-rouge">uv</code> has a lot of functionalities which weren’t covered in this blog, I’ll try to add them as I become more familiar with the other functionalities.</p>
 
     </div>
   </article><div id="giscus_thread" style="max-width: 800px; margin: 0 auto;">
