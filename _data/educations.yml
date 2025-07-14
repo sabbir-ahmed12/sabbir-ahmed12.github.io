@@ -53,31 +53,31 @@
             - Learnt about Lagrange multipliers, and Karush-Kuhn-Tucker conditions via Farkas lemma.
             - Learnt about stochastic methods for continuous optimization & stochastic differential equations, optimization with differential equations - optimal control.
 
-        - title: ECE 5330:001 Graph Algorithm and Combinatorial Optimization
-          institution: UIowa
-          year: Spring 2024
-          description:
-            - title: Learning Outcomes
-              contents:
-                - Learnt about the basic data structures and algorithms.
-                - Learnt to analyze algorithms - space and time complexity, big-Oh notation, recurrences.
-                - Learnt about classic algorithm design techniques such as - divide and conquer, dynamic programming and greedy methods.
-                - Learnt about basic graph algorithms (DFS, BFS, Toplolgical sort) - graph traversal techniques, shortest path algorithms and minimum spanning trees.
-                - Learnt about network flows (Ford-Fulkerson method, Push-relabel algorithms) - maximum flows, matching and graph cuts
-                - Learnt about NP-Hard, NP-completeness and approximation algorithms.
+    - title: ECE 5330:001 Graph Algorithm and Combinatorial Optimization
+      institution: UIowa
+      year: Spring 2024
+      description:
+        - title: Learning Outcomes
+          contents:
+            - Learnt about the basic data structures and algorithms.
+            - Learnt to analyze algorithms - space and time complexity, big-Oh notation, recurrences.
+            - Learnt about classic algorithm design techniques such as - divide and conquer, dynamic programming and greedy methods.
+            - Learnt about basic graph algorithms (DFS, BFS, Toplolgical sort) - graph traversal techniques, shortest path algorithms and minimum spanning trees.
+            - Learnt about network flows (Ford-Fulkerson method, Push-relabel algorithms) - maximum flows, matching and graph cuts
+            - Learnt about NP-Hard, NP-completeness and approximation algorithms.
 
-        - title: ECE 5995:001 Applied Machine Learning
-          institution: UIowa
-          year: Spring 2024
-          description:
-            - title: Learning Outcomes
-              contents:
-                - Learnt about probability distributions, information theory, entropy
-                - Learnt about linear and kernel regression and classification.
-                - Learnt about neural network, optimization and regularization of neural networks.
-                - Learnt about factor based generative models - PCA, kernel PCA and applications - Low-rank methods
-                - Learnt about the generative models - Auto-encoder, Variational Auto-encoder, GANs and diffusion models and their relation to energy models.
-                - Learnt about disentanglement of latent variables and tricks to improve representation power.
+    - title: ECE 5995:001 Applied Machine Learning
+      institution: UIowa
+      year: Spring 2024
+      description:
+        - title: Learning Outcomes
+          contents:
+            - Learnt about probability distributions, information theory, entropy
+            - Learnt about linear and kernel regression and classification.
+            - Learnt about neural network, optimization and regularization of neural networks.
+            - Learnt about factor based generative models - PCA, kernel PCA and applications - Low-rank methods
+            - Learnt about the generative models - Auto-encoder, Variational Auto-encoder, GANs and diffusion models and their relation to energy models.
+            - Learnt about disentanglement of latent variables and tricks to improve representation power.
 
 # PROFESSIONAL EDUCATION
 # - title: Professional Courses
