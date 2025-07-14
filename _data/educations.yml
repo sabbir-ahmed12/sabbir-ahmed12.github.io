@@ -21,7 +21,7 @@
     - title: Ph.D in Electrical and Computer Engineering
       institution: University of Iowa, Iowa City, USA
       year: 2024-2028
-      
+
     - title: B.Sc. in Electronics and Telecommunication Engineering
       institution: Chittagong University of Engineering and Technology, Chattogram, BD
       year: 2017-2022
@@ -33,6 +33,25 @@
     - title: Secondary School Level
       institution: Ispahani Public School and College, Cumilla, BD
       year: 2012-2014
+
+- title: PhD Courseworks
+  type: time_table
+  contents:
+    - title: MATH 4820:001 Optimization Techniques
+      institution: UIowa
+      year: Spring 2024
+      description:
+        - title: Learning Outcomes
+          contents:
+            - Learnt to identify conditions under which global minimizers exist.
+            - Learnt to identify critical points and when a critical point is definitely a local minimizer.
+            - Learnt to implement and use basic optimization algorithms such as gradient descent.
+            - Got familiar with line searches for gradient descent.
+            - Learnt about Newton method and variants for optimization.
+            - Learnt about conjugate gradient method and quasi-Newton methods.
+            - Learnt to formulate constrained optimization problems (equality and inequality constrained optimization).
+            - Learnt about Lagrange multipliers, and Karush-Kuhn-Tucker conditions via Farkas lemma.
+            - Learnt about stochastic methods for continuous optimization & stochastic differential equations, optimization with differential equations - optimal control.
 
 # PROFESSIONAL EDUCATION
 # - title: Professional Courses
