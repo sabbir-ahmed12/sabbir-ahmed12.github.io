@@ -23,6 +23,7 @@
       credential_link:
       description:
         - title: Machine-Learning Based Speaker Identification System Using Cochleagram.
+          contents:
         - title: Objectives
           contents:
             - To build a speaker identification (SID) system that provides consistent performance for different noises at various levels of SNR.
@@ -51,10 +52,11 @@
   contents:
     - title: Project Mentor
       institution: University of Iowa, Iowa City, IA, USA
-      year: May 20, 2025 - July 23, 2025
+      year: 05/20/'25' - 07/23/'25
       credential_link:
       description:
         - title: Evaluation of Different Bias Field Correction Approaches for Pulmonary UTE MRI.
+          contents: 
         - title: Objectives
           contents: 
             - To eliminate the presence of intensity inhomogeneities in pulmonary MRI for better diagnosis, plan and treatment of patients with lung disease.
