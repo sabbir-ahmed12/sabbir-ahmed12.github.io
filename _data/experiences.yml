@@ -22,9 +22,7 @@
       year: 2020-2022
       credential_link:
       description:
-        - title: Machine-Learning Based Speaker Identification System Using Cochleagram.
-          contents:
-          
+        - Machine-Learning Based Speaker Identification System Using Cochleagram.
         - title: Objectives
           contents:
             - To build a speaker identification (SID) system that provides consistent performance for different noises at various levels of SNR.
@@ -56,9 +54,7 @@
       year: 05/20/'25' - 07/23/'25
       credential_link:
       description:
-        - title: Evaluation of Different Bias Field Correction Approaches for Pulmonary UTE MRI.
-          contents: 
-
+        - Evaluation of Different Bias Field Correction Approaches for Pulmonary UTE MRI.
         - title: Objectives
           contents: 
             - To eliminate the presence of intensity inhomogeneities in pulmonary MRI for better diagnosis, plan and treatment of patients with lung disease.
