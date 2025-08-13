@@ -24,6 +24,7 @@
       description:
         - title: Machine-Learning Based Speaker Identification System Using Cochleagram.
           contents:
+          
         - title: Objectives
           contents:
             - To build a speaker identification (SID) system that provides consistent performance for different noises at various levels of SNR.
@@ -57,6 +58,7 @@
       description:
         - title: Evaluation of Different Bias Field Correction Approaches for Pulmonary UTE MRI.
           contents: 
+
         - title: Objectives
           contents: 
             - To eliminate the presence of intensity inhomogeneities in pulmonary MRI for better diagnosis, plan and treatment of patients with lung disease.
