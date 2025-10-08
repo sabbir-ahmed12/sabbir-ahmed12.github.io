@@ -37,7 +37,104 @@
 - title: PhD Courseworks
   type: time_table
   contents:
-    - title: MATH 4820:001 Optimization Techniques
+    -title: ECE 5460 Digital Signal Processing
+      institution: UIowa
+      year: Fall 2025
+      description:
+        - title: Learning Outcomes
+        - contents:
+          - Got familiar with DTFT, z-transform and causality and stability analysis of system.
+          - Learnt about Type I-IV filters, All pass and Minimum phase systems.
+          - [In-progress]
+
+    -title: ECE 5600 Control Theory
+      institution: UIowa
+      year: Fall 2025
+      description:
+        - title: Learning Outcomes
+        - contents:
+          - Learnt about the SISO and MIMO systems
+          - Learnt about state variable representation of system, stability analysis using transfer function.
+          - [In-progress]
+
+    -title: ECE 5995 Large Language Models
+      institution: UIowa
+      year: Spring 2025
+      description:
+        - title: Learning Outcomes
+        - contents:
+          - Learnt about the small language models and the concept for textual feature extraction such as n-grams, bag-of-words etc.
+          - Learnt about the architectures of the Transformer model.
+          - Learnt about various state-of-the art LLMs such as - GPT, RoBERTa etc.
+          - Got familiar with LoRA and other techniques.
+
+    -title: ECE 5995 Intelligent Vision and Image Understanding
+      institution: UIowa
+      year: Spring 2025
+      description:
+        - title: Learning Outcomes
+        - contents:
+          - Learnt about various image enhancement and filtering techniques.
+          - Learnt about various edge, corner detection and line detection algorithms.
+          - Learnt about conventional and AI-based approaches for image segmentation.
+          - Got familiar with image registration, mathematical morphology, wavelet theory
+
+    -title: ECE 5320 High Performance Computer Architecture
+      institution: UIowa
+      year: Spring 2025
+      description:
+        - title: Learning Outcomes
+        - contents:
+          - Got familiar with the quantitative measures for assessing and comparing processor performance.
+          - Learnt about various processor design techniques, including - pipelining, instruction level parallelism, out-of-order execution, speculative execution, memory architecture, multi-threading, GPU architecture etc.
+          - Used simulations to design and analyze processors.
+          - Learnt about the future trends of processor design.
+
+    -title: ECE 5450 Machine Learning
+      institution: UIowa
+      year: Fall 2024
+      description:
+        - title: Learning Outcomes
+        - contents:
+          - Gained an in-depth understanding of machine learning theory & algorithms.
+          - Learnt about curve fitting, constrained optimization and Lagrange multipliers method, least squares, bias vs variance tradeoffs, MLE, MAP, SVM, K-means clustering, Mixture of Gaussians, EM algorithms for GMMs.
+          - Implemented the algorithms in Python to get hands-on experience. 
+
+    -title: ECE 5470 Medical Imaging Physics
+      institution: UIowa
+      year: Fall 2024
+      description:
+        - title: Learning Outcomes
+        - contents:
+          - Got familiar with the various imaging modalities.
+          - Learnt about the principles and methods of acquiring imaging data.
+          - Learnt about the physics and data acquisition technique of major medical imaging modalities (X-ray, CT, MRI, Ultra-Sound, PET, SPECT)
+          - Learnt about the factors influencing image characteristics and image qualities in individual modalities.
+
+    -title: BME 5240 Deep Learning in Medical Imaging
+      institution: UIowa
+      year: Fall 2024
+      description:
+        - title: Learning Outcomes
+        - contents:
+            - Got familiar with image space and physical space.
+            - Learnt about techniques to represent, reorient and standardize medical image.
+            - Learnt to implement image processing pipeline using SimpleITK.
+            - Got familiar with various NN architectures for tasks such as - classification, segmentation, registration and synthesis.
+            - Got familiar with libraries such as - MONAI, PyTorch, SimpleITK
+
+    -title: ECE 5820 Software Engineering Languages and Tools
+      institution: UIowa
+      year: Fall 2024
+      description:
+        - title: Learning Outcomes
+          contents:
+            - Got familiar with the various aspects of software engineering.
+            - Got familiar with concepts such as - TDD, BDD, Agile & Waterfall methodologies.
+            - Learnt about various tools such as git, github, kanban board.
+            - Got hands on experience of working in a team and develop an web app following the industry practices such as - working as developer or product manager in the team, holding stand up meeting in every other day, getting out a minimum viable product in every sprint, writing tests and generating test coverage report etc.
+
+    - title: MATH 4820 Optimization Techniques
       institution: UIowa
       year: Spring 2024
       description:
@@ -53,7 +150,7 @@
             - Learnt about Lagrange multipliers, and Karush-Kuhn-Tucker conditions via Farkas lemma.
             - Learnt about stochastic methods for continuous optimization & stochastic differential equations, optimization with differential equations - optimal control.
 
-    - title: ECE 5330:001 Graph Algorithm and Combinatorial Optimization
+    - title: ECE 5330 Graph Algorithm and Combinatorial Optimization
       institution: UIowa
       year: Spring 2024
       description:
@@ -66,7 +163,7 @@
             - Learnt about network flows (Ford-Fulkerson method, Push-relabel algorithms) - maximum flows, matching and graph cuts
             - Learnt about NP-Hard, NP-completeness and approximation algorithms.
 
-    - title: ECE 5995:001 Applied Machine Learning
+    - title: ECE 5995 Applied Machine Learning
       institution: UIowa
       year: Spring 2024
       description:
