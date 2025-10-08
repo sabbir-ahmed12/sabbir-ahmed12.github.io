@@ -47,7 +47,7 @@
           - Learnt about Type I-IV filters, All pass and Minimum phase systems.
           - [In-progress]
 
-    -title: ECE 5600 Control Theory
+    - title: ECE 5600 Control Theory
       institution: UIowa
       year: Fall 2025
       description:
@@ -57,7 +57,7 @@
           - Learnt about state variable representation of system, stability analysis using transfer function.
           - [In-progress]
 
-    -title: ECE 5995 Large Language Models
+    - title: ECE 5995 Large Language Models
       institution: UIowa
       year: Spring 2025
       description:
@@ -68,7 +68,7 @@
           - Learnt about various state-of-the art LLMs such as - GPT, RoBERTa etc.
           - Got familiar with LoRA and other techniques.
 
-    -title: ECE 5995 Intelligent Vision and Image Understanding
+    - title: ECE 5995 Intelligent Vision and Image Understanding
       institution: UIowa
       year: Spring 2025
       description:
@@ -79,7 +79,7 @@
           - Learnt about conventional and AI-based approaches for image segmentation.
           - Got familiar with image registration, mathematical morphology, wavelet theory
 
-    -title: ECE 5320 High Performance Computer Architecture
+    - title: ECE 5320 High Performance Computer Architecture
       institution: UIowa
       year: Spring 2025
       description:
@@ -90,7 +90,7 @@
           - Used simulations to design and analyze processors.
           - Learnt about the future trends of processor design.
 
-    -title: ECE 5450 Machine Learning
+    - title: ECE 5450 Machine Learning
       institution: UIowa
       year: Fall 2024
       description:
@@ -100,7 +100,7 @@
           - Learnt about curve fitting, constrained optimization and Lagrange multipliers method, least squares, bias vs variance tradeoffs, MLE, MAP, SVM, K-means clustering, Mixture of Gaussians, EM algorithms for GMMs.
           - Implemented the algorithms in Python to get hands-on experience. 
 
-    -title: ECE 5470 Medical Imaging Physics
+    - title: ECE 5470 Medical Imaging Physics
       institution: UIowa
       year: Fall 2024
       description:
@@ -111,7 +111,7 @@
           - Learnt about the physics and data acquisition technique of major medical imaging modalities (X-ray, CT, MRI, Ultra-Sound, PET, SPECT)
           - Learnt about the factors influencing image characteristics and image qualities in individual modalities.
 
-    -title: BME 5240 Deep Learning in Medical Imaging
+    - title: BME 5240 Deep Learning in Medical Imaging
       institution: UIowa
       year: Fall 2024
       description:
@@ -123,7 +123,7 @@
             - Got familiar with various NN architectures for tasks such as - classification, segmentation, registration and synthesis.
             - Got familiar with libraries such as - MONAI, PyTorch, SimpleITK
 
-    -title: ECE 5820 Software Engineering Languages and Tools
+    - title: ECE 5820 Software Engineering Languages and Tools
       institution: UIowa
       year: Fall 2024
       description:
