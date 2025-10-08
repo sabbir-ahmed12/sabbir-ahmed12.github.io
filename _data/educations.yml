@@ -37,15 +37,15 @@
 - title: PhD Courseworks
   type: time_table
   contents:
-    -title: ECE 5460 Digital Signal Processing
+    - title: ECE 5460 Digital Signal Processing
       institution: UIowa
       year: Fall 2025
       description:
         - title: Learning Outcomes
         - contents:
-          - Got familiar with DTFT, z-transform and causality and stability analysis of system.
-          - Learnt about Type I-IV filters, All pass and Minimum phase systems.
-          - [In-progress]
+            - Got familiar with DTFT, z-transform and causality and stability analysis of system.
+            - Learnt about Type I-IV filters, All pass and Minimum phase systems.
+            - [In-progress]
 
     - title: ECE 5600 Control Theory
       institution: UIowa
@@ -53,9 +53,9 @@
       description:
         - title: Learning Outcomes
         - contents:
-          - Learnt about the SISO and MIMO systems
-          - Learnt about state variable representation of system, stability analysis using transfer function.
-          - [In-progress]
+            - Learnt about the SISO and MIMO systems
+            - Learnt about state variable representation of system, stability analysis using transfer function.
+            - [In-progress]
 
     - title: ECE 5995 Large Language Models
       institution: UIowa
@@ -63,10 +63,10 @@
       description:
         - title: Learning Outcomes
         - contents:
-          - Learnt about the small language models and the concept for textual feature extraction such as n-grams, bag-of-words etc.
-          - Learnt about the architectures of the Transformer model.
-          - Learnt about various state-of-the art LLMs such as - GPT, RoBERTa etc.
-          - Got familiar with LoRA and other techniques.
+            - Learnt about the small language models and the concept for textual feature extraction such as n-grams, bag-of-words etc.
+            - Learnt about the architectures of the Transformer model.
+            - Learnt about various state-of-the art LLMs such as - GPT, RoBERTa etc.
+            - Got familiar with LoRA and other techniques.
 
     - title: ECE 5995 Intelligent Vision and Image Understanding
       institution: UIowa
@@ -74,10 +74,10 @@
       description:
         - title: Learning Outcomes
         - contents:
-          - Learnt about various image enhancement and filtering techniques.
-          - Learnt about various edge, corner detection and line detection algorithms.
-          - Learnt about conventional and AI-based approaches for image segmentation.
-          - Got familiar with image registration, mathematical morphology, wavelet theory
+            - Learnt about various image enhancement and filtering techniques.
+            - Learnt about various edge, corner detection and line detection algorithms.
+            - Learnt about conventional and AI-based approaches for image segmentation.
+            - Got familiar with image registration, mathematical morphology, wavelet theory
 
     - title: ECE 5320 High Performance Computer Architecture
       institution: UIowa
@@ -85,10 +85,10 @@
       description:
         - title: Learning Outcomes
         - contents:
-          - Got familiar with the quantitative measures for assessing and comparing processor performance.
-          - Learnt about various processor design techniques, including - pipelining, instruction level parallelism, out-of-order execution, speculative execution, memory architecture, multi-threading, GPU architecture etc.
-          - Used simulations to design and analyze processors.
-          - Learnt about the future trends of processor design.
+            - Got familiar with the quantitative measures for assessing and comparing processor performance.
+            - Learnt about various processor design techniques, including - pipelining, instruction level parallelism, out-of-order execution, speculative execution, memory architecture, multi-threading, GPU architecture etc.
+            - Used simulations to design and analyze processors.
+            - Learnt about the future trends of processor design.
 
     - title: ECE 5450 Machine Learning
       institution: UIowa
@@ -96,9 +96,9 @@
       description:
         - title: Learning Outcomes
         - contents:
-          - Gained an in-depth understanding of machine learning theory & algorithms.
-          - Learnt about curve fitting, constrained optimization and Lagrange multipliers method, least squares, bias vs variance tradeoffs, MLE, MAP, SVM, K-means clustering, Mixture of Gaussians, EM algorithms for GMMs.
-          - Implemented the algorithms in Python to get hands-on experience. 
+            - Gained an in-depth understanding of machine learning theory & algorithms.
+            - Learnt about curve fitting, constrained optimization and Lagrange multipliers method, least squares, bias vs variance tradeoffs, MLE, MAP, SVM, K-means clustering, Mixture of Gaussians, EM algorithms for GMMs.
+            - Implemented the algorithms in Python to get hands-on experience.
 
     - title: ECE 5470 Medical Imaging Physics
       institution: UIowa
@@ -106,10 +106,10 @@
       description:
         - title: Learning Outcomes
         - contents:
-          - Got familiar with the various imaging modalities.
-          - Learnt about the principles and methods of acquiring imaging data.
-          - Learnt about the physics and data acquisition technique of major medical imaging modalities (X-ray, CT, MRI, Ultra-Sound, PET, SPECT)
-          - Learnt about the factors influencing image characteristics and image qualities in individual modalities.
+            - Got familiar with the various imaging modalities.
+            - Learnt about the principles and methods of acquiring imaging data.
+            - Learnt about the physics and data acquisition technique of major medical imaging modalities (X-ray, CT, MRI, Ultra-Sound, PET, SPECT)
+            - Learnt about the factors influencing image characteristics and image qualities in individual modalities.
 
     - title: BME 5240 Deep Learning in Medical Imaging
       institution: UIowa
