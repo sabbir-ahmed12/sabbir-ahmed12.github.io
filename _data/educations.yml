@@ -42,7 +42,7 @@
       year: Fall 2025
       description:
         - title: Learning Outcomes
-        - contents:
+          contents:
             - Got familiar with DTFT, z-transform and causality and stability analysis of system.
             - Learnt about Type I-IV filters, All pass and Minimum phase systems.
             - [In-progress]
@@ -52,7 +52,7 @@
       year: Fall 2025
       description:
         - title: Learning Outcomes
-        - contents:
+          contents:
             - Learnt about the SISO and MIMO systems
             - Learnt about state variable representation of system, stability analysis using transfer function.
             - [In-progress]
@@ -62,7 +62,7 @@
       year: Spring 2025
       description:
         - title: Learning Outcomes
-        - contents:
+          contents:
             - Learnt about the small language models and the concept for textual feature extraction such as n-grams, bag-of-words etc.
             - Learnt about the architectures of the Transformer model.
             - Learnt about various state-of-the art LLMs such as - GPT, RoBERTa etc.
@@ -73,7 +73,7 @@
       year: Spring 2025
       description:
         - title: Learning Outcomes
-        - contents:
+          contents:
             - Learnt about various image enhancement and filtering techniques.
             - Learnt about various edge, corner detection and line detection algorithms.
             - Learnt about conventional and AI-based approaches for image segmentation.
@@ -84,7 +84,7 @@
       year: Spring 2025
       description:
         - title: Learning Outcomes
-        - contents:
+          contents:
             - Got familiar with the quantitative measures for assessing and comparing processor performance.
             - Learnt about various processor design techniques, including - pipelining, instruction level parallelism, out-of-order execution, speculative execution, memory architecture, multi-threading, GPU architecture etc.
             - Used simulations to design and analyze processors.
@@ -95,7 +95,7 @@
       year: Fall 2024
       description:
         - title: Learning Outcomes
-        - contents:
+          contents:
             - Gained an in-depth understanding of machine learning theory & algorithms.
             - Learnt about curve fitting, constrained optimization and Lagrange multipliers method, least squares, bias vs variance tradeoffs, MLE, MAP, SVM, K-means clustering, Mixture of Gaussians, EM algorithms for GMMs.
             - Implemented the algorithms in Python to get hands-on experience.
@@ -105,7 +105,7 @@
       year: Fall 2024
       description:
         - title: Learning Outcomes
-        - contents:
+          contents:
             - Got familiar with the various imaging modalities.
             - Learnt about the principles and methods of acquiring imaging data.
             - Learnt about the physics and data acquisition technique of major medical imaging modalities (X-ray, CT, MRI, Ultra-Sound, PET, SPECT)
@@ -116,7 +116,7 @@
       year: Fall 2024
       description:
         - title: Learning Outcomes
-        - contents:
+          contents:
             - Got familiar with image space and physical space.
             - Learnt about techniques to represent, reorient and standardize medical image.
             - Learnt to implement image processing pipeline using SimpleITK.
