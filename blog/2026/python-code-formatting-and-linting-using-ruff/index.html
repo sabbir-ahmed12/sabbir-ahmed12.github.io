@@ -9,9 +9,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Non-Cartesian MR Image Reconstruction | Sabbir  Ahmed</title>
+    <title>Python Code Formatting and Linting Using Ruff | Sabbir  Ahmed</title>
     <meta name="author" content="Sabbir  Ahmed">
-    <meta name="description" content="Tutorial post on non-cartesian MR image reconstruction.">
+    <meta name="description" content="Tutorial Post on Python Code formatting and Linting">
     <meta name="keywords" content="sabbir-ahmed, uiowa, ece, radiology, portfolio, cuet, ete">
 
 
@@ -37,7 +37,7 @@
     <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%A7%94&lt;/text&gt;&lt;/svg&gt;">
     
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="https://sabbir-ahmed12.github.io/blog/2025/non-cartesian-mr-image-reconstruction/">
+    <link rel="canonical" href="https://sabbir-ahmed12.github.io/blog/2026/python-code-formatting-and-linting-using-ruff/">
 
     <!-- Dark Mode -->
     
@@ -127,13 +127,13 @@
 <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Non-Cartesian MR Image Reconstruction</h1>
-    <p class="post-meta">January 30, 2025</p>
+    <h1 class="post-title">Python Code Formatting and Linting Using Ruff</h1>
+    <p class="post-meta">January 19, 2026</p>
     <p class="post-tags">
-      <a href="/blog/2025"> <i class="fas fa-calendar fa-sm"></i> 2025 </a>
+      <a href="/blog/2026"> <i class="fas fa-calendar fa-sm"></i> 2026 </a>
         ·  
-        <a href="/blog/tag/linux">
-          <i class="fas fa-hashtag fa-sm"></i> linux</a>  
+        <a href="/blog/tag/python">
+          <i class="fas fa-hashtag fa-sm"></i> python</a>  
           
         ·  
         <a href="/blog/category/tutorial">
@@ -146,16 +146,94 @@
   <article class="post-content">
     
     <div id="markdown-content">
-      
+      <h2 id="ruff">Ruff</h2>
 
+<p><code class="language-plaintext highlighter-rouge">ruff</code> is a super-fast Python linter and formatter written in Rust. It consolidates multiple Python tools like Flake8, Black, isort and others into a single, faster solution that significantly improves code quality. In this tutorial, we’ll learn how to use <code class="language-plaintext highlighter-rouge">ruff</code> from the command line to check and fix our code, and how to configure <code class="language-plaintext highlighter-rouge">ruff</code> both for individual projects and globally. We’ll also learn how to integrate <code class="language-plaintext highlighter-rouge">ruff</code> with VSCode to get real-time feedback as we code.</p>
 
-<div class="jupyter-notebook" style="position: relative; width: 100%; margin: 0 auto;">
-  <div class="jupyter-notebook-iframe-container">
-    <iframe src="/assets/jupyter/non_cartesian_MR_recon.ipynb.html" style="position: absolute; top: 0; left: 0; border-style: none;" width="100%" height="100%" onload="this.parentElement.style.paddingBottom = (this.contentWindow.document.documentElement.scrollHeight + 10) + 'px'"></iframe>
-  </div>
-</div>
+<h2 id="installation">Installation</h2>
 
+<p>Assuming we’ve the <code class="language-plaintext highlighter-rouge">uv</code> already installed in our system, we can install <code class="language-plaintext highlighter-rouge">ruff</code> using <code class="language-plaintext highlighter-rouge">uv</code> globally using the command below:</p>
 
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv tool <span class="nb">install </span>ruff
+</code></pre></div></div>
+
+<p>We can check if <code class="language-plaintext highlighter-rouge">ruff</code> has been installed properly or not using <code class="language-plaintext highlighter-rouge">ruff --version</code> command.</p>
+
+<h2 id="use-ruff-to-check-linting">Use Ruff to Check Linting</h2>
+
+<p>We can check any issues within a Python file e.g. <code class="language-plaintext highlighter-rouge">main.py</code> using <code class="language-plaintext highlighter-rouge">ruff</code> with following command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ruff check main.py
+</code></pre></div></div>
+
+<p>However, if we want to check all the files in a directory, we can use:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ruff check <span class="nb">.</span>
+</code></pre></div></div>
+
+<p>Ruff can automatically fix some issues. For that we need to use the command using <code class="language-plaintext highlighter-rouge">--fix</code> flag. For example:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ruff check <span class="nt">--fix</span> <span class="nb">.</span>
+</code></pre></div></div>
+
+<p>We can also check what <code class="language-plaintext highlighter-rouge">ruff</code> will change if we use the <code class="language-plaintext highlighter-rouge">--fix</code> flag before <code class="language-plaintext highlighter-rouge">ruff</code> actually changes our code. It’s better to be aware of the changes before it breaks the code.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ruff check <span class="nt">--fix</span> <span class="nt">--diff</span> <span class="nb">.</span>
+</code></pre></div></div>
+
+<h2 id="use-ruff-to-format-code">Use Ruff to Format Code</h2>
+
+<p>Ruff comes with <code class="language-plaintext highlighter-rouge">Black</code> compatible code formatter. We can format our code using <code class="language-plaintext highlighter-rouge">ruff</code> using the command below:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ruff format <span class="nb">.</span>
+</code></pre></div></div>
+
+<p><strong>Run the <code class="language-plaintext highlighter-rouge">ruff check</code> command before <code class="language-plaintext highlighter-rouge">run format</code></strong>. If we want <code class="language-plaintext highlighter-rouge">ruff</code> to watch our code for error continuously, we can use the following command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ruff check <span class="nt">--watch</span> <span class="nb">.</span>
+</code></pre></div></div>
+
+<h2 id="configure-ruff">Configure Ruff</h2>
+
+<p>Ruff comes with some default rule set which are non-controversial. However, we can configure <code class="language-plaintext highlighter-rouge">ruff</code> in our own way. We can configure <code class="language-plaintext highlighter-rouge">ruff</code> globally to apply the rules to any project and locally to apply rules to a particular project. If we use local configuration, it’ll overwrite the global rules.</p>
+
+<h3 id="configure-ruff-locally">Configure Ruff Locally</h3>
+
+<p>We can setup <code class="language-plaintext highlighter-rouge">ruff</code> using either <code class="language-plaintext highlighter-rouge">pyproject.toml</code> file or <code class="language-plaintext highlighter-rouge">ruff.toml</code> for individual project. In <code class="language-plaintext highlighter-rouge">pyproject.toml</code> file, there maybe different sections describing different things related to the project. However, we need a different section to configure <code class="language-plaintext highlighter-rouge">ruff</code> which is [tool.ruff]. Now let’s say we want to enforce a rule so that we use <code class="language-plaintext highlighter-rouge">Path.open()</code> to open a file using <code class="language-plaintext highlighter-rouge">pahtlib</code> instead of using <code class="language-plaintext highlighter-rouge">open()</code> directly in our code. We can set the rule using the <code class="language-plaintext highlighter-rouge">lint.extend-select = ["PTH"]</code> in the <code class="language-plaintext highlighter-rouge">[tool.ruff]</code> section as shown below:</p>
+
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">[</span><span class="n">tool</span><span class="k">.</span><span class="n">ruff</span><span class="k">]</span>
+<span class="n">lint</span><span class="p">.</span><span class="n">extend-select</span> <span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"PTH"</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h3 id="configure-ruff-globally">Configure Ruff Globally</h3>
+
+<p>To use global configuration for <code class="language-plaintext highlighter-rouge">ruff</code>, we can create a directory at <code class="language-plaintext highlighter-rouge">~/.config</code> called <code class="language-plaintext highlighter-rouge">ruff</code> and create a file named <code class="language-plaintext highlighter-rouge">ruff.toml</code> in that directory. For Windows, it can be inside the <code class="language-plaintext highlighter-rouge">AppData\Roaming</code> directory. Once the rules are set in the <code class="language-plaintext highlighter-rouge">ruff.toml</code> file, we can use the same <code class="language-plaintext highlighter-rouge">ruff check</code> command to look for issues in the code using the global configuration. We can write <code class="language-plaintext highlighter-rouge">ruff.toml</code> file as give in the following <a href="https://docs.astral.sh/ruff/configuration/" rel="external nofollow noopener" target="_blank">link</a>.</p>
+
+<h2 id="integrate-ruff-into-vscode">Integrate Ruff into VSCode</h2>
+
+<p>We can also integrate <code class="language-plaintext highlighter-rouge">ruff</code> in the VSCode to fix the linting and formatting issues as we code. For that, go to the <code class="language-plaintext highlighter-rouge">Extensions</code> option and search for <code class="language-plaintext highlighter-rouge">Ruff</code>. Install the one from <code class="language-plaintext highlighter-rouge">Atral Software</code>. Once installed, you can update your <code class="language-plaintext highlighter-rouge">settings.json</code> file to use <code class="language-plaintext highlighter-rouge">ruff</code>. You can find get help if you read the details of extension documentation but you can do it in the following way.</p>
+
+<p>Press <code class="language-plaintext highlighter-rouge">command + shift + p</code> to open the command palette and type <code class="language-plaintext highlighter-rouge">Preferences: Open User Setting (JSON)</code>. Press <code class="language-plaintext highlighter-rouge">Enter</code> to open the <code class="language-plaintext highlighter-rouge">setting.json</code> file and find if you’ve any rules already setup for <code class="language-plaintext highlighter-rouge">Python</code>. Otherwise, you can paste the followings:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"[python]"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"editor.formatOnSave"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"editor.codeActionsOnSave"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"source.fixAll"</span><span class="p">:</span><span class="w"> </span><span class="s2">"explicit"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"source.organizeImports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"explicit"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"editor.defaultFormatter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"charliermarsh.ruff"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>However, we can still use the <code class="language-plaintext highlighter-rouge">pyproject.toml</code> and <code class="language-plaintext highlighter-rouge">ruff.toml</code> files in our project to overwrite the rules of the extension.</p>
+
+<h2 id="useful-links">Useful Links</h2>
+
+<p>Ruff documentation - https://docs.astral.sh/ruff/</p>
+
+<p>Ruff rules - https://docs.astral.sh/ruff/rules/</p>
 
     </div>
   </article><div id="giscus_thread" style="max-width: 800px; margin: 0 auto;">
