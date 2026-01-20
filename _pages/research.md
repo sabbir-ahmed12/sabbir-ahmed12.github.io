@@ -9,12 +9,13 @@ nav_order: 3
 ---
 
 #### **Current Research Areas:**
+
 - Motion Compensation in Free Breathing Pulmonary MRI
 - Medical Imaging and Machine Learning
 - Algorithm Development and Optimizations
 - Inverse Problems and MR Image Reconstruction
 
-#### **Research Interests:**
+<!-- #### **Research Interests:**
 
 My research interests broadly lies in the area of Signal Processing and Deep Learning. Some of the areas I wish to work are:
 
@@ -22,7 +23,7 @@ My research interests broadly lies in the area of Signal Processing and Deep Lea
 - Image Recognition, Image Processing, Medical Imaging, Image Segmentation.
 - Sentiment and Emotion Analysis, QA Answering, Conversational AI.
 - Multimodal Signal Processing (combining textual, acoustic & visual features) to build intelligent system.
-- Audio Steganalysis, Audio Steganography, DeepFake Detecion.
+- Audio Steganalysis, Audio Steganography, DeepFake Detecion. -->
 
 <br />
 
