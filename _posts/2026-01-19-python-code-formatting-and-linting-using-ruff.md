@@ -80,7 +80,7 @@ lint.extend-select = ["PTH"]
 
 To use global configuration for `ruff`, we can create a directory at `~/.config` called `ruff` and create a file named `ruff.toml` in that directory. For Windows, it can be inside the `AppData\Roaming` directory. Once the rules are set in the `ruff.toml` file, we can use the same `ruff check` command to look for issues in the code using the global configuration. We can write `ruff.toml` file as give in the following [link](https://docs.astral.sh/ruff/configuration/).
 
-## Integrate Ruff into VSCode
+### Integrate Ruff into VSCode
 
 We can also integrate `ruff` in the VSCode to fix the linting and formatting issues as we code. For that, go to the `Extensions` option and search for `Ruff`. Install the one from `Atral Software`. Once installed, you can update your `settings.json` file to use `ruff`. You can find get help if you read the details of extension documentation but you can do it in the following way.
 
