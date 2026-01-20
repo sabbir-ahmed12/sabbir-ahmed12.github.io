@@ -37,6 +37,30 @@
 - title: PhD Courseworks
   type: time_table
   contents:
+    - title: ECE 5830 Software Engineering Project
+      institution: UIowa
+      year: Spring 2026
+      description:
+        - title: Learning Outcomes
+          contents:
+            - [In-Progress]
+
+    - title: ECE 5840 Software Security
+      institution: UIowa
+      year: Spring 2026
+      description:
+        - title: Learning Outcomes
+          contents:
+            - [In-Progress]
+
+    - title: BME 6230 Principles of Magnetic Resonance Imaging
+      institution: UIowa
+      year: Spring 2026
+      description:
+        - title: Learning Outcomes
+          contents:
+            - [In-Progress]
+
     - title: ECE 5460 Digital Signal Processing
       institution: UIowa
       year: Fall 2025
@@ -45,7 +69,8 @@
           contents:
             - Got familiar with DTFT, z-transform and causality and stability analysis of system.
             - Learnt about Type I-IV filters, All pass and Minimum phase systems.
-            - [In-progress]
+            - Learnt about designing filters in MATLAB.
+            - Got familiar with polyphase decomposition and multirate signal processing.
 
     - title: ECE 5600 Control Theory
       institution: UIowa
@@ -54,8 +79,9 @@
         - title: Learning Outcomes
           contents:
             - Learnt about the SISO and MIMO systems
-            - Learnt about state variable representation of system, stability analysis using transfer function.
-            - [In-progress]
+            - Learnt about state variable representation of system (LTI & LTV), stability analysis using transfer function.
+            - Learnt about controllability & observability, minimal realization.
+            - Learnt about state feedback, robust tracking and disturbance rejection.
 
     - title: ECE 5995 Large Language Models
       institution: UIowa
