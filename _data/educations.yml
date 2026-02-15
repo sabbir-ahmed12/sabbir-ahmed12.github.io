@@ -43,14 +43,20 @@
       description:
         - title: Learning Outcomes
           contents:
+            - Got familiar with real-world software development methodologies, utilizing team-based collaboration to simulate corporate culture and industry standard practices.
+            - Learnt about SDLC and MVP delivery after each sprint, Agile project management and scrum methodology.
+            - Learnt about writing user stories, preparing test plan and project management using kanban board.
+            - Learnt about github workflows to automate test, create PR for code reviewing and merge code with production branch.
             - [In-Progress]
 
-    - title: ECE 5840 Software Security
+    - title: ECE 5490 Multi-Dimensional Image Analysis Tools
       institution: UIowa
       year: Spring 2026
       description:
         - title: Learning Outcomes
           contents:
+            - Got familiar with multi-dimensional medical image analysis tools and techniques for applying in clinical and research settings.
+            - Learnt about building ITK libraries using CMake and writing C++ application linking a pre-built ITK.
             - [In-Progress]
 
     - title: BME 6230 Principles of Magnetic Resonance Imaging
@@ -59,6 +65,7 @@
       description:
         - title: Learning Outcomes
           contents:
+            - Learnt about the principles of MRI and the source of different artifacts in MRI.
             - [In-Progress]
 
     - title: ECE 5460 Digital Signal Processing
