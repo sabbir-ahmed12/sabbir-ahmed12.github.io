@@ -1,5 +1,759 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://sabbir-ahmed12.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sabbir-ahmed12.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-02-15T22:27:57+00:00</updated><id>https://sabbir-ahmed12.github.io/feed.xml</id><title type="html">blank</title><subtitle>This is Sabbir Ahmed&apos;s personal website.
-</subtitle><entry><title type="html">Python Code Formatting and Linting Using Ruff</title><link href="https://sabbir-ahmed12.github.io/blog/2026/python-code-formatting-and-linting-using-ruff/" rel="alternate" type="text/html" title="Python Code Formatting and Linting Using Ruff" /><published>2026-01-19T04:16:12+00:00</published><updated>2026-01-19T04:16:12+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2026/python-code-formatting-and-linting-using-ruff</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2026/python-code-formatting-and-linting-using-ruff/"><![CDATA[<h2 id="ruff">Ruff</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://sabbir-ahmed12.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sabbir-ahmed12.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-03-11T07:16:15+00:00</updated><id>https://sabbir-ahmed12.github.io/feed.xml</id><title type="html">blank</title><subtitle>This is Sabbir Ahmed&apos;s personal website.
+</subtitle><entry><title type="html">Building a 3D Slicer CLI Module from Scratch Using ITK and SlicerExecutionModel</title><link href="https://sabbir-ahmed12.github.io/blog/2026/building-a-simple-thresholding-filter-module-for-3D-slicer/" rel="alternate" type="text/html" title="Building a 3D Slicer CLI Module from Scratch Using ITK and SlicerExecutionModel" /><published>2026-03-11T04:16:12+00:00</published><updated>2026-03-11T04:16:12+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2026/building-a-simple-thresholding-filter-module-for-3D-slicer</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2026/building-a-simple-thresholding-filter-module-for-3D-slicer/"><![CDATA[<h1 id="building-a-3d-slicer-cli-module-from-scratch-using-itk-and-slicerexecutionmodel">Building a 3D Slicer CLI Module from Scratch Using ITK and SlicerExecutionModel</h1>
+
+<p>3D Slicer is a powerful open-source platform widely used for <strong>medical image analysis, visualization, and research</strong>. One of its most powerful features is the ability to extend its functionality using <strong>custom modules</strong>.</p>
+
+<p>In this tutorial we will build a <strong>Slicer Command Line Interface (CLI) module from scratch</strong> using:</p>
+
+<ul>
+  <li><strong>ITK (Insight Toolkit)</strong> for image processing</li>
+  <li><strong>SlicerExecutionModel</strong> for module integration</li>
+  <li><strong>CMake</strong> for building the project</li>
+</ul>
+
+<p>By the end of this tutorial you will understand:</p>
+
+<ul>
+  <li>How Slicer CLI modules work</li>
+  <li>How to configure projects using CMake</li>
+  <li>What <code class="language-plaintext highlighter-rouge">GenerateCLP</code> is and why it is needed</li>
+  <li>How to build a module from scratch</li>
+  <li>How to load the module into Slicer</li>
+</ul>
+
+<hr />
+
+<h1 id="table-of-contents">Table of Contents</h1>
+
+<ol>
+  <li>Introduction</li>
+  <li>Understanding CLI Modules in Slicer</li>
+  <li>Installing Dependencies</li>
+  <li>Understanding CMake</li>
+  <li>Building ITK</li>
+  <li>Building SlicerExecutionModel</li>
+  <li>Project Structure</li>
+  <li>Understanding GenerateCLP</li>
+  <li>Writing the XML Interface</li>
+  <li>Writing the Thresholding Algorithm</li>
+  <li>Writing the CMake Configuration</li>
+  <li>Building the Project</li>
+  <li>Running the Module</li>
+  <li>Loading the Module in Slicer</li>
+  <li>Conclusion</li>
+</ol>
+
+<hr />
+
+<h1 id="1-introduction">1. Introduction</h1>
+
+<p>Slicer modules can be implemented in three ways:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Language</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Scripted modules</td>
+      <td>Python</td>
+      <td>Fast development</td>
+    </tr>
+    <tr>
+      <td>Loadable modules</td>
+      <td>C++</td>
+      <td>High performance</td>
+    </tr>
+    <tr>
+      <td>CLI modules</td>
+      <td>C++ executable</td>
+      <td>Simple integration with automatic GUI</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>In this tutorial we focus on <strong>CLI modules</strong>, which are ideal when you want to:</p>
+
+<ul>
+  <li>Integrate an <strong>existing C++ or ITK algorithm</strong></li>
+  <li>Automatically generate a <strong>GUI</strong></li>
+  <li>Allow the algorithm to run <strong>both inside and outside Slicer</strong></li>
+</ul>
+
+<hr />
+
+<h1 id="2-understanding-cli-modules-in-slicer">2. Understanding CLI Modules in Slicer</h1>
+
+<p>A Slicer CLI module consists of three components:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>XML description
+C++ algorithm
+CMake build system
+</code></pre></div></div>
+
+<p>Workflow:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>XML → GenerateCLP → C++ executable → Slicer GUI
+</code></pre></div></div>
+
+<p>Steps:</p>
+
+<ol>
+  <li>XML describes the interface</li>
+  <li><code class="language-plaintext highlighter-rouge">GenerateCLP</code> generates command-line parsing code</li>
+  <li>C++ implements the algorithm</li>
+  <li>Slicer loads the executable and automatically creates a GUI</li>
+</ol>
+
+<p>A major advantage of CLI modules is that the <strong>user interface and the algorithm are separated</strong>. You describe the interface once in XML, and SlicerExecutionModel handles the tedious command-line parsing and GUI generation for you.</p>
+
+<hr />
+
+<h1 id="3-installing-dependencies">3. Installing Dependencies</h1>
+
+<p>You will need:</p>
+
+<ul>
+  <li><strong>CMake</strong></li>
+  <li><strong>ITK</strong></li>
+  <li><strong>SlicerExecutionModel</strong></li>
+</ul>
+
+<p>Clone the repositories:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/InsightSoftwareConsortium/ITK.git
+git clone https://github.com/Slicer/SlicerExecutionModel.git
+</code></pre></div></div>
+
+<p>If you also want to test the module inside Slicer, make sure you already have a working 3D Slicer installation on your machine.</p>
+
+<hr />
+
+<h1 id="4-understanding-cmake">4. Understanding CMake</h1>
+
+<p>CMake is a <strong>cross-platform build system generator</strong>. Instead of manually writing platform-specific build files, we write one or more <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> files that describe:</p>
+
+<ul>
+  <li>Source files</li>
+  <li>Libraries</li>
+  <li>Dependencies</li>
+  <li>Include directories</li>
+  <li>Build rules</li>
+</ul>
+
+<p>CMake then generates the actual native build system for your platform.</p>
+
+<p>For example, CMake can generate:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Generator</th>
+      <th>Typical Use</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Unix Makefiles</td>
+      <td>Standard Linux/macOS terminal builds</td>
+    </tr>
+    <tr>
+      <td>Ninja</td>
+      <td>Faster incremental builds</td>
+    </tr>
+    <tr>
+      <td>Visual Studio</td>
+      <td>Windows projects</td>
+    </tr>
+    <tr>
+      <td>Xcode</td>
+      <td>macOS IDE projects</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="typical-cmake-workflow">Typical CMake workflow</h2>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Source code → CMake configure step → Generated build system → Compiler
+</code></pre></div></div>
+
+<p>The modern and clean way to configure a project is:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">-S</span> <span class="nb">.</span> <span class="nt">-B</span> build
+</code></pre></div></div>
+
+<p>Here:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">-S .</code> means the source directory is the current directory</li>
+  <li><code class="language-plaintext highlighter-rouge">-B build</code> means the build files will be generated in the <code class="language-plaintext highlighter-rouge">build</code> directory</li>
+</ul>
+
+<p>Then build with:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">--build</span> build
+</code></pre></div></div>
+
+<p>This is preferred over building directly inside the source tree because it keeps generated files separate from your source code.</p>
+
+<h2 id="choosing-a-generator">Choosing a generator</h2>
+
+<p>You can explicitly choose a generator if needed:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">-S</span> <span class="nb">.</span> <span class="nt">-B</span> build <span class="nt">-G</span> <span class="s2">"Unix Makefiles"</span>
+</code></pre></div></div>
+
+<p>or</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">-S</span> <span class="nb">.</span> <span class="nt">-B</span> build <span class="nt">-G</span> Ninja
+</code></pre></div></div>
+
+<p>If you use Unix Makefiles, you may also build with:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make <span class="nt">-C</span> build <span class="nt">-j8</span>
+</code></pre></div></div>
+
+<p>If you use Ninja, you may build with:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ninja <span class="nt">-C</span> build
+</code></pre></div></div>
+
+<h2 id="using-an-interactive-cmake-interface">Using an interactive CMake interface</h2>
+
+<p>If you prefer an interactive terminal interface, you can use:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ccmake <span class="nt">-S</span> <span class="nb">.</span> <span class="nt">-B</span> build
+</code></pre></div></div>
+
+<p>This is helpful when you want to inspect or modify CMake cache variables such as:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ITK_DIR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">SlicerExecutionModel_DIR</code></li>
+  <li>build options</li>
+  <li>compiler settings</li>
+</ul>
+
+<p>There is also a graphical interface:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake-gui
+</code></pre></div></div>
+
+<p>In short, <strong>CMake is necessary because it finds dependencies, configures the project, and generates the correct build files for your platform and compiler</strong>.</p>
+
+<hr />
+
+<h1 id="5-building-itk">5. Building ITK</h1>
+
+<p>Create a build directory:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>ITK-build
+</code></pre></div></div>
+
+<p>Configure:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">-S</span> ./ITK <span class="nt">-B</span> ./ITK-build
+</code></pre></div></div>
+
+<p>Build:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">--build</span> ./ITK-build
+</code></pre></div></div>
+
+<p>If you are using Makefiles, you can also build with multiple CPU cores:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make <span class="nt">-C</span> ./ITK-build <span class="nt">-j8</span>
+</code></pre></div></div>
+
+<p>On Linux, you can check the number of available CPU cores with:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">nproc</span>
+</code></pre></div></div>
+
+<p>After building, remember the path to:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ITK-build
+</code></pre></div></div>
+
+<p>You will use this later when configuring your CLI module project.</p>
+
+<hr />
+
+<h1 id="6-building-slicerexecutionmodel">6. Building SlicerExecutionModel</h1>
+
+<p>Create a build directory:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>SEM-build
+</code></pre></div></div>
+
+<p>Configure:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">-S</span> ./SlicerExecutionModel <span class="nt">-B</span> ./SEM-build
+</code></pre></div></div>
+
+<p>Build:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">--build</span> ./SEM-build
+</code></pre></div></div>
+
+<p>If you are using Makefiles, you can also build with:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make <span class="nt">-C</span> ./SEM-build <span class="nt">-j8</span>
+</code></pre></div></div>
+
+<p>One important output of this build is the tool:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GenerateCLP
+</code></pre></div></div>
+
+<p>This tool is central to how Slicer CLI modules work.</p>
+
+<hr />
+
+<h1 id="7-project-structure">7. Project Structure</h1>
+
+<p>Our project will look like this:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>project-root
+│
+├── CMakeLists.txt
+└── src
+    ├── CMakeLists.txt
+    └── SimpleThreshold
+        ├── CMakeLists.txt
+        ├── SimpleThreshold.cxx
+        └── SimpleThreshold.xml
+</code></pre></div></div>
+
+<p>This structure keeps the project organized:</p>
+
+<ul>
+  <li>the root directory manages the whole project</li>
+  <li><code class="language-plaintext highlighter-rouge">src</code> collects source modules</li>
+  <li><code class="language-plaintext highlighter-rouge">src/SimpleThreshold</code> contains one CLI module</li>
+</ul>
+
+<hr />
+
+<h1 id="8-understanding-generateclp">8. Understanding GenerateCLP</h1>
+
+<p><code class="language-plaintext highlighter-rouge">GenerateCLP</code> is a tool provided by <strong>SlicerExecutionModel</strong>.</p>
+
+<p>Its job is to read your module XML file and automatically generate C++ code for command-line parsing. Instead of writing your own parser for arguments such as:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--inputVolume</code></li>
+  <li><code class="language-plaintext highlighter-rouge">--outputVolume</code></li>
+  <li><code class="language-plaintext highlighter-rouge">--lowThreshold</code></li>
+  <li><code class="language-plaintext highlighter-rouge">--highThreshold</code></li>
+</ul>
+
+<p>you define them once in XML, and <code class="language-plaintext highlighter-rouge">GenerateCLP</code> creates the corresponding parser code for you.</p>
+
+<p>For example, suppose your XML contains:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;double&gt;</span>
+  <span class="nt">&lt;name&gt;</span>lowThreshold<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;longflag&gt;</span>lowThreshold<span class="nt">&lt;/longflag&gt;</span>
+  <span class="nt">&lt;default&gt;</span>0<span class="nt">&lt;/default&gt;</span>
+<span class="nt">&lt;/double&gt;</span>
+</code></pre></div></div>
+
+<p>From this, <code class="language-plaintext highlighter-rouge">GenerateCLP</code> generates support code so that your C++ program can directly use:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lowThreshold</span>
+</code></pre></div></div>
+
+<p>It also generates a header file named after your module. In this tutorial that file is:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SimpleThresholdCLP.h
+</code></pre></div></div>
+
+<p>Inside your <code class="language-plaintext highlighter-rouge">.cxx</code> file, you include it:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">"SimpleThresholdCLP.h"</span><span class="cp">
+</span></code></pre></div></div>
+
+<p>and then call:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">PARSE_ARGS</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>This macro parses the command-line arguments based on the XML description and populates the generated variables automatically.</p>
+
+<p>So <code class="language-plaintext highlighter-rouge">GenerateCLP</code> is needed because it:</p>
+
+<ul>
+  <li>avoids manual argument parsing</li>
+  <li>keeps the XML and the executable interface synchronized</li>
+  <li>enables Slicer to generate the GUI automatically from the same interface description</li>
+</ul>
+
+<p>In practice, you usually do <strong>not</strong> run <code class="language-plaintext highlighter-rouge">GenerateCLP</code> manually. Instead, the CMake macro <code class="language-plaintext highlighter-rouge">SEMMacroBuildCLI(...)</code> calls it for you during the build.</p>
+
+<hr />
+
+<h1 id="9-writing-the-xml-interface">9. Writing the XML Interface</h1>
+
+<p>The XML file defines:</p>
+
+<ul>
+  <li>Module category</li>
+  <li>Visible module title</li>
+  <li>Inputs</li>
+  <li>Outputs</li>
+  <li>Parameters</li>
+</ul>
+
+<p>Example:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+
+<span class="nt">&lt;executable&gt;</span>
+
+  <span class="nt">&lt;category&gt;</span>MyModules<span class="nt">&lt;/category&gt;</span>
+  <span class="nt">&lt;title&gt;</span>SimpleThreshold<span class="nt">&lt;/title&gt;</span>
+
+  <span class="nt">&lt;description&gt;</span>
+    Simple binary thresholding using ITK.
+  <span class="nt">&lt;/description&gt;</span>
+
+  <span class="nt">&lt;parameters&gt;</span>
+    <span class="nt">&lt;label&gt;</span>Input/Output<span class="nt">&lt;/label&gt;</span>
+
+    <span class="nt">&lt;image&gt;</span>
+      <span class="nt">&lt;name&gt;</span>inputVolume<span class="nt">&lt;/name&gt;</span>
+      <span class="nt">&lt;longflag&gt;</span>inputVolume<span class="nt">&lt;/longflag&gt;</span>
+      <span class="nt">&lt;label&gt;</span>Input Volume<span class="nt">&lt;/label&gt;</span>
+      <span class="nt">&lt;channel&gt;</span>input<span class="nt">&lt;/channel&gt;</span>
+      <span class="nt">&lt;description&gt;</span>Input image volume<span class="nt">&lt;/description&gt;</span>
+    <span class="nt">&lt;/image&gt;</span>
+
+    <span class="nt">&lt;image&gt;</span>
+      <span class="nt">&lt;name&gt;</span>outputVolume<span class="nt">&lt;/name&gt;</span>
+      <span class="nt">&lt;longflag&gt;</span>outputVolume<span class="nt">&lt;/longflag&gt;</span>
+      <span class="nt">&lt;label&gt;</span>Output Volume<span class="nt">&lt;/label&gt;</span>
+      <span class="nt">&lt;channel&gt;</span>output<span class="nt">&lt;/channel&gt;</span>
+      <span class="nt">&lt;description&gt;</span>Output thresholded image volume<span class="nt">&lt;/description&gt;</span>
+    <span class="nt">&lt;/image&gt;</span>
+  <span class="nt">&lt;/parameters&gt;</span>
+
+  <span class="nt">&lt;parameters&gt;</span>
+    <span class="nt">&lt;label&gt;</span>Threshold Parameters<span class="nt">&lt;/label&gt;</span>
+
+    <span class="nt">&lt;double&gt;</span>
+      <span class="nt">&lt;name&gt;</span>lowThreshold<span class="nt">&lt;/name&gt;</span>
+      <span class="nt">&lt;longflag&gt;</span>lowThreshold<span class="nt">&lt;/longflag&gt;</span>
+      <span class="nt">&lt;label&gt;</span>Low Threshold<span class="nt">&lt;/label&gt;</span>
+      <span class="nt">&lt;description&gt;</span>Lower threshold value<span class="nt">&lt;/description&gt;</span>
+      <span class="nt">&lt;default&gt;</span>0<span class="nt">&lt;/default&gt;</span>
+    <span class="nt">&lt;/double&gt;</span>
+
+    <span class="nt">&lt;double&gt;</span>
+      <span class="nt">&lt;name&gt;</span>highThreshold<span class="nt">&lt;/name&gt;</span>
+      <span class="nt">&lt;longflag&gt;</span>highThreshold<span class="nt">&lt;/longflag&gt;</span>
+      <span class="nt">&lt;label&gt;</span>High Threshold<span class="nt">&lt;/label&gt;</span>
+      <span class="nt">&lt;description&gt;</span>Upper threshold value<span class="nt">&lt;/description&gt;</span>
+      <span class="nt">&lt;default&gt;</span>0<span class="nt">&lt;/default&gt;</span>
+    <span class="nt">&lt;/double&gt;</span>
+
+    <span class="nt">&lt;double&gt;</span>
+      <span class="nt">&lt;name&gt;</span>insideValue<span class="nt">&lt;/name&gt;</span>
+      <span class="nt">&lt;longflag&gt;</span>insideValue<span class="nt">&lt;/longflag&gt;</span>
+      <span class="nt">&lt;label&gt;</span>Inside Value<span class="nt">&lt;/label&gt;</span>
+      <span class="nt">&lt;description&gt;</span>Value assigned to voxels inside the threshold range<span class="nt">&lt;/description&gt;</span>
+      <span class="nt">&lt;default&gt;</span>1<span class="nt">&lt;/default&gt;</span>
+    <span class="nt">&lt;/double&gt;</span>
+
+    <span class="nt">&lt;double&gt;</span>
+      <span class="nt">&lt;name&gt;</span>outsideValue<span class="nt">&lt;/name&gt;</span>
+      <span class="nt">&lt;longflag&gt;</span>outsideValue<span class="nt">&lt;/longflag&gt;</span>
+      <span class="nt">&lt;label&gt;</span>Outside Value<span class="nt">&lt;/label&gt;</span>
+      <span class="nt">&lt;description&gt;</span>Value assigned to voxels outside the threshold range<span class="nt">&lt;/description&gt;</span>
+      <span class="nt">&lt;default&gt;</span>0<span class="nt">&lt;/default&gt;</span>
+    <span class="nt">&lt;/double&gt;</span>
+  <span class="nt">&lt;/parameters&gt;</span>
+
+<span class="nt">&lt;/executable&gt;</span>
+</code></pre></div></div>
+
+<h2 id="brief-explanation-of-the-xml">Brief explanation of the XML</h2>
+
+<p>This XML defines the interface of the CLI module.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">&lt;category&gt;</code> controls where the module appears in Slicer</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;title&gt;</code> controls the displayed module name</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;parameters&gt;</code> groups related parameters together in the GUI</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;image&gt;</code> defines image inputs and outputs</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;double&gt;</code> defines numeric parameters</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;name&gt;</code> becomes the generated variable name in C++</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;longflag&gt;</code> defines the command-line flag name</li>
+</ul>
+
+<p>Because we use:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;category&gt;</span>MyModules<span class="nt">&lt;/category&gt;</span>
+</code></pre></div></div>
+
+<p>the module will appear under:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Modules → MyModules → SimpleThreshold
+</code></pre></div></div>
+
+<p>This same XML is used both to build the GUI in Slicer and to generate the parser used by the executable.</p>
+
+<hr />
+
+<h1 id="10-writing-the-thresholding-algorithm">10. Writing the Thresholding Algorithm</h1>
+
+<p>Now we implement the actual algorithm using ITK.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SimpleThreshold.cxx
+</code></pre></div></div>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">"itkImage.h"</span><span class="cp">
+#include</span> <span class="cpf">"itkImageFileReader.h"</span><span class="cp">
+#include</span> <span class="cpf">"itkImageFileWriter.h"</span><span class="cp">
+#include</span> <span class="cpf">"itkBinaryThresholdImageFilter.h"</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstdlib&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">"SimpleThresholdCLP.h"</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="n">PARSE_ARGS</span><span class="p">;</span>
+
+  <span class="k">constexpr</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">Dimension</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="k">using</span> <span class="n">PixelType</span> <span class="o">=</span> <span class="kt">short</span><span class="p">;</span>
+
+  <span class="k">using</span> <span class="n">ImageType</span> <span class="o">=</span> <span class="n">itk</span><span class="o">::</span><span class="n">Image</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="p">,</span> <span class="n">Dimension</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="k">using</span> <span class="n">ReaderType</span> <span class="o">=</span> <span class="n">itk</span><span class="o">::</span><span class="n">ImageFileReader</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="k">using</span> <span class="n">WriterType</span> <span class="o">=</span> <span class="n">itk</span><span class="o">::</span><span class="n">ImageFileWriter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="k">using</span> <span class="n">ThresholdFilterType</span> <span class="o">=</span>
+      <span class="n">itk</span><span class="o">::</span><span class="n">BinaryThresholdImageFilter</span><span class="o">&lt;</span><span class="n">ImageType</span><span class="p">,</span> <span class="n">ImageType</span><span class="o">&gt;</span><span class="p">;</span>
+
+  <span class="k">auto</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">ReaderType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">reader</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">inputVolume</span><span class="p">);</span>
+
+  <span class="k">auto</span> <span class="n">thresholder</span> <span class="o">=</span> <span class="n">ThresholdFilterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">thresholder</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">reader</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+  <span class="n">thresholder</span><span class="o">-&gt;</span><span class="n">SetLowerThreshold</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">lowThreshold</span><span class="p">));</span>
+  <span class="n">thresholder</span><span class="o">-&gt;</span><span class="n">SetUpperThreshold</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">highThreshold</span><span class="p">));</span>
+  <span class="n">thresholder</span><span class="o">-&gt;</span><span class="n">SetInsideValue</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">insideValue</span><span class="p">));</span>
+  <span class="n">thresholder</span><span class="o">-&gt;</span><span class="n">SetOutsideValue</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">PixelType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">outsideValue</span><span class="p">));</span>
+
+  <span class="k">auto</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">WriterType</span><span class="o">::</span><span class="n">New</span><span class="p">();</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">outputVolume</span><span class="p">);</span>
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">SetInput</span><span class="p">(</span><span class="n">thresholder</span><span class="o">-&gt;</span><span class="n">GetOutput</span><span class="p">());</span>
+
+  <span class="n">writer</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">();</span>
+
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="brief-explanation-of-the-thresholding-code">Brief explanation of the thresholding code</h2>
+
+<p>This code performs binary thresholding on a 3D image. It sets every pixel in the range <code class="language-plaintext highlighter-rouge">[lowThreshold, highThreshold]</code> to <code class="language-plaintext highlighter-rouge">insideValue</code> and all other pixels to the <code class="language-plaintext highlighter-rouge">outsideValue</code>.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">PARSE_ARGS;</code> loads the parameters defined in the XML</li>
+  <li><code class="language-plaintext highlighter-rouge">Dimension = 3</code> means we are processing a 3D volume</li>
+  <li><code class="language-plaintext highlighter-rouge">PixelType = short</code> means the image stores signed-short intensities</li>
+  <li><code class="language-plaintext highlighter-rouge">ImageFileReader</code> reads the input image</li>
+  <li><code class="language-plaintext highlighter-rouge">BinaryThresholdImageFilter</code> performs the thresholding</li>
+  <li><code class="language-plaintext highlighter-rouge">SetLowerThreshold(...)</code> and <code class="language-plaintext highlighter-rouge">SetUpperThreshold(...)</code> define the valid intensity range</li>
+  <li><code class="language-plaintext highlighter-rouge">SetInsideValue(...)</code> assigns a value to voxels inside the threshold range</li>
+  <li><code class="language-plaintext highlighter-rouge">SetOutsideValue(...)</code> assigns a value to voxels outside the threshold range</li>
+  <li><code class="language-plaintext highlighter-rouge">ImageFileWriter</code> writes the output image</li>
+</ul>
+
+<p>Because ITK chooses the file format from the output filename extension, using:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>output.nii.gz
+</code></pre></div></div>
+
+<p>will save the result in NIfTI format.</p>
+
+<hr />
+
+<h1 id="11-writing-the-cmake-configuration">11. Writing the CMake Configuration</h1>
+
+<h2 id="root-cmakeliststxt">Root <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code></h2>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.16<span class="p">)</span>
+
+<span class="nb">project</span><span class="p">(</span>SimpleThresholdModule LANGUAGES CXX<span class="p">)</span>
+
+<span class="nb">find_package</span><span class="p">(</span>ITK REQUIRED<span class="p">)</span>
+<span class="nb">include</span><span class="p">(</span><span class="si">${</span><span class="nv">ITK_USE_FILE</span><span class="si">}</span><span class="p">)</span>
+
+<span class="nb">find_package</span><span class="p">(</span>SlicerExecutionModel REQUIRED GenerateCLP<span class="p">)</span>
+<span class="nb">include</span><span class="p">(</span><span class="si">${</span><span class="nv">GenerateCLP_USE_FILE</span><span class="si">}</span><span class="p">)</span>
+<span class="nb">include</span><span class="p">(</span><span class="si">${</span><span class="nv">SlicerExecutionModel_USE_FILE</span><span class="si">}</span><span class="p">)</span>
+<span class="nb">include</span><span class="p">(</span><span class="si">${</span><span class="nv">SlicerExecutionModel_CMAKE_DIR</span><span class="si">}</span>/SEMMacroBuildCLI.cmake<span class="p">)</span>
+
+<span class="nb">add_subdirectory</span><span class="p">(</span>src<span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="brief-explanation">Brief explanation</h2>
+
+<p>This file configures the overall project.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">cmake_minimum_required(...)</code> sets the minimum required CMake version</li>
+  <li><code class="language-plaintext highlighter-rouge">project(...)</code> names the project and declares the language</li>
+  <li><code class="language-plaintext highlighter-rouge">find_package(ITK REQUIRED)</code> finds the ITK installation</li>
+  <li><code class="language-plaintext highlighter-rouge">include(${ITK_USE_FILE})</code> brings in ITK compiler and include settings</li>
+  <li><code class="language-plaintext highlighter-rouge">find_package(SlicerExecutionModel REQUIRED GenerateCLP)</code> finds SlicerExecutionModel and the <code class="language-plaintext highlighter-rouge">GenerateCLP</code> tool</li>
+  <li>the <code class="language-plaintext highlighter-rouge">include(...)</code> lines expose the macros needed for building CLI modules</li>
+  <li><code class="language-plaintext highlighter-rouge">add_subdirectory(src)</code> tells CMake to continue processing the source tree</li>
+</ul>
+
+<h2 id="srccmakeliststxt"><code class="language-plaintext highlighter-rouge">src/CMakeLists.txt</code></h2>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">add_subdirectory</span><span class="p">(</span>SimpleThreshold<span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="brief-explanation-1">Brief explanation</h2>
+
+<p>This file simply tells CMake to process the <code class="language-plaintext highlighter-rouge">SimpleThreshold</code> module directory.</p>
+
+<h2 id="module-cmakeliststxt">Module <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code></h2>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">set</span><span class="p">(</span>MODULE_NAME SimpleThreshold<span class="p">)</span>
+
+<span class="nf">SEMMacroBuildCLI</span><span class="p">(</span>
+  NAME <span class="si">${</span><span class="nv">MODULE_NAME</span><span class="si">}</span>
+  TARGET_LIBRARIES <span class="si">${</span><span class="nv">ITK_LIBRARIES</span><span class="si">}</span>
+  EXECUTABLE_ONLY
+<span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="brief-explanation-2">Brief explanation</h2>
+
+<p>This file builds the actual CLI module.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">MODULE_NAME</code> defines the module name</li>
+  <li><code class="language-plaintext highlighter-rouge">SEMMacroBuildCLI(...)</code> is a helper macro from SlicerExecutionModel</li>
+  <li>it runs <code class="language-plaintext highlighter-rouge">GenerateCLP</code> on <code class="language-plaintext highlighter-rouge">SimpleThreshold.xml</code></li>
+  <li>it generates <code class="language-plaintext highlighter-rouge">SimpleThresholdCLP.h</code></li>
+  <li>it builds the executable</li>
+  <li>it links the executable against ITK</li>
+</ul>
+
+<hr />
+
+<h1 id="12-building-the-project">12. Building the Project</h1>
+
+<p>First configure the project:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">-S</span> <span class="nb">.</span> <span class="nt">-B</span> build <span class="se">\</span>
+  <span class="nt">-DITK_DIR</span><span class="o">=</span>/path/to/ITK-build <span class="se">\</span>
+  <span class="nt">-DSlicerExecutionModel_DIR</span><span class="o">=</span>/path/to/SEM-build
+</code></pre></div></div>
+
+<p>Then build it:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">--build</span> build
+</code></pre></div></div>
+
+<p>If your generator is Unix Makefiles, you can also build with:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make <span class="nt">-C</span> build <span class="nt">-j8</span>
+</code></pre></div></div>
+
+<p>If you want an interactive configuration interface, you can use:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ccmake <span class="nt">-S</span> <span class="nb">.</span> <span class="nt">-B</span> build
+</code></pre></div></div>
+
+<p>The executable will typically appear in:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>build/src/SimpleThreshold/bin
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="13-running-the-module">13. Running the Module</h1>
+
+<p>Run from the command line:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SimpleThreshold <span class="se">\</span>
+  <span class="nt">--inputVolume</span> input.nii.gz <span class="se">\</span>
+  <span class="nt">--outputVolume</span> output.nii.gz <span class="se">\</span>
+  <span class="nt">--lowThreshold</span> 100 <span class="se">\</span>
+  <span class="nt">--highThreshold</span> 500 <span class="se">\</span>
+  <span class="nt">--insideValue</span> 1 <span class="se">\</span>
+  <span class="nt">--outsideValue</span> 0
+</code></pre></div></div>
+
+<p>This will write the thresholded image to <code class="language-plaintext highlighter-rouge">output.nii.gz</code>.</p>
+
+<p>You can also inspect the generated command-line interface using:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./SimpleThreshold <span class="nt">--help</span>
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="14-loading-the-module-in-slicer">14. Loading the Module in Slicer</h1>
+
+<p>Start Slicer with:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Slicer <span class="nt">--additional-module-paths</span> /path/to/build/src/SimpleThreshold/bin
+</code></pre></div></div>
+
+<p>Your module will appear in:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Modules → MyModules → SimpleThreshold
+</code></pre></div></div>
+
+<p>The GUI is generated automatically from the XML file.</p>
+
+<p>If Slicer cannot save additional module paths in its settings, launching it with <code class="language-plaintext highlighter-rouge">--additional-module-paths</code> is a reliable workaround during development.</p>
+
+<hr />
+
+<h1 id="15-conclusion">15. Conclusion</h1>
+
+<p>In this tutorial we built a <strong>complete Slicer CLI module from scratch</strong> using:</p>
+
+<ul>
+  <li>ITK</li>
+  <li>SlicerExecutionModel</li>
+  <li>CMake</li>
+</ul>
+
+<p>Key takeaways:</p>
+
+<ul>
+  <li>CLI modules separate <strong>interface, algorithm, and build system</strong></li>
+  <li>XML defines the user interface</li>
+  <li><code class="language-plaintext highlighter-rouge">GenerateCLP</code> handles argument parsing automatically</li>
+  <li>ITK implements the image processing</li>
+  <li>CMake manages dependencies and builds the executable</li>
+  <li>Useful links:
+    <ul>
+      <li><a href="https://docs.itk.org/en/latest/">ITK documentation</a></li>
+      <li><a href="https://itk.org/ItkSoftwareGuide.pdf">ITK software guide</a></li>
+      <li><a href="https://www.slicer.org/wiki/Documentation/Nightly/Developers/SlicerExecutionModel">Slicer Execution Model</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>This workflow makes it much easier to integrate custom medical image processing algorithms into 3D Slicer without manually building a GUI.</p>
+
+<hr />
+
+<p><em>Congratulations! You can create a Slicer module using your custom algorithm.</em></p>]]></content><author><name></name></author><category term="tutorial" /><category term="itk" /><category term="slicer" /><category term="cmake" /><category term="c++" /><summary type="html"><![CDATA[A complete tutorial on building a Slicer CLI module using ITK and SlicerExecutionModel]]></summary></entry><entry><title type="html">Python Code Formatting and Linting Using Ruff</title><link href="https://sabbir-ahmed12.github.io/blog/2026/python-code-formatting-and-linting-using-ruff/" rel="alternate" type="text/html" title="Python Code Formatting and Linting Using Ruff" /><published>2026-01-19T04:16:12+00:00</published><updated>2026-01-19T04:16:12+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2026/python-code-formatting-and-linting-using-ruff</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2026/python-code-formatting-and-linting-using-ruff/"><![CDATA[<h2 id="ruff">Ruff</h2>
 
 <p><code class="language-plaintext highlighter-rouge">ruff</code> is a super-fast Python linter and formatter written in Rust. It consolidates multiple Python tools like Flake8, Black, isort and others into a single, faster solution that significantly improves code quality. In this tutorial, we’ll learn how to use <code class="language-plaintext highlighter-rouge">ruff</code> from the command line to check and fix our code, and how to configure <code class="language-plaintext highlighter-rouge">ruff</code> both for individual projects and globally. We’ll also learn how to integrate <code class="language-plaintext highlighter-rouge">ruff</code> with VSCode to get real-time feedback as we code.</p>
 
