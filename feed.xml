@@ -1,5 +1,140 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://sabbir-ahmed12.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sabbir-ahmed12.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-03-11T07:16:15+00:00</updated><id>https://sabbir-ahmed12.github.io/feed.xml</id><title type="html">blank</title><subtitle>This is Sabbir Ahmed&apos;s personal website.
-</subtitle><entry><title type="html">Building a 3D Slicer CLI Module from Scratch Using ITK and SlicerExecutionModel</title><link href="https://sabbir-ahmed12.github.io/blog/2026/building-a-simple-thresholding-filter-module-for-3D-slicer/" rel="alternate" type="text/html" title="Building a 3D Slicer CLI Module from Scratch Using ITK and SlicerExecutionModel" /><published>2026-03-11T04:16:12+00:00</published><updated>2026-03-11T04:16:12+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2026/building-a-simple-thresholding-filter-module-for-3D-slicer</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2026/building-a-simple-thresholding-filter-module-for-3D-slicer/"><![CDATA[<h1 id="building-a-3d-slicer-cli-module-from-scratch-using-itk-and-slicerexecutionmodel">Building a 3D Slicer CLI Module from Scratch Using ITK and SlicerExecutionModel</h1>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://sabbir-ahmed12.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sabbir-ahmed12.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-04-02T04:14:12+00:00</updated><id>https://sabbir-ahmed12.github.io/feed.xml</id><title type="html">blank</title><subtitle>This is Sabbir Ahmed&apos;s personal website.
+</subtitle><entry><title type="html">Pixi - Best Package Manager for Python and for Doing Reproducible Research</title><link href="https://sabbir-ahmed12.github.io/blog/2026/pixi-the-best-python-package-manager/" rel="alternate" type="text/html" title="Pixi - Best Package Manager for Python and for Doing Reproducible Research" /><published>2026-04-01T04:21:12+00:00</published><updated>2026-04-01T04:21:12+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2026/pixi-the-best-python-package-manager</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2026/pixi-the-best-python-package-manager/"><![CDATA[<h1 id="pixi">Pixi</h1>
+<p>Pixi is a fast, modern, and reproducible package management tool for developers of all backgrounds.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p><code class="language-plaintext highlighter-rouge">pip</code> and <code class="language-plaintext highlighter-rouge">conda</code> are the default python package manager for Python. However, <code class="language-plaintext highlighter-rouge">uv</code> has also gained much popularity and became the go-to package manager for many people. The reasons are - it is fast, handles lockfiles, and manages virtual environments out of the box.</p>
+
+<p>However, data science and AI projects rarely stay pure Python. Many key packages such as numpy, psycopg2 etc. contain C, C++ or Fortran extensions that require compiler installed on the system level. <code class="language-plaintext highlighter-rouge">uv</code> or <code class="language-plaintext highlighter-rouge">pip</code> can install the Python bindings, but not the system libraries underneath them. So, if you’ve worked on data science project or if you’ve used a high performance computing cluster (HPC), you might be familiar with the pip build failures. The reasons you get such errors are - missing system build tools, missing header libraries, missing wheel package etc. In order to compile the C/C++ libraries, windows requires Microsoft C++ build tools and Linux requires <code class="language-plaintext highlighter-rouge">build-essential</code> and <code class="language-plaintext highlighter-rouge">python3-dev</code> packages. Moreover, your system might be also missing some system level packages which you need to install using system level package manager such as <code class="language-plaintext highlighter-rouge">apt</code> or <code class="language-plaintext highlighter-rouge">homebrew</code>. Since <code class="language-plaintext highlighter-rouge">pip</code> and <code class="language-plaintext highlighter-rouge">uv</code> use Python Package Index (PyPI - main package index for Python with a much larger ecosystem than conda) as the source for installing packages, you’ll almost always face such errors if you want to setup an environment for your AI or ML project.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Conda</code> is a cross-platform, cross-language package ecosystem that allows users to install packages and manage environments. It manages conda packages from the Anaconda repository and Anaconda Cloud. <code class="language-plaintext highlighter-rouge">Conda</code> packages are binaries so you don’t need to have compilers available to install them. <code class="language-plaintext highlighter-rouge">Conda</code> can create isolated environments with differnt versions of Python whereas <code class="language-plaintext highlighter-rouge">Pip</code> depends on <code class="language-plaintext highlighter-rouge">virtualenv</code> or <code class="language-plaintext highlighter-rouge">venv</code> to create isolated environments. Moreover, <code class="language-plaintext highlighter-rouge">pip</code> installs dependencies in a recursive, serial loop. No effort is made to ensure that dependencies of all the packages are fulfilled simultaneously which can lead to broken environments. <code class="language-plaintext highlighter-rouge">Conda</code> takes care of that to help prevent broken environment. However, <code class="language-plaintext highlighter-rouge">conda</code> can take long time to solve dependencies. Also, it’s <code class="language-plaintext highlighter-rouge">environment.yml</code> file only lists packages that you explicitly install, not all the dependencies underneath. So, recreating the environment later may silently pull different versions of the dependencies and thus the code may not work. Most projects need packages from both <code class="language-plaintext highlighter-rouge">PyPI</code> and <code class="language-plaintext highlighter-rouge">conda-forge</code> but neither <code class="language-plaintext highlighter-rouge">pip</code> nor <code class="language-plaintext highlighter-rouge">conda</code> checks the other conflicting versions which can break the environment.</p>
+
+<p><code class="language-plaintext highlighter-rouge">pixi</code> solves all the problems of <code class="language-plaintext highlighter-rouge">uv</code>, <code class="language-plaintext highlighter-rouge">pip</code> and <code class="language-plaintext highlighter-rouge">conda</code> by managing Python packages from <code class="language-plaintext highlighter-rouge">PyPI</code> and compiled system libraries from <code class="language-plaintext highlighter-rouge">conda-forge</code> in a single tool, with automatic lockfiles, fast dependency resolution and stores the environment inside the project itself.</p>
+
+<h2 id="installation">Installation</h2>
+
+<p>Install <code class="language-plaintext highlighter-rouge">pixi</code> on Linux or macOS using the command below. For windows or other installation method, you can follow the instruction in this <a href="https://pixi.prefix.dev/latest/#available-software">link</a>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-fsSL</span> https://pixi.sh/install.sh | sh
+</code></pre></div></div>
+
+<h2 id="initialize-a-project">Initialize a Project</h2>
+
+<p>You can create a new directory and initialize a <code class="language-plaintext highlighter-rouge">pixi</code> project using the <code class="language-plaintext highlighter-rouge">pixi init</code> command as given below. It creates a <code class="language-plaintext highlighter-rouge">pixi.toml</code> manifest that tracks dependencies and lives in version control with your code. It automatically detects your platform and sets <code class="language-plaintext highlighter-rouge">conda-forge</code> as the default channel.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pixi init &lt;project-name&gt;
+<span class="nb">cd</span> &lt;project-name&gt;
+</code></pre></div></div>
+<p>If you run <code class="language-plaintext highlighter-rouge">cat pixi.toml</code>, you’ll find that the <code class="language-plaintext highlighter-rouge">dependencies</code> section is empty as we haven’t installed any package yet. If your project already has a <code class="language-plaintext highlighter-rouge">pyproject.toml</code> file, <code class="language-plaintext highlighter-rouge">pixi init</code> will add sections to it automatically. No separate manifest needed.</p>
+
+<h2 id="adding-dependencies">Adding Dependencies</h2>
+<p>You can install packages from both <code class="language-plaintext highlighter-rouge">conda-forge</code> and <code class="language-plaintext highlighter-rouge">PyPI</code> as below:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># conda-forge packages</span>
+pixi add python geopandas gdal lightgbm
+
+<span class="c"># PyPI packages</span>
+pixi add <span class="nt">--pypi</span> scikit-learn
+</code></pre></div></div>
+
+<p>The packages and their dependencies will appear in separate sections like <code class="language-plaintext highlighter-rouge">[dependecies]</code> and <code class="language-plaintext highlighter-rouge">[pypi-dependencies]</code> for the <code class="language-plaintext highlighter-rouge">conda-forge</code> and <code class="language-plaintext highlighter-rouge">PyPI</code> channels respectively.</p>
+
+<p>Each command updates the pixi.toml manifest and regenerates the lockfile automatically.</p>
+
+<h2 id="activating-environment">Activating Environment</h2>
+<p>Now that you’ve an environment and some packages installed, you need to activate the environment to use the installed packages. You can use the following command to run the file e.g. <code class="language-plaintext highlighter-rouge">train.py</code> without manually activating the environment:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pixi run python train.py
+</code></pre></div></div>
+
+<p>However, if you want to manually activate it to run a program or for interactive shell session, you can do it by using:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pixi shell
+</code></pre></div></div>
+
+<h2 id="multi-platform-support">Multi-Platform Support</h2>
+
+<p>If you’re working on a MacOS or on a Windows system but later you may need to run the code in a Linux machine, you can add more platforms on your lockfile. <code class="language-plaintext highlighter-rouge">pixi</code> can generate lockfile entries for every target platform, including system libraries. In the example below, I’ve added Linux and Windows. If you read the <code class="language-plaintext highlighter-rouge">pixi.toml</code> file, you can see the target platforms under the <code class="language-plaintext highlighter-rouge">platforms</code> variable. For more information, read the <a href="https://pixi.prefix.dev/latest/workspace/multi_platform_configuration/">documentation</a>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pixi workspace platform add linux-64 win-64
+</code></pre></div></div>
+
+<p>This command updates <code class="language-plaintext highlighter-rouge">pixi.toml</code> file with the new platforms and regenerates the lockfile with entries for all of the platforms.</p>
+
+<h2 id="multiple-environments">Multiple Environments</h2>
+<p><code class="language-plaintext highlighter-rouge">pixi</code> can manage dependencies for separate environments such as - dev or production by not only including Python packages but also system libraries. For example, you can add <code class="language-plaintext highlighter-rouge">pytest</code> and <code class="language-plaintext highlighter-rouge">ruff</code> for dev environment using the command below:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pixi add <span class="nt">--feature</span> dev pytest ruff
+</code></pre></div></div>
+
+<p>To use the feature, link it to a named environment:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pixi workspace environment add dev <span class="nt">--feature</span> dev
+</code></pre></div></div>
+
+<p>These two commands update pixi.toml with the new feature and environment. <code class="language-plaintext highlighter-rouge">dev = ["dev"]</code> means the dev environment includes default dependencies plus everything under <code class="language-plaintext highlighter-rouge">[feature.dev.dependencies]</code>.</p>
+
+<p>To use the dev environment, pass <code class="language-plaintext highlighter-rouge">-e dev</code> to any <code class="language-plaintext highlighter-rouge">pixi</code> command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Activate an interactive shell</span>
+pixi shell <span class="nt">-e</span> dev      
+
+<span class="c"># Run a single command</span>
+pixi run <span class="nt">-e</span> dev pytest  
+</code></pre></div></div>
+
+<h2 id="built-in-task-runner">Built-in Task Runner</h2>
+<p><code class="language-plaintext highlighter-rouge">uv</code> doesn’t have a built-in task runner, so teams typically manage project commands with <code class="language-plaintext highlighter-rouge">Makefiles</code>, Just, or shell scripts. These commands can be hard to remember. <code class="language-plaintext highlighter-rouge">pixi</code> has a built-in task runner that stores these commands alongside your dependencies, so no one has to memorize them.</p>
+
+<p>To define a task, use pixi task add:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pixi task add preprocess <span class="s2">"python src/preprocess.py --input data/raw --output data/processed"</span>
+pixi task add train <span class="s2">"python src/train.py"</span>
+pixi task add <span class="nb">test</span> <span class="s2">"pytest tests/"</span>
+</code></pre></div></div>
+
+<p>This adds three tasks to pixi.toml:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>tasks]
+preprocess <span class="o">=</span> <span class="s2">"python src/preprocess.py --input data/raw --output data/processed"</span>
+train <span class="o">=</span> <span class="s2">"python src/train.py"</span>
+<span class="nb">test</span> <span class="o">=</span> <span class="s2">"pytest tests/"</span>
+</code></pre></div></div>
+
+<p>To run any task, use pixi run followed by the task name:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pixi run train
+pixi run <span class="nb">test</span>
+</code></pre></div></div>
+
+<p>Tasks run inside the project environment automatically, with no need to activate first.</p>
+
+<h2 id="global-tool-installtion">Global Tool Installtion</h2>
+<p>Both uv (uv tool install) and pixi support installing tools globally. These are tools like code formatters and linters that are useful everywhere but don’t belong in any specific project:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pixi global <span class="nb">install </span>ipython
+pixi global <span class="nb">install </span>ruff
+</code></pre></div></div>
+
+<p>Once installed, they’re available from any directory:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ipython    <span class="c"># start interactive Python shell</span>
+ruff check <span class="nb">.</span>  <span class="c"># lint any project</span>
+</code></pre></div></div>
+
+<h2 id="reproduce-the-environment">Reproduce the Environment</h2>
+
+<p>To reproduce the environment, you just need to run the command below:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pixi <span class="nb">install</span>
+</code></pre></div></div>
+
+<h2 id="useful-links">Useful Links</h2>
+<ul>
+  <li>Pixi Homepage: https://pixi.prefix.dev/latest/</li>
+  <li>GitHub: https://github.com/prefix-dev/pixi</li>
+</ul>]]></content><author><name></name></author><category term="tutorial" /><category term="python" /><category term="pixi" /><summary type="html"><![CDATA[A hands-on tutorial on setting up a project environment using pixi]]></summary></entry><entry><title type="html">Building a 3D Slicer CLI Module from Scratch Using ITK and SlicerExecutionModel</title><link href="https://sabbir-ahmed12.github.io/blog/2026/building-a-simple-thresholding-filter-module-for-3D-slicer/" rel="alternate" type="text/html" title="Building a 3D Slicer CLI Module from Scratch Using ITK and SlicerExecutionModel" /><published>2026-03-11T04:16:12+00:00</published><updated>2026-03-11T04:16:12+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2026/building-a-simple-thresholding-filter-module-for-3D-slicer</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2026/building-a-simple-thresholding-filter-module-for-3D-slicer/"><![CDATA[<h1 id="introduction">Introduction</h1>
 
 <p>3D Slicer is a powerful open-source platform widely used for <strong>medical image analysis, visualization, and research</strong>. One of its most powerful features is the ability to extend its functionality using <strong>custom modules</strong>.</p>
 
