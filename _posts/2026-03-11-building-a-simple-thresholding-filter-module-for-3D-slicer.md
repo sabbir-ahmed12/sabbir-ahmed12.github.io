@@ -9,7 +9,7 @@ giscus_comments: true
 related_posts: false
 ---
 
-# Introduction
+# Overview
 
 3D Slicer is a powerful open-source platform widely used for **medical image analysis, visualization, and research**. One of its most powerful features is the ability to extend its functionality using **custom modules**.
 
@@ -49,7 +49,7 @@ By the end of this tutorial you will understand:
 
 ---
 
-# 1. Introduction
+## 1. Introduction
 
 Slicer modules can be implemented in three ways:
 
@@ -67,7 +67,7 @@ In this tutorial we focus on **CLI modules**, which are ideal when you want to:
 
 ---
 
-# 2. Understanding CLI Modules in Slicer
+## 2. Understanding CLI Modules in Slicer
 
 A Slicer CLI module consists of three components:
 
@@ -94,7 +94,7 @@ A major advantage of CLI modules is that the **user interface and the algorithm 
 
 ---
 
-# 3. Installing Dependencies
+## 3. Installing Dependencies
 
 You will need:
 
@@ -113,7 +113,7 @@ If you also want to test the module inside Slicer, make sure you already have a 
 
 ---
 
-# 4. Understanding CMake
+## 4. Understanding CMake
 
 CMake is a **cross-platform build system generator**. Instead of manually writing platform-specific build files, we write one or more `CMakeLists.txt` files that describe:
 
@@ -159,7 +159,7 @@ cmake --build build
 
 This is preferred over building directly inside the source tree because it keeps generated files separate from your source code.
 
-## Choosing a generator
+### Choosing a generator
 
 You can explicitly choose a generator if needed:
 
@@ -210,7 +210,7 @@ In short, **CMake is necessary because it finds dependencies, configures the pro
 
 ---
 
-# 5. Building ITK
+## 5. Building ITK
 
 Create a build directory:
 
@@ -252,7 +252,7 @@ You will use this later when configuring your CLI module project.
 
 ---
 
-# 6. Building SlicerExecutionModel
+## 6. Building SlicerExecutionModel
 
 Create a build directory:
 
@@ -288,7 +288,7 @@ This tool is central to how Slicer CLI modules work.
 
 ---
 
-# 7. Project Structure
+## 7. Project Structure
 
 Our project will look like this:
 
@@ -312,7 +312,7 @@ This structure keeps the project organized:
 
 ---
 
-# 8. Understanding GenerateCLP
+## 8. Understanding GenerateCLP
 
 `GenerateCLP` is a tool provided by **SlicerExecutionModel**.
 
@@ -371,7 +371,7 @@ In practice, you usually do **not** run `GenerateCLP` manually. Instead, the CMa
 
 ---
 
-# 9. Writing the XML Interface
+## 9. Writing the XML Interface
 
 The XML file defines:
 
@@ -454,7 +454,7 @@ Example:
 </executable>
 ```
 
-## Brief explanation of the XML
+### Brief explanation of the XML
 
 This XML defines the interface of the CLI module.
 
@@ -482,7 +482,7 @@ This same XML is used both to build the GUI in Slicer and to generate the parser
 
 ---
 
-# 10. Writing the Thresholding Algorithm
+## 10. Writing the Thresholding Algorithm
 
 Now we implement the actual algorithm using ITK.
 
@@ -533,7 +533,7 @@ int main(int argc, char * argv[])
 }
 ```
 
-## Brief explanation of the thresholding code
+### Brief explanation of the thresholding code
 
 This code performs binary thresholding on a 3D image. It sets every pixel in the range `[lowThreshold, highThreshold]` to `insideValue` and all other pixels to the `outsideValue`.
 
@@ -557,9 +557,9 @@ will save the result in NIfTI format.
 
 ---
 
-# 11. Writing the CMake Configuration
+## 11. Writing the CMake Configuration
 
-## Root `CMakeLists.txt`
+### Root `CMakeLists.txt`
 
 ```cmake
 cmake_minimum_required(VERSION 3.16)
@@ -577,7 +577,7 @@ include(${SlicerExecutionModel_CMAKE_DIR}/SEMMacroBuildCLI.cmake)
 add_subdirectory(src)
 ```
 
-## Brief explanation
+### Brief explanation
 
 This file configures the overall project.
 
@@ -589,17 +589,17 @@ This file configures the overall project.
 - the `include(...)` lines expose the macros needed for building CLI modules
 - `add_subdirectory(src)` tells CMake to continue processing the source tree
 
-## `src/CMakeLists.txt`
+### `src/CMakeLists.txt`
 
 ```cmake
 add_subdirectory(SimpleThreshold)
 ```
 
-## Brief explanation
+### Brief explanation
 
 This file simply tells CMake to process the `SimpleThreshold` module directory.
 
-## Module `CMakeLists.txt`
+### Module `CMakeLists.txt`
 
 ```cmake
 set(MODULE_NAME SimpleThreshold)
@@ -611,7 +611,7 @@ SEMMacroBuildCLI(
 )
 ```
 
-## Brief explanation
+### Brief explanation
 
 This file builds the actual CLI module.
 
@@ -624,7 +624,7 @@ This file builds the actual CLI module.
 
 ---
 
-# 12. Building the Project
+## 12. Building the Project
 
 First configure the project:
 
@@ -660,7 +660,7 @@ build/src/SimpleThreshold/bin
 
 ---
 
-# 13. Running the Module
+## 13. Running the Module
 
 Run from the command line:
 
@@ -684,7 +684,7 @@ You can also inspect the generated command-line interface using:
 
 ---
 
-# 14. Loading the Module in Slicer
+## 14. Loading the Module in Slicer
 
 Start Slicer with:
 
@@ -704,7 +704,7 @@ If Slicer cannot save additional module paths in its settings, launching it with
 
 ---
 
-# 15. Conclusion
+## 15. Conclusion
 
 In this tutorial we built a **complete Slicer CLI module from scratch** using:
 
