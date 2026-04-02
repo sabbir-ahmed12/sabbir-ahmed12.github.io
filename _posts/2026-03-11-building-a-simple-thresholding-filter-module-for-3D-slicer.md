@@ -9,7 +9,7 @@ giscus_comments: true
 related_posts: false
 ---
 
-# Building a 3D Slicer CLI Module from Scratch Using ITK and SlicerExecutionModel
+# Introduction
 
 3D Slicer is a powerful open-source platform widely used for **medical image analysis, visualization, and research**. One of its most powerful features is the ability to extend its functionality using **custom modules**.
 
