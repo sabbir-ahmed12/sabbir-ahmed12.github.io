@@ -152,7 +152,7 @@
   <article class="post-content">
     
     <div id="markdown-content">
-      <h1 id="introduction">Introduction</h1>
+      <h1 id="overview">Overview</h1>
 
 <p>3D Slicer is a powerful open-source platform widely used for <strong>medical image analysis, visualization, and research</strong>. One of its most powerful features is the ability to extend its functionality using <strong>custom modules</strong>.</p>
 
@@ -201,7 +201,7 @@
 
 <hr>
 
-<h1 id="1-introduction">1. Introduction</h1>
+<h2 id="1-introduction">1. Introduction</h2>
 
 <p>Slicer modules can be implemented in three ways:</p>
 
@@ -245,7 +245,7 @@
 
 <hr>
 
-<h1 id="2-understanding-cli-modules-in-slicer">2. Understanding CLI Modules in Slicer</h1>
+<h2 id="2-understanding-cli-modules-in-slicer">2. Understanding CLI Modules in Slicer</h2>
 
 <p>A Slicer CLI module consists of three components:</p>
 
@@ -273,7 +273,7 @@ CMake build system
 
 <hr>
 
-<h1 id="3-installing-dependencies">3. Installing Dependencies</h1>
+<h2 id="3-installing-dependencies">3. Installing Dependencies</h2>
 
 <p>You will need:</p>
 
@@ -293,7 +293,7 @@ git clone https://github.com/Slicer/SlicerExecutionModel.git
 
 <hr>
 
-<h1 id="4-understanding-cmake">4. Understanding CMake</h1>
+<h2 id="4-understanding-cmake">4. Understanding CMake</h2>
 
 <p>CMake is a <strong>cross-platform build system generator</strong>. Instead of manually writing platform-specific build files, we write one or more <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> files that describe:</p>
 
@@ -362,7 +362,7 @@ git clone https://github.com/Slicer/SlicerExecutionModel.git
 
 <p>This is preferred over building directly inside the source tree because it keeps generated files separate from your source code.</p>
 
-<h2 id="choosing-a-generator">Choosing a generator</h2>
+<h3 id="choosing-a-generator">Choosing a generator</h3>
 
 <p>You can explicitly choose a generator if needed:</p>
 
@@ -409,7 +409,7 @@ git clone https://github.com/Slicer/SlicerExecutionModel.git
 
 <hr>
 
-<h1 id="5-building-itk">5. Building ITK</h1>
+<h2 id="5-building-itk">5. Building ITK</h2>
 
 <p>Create a build directory:</p>
 
@@ -445,7 +445,7 @@ git clone https://github.com/Slicer/SlicerExecutionModel.git
 
 <hr>
 
-<h1 id="6-building-slicerexecutionmodel">6. Building SlicerExecutionModel</h1>
+<h2 id="6-building-slicerexecutionmodel">6. Building SlicerExecutionModel</h2>
 
 <p>Create a build directory:</p>
 
@@ -476,7 +476,7 @@ git clone https://github.com/Slicer/SlicerExecutionModel.git
 
 <hr>
 
-<h1 id="7-project-structure">7. Project Structure</h1>
+<h2 id="7-project-structure">7. Project Structure</h2>
 
 <p>Our project will look like this:</p>
 
@@ -503,7 +503,7 @@ git clone https://github.com/Slicer/SlicerExecutionModel.git
 
 <hr>
 
-<h1 id="8-understanding-generateclp">8. Understanding GenerateCLP</h1>
+<h2 id="8-understanding-generateclp">8. Understanding GenerateCLP</h2>
 
 <p><code class="language-plaintext highlighter-rouge">GenerateCLP</code> is a tool provided by <strong>SlicerExecutionModel</strong>.</p>
 
@@ -561,7 +561,7 @@ git clone https://github.com/Slicer/SlicerExecutionModel.git
 
 <hr>
 
-<h1 id="9-writing-the-xml-interface">9. Writing the XML Interface</h1>
+<h2 id="9-writing-the-xml-interface">9. Writing the XML Interface</h2>
 
 <p>The XML file defines:</p>
 
@@ -645,7 +645,7 @@ git clone https://github.com/Slicer/SlicerExecutionModel.git
 <span class="nt">&lt;/executable&gt;</span>
 </code></pre></div></div>
 
-<h2 id="brief-explanation-of-the-xml">Brief explanation of the XML</h2>
+<h3 id="brief-explanation-of-the-xml">Brief explanation of the XML</h3>
 
 <p>This XML defines the interface of the CLI module.</p>
 
@@ -680,7 +680,7 @@ git clone https://github.com/Slicer/SlicerExecutionModel.git
 
 <hr>
 
-<h1 id="10-writing-the-thresholding-algorithm">10. Writing the Thresholding Algorithm</h1>
+<h2 id="10-writing-the-thresholding-algorithm">10. Writing the Thresholding Algorithm</h2>
 
 <p>Now we implement the actual algorithm using ITK.</p>
 
@@ -729,7 +729,7 @@ git clone https://github.com/Slicer/SlicerExecutionModel.git
 <span class="p">}</span>
 </code></pre></div></div>
 
-<h2 id="brief-explanation-of-the-thresholding-code">Brief explanation of the thresholding code</h2>
+<h3 id="brief-explanation-of-the-thresholding-code">Brief explanation of the thresholding code</h3>
 
 <p>This code performs binary thresholding on a 3D image. It sets every pixel in the range <code class="language-plaintext highlighter-rouge">[lowThreshold, highThreshold]</code> to <code class="language-plaintext highlighter-rouge">insideValue</code> and all other pixels to the <code class="language-plaintext highlighter-rouge">outsideValue</code>.</p>
 
@@ -763,10 +763,10 @@ git clone https://github.com/Slicer/SlicerExecutionModel.git
 
 <hr>
 
-<h1 id="11-writing-the-cmake-configuration">11. Writing the CMake Configuration</h1>
+<h2 id="11-writing-the-cmake-configuration">11. Writing the CMake Configuration</h2>
 
-<h2 id="root-cmakeliststxt">Root <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>
-</h2>
+<h3 id="root-cmakeliststxt">Root <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>
+</h3>
 
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.16<span class="p">)</span>
 
@@ -783,7 +783,7 @@ git clone https://github.com/Slicer/SlicerExecutionModel.git
 <span class="nb">add_subdirectory</span><span class="p">(</span>src<span class="p">)</span>
 </code></pre></div></div>
 
-<h2 id="brief-explanation">Brief explanation</h2>
+<h3 id="brief-explanation">Brief explanation</h3>
 
 <p>This file configures the overall project.</p>
 
@@ -803,17 +803,17 @@ git clone https://github.com/Slicer/SlicerExecutionModel.git
 <code class="language-plaintext highlighter-rouge">add_subdirectory(src)</code> tells CMake to continue processing the source tree</li>
 </ul>
 
-<h2 id="srccmakeliststxt"><code class="language-plaintext highlighter-rouge">src/CMakeLists.txt</code></h2>
+<h3 id="srccmakeliststxt"><code class="language-plaintext highlighter-rouge">src/CMakeLists.txt</code></h3>
 
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">add_subdirectory</span><span class="p">(</span>SimpleThreshold<span class="p">)</span>
 </code></pre></div></div>
 
-<h2 id="brief-explanation-1">Brief explanation</h2>
+<h3 id="brief-explanation-1">Brief explanation</h3>
 
 <p>This file simply tells CMake to process the <code class="language-plaintext highlighter-rouge">SimpleThreshold</code> module directory.</p>
 
-<h2 id="module-cmakeliststxt">Module <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>
-</h2>
+<h3 id="module-cmakeliststxt">Module <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>
+</h3>
 
 <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">set</span><span class="p">(</span>MODULE_NAME SimpleThreshold<span class="p">)</span>
 
@@ -824,7 +824,7 @@ git clone https://github.com/Slicer/SlicerExecutionModel.git
 <span class="p">)</span>
 </code></pre></div></div>
 
-<h2 id="brief-explanation-2">Brief explanation</h2>
+<h3 id="brief-explanation-2">Brief explanation</h3>
 
 <p>This file builds the actual CLI module.</p>
 
@@ -843,7 +843,7 @@ git clone https://github.com/Slicer/SlicerExecutionModel.git
 
 <hr>
 
-<h1 id="12-building-the-project">12. Building the Project</h1>
+<h2 id="12-building-the-project">12. Building the Project</h2>
 
 <p>First configure the project:</p>
 
@@ -874,7 +874,7 @@ git clone https://github.com/Slicer/SlicerExecutionModel.git
 
 <hr>
 
-<h1 id="13-running-the-module">13. Running the Module</h1>
+<h2 id="13-running-the-module">13. Running the Module</h2>
 
 <p>Run from the command line:</p>
 
@@ -896,7 +896,7 @@ git clone https://github.com/Slicer/SlicerExecutionModel.git
 
 <hr>
 
-<h1 id="14-loading-the-module-in-slicer">14. Loading the Module in Slicer</h1>
+<h2 id="14-loading-the-module-in-slicer">14. Loading the Module in Slicer</h2>
 
 <p>Start Slicer with:</p>
 
@@ -914,7 +914,7 @@ git clone https://github.com/Slicer/SlicerExecutionModel.git
 
 <hr>
 
-<h1 id="15-conclusion">15. Conclusion</h1>
+<h2 id="15-conclusion">15. Conclusion</h2>
 
 <p>In this tutorial we built a <strong>complete Slicer CLI module from scratch</strong> using:</p>
 
