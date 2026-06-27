@@ -1,5 +1,580 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://sabbir-ahmed12.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sabbir-ahmed12.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-04-02T04:24:25+00:00</updated><id>https://sabbir-ahmed12.github.io/feed.xml</id><title type="html">blank</title><subtitle>This is Sabbir Ahmed&apos;s personal website.
-</subtitle><entry><title type="html">Pixi - Best Package Manager for Python and for Doing Reproducible Research</title><link href="https://sabbir-ahmed12.github.io/blog/2026/pixi-the-best-python-package-manager/" rel="alternate" type="text/html" title="Pixi - Best Package Manager for Python and for Doing Reproducible Research" /><published>2026-04-01T04:21:12+00:00</published><updated>2026-04-01T04:21:12+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2026/pixi-the-best-python-package-manager</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2026/pixi-the-best-python-package-manager/"><![CDATA[<h1 id="pixi">Pixi</h1>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://sabbir-ahmed12.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sabbir-ahmed12.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-06-27T19:07:26+00:00</updated><id>https://sabbir-ahmed12.github.io/feed.xml</id><title type="html">blank</title><subtitle>This is Sabbir Ahmed&apos;s personal website.
+</subtitle><entry><title type="html">Function Pointer in C++</title><link href="https://sabbir-ahmed12.github.io/blog/2026/function-pointer-in-c++/" rel="alternate" type="text/html" title="Function Pointer in C++" /><published>2026-06-27T04:57:00+00:00</published><updated>2026-06-27T04:57:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2026/function-pointer-in-c++</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2026/function-pointer-in-c++/"><![CDATA[<h1 id="what-is-function-pointer">What is Function Pointer?</h1>
+<p>In C++, pointers store memory address. While they are commonly used to store memory address of variables or objects, they can also store the address of a function. A function pointer allows a program to call a function indirectly or pass a function as an argument, enabling flexible and dynamic behavior.</p>
+
+<p>Consider the example below to find the address of a function:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span>
+<span class="n">ing</span> <span class="nf">getNumber</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">num</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">getNumber</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>Note that the function is not called here, we just put the function name without <code class="language-plaintext highlighter-rouge">()</code>.</p>
+
+<p>So, a function pointer is a pointer variable that stores the address of a function with specific return type and parameter list.</p>
+
+<h2 id="how-to-create-a-function-pointer-and-invoke-a-function-using-function-pointer">How to Create a Function Pointer and Invoke a Function Using Function Pointer?</h2>
+<p>Consider the example below where we create the <code class="language-plaintext highlighter-rouge">add</code> function. It takes two integers and return the sum of the integers. To create a function pointer of that function we need to follow the synax below:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>return_type(*functionPtr)(parameter_type);
+</code></pre></div></div>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">num1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">num2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">num1</span> <span class="o">+</span> <span class="n">num2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Creating a pointer to the add function</span>
+    <span class="kt">int</span><span class="p">(</span><span class="o">*</span><span class="n">addFuncPtr</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span> <span class="o">=</span> <span class="n">add</span><span class="p">;</span>
+
+    <span class="c1">// Invoke using the function pointer</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">addFuncPtr</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="c1">// Invoke the function directly</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="applications-of-function-pointer">Applications of Function Pointer:</h2>
+<h3 id="passing-functions-as-argument-callback-function">Passing functions as argument (Callback Function)</h3>
+<p>If you’re familiar with Python or Javascript, you may know that you can pass a function as an argument of another function. That’s one of reasons why functions are called first class citizen or object in Python. We can implement that using function pointer in C++. Consider the example below where we want to write a sort function. Depending on the function we pass as argument to the sort function, it sorts a list of number either in ascending or descending order.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span><span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cm">/*
+* Sort into ascending oder
+*/</span>
+<span class="kt">bool</span> <span class="nf">ascendingCompare</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*
+* Sort into descending order
+*/</span>
+<span class="kt">bool</span> <span class="nf">descendingCompare</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">sort</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">intVector</span><span class="p">,</span> <span class="kt">bool</span><span class="p">(</span><span class="o">*</span><span class="n">compareFuncPtr</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">startIdx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">startIdx</span> <span class="o">&lt;</span> <span class="n">intVector</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">startIdx</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="kt">int</span> <span class="n">bestIdx</span> <span class="o">=</span> <span class="n">startIdx</span><span class="p">;</span>
+
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">currentIdx</span><span class="o">=</span><span class="n">startIdx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">currentIdx</span> <span class="o">&lt;</span> <span class="n">intVector</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">currentIdx</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">compareFuncPtr</span><span class="p">(</span><span class="n">intVector</span><span class="p">[</span><span class="n">currentIdx</span><span class="p">],</span> <span class="n">intVector</span><span class="p">[</span><span class="n">bestIdx</span><span class="p">]))</span> <span class="p">{</span>
+                <span class="n">bestIdx</span> <span class="o">=</span> <span class="n">currentIdx</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">swap</span><span class="p">(</span><span class="n">intVector</span><span class="p">[</span><span class="n">startIdx</span><span class="p">],</span> <span class="n">intVector</span><span class="p">[</span><span class="n">bestIdx</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/*
+* Prints the numbers in a vector
+*/</span>
+<span class="kt">void</span> <span class="nf">printVector</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">intVector</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">intVector</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">intVector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">numbers</span> <span class="o">=</span> <span class="p">{</span><span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">};</span>
+    <span class="n">printVector</span><span class="p">(</span><span class="n">numbers</span><span class="p">);</span>
+    <span class="kt">bool</span><span class="p">(</span><span class="o">*</span><span class="n">functionPtr</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span> <span class="o">=</span> <span class="n">ascendingCompare</span><span class="p">;</span>
+    <span class="n">sort</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">ascendingCompare</span><span class="p">);</span>
+    <span class="n">printVector</span><span class="p">(</span><span class="n">numbers</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>]]></content><author><name></name></author><category term="tutorial" /><category term="C++" /><summary type="html"><![CDATA[Learn about function pointer and it's application]]></summary></entry><entry><title type="html">Pointer in C/C++</title><link href="https://sabbir-ahmed12.github.io/blog/2026/pointer-in-c-and-c++/" rel="alternate" type="text/html" title="Pointer in C/C++" /><published>2026-06-27T04:57:00+00:00</published><updated>2026-06-27T04:57:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2026/pointer-in-c-and-c++</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2026/pointer-in-c-and-c++/"><![CDATA[<h1 id="what-is-a-pointer">What is a Pointer?</h1>
+<p>A pointer is a variable that stores the memory address of another variable. For example - in the program below, <code class="language-plaintext highlighter-rouge">a</code> is an integer variable which represents a memory address. Let’s say <code class="language-plaintext highlighter-rouge">10</code> is stored at address <code class="language-plaintext highlighter-rouge">200</code>(here memory address is represented in integer value for explaining the concept but it is usually represented in hexadecimal form) inside computer memory. Remember that an integer usually takes 4 bytes of memory. However, now the variable <code class="language-plaintext highlighter-rouge">a</code> represents address <code class="language-plaintext highlighter-rouge">200</code>. A pointer variable is a variable which can store that address instead of storing the value <code class="language-plaintext highlighter-rouge">10</code>. However, the type of the pointer variable must be same as the data type of the variable.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="declaring-pointers-in-c">Declaring Pointers in C++</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data_type* pointer_name;
+
+// Pointer to an integer
+int* intPtr;
+</code></pre></div></div>
+<p>Or,</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data_type *pointer_name;
+
+// Pointer to a character
+char *cPtr;
+</code></pre></div></div>
+
+<h2 id="initializing-pointers-in-c">Initializing Pointers in C++</h2>
+<p>There are two ways of initializing a pointer safely.</p>
+
+<ol>
+  <li>
+    <p><strong>Assigning an existing variable’s address:</strong> The most common way of initializing a pointer is by storing the address of an already declared variable. It stores the address of the variable and can access or modify the underlying value as shown below:</p>
+
+    <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span>
+ <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+     <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+     <span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">num</span><span class="p">;</span>
+
+     <span class="c1">// Display the stored address</span>
+     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ptr</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+    <blockquote>
+      <p>To get the address of variable <code class="language-plaintext highlighter-rouge">num</code>, you need to use the <code class="language-plaintext highlighter-rouge">&amp;</code> (also known as reference operator) operator.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p><strong>Using <code class="language-plaintext highlighter-rouge">nullptr</code> (Modern C++):</strong> Sometimes we need to declare a pointer in advance, even if we don’t yet have a variable for it to point to—for example, when a pointer will later be assigned dynamically allocated memory or a value returned by a function. In such cases, we should initialize the pointer with nullptr. This prevents it from pointing to random memory and makes it safer to check before using it:</p>
+
+    <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// Does not point anywhere</span>
+ <span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="nb">nullptr</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="dereferencing-a-pointer">Dereferencing a Pointer</h2>
+<p>Dereferencing a pointer means to access or modify the data stored at the memory address held by a pointer. <code class="language-plaintext highlighter-rouge">*</code> operator is used to dereference a pointer.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">num</span><span class="p">;</span>
+
+    <span class="c1">// Display the address</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ptr</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="c1">// Dereferencing pointer</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">ptr</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="c1">// Modifying underlying value</span>
+    <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+
+    <span class="c1">// Print updated value</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">num</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">ptr</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>We can also change the underlying value in that address using the pointer and when we do that, both the <code class="language-plaintext highlighter-rouge">num</code> variable and the pointer variable will show the modified value.</p>
+
+<blockquote>
+  <p><strong>NOTE:</strong> If we attempt to dereference a null pointer, the program will typically crash or throw a runtime error instead of silently reading or writing garbage memory. This makes bugs easier to detect. By initializing a pointer with <code class="language-plaintext highlighter-rouge">nullptr</code>, we ensure it doesn’t accidentally access random memory, and we can safely check whether it points to a valid location before using it:</p>
+</blockquote>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">ptr</span> <span class="o">!=</span> <span class="nb">nullptr</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>  <span class="c1">// Change the stored value</span>
+<span class="p">}</span> 
+</code></pre></div></div>
+
+<h2 id="types-of-pointer-in-c">Types of Pointer in C++:</h2>
+
+<h3 id="null-pointer">Null Pointer</h3>
+<p>A null pointer doesn’t point to any memory location. In modern C++, it is represented using the keyword <code class="language-plaintext highlighter-rouge">nullptr</code>. Using <code class="language-plaintext highlighter-rouge">nullptr</code> helps ensure that a pointer does not accidentally reference garbage memory.</p>
+
+<p>For example, the code block below shows how <code class="language-plaintext highlighter-rouge">nullptr</code> can prevent undefined behavior by allowing us to check whether a pointer is pointing to a valid memory location before using it:</p>
+
+<pre><code class="language-C++">#include&lt;iostream&gt;
+
+int main() {
+    int* ptr = nullptr; 
+
+    if (ptr != nullptr) { 
+        *ptr = 10;  // Safe: This block runs only if ptr points to valid memory 
+    } else { 
+        std::cout &lt;&lt; "Pointer is null, cannot assign value.\n"; 
+    } 
+
+    return 0;
+}
+</code></pre>
+
+<h3 id="void-pointer">Void Pointer</h3>
+<p>A void pointer (also called a generic pointer) can hold the memory address of any data type, but it cannot be dereferenced directly without typecasting.</p>
+
+<p>When the type is known at compile time and no runtime checks are needed, static casting is used:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">void</span><span class="o">*</span> <span class="n">ptr</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+    <span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">num</span><span class="p">;</span>
+
+    <span class="c1">// Casting to access the value</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="p">((</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">ptr</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">:</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Casting was done by <code class="language-plaintext highlighter-rouge">(int*)</code> and to dereference the integer pointer we used <code class="language-plaintext highlighter-rouge">*((int*)ptr)</code>.</p>
+</blockquote>
+
+<h3 id="dangling-pointer">Dangling Pointer</h3>
+<p>A dangling pointer is one that points to memory that has already been freed or deleted. Accessing such memory is unsafe and may crash the program.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Using heap memory to store 5</span>
+    <span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+
+    <span class="c1">// Accessing underlying value</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">ptr</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="c1">// Delete the pointer</span>
+    <span class="k">delete</span> <span class="n">ptr</span><span class="p">;</span>
+    <span class="c1">// ptr is now dangling (Invalid memory reference) </span>
+    
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="wild-pointer">Wild Pointer</h3>
+<p>A wild pointer is an uninitialized pointer that points to a random memory location. Dereferencing such a pointer is dangerous because it can cause undefined behavior, crashes, or data corruption:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span>  <span class="c1">// Not initialized</span>
+<span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>  <span class="c1">// Crash the program with error</span>
+</code></pre></div></div>
+
+<h3 id="constant-pointer">Constant Pointer</h3>
+<p>A constant pointer is a pointer that, once initialized, cannot point to a different address, but the value stored at that address can still be modified:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="kt">int</span><span class="o">*</span> <span class="k">const</span> <span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
+
+    <span class="c1">// Stored value can be changed</span>
+    <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+
+    <span class="c1">// Stored address can't be changed</span>
+    <span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">;</span>    <span class="c1">// Not allowed</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<blockquote>
+  <p>We can also make the value constant by using <code class="language-plaintext highlighter-rouge">const</code> before the data type e.g., <code class="language-plaintext highlighter-rouge">const int* const ptr = &amp;x;</code>.</p>
+</blockquote>
+
+<h2 id="pointers-and-arrays">Pointers and Arrays</h2>
+<p>In C++, when we assign an array to a pointer, the pointer refers to the first element of the array. From there, we can use pointer arithmetic (see the next section) to access different elements, just as we would with indexing.</p>
+
+<p>When we write:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">arr</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">};</span> 
+<span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">arr</span><span class="p">;</span> 
+</code></pre></div></div>
+<p>Here:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">arr</code> gives the address of the first element (<code class="language-plaintext highlighter-rouge">&amp;arr[0]</code>).</li>
+  <li><code class="language-plaintext highlighter-rouge">ptr</code> now points to the address of the first element.</li>
+</ul>
+
+<p>Now <code class="language-plaintext highlighter-rouge">ptr</code> is equivalent to <code class="language-plaintext highlighter-rouge">arr[0]</code>, and (<code class="language-plaintext highlighter-rouge">ptr + i</code>) is equivalent to <code class="language-plaintext highlighter-rouge">arr[i]</code>.</p>
+
+<p>Using pointers with arrays is useful because it allows more efficient traversal and manipulation of array elements, especially in functions, without copying the entire array. Pointer arithmetic can also simplify operations like iterating through dynamically allocated arrays or working with segments of an array.</p>
+
+<p>The example below shows how we can access array elements using pointers:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1"> </span><span class="cp">
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span> 
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span> 
+    <span class="kt">double</span> <span class="n">numbers</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mf">6.5</span><span class="p">,</span> <span class="mf">8.5</span><span class="p">};</span> 
+    <span class="kt">double</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">numbers</span><span class="p">;</span> 
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> 
+        <span class="c1">// Using pointer arithmetic instead of array indexing</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"numbers["</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">"] = "</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="p">(</span><span class="n">ptr</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> 
+    <span class="p">}</span> 
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> 
+<span class="p">}</span>  
+</code></pre></div></div>
+
+<p>The output will be:</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.5</span> 
+<span class="n">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">4.5</span> 
+<span class="n">numbers</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">6.5</span> 
+<span class="n">numbers</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mf">8.5</span> 
+</code></pre></div></div>
+
+<p>Since pointers give direct access to memory, we can also change array values using them. This can be useful when we want to efficiently modify elements in an array without using the array index notation, especially in scenarios like passing arrays to functions, iterating through large datasets, or implementing dynamic data structures where direct memory manipulation improves performance:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1"> </span><span class="cp">
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span> 
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span> 
+    <span class="kt">int</span> <span class="n">arr</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>  
+    <span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">arr</span><span class="p">;</span>  
+
+    <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>             <span class="c1">// Changes arr[0] to 10  </span>
+    <span class="o">*</span><span class="p">(</span><span class="n">ptr</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>  <span class="c1">// Changes arr[1] to 20  </span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> 
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span> 
+    <span class="p">}</span> 
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> 
+<span class="p">}</span>  
+</code></pre></div></div>
+
+<p>The output will be:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10 20 3 
+</code></pre></div></div>
+
+<h2 id="pointer-arithmetic">Pointer Arithmetic</h2>
+<p>Pointers in C++ allows us to perform arithmetic operations using them. It allows us to move through memory locations efficiently, especially when working with arrays. However, it supports only a limited number of well-defined operations.</p>
+
+<h3 id="increment-">Increment (++)</h3>
+<p>The increment operator (++) moves the pointer to the next memory location based on its data type:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1"> </span><span class="cp">
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span> 
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span> 
+    <span class="kt">int</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">};</span>  
+    <span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">arr</span><span class="p">;</span>   <span class="c1">// Points to arr[0]  </span>
+    <span class="n">ptr</span><span class="o">++</span><span class="p">;</span>                <span class="c1">// Now points to arr[1]  </span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span> 
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> 
+<span class="p">}</span> 
+</code></pre></div></div>
+<p>The output will be:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>20
+</code></pre></div></div>
+<p>Here, <code class="language-plaintext highlighter-rouge">ptr++</code> increases the pointer by the size of the data type (<code class="language-plaintext highlighter-rouge">int</code>) (i.e., <code class="language-plaintext highlighter-rouge">4 bytes</code>), not just by one byte. Consider the example below to understand it better:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="kt">int</span><span class="o">*</span> <span class="n">ptrVar</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ptrVar</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">ptrVar</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>Here, in the first statement, it’ll print a memory address and in the second statement, it’ll add <code class="language-plaintext highlighter-rouge">4</code> bytes to the initial memory address. This is because the type of the pointer variable is integer and integer takes <code class="language-plaintext highlighter-rouge">4</code> bytes of memory. Therefore, the next memory address will be at <code class="language-plaintext highlighter-rouge">(previous memory address + 4 bytes)</code>. <strong><em>We’ll get a random value if we try to dereference <code class="language-plaintext highlighter-rouge">*(p+1)</code> because we don’t know what happened with that memory address. Maybe some other programs stored that value at some points in that memory address.</em></strong></p>
+
+<blockquote>
+  <p>You can check the size of a data type using <code class="language-plaintext highlighter-rouge">sizeof</code> operator. For example - <code class="language-plaintext highlighter-rouge">sizeof(int)</code>.</p>
+</blockquote>
+
+<h3 id="decrement-">Decrement (–)</h3>
+<p>The decrement operator (<code class="language-plaintext highlighter-rouge">--</code>) moves the pointer to the previous memory location:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1"> </span><span class="cp">
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span> 
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span> 
+    <span class="kt">int</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">};</span>  
+    <span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">arr</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="c1">// Points to arr[2]  </span>
+    <span class="n">ptr</span><span class="o">--</span><span class="p">;</span>                         <span class="c1">// Now points to arr[1]  </span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span> 
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> 
+<span class="p">}</span>
+</code></pre></div></div>
+<p>The output will be:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>20
+</code></pre></div></div>
+
+<h3 id="addition">Addition</h3>
+<p>The addition operator (<code class="language-plaintext highlighter-rouge">+</code>) can be used with pointers to move them forward in memory. When we add an integer <code class="language-plaintext highlighter-rouge">n</code> to a pointer, the pointer advances by <code class="language-plaintext highlighter-rouge">n</code> elements, not raw bytes. The actual number of bytes skipped depends on the size of the type the pointer refers to:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1"> </span><span class="cp">
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span> 
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span> 
+    <span class="kt">int</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">};</span>  
+    <span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">arr</span><span class="p">;</span>  
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="p">(</span><span class="n">ptr</span> <span class="o">+</span> <span class="mi">2</span><span class="p">);</span> 
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> 
+<span class="p">}</span> 
+</code></pre></div></div>
+<p>The output will be:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>30
+</code></pre></div></div>
+<blockquote>
+  <p><strong>NOTE:</strong> If we increment a pointer beyond the valid range of the array (or object) it points to, we invoke undefined behavior. This can lead to memory corruption, program crashes, or unpredictable results. Always ensure your pointer arithmetic stays within the allocated bounds.</p>
+</blockquote>
+
+<h3 id="subtraction">Subtraction</h3>
+<p>The subtraction operator (<code class="language-plaintext highlighter-rouge">-</code>) can be used with pointers to move them backward in memory. When we subtract an integer <code class="language-plaintext highlighter-rouge">n</code> from a pointer, the pointer moves back by <code class="language-plaintext highlighter-rouge">n</code> elements:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1"> </span><span class="cp">
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span> 
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span> 
+    <span class="kt">int</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">};</span>  
+    <span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">arr</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>        <span class="c1">// Points to arr[3] </span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="p">(</span><span class="n">ptr</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span>       <span class="c1">// Moves 2 elements back → arr[1] </span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> 
+<span class="p">}</span> 
+</code></pre></div></div>
+
+<p>The output will be:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>20
+</code></pre></div></div>
+<p>Just like the addition operator, subtracting too far can move the pointer outside the valid range of the array (or object) it belongs to, invoking undefined behavior.</p>
+
+<h3 id="pointer-difference">Pointer Difference</h3>
+<p>We can subtract one pointer from another (as long as they both point to the same array). The result is the number of elements between them, not the number of bytes:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1"> </span><span class="cp">
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span> 
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span> 
+    <span class="kt">int</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">};</span>  
+    <span class="kt">int</span><span class="o">*</span> <span class="n">p1</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>  
+    <span class="kt">int</span><span class="o">*</span> <span class="n">p2</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">arr</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>  
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">p2</span> <span class="o">-</span> <span class="n">p1</span><span class="p">);</span> 
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> 
+<span class="p">}</span> 
+</code></pre></div></div>
+
+<p>The output will be:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3
+</code></pre></div></div>
+<p>The output indicates that there are <code class="language-plaintext highlighter-rouge">3</code> elements between the pointers <code class="language-plaintext highlighter-rouge">p1</code> and <code class="language-plaintext highlighter-rouge">p2</code>.</p>
+
+<h3 id="pointers-and-functions">Pointers and Functions</h3>
+<p>One of the most powerful applications of pointers in C++ is their use with functions. Normally, when we pass variables to a function, they are passed by value, meaning the function receives a copy of the variable. Changes inside the function don’t affect the original variable.</p>
+
+<p>Pointers solve this limitation by enabling pass-by-reference. Unlike C++’s built-in pass-by-reference (<code class="language-plaintext highlighter-rouge">&amp;</code>), pointers allow more flexibility—for example, passing <code class="language-plaintext highlighter-rouge">nullptr</code>, handling arrays dynamically, or modifying multiple variables through a single pointer. They also make it clear that a function may change the original data, improving both clarity and efficiency.</p>
+
+<h3 id="passing-pointer-to-function">Passing Pointer to Function</h3>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1"> </span><span class="cp">
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span> 
+ 
+<span class="kt">void</span> <span class="nf">updateValue</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">*</span><span class="n">p</span> <span class="o">+</span> <span class="mi">10</span><span class="p">;</span> <span class="c1">// Modifies the original variable </span>
+<span class="p">}</span> 
+ 
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span> 
+    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> 
+    <span class="n">updateValue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">num</span><span class="p">);</span> <span class="c1">// Pass address of num </span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Updated value: "</span> <span class="o">&lt;&lt;</span> <span class="n">num</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> 
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> 
+<span class="p">}</span> 
+</code></pre></div></div>
+
+<p>The output will be:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Updated value: 15 
+</code></pre></div></div>
+<p>Here, <code class="language-plaintext highlighter-rouge">updateValue()</code> receives the address of <code class="language-plaintext highlighter-rouge">num</code>, and by dereferencing the pointer (<code class="language-plaintext highlighter-rouge">*p</code>), it changes the original variable.</p>
+
+<h3 id="pointers-to-functions">Pointers to Functions</h3>
+<p>C++ also allows pointers to point to functions themselves. This lets us store the address of a function in a pointer and call it indirectly, which is useful for callback mechanisms or passing functions as arguments:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1"> </span><span class="cp">
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span> 
+ 
+<span class="kt">void</span> <span class="nf">greet</span><span class="p">()</span> <span class="p">{</span> 
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Hello from a function!"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> 
+<span class="p">}</span> 
+ 
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span> 
+    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">funcPtr</span><span class="p">)()</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">greet</span><span class="p">;</span> <span class="c1">// Pointer to function </span>
+    <span class="n">funcPtr</span><span class="p">();</span> <span class="c1">// Call function via pointer </span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> 
+<span class="p">}</span> 
+</code></pre></div></div>
+<p>In this example, (<code class="language-plaintext highlighter-rouge">*funcPtr</code>) declares <code class="language-plaintext highlighter-rouge">funcPtr</code> as a pointer to a function. The parentheses are necessary as without them, C++ would interpret it as a function returning <code class="language-plaintext highlighter-rouge">void</code> instead of a pointer. The <code class="language-plaintext highlighter-rouge">()</code> after <code class="language-plaintext highlighter-rouge">(*funcPtr)</code> indicates that the function takes no parameters.</p>
+
+<p>As a whole, the <code class="language-plaintext highlighter-rouge">void (*funcPtr)() = &amp;greet;</code> line assigns the address of the <code class="language-plaintext highlighter-rouge">greet</code> function to the <code class="language-plaintext highlighter-rouge">(*funcPtr)</code> pointer. The <code class="language-plaintext highlighter-rouge">&amp;</code> is optional, as the function name alone also represents its address.</p>
+
+<p>The output will be:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello from a function! 
+</code></pre></div></div>
+
+<p>Pointer can be used to write <code class="language-plaintext highlighter-rouge">callback</code> function. You can learn more about function pointer <a href="">here</a>.</p>
+
+<h2 id="advantages-and-disadvantages-of-pointers">Advantages and Disadvantages of Pointers</h2>
+<h3 id="advantages">Advantages</h3>
+<ul>
+  <li>
+    <p><strong>Efficient memory management:</strong> Pointers allow us to allocate and deallocate memory dynamically, which is essential for managing resources effectively.</p>
+  </li>
+  <li>
+    <p><strong>Faster execution:</strong> By giving direct access to memory addresses, pointers reduce overhead and make programs more efficient.</p>
+  </li>
+  <li>
+    <p><strong>Support for complex data structures:</strong> Pointers are the foundation for implementing linked lists, trees, graphs, and other advanced data structures.</p>
+  </li>
+  <li>
+    <p><strong>Pass by reference:</strong> Pointers make it possible to modify variables directly inside functions without returning values.</p>
+  </li>
+</ul>
+
+<h3 id="disadvantages">Disadvantages:</h3>
+<ul>
+  <li>
+    <p><strong>Risk of memory leaks:</strong> If dynamically allocated memory is not properly freed, it can lead to wasted memory.</p>
+  </li>
+  <li>
+    <p><strong>Dangling and wild pointers:</strong> Mismanagement of pointers (e.g., using freed or uninitialized pointers) can cause crashes or undefined behavior.</p>
+  </li>
+  <li>
+    <p><strong>Increased complexity:</strong> Pointer syntax and logic can be difficult for beginners to understand and debug.</p>
+  </li>
+  <li>
+    <p><strong>Security issues:</strong> Improper use of pointers can expose vulnerabilities like buffer overflows, leading to potential exploits.</p>
+  </li>
+</ul>
+
+<h2 id="best-practices-for-using-c-pointers">Best Practices for Using C++ Pointers</h2>
+<p>Applying these best practices will ensure effective usage of C++ pointers:</p>
+
+<ul>
+  <li>
+    <p><strong>Always initialize pointers:</strong> Set pointers to a valid address or nullptr to avoid wild pointers.</p>
+  </li>
+  <li>
+    <p><strong>Limit pointer arithmetic:</strong> Keep arithmetic minimal and always stay within array bounds to avoid undefined behavior.</p>
+  </li>
+  <li>
+    <p><strong>Validate pointers before use:</strong> Check for nullptr before dereferencing to ensure safe access.</p>
+  </li>
+  <li>
+    <p><strong>Use references when possible:</strong> For function parameters, prefer references over raw pointers if ownership transfer is not required.</p>
+  </li>
+</ul>
+
+<h2 id="references">References:</h2>
+<ul>
+  <li>CodeAcademy and GeeksForGeeks</li>
+</ul>]]></content><author><name></name></author><category term="tutorial" /><category term="C++" /><summary type="html"><![CDATA[Learn about pointer and it's application in C/C++]]></summary></entry><entry><title type="html">Pixi - Best Package Manager for Python and for Doing Reproducible Research</title><link href="https://sabbir-ahmed12.github.io/blog/2026/pixi-the-best-python-package-manager/" rel="alternate" type="text/html" title="Pixi - Best Package Manager for Python and for Doing Reproducible Research" /><published>2026-04-01T04:21:12+00:00</published><updated>2026-04-01T04:21:12+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2026/pixi-the-best-python-package-manager</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2026/pixi-the-best-python-package-manager/"><![CDATA[<h1 id="pixi">Pixi</h1>
 <p>Pixi is a fast, modern, and reproducible package management tool for developers of all backgrounds.</p>
 
 <h2 id="introduction">Introduction</h2>
@@ -1293,193 +1868,4 @@ When you say that a distribution is “derived” from another, the newer distro
 
 <p>Finally, to remove nano, you need to use the command <code class="language-plaintext highlighter-rouge">sudo apt remove nano</code>. It will remove the package along with its dependencies. To check the list of available <code class="language-plaintext highlighter-rouge">apt</code> soft commands, you can run the <code class="language-plaintext highlighter-rouge">apt</code> command in your terminal.</p>
 
-<p>That’s it. You should now be comfortable with the <code class="language-plaintext highlighter-rouge">apt</code> package manager. Best of luck!</p>]]></content><author><name></name></author><category term="tutorial" /><category term="linux" /><summary type="html"><![CDATA[Tutorial on installing and removing package in linux.]]></summary></entry><entry><title type="html">How Can You Run Multiple Versions of Python on Ubuntu and Create Virtual Environments?</title><link href="https://sabbir-ahmed12.github.io/blog/2023/installing-python-on-ubuntu/" rel="alternate" type="text/html" title="How Can You Run Multiple Versions of Python on Ubuntu and Create Virtual Environments?" /><published>2023-06-17T16:15:00+00:00</published><updated>2023-06-17T16:15:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2023/installing-python-on-ubuntu</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2023/installing-python-on-ubuntu/"><![CDATA[<p>Maintaining multiple python versions of python on ubuntu becomes a issue of headache sometimes as Ubuntu OS already comes with a pre-installed python. Therefore, changing the system python may affect your Ubuntu OS functionality. In this tutorial, I’ll use <code class="language-plaintext highlighter-rouge">pyenv</code> to work with multiple versions of python.</p>
-
-<h2 id="why-should-you-use-pyenv-and-virtual-python-environments">Why should you use <code class="language-plaintext highlighter-rouge">pyenv</code> and Virtual Python Environments?</h2>
-
-<p>As a programmer or as a hobbyist you may want to work on several python projects simultaneously. And most of the projects require different Python versions and some project may require a specific version of a package e.g. specific version of numpy or django. In such cases you’ll need to install multiple versions of python and will have to install several versions of a specific package and that is when virtual environment is required to maintain several python ecosystems based on various projects in isolation. <code class="language-plaintext highlighter-rouge">pyenv</code> makes it easier to maintain various versions of python on ubuntu and unix based systems as those systems by default contains a python version which they uses for various system operations and we don’t wanna mess up with that python version.</p>
-
-<h2 id="how-to-install-pyenv-on-your-ubuntu">How to install <code class="language-plaintext highlighter-rouge">pyenv</code> on your ubuntu?</h2>
-
-<p>To install <code class="language-plaintext highlighter-rouge">pyenv</code> on Debian or Ubuntu based Linux distributions, you’ll have to install several libraries and packages necessary for building Python from scratch. Enter the following command into your terminal to install all the necessary packages.<br /></p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt install -y make build-essential libssl-dev zlib1g-dev \
-libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev \
-libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl \
-git
-</code></pre></div></div>
-
-<p>To install <code class="language-plaintext highlighter-rouge">pyenv</code> you can clone it directly from <a href="https://github.com/pyenv/pyenv">github</a> repository.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-</code></pre></div></div>
-
-<p>After that you need to enter the following commands to add <code class="language-plaintext highlighter-rouge">pyenv</code> to your <code class="language-plaintext highlighter-rouge">$PATH</code>. To see the effect you’ll have to open a new terminal.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo 'export PYENV_ROOT="$HOME/.pyenv"' &gt;&gt; ~/.bashrc
-echo 'export PATH="$PYENV_ROOT/bin:$PATH"' &gt;&gt; ~/.bashrc
-echo 'eval "$(pyenv init --path)"' &gt;&gt; ~/.bashrc
-</code></pre></div></div>
-
-<p><strong>If you use <code class="language-plaintext highlighter-rouge">zsh</code>, use <code class="language-plaintext highlighter-rouge">.zshrc</code> instead of <code class="language-plaintext highlighter-rouge">.bashrc</code>.</strong></p>
-
-<h2 id="using-pyenv">Using <code class="language-plaintext highlighter-rouge">pyenv</code></h2>
-
-<p>If you followed the previous steps successfully, you should be able to use <code class="language-plaintext highlighter-rouge">pyenv</code> from your terminal. Type the following command on your terminal to check whether <code class="language-plaintext highlighter-rouge">pyenv</code> successfully installed or not. It should print the pyenv version.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv --version
-</code></pre></div></div>
-
-<p>It you get the <code class="language-plaintext highlighter-rouge">pyenv</code> version, congratulations!. Next step is to install Python of your desired version. First check which Python versions are available to you. For that use the following command.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv install -l
-</code></pre></div></div>
-
-<p>This command will display the various CPython versions(displays just the versions) along with other Python distributions such as Miniconda and Anaconda. In this tutorial we’ll install a CPython version. Let’s say you want to install CPython version 3.9.7. For that execute the following command on you terminal.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv install 3.9.7
-</code></pre></div></div>
-
-<p>It’ll take some time to build and install the desired Python version. However after completion of installation, type the following command to see the available python versions on your system.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv versions
-</code></pre></div></div>
-
-<p>You’ll find all the Python versions currently installed on your system and the current global version is indicated by an <code class="language-plaintext highlighter-rouge">*</code> on the left. To change the default global version of Python on your system type the following command.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv global [PYTHON_VERSION]
-</code></pre></div></div>
-
-<p>Or if you want to use a specific version of python for a specific folder i.e. project, navigate to that directory and execute the command below.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv local [PYTHON_VERSION]
-</code></pre></div></div>
-
-<p>Or if you want to set a specific Python version for your current terminal session use.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv shell [PYTHON_VERSION]
-</code></pre></div></div>
-
-<p>This will set the Python version only as long as your session is active. So after you close your terminal, everything will be back to default.</p>
-
-<h2 id="method-1-creating-virtual-environment-and-installing-package-on-that-environment">Method-1 Creating Virtual Environment and Installing Package on that Environment</h2>
-
-<p>Python installation includes some basic packages and modules. Your Python version should include <code class="language-plaintext highlighter-rouge">pip</code> module by default. So, set the specific Python version as global Python version. After that open a new terminal and you can close the previous session.</p>
-
-<p>After that install <code class="language-plaintext highlighter-rouge">pipenv</code> using <code class="language-plaintext highlighter-rouge">pip</code> command. It will install some dependencies along with <code class="language-plaintext highlighter-rouge">pipenv</code>. Creating and maintaining virtual environment using <code class="language-plaintext highlighter-rouge">pipenv</code> is much easier.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pipenv
-</code></pre></div></div>
-
-<p>You can check the installed packages on your current Python version using <code class="language-plaintext highlighter-rouge">pip list</code> command.</p>
-
-<p>To create virtual environment navigate to your preferred directory and create a folder. Suppose you want to start a django project, type the following command to install django under a virtual environment.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pipenv install django
-</code></pre></div></div>
-
-<p>It’ll create an environment at first and then install the latest django version for that environment. It should successfully install django on a virtual environment. You can activate the environment by navigating to that folder and then executing the following command.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pipenv shell
-</code></pre></div></div>
-
-<p>After activating the environment, you can run django command. e.g. you can try the following command -</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>django-admin
-</code></pre></div></div>
-
-<p>For installation of more packages, run the following command keeping the environment activated.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pipenv install [PACKAGE_NAME]
-</code></pre></div></div>
-
-<p>Exit the environment by just typing <code class="language-plaintext highlighter-rouge">exit</code>.</p>
-
-<h3 id="deleting-virtual-environment">Deleting Virtual Environment</h3>
-
-<p>You can delete a specific virtual environment from <code class="language-plaintext highlighter-rouge">~/.local/share/virtualenvs/</code> folder. Or you can delete all the virtual environments using -</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rm -rf ~/.local/share/virtualenvs
-</code></pre></div></div>
-
-<h2 id="method-2-creating-virtual-environment-and-installing-package-on-that-environment">Method-2 Creating Virtual Environment and Installing Package on that Environment</h2>
-
-<p><code class="language-plaintext highlighter-rouge">pyenv</code> has a wonderful plugin called <code class="language-plaintext highlighter-rouge">pyenv-virtualenv</code> that makes working with multiple environments easy. Please visit the <a href="https://github.com/pyenv/pyenv-virtualenv">link</a> to install <code class="language-plaintext highlighter-rouge">pyenv-virtualenv</code>. After installation, check if it installed properly by running the command <code class="language-plaintext highlighter-rouge">pyenv commands</code>. You should see the commands <code class="language-plaintext highlighter-rouge">virtualenv, virtualenv-delete, virtualenv-init, virtualenv-prefix, virtualenv</code> listed along with the other commands. You can also update your <code class="language-plaintext highlighter-rouge">.bashrc</code> file as mentioned in the documentation of <code class="language-plaintext highlighter-rouge">pyenv-virtualenv</code>.</p>
-
-<p>To create a virtual environment, first create a directory in your preferred place and go to that directory. Then run the following command.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv virtualenv &lt;python_version&gt; &lt;environment_name&gt;
-</code></pre></div></div>
-
-<p>If you’ve updated your <code class="language-plaintext highlighter-rouge">.bashrc</code> file, you can activate your environment by running the following command:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv local &lt;environment_name&gt;
-</code></pre></div></div>
-
-<p>It creates a <code class="language-plaintext highlighter-rouge">.python-version</code> file in the directory because it internally runs the bash command `eval “$(pyenv virtualenv-init -)”. You can verify it by running the following command.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv which python
-</code></pre></div></div>
-
-<p>You can see a new version has been created called <environment_name> and the python executable is pointing to that version.</environment_name></p>
-
-<p>If you didn’t modify your <code class="language-plaintext highlighter-rouge">.bashrc</code> file by adding the command <code class="language-plaintext highlighter-rouge">eval "$(pyenv virtualenv-init -)</code>, you can manually activate/deactivate your python versions with this:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv activate &lt;environment_name&gt;
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv deactivate
-</code></pre></div></div>
-
-<div>
-  <b>NOTE: Setting a specific version of python as global python version may sometime cause problems. I found method-2 more friendly and easier to manage different python versions and python environments.</b>
-</div>
-
-<h2 id="removing-a-specific-version-of-python">Removing a Specific Version of Python</h2>
-
-<p>You can uninstall a specific python version using <code class="language-plaintext highlighter-rouge">pyenv</code> using -</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv uninstall [PYTHON_VERSION]
-</code></pre></div></div>
-
-<p><strong>Before deleting the active Python version, set the Python version to system default.</strong></p>
-
-<h2 id="updating-packages">Updating packages</h2>
-
-<p>If you want a list of outdated packages, run this to see all the packages needing an upgrade.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pipenv update --outdated
-</code></pre></div></div>
-
-<p>You can choose to blindly update all packages.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pipenv update
-</code></pre></div></div>
-
-<p>Or you can update a specific package one at a time.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pipenv update pandas
-</code></pre></div></div>
-
-<h2 id="installing-from-requirementstxt-file">Installing from Requirements.txt file</h2>
-
-<p>If you have a legacy requirements.txt file, <code class="language-plaintext highlighter-rouge">pipenv</code> can be used for that.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pipenv install -r requirements.txt
-</code></pre></div></div>
-
-<p>If you want a generate a requirements.txt file, you can run the following command after activating the environment from you project directory.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip freeze &gt; requirements.txt
-</code></pre></div></div>
-
-<h2 id="using-virtual-environment-with-vscode">Using Virtual Environment with VSCode</h2>
-
-<p>Open the directory using VS Code. After that open the workspace using <code class="language-plaintext highlighter-rouge">Ctrl + Shift + p</code> and type <code class="language-plaintext highlighter-rouge">settings.json</code>. Select <code class="language-plaintext highlighter-rouge">Preferences: Open Workspace Settings (JSON)</code> and hit <code class="language-plaintext highlighter-rouge">Enter</code> on your keyboard. It should open an empty JSON file. Now inside the file type the following command.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
-  "python.terminal.activateEnvironment": true
-}
-</code></pre></div></div>
-
-<p>Then go to option <code class="language-plaintext highlighter-rouge">run</code> and select <code class="language-plaintext highlighter-rouge">run without debugging</code>. It should automatically activate the environment everytime you run from that directory.</p>]]></content><author><name></name></author><category term="tutorial" /><category term="linux" /><summary type="html"><![CDATA[Tutorial post on installing and maintaining multiple versions of python along with system python.]]></summary></entry></feed>
+<p>That’s it. You should now be comfortable with the <code class="language-plaintext highlighter-rouge">apt</code> package manager. Best of luck!</p>]]></content><author><name></name></author><category term="tutorial" /><category term="linux" /><summary type="html"><![CDATA[Tutorial on installing and removing package in linux.]]></summary></entry></feed>

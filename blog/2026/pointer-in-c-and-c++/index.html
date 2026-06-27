@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Head -->
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    <!-- Metadata, OpenGraph and Schema.org -->
+    
+
+    <!-- Standard metadata -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Pointer in C/C++ | Sabbir  Ahmed</title>
+    <meta name="author" content="Sabbir  Ahmed">
+    <meta name="description" content="Learn about pointer and it's application in C/C++">
+    <meta name="keywords" content="sabbir-ahmed, uiowa, ece, radiology, portfolio, cuet, ete">
+
+
+    <!-- Bootstrap & MDB -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-DF7Zhf293AJxJNTmh5zhoYYIMs2oXitRfBjY+9L//AY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous">
+
+    <!-- Bootstrap Table -->
+    <link defer rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.21.4/dist/bootstrap-table.min.css">
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+
+    <!-- Code Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/github.css" media="" id="highlight_theme_light">
+
+    
+
+    <!-- Styles -->
+    
+    <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%A7%94&lt;/text&gt;&lt;/svg&gt;">
+    
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="canonical" href="https://sabbir-ahmed12.github.io/blog/2026/pointer-in-c-and-c++/">
+
+    <!-- Dark Mode -->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/native.css" media="none" id="highlight_theme_dark">
+
+    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/dark_mode.js"></script>
+    
+
+  </head>
+
+  <!-- Body -->
+  <body class="fixed-top-nav ">
+    <!-- Header -->
+    <header>
+
+      <!-- Nav Bar -->
+      <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+        <div class="container">
+          <a class="navbar-brand title font-weight-lighter" href="/"><span class="font-weight-bold">Sabbir </span>Ahmed</a>
+          <!-- Navbar Toggle -->
+          <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar top-bar"></span>
+            <span class="icon-bar middle-bar"></span>
+            <span class="icon-bar bottom-bar"></span>
+          </button>
+
+          <div class="collapse navbar-collapse text-right" id="navbarNav">
+            <ul class="navbar-nav ml-auto flex-nowrap">
+
+              <!-- About -->
+              <li class="nav-item ">
+                <a class="nav-link" href="/">About</a>
+              </li>
+              
+              <!-- Blog -->
+              <li class="nav-item active">
+                <a class="nav-link" href="/blog/">Blog<span class="sr-only">(current)</span></a>
+              </li>
+
+              <!-- Other pages -->
+              <li class="nav-item ">
+                <a class="nav-link" href="/education/">Education</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/experiences/">Experiences</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/research/">Research</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/skills/">Skills</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/projects/">Projects</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/misc/">Misc</a>
+              </li>
+
+              <!-- Toogle theme mode -->
+              <li class="toggle-container">
+                <button id="light-toggle" title="Change theme">
+                  <i class="fas fa-moon"></i>
+                  <i class="fas fa-sun"></i>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Scrolling Progress Bar -->
+      <progress id="progress" value="0">
+        <div class="progress-container">
+          <span class="progress-bar"></span>
+        </div>
+      </progress>
+    </header>
+
+
+    <!-- Content -->
+    <div class="container mt-5">
+       <!-- _layouts/post.html -->
+
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Pointer in C/C++</h1>
+    <p class="post-meta">June 27, 2026</p>
+    <p class="post-tags">
+      <a href="/blog/2026"> <i class="fas fa-calendar fa-sm"></i> 2026 </a>
+        ·  
+        <a href="/blog/tag/c">
+          <i class="fas fa-hashtag fa-sm"></i> C++</a>  
+          
+        ·  
+        <a href="/blog/category/tutorial">
+          <i class="fas fa-tag fa-sm"></i> tutorial</a>  
+          
+
+    </p>
+  </header>
+
+  <article class="post-content">
+    
+    <div id="markdown-content">
+      <h1 id="what-is-a-pointer">What is a Pointer?</h1>
+<p>A pointer is a variable that stores the memory address of another variable. For example - in the program below, <code class="language-plaintext highlighter-rouge">a</code> is an integer variable which represents a memory address. Let’s say <code class="language-plaintext highlighter-rouge">10</code> is stored at address <code class="language-plaintext highlighter-rouge">200</code>(here memory address is represented in integer value for explaining the concept but it is usually represented in hexadecimal form) inside computer memory. Remember that an integer usually takes 4 bytes of memory. However, now the variable <code class="language-plaintext highlighter-rouge">a</code> represents address <code class="language-plaintext highlighter-rouge">200</code>. A pointer variable is a variable which can store that address instead of storing the value <code class="language-plaintext highlighter-rouge">10</code>. However, the type of the pointer variable must be same as the data type of the variable.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="declaring-pointers-in-c">Declaring Pointers in C++</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data_type* pointer_name;
+
+// Pointer to an integer
+int* intPtr;
+</code></pre></div></div>
+<p>Or,</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data_type *pointer_name;
+
+// Pointer to a character
+char *cPtr;
+</code></pre></div></div>
+
+<h2 id="initializing-pointers-in-c">Initializing Pointers in C++</h2>
+<p>There are two ways of initializing a pointer safely.</p>
+
+<ol>
+  <li>
+    <p><strong>Assigning an existing variable’s address:</strong> The most common way of initializing a pointer is by storing the address of an already declared variable. It stores the address of the variable and can access or modify the underlying value as shown below:</p>
+
+    <div class="language-c++ highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span>
+ <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+     <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+     <span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">num</span><span class="p">;</span>
+
+     <span class="c1">// Display the stored address</span>
+     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ptr</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+    <blockquote>
+      <p>To get the address of variable <code class="language-plaintext highlighter-rouge">num</code>, you need to use the <code class="language-plaintext highlighter-rouge">&amp;</code> (also known as reference operator) operator.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p><strong>Using <code class="language-plaintext highlighter-rouge">nullptr</code> (Modern C++):</strong> Sometimes we need to declare a pointer in advance, even if we don’t yet have a variable for it to point to—for example, when a pointer will later be assigned dynamically allocated memory or a value returned by a function. In such cases, we should initialize the pointer with nullptr. This prevents it from pointing to random memory and makes it safer to check before using it:</p>
+
+    <div class="language-c++ highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="c1">// Does not point anywhere</span>
+ <span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="nb">nullptr</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="dereferencing-a-pointer">Dereferencing a Pointer</h2>
+<p>Dereferencing a pointer means to access or modify the data stored at the memory address held by a pointer. <code class="language-plaintext highlighter-rouge">*</code> operator is used to dereference a pointer.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">num</span><span class="p">;</span>
+
+    <span class="c1">// Display the address</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ptr</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="c1">// Dereferencing pointer</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">ptr</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="c1">// Modifying underlying value</span>
+    <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+
+    <span class="c1">// Print updated value</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">num</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">ptr</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>We can also change the underlying value in that address using the pointer and when we do that, both the <code class="language-plaintext highlighter-rouge">num</code> variable and the pointer variable will show the modified value.</p>
+
+<blockquote>
+  <p><strong>NOTE:</strong> If we attempt to dereference a null pointer, the program will typically crash or throw a runtime error instead of silently reading or writing garbage memory. This makes bugs easier to detect. By initializing a pointer with <code class="language-plaintext highlighter-rouge">nullptr</code>, we ensure it doesn’t accidentally access random memory, and we can safely check whether it points to a valid location before using it:</p>
+</blockquote>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">ptr</span> <span class="o">!=</span> <span class="nb">nullptr</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>  <span class="c1">// Change the stored value</span>
+<span class="p">}</span> 
+</code></pre></div></div>
+
+<h2 id="types-of-pointer-in-c">Types of Pointer in C++:</h2>
+
+<h3 id="null-pointer">Null Pointer</h3>
+<p>A null pointer doesn’t point to any memory location. In modern C++, it is represented using the keyword <code class="language-plaintext highlighter-rouge">nullptr</code>. Using <code class="language-plaintext highlighter-rouge">nullptr</code> helps ensure that a pointer does not accidentally reference garbage memory.</p>
+
+<p>For example, the code block below shows how <code class="language-plaintext highlighter-rouge">nullptr</code> can prevent undefined behavior by allowing us to check whether a pointer is pointing to a valid memory location before using it:</p>
+
+<pre><code class="language-C++">#include&lt;iostream&gt;
+
+int main() {
+    int* ptr = nullptr; 
+
+    if (ptr != nullptr) { 
+        *ptr = 10;  // Safe: This block runs only if ptr points to valid memory 
+    } else { 
+        std::cout &lt;&lt; "Pointer is null, cannot assign value.\n"; 
+    } 
+
+    return 0;
+}
+</code></pre>
+
+<h3 id="void-pointer">Void Pointer</h3>
+<p>A void pointer (also called a generic pointer) can hold the memory address of any data type, but it cannot be dereferenced directly without typecasting.</p>
+
+<p>When the type is known at compile time and no runtime checks are needed, static casting is used:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">void</span><span class="o">*</span> <span class="n">ptr</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+    <span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">num</span><span class="p">;</span>
+
+    <span class="c1">// Casting to access the value</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="p">((</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">ptr</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">:</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Casting was done by <code class="language-plaintext highlighter-rouge">(int*)</code> and to dereference the integer pointer we used <code class="language-plaintext highlighter-rouge">*((int*)ptr)</code>.</p>
+</blockquote>
+
+<h3 id="dangling-pointer">Dangling Pointer</h3>
+<p>A dangling pointer is one that points to memory that has already been freed or deleted. Accessing such memory is unsafe and may crash the program.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Using heap memory to store 5</span>
+    <span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+
+    <span class="c1">// Accessing underlying value</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">ptr</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="c1">// Delete the pointer</span>
+    <span class="k">delete</span> <span class="n">ptr</span><span class="p">;</span>
+    <span class="c1">// ptr is now dangling (Invalid memory reference) </span>
+    
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="wild-pointer">Wild Pointer</h3>
+<p>A wild pointer is an uninitialized pointer that points to a random memory location. Dereferencing such a pointer is dangerous because it can cause undefined behavior, crashes, or data corruption:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span>  <span class="c1">// Not initialized</span>
+<span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>  <span class="c1">// Crash the program with error</span>
+</code></pre></div></div>
+
+<h3 id="constant-pointer">Constant Pointer</h3>
+<p>A constant pointer is a pointer that, once initialized, cannot point to a different address, but the value stored at that address can still be modified:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="kt">int</span><span class="o">*</span> <span class="k">const</span> <span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
+
+    <span class="c1">// Stored value can be changed</span>
+    <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+
+    <span class="c1">// Stored address can't be changed</span>
+    <span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">;</span>    <span class="c1">// Not allowed</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<blockquote>
+  <p>We can also make the value constant by using <code class="language-plaintext highlighter-rouge">const</code> before the data type e.g., <code class="language-plaintext highlighter-rouge">const int* const ptr = &amp;x;</code>.</p>
+</blockquote>
+
+<h2 id="pointers-and-arrays">Pointers and Arrays</h2>
+<p>In C++, when we assign an array to a pointer, the pointer refers to the first element of the array. From there, we can use pointer arithmetic (see the next section) to access different elements, just as we would with indexing.</p>
+
+<p>When we write:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">arr</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">};</span> 
+<span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">arr</span><span class="p">;</span> 
+</code></pre></div></div>
+<p>Here:</p>
+<ul>
+  <li>
+<code class="language-plaintext highlighter-rouge">arr</code> gives the address of the first element (<code class="language-plaintext highlighter-rouge">&amp;arr[0]</code>).</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">ptr</code> now points to the address of the first element.</li>
+</ul>
+
+<p>Now <code class="language-plaintext highlighter-rouge">ptr</code> is equivalent to <code class="language-plaintext highlighter-rouge">arr[0]</code>, and (<code class="language-plaintext highlighter-rouge">ptr + i</code>) is equivalent to <code class="language-plaintext highlighter-rouge">arr[i]</code>.</p>
+
+<p>Using pointers with arrays is useful because it allows more efficient traversal and manipulation of array elements, especially in functions, without copying the entire array. Pointer arithmetic can also simplify operations like iterating through dynamically allocated arrays or working with segments of an array.</p>
+
+<p>The example below shows how we can access array elements using pointers:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1"> </span><span class="cp">
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span> 
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span> 
+    <span class="kt">double</span> <span class="n">numbers</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mf">6.5</span><span class="p">,</span> <span class="mf">8.5</span><span class="p">};</span> 
+    <span class="kt">double</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">numbers</span><span class="p">;</span> 
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> 
+        <span class="c1">// Using pointer arithmetic instead of array indexing</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"numbers["</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">"] = "</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="p">(</span><span class="n">ptr</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> 
+    <span class="p">}</span> 
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> 
+<span class="p">}</span>  
+</code></pre></div></div>
+
+<p>The output will be:</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.5</span> 
+<span class="n">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">4.5</span> 
+<span class="n">numbers</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">6.5</span> 
+<span class="n">numbers</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mf">8.5</span> 
+</code></pre></div></div>
+
+<p>Since pointers give direct access to memory, we can also change array values using them. This can be useful when we want to efficiently modify elements in an array without using the array index notation, especially in scenarios like passing arrays to functions, iterating through large datasets, or implementing dynamic data structures where direct memory manipulation improves performance:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1"> </span><span class="cp">
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span> 
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span> 
+    <span class="kt">int</span> <span class="n">arr</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>  
+    <span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">arr</span><span class="p">;</span>  
+
+    <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>             <span class="c1">// Changes arr[0] to 10  </span>
+    <span class="o">*</span><span class="p">(</span><span class="n">ptr</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>  <span class="c1">// Changes arr[1] to 20  </span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> 
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span> 
+    <span class="p">}</span> 
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> 
+<span class="p">}</span>  
+</code></pre></div></div>
+
+<p>The output will be:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10 20 3 
+</code></pre></div></div>
+
+<h2 id="pointer-arithmetic">Pointer Arithmetic</h2>
+<p>Pointers in C++ allows us to perform arithmetic operations using them. It allows us to move through memory locations efficiently, especially when working with arrays. However, it supports only a limited number of well-defined operations.</p>
+
+<h3 id="increment-">Increment (++)</h3>
+<p>The increment operator (++) moves the pointer to the next memory location based on its data type:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1"> </span><span class="cp">
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span> 
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span> 
+    <span class="kt">int</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">};</span>  
+    <span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">arr</span><span class="p">;</span>   <span class="c1">// Points to arr[0]  </span>
+    <span class="n">ptr</span><span class="o">++</span><span class="p">;</span>                <span class="c1">// Now points to arr[1]  </span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span> 
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> 
+<span class="p">}</span> 
+</code></pre></div></div>
+<p>The output will be:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>20
+</code></pre></div></div>
+<p>Here, <code class="language-plaintext highlighter-rouge">ptr++</code> increases the pointer by the size of the data type (<code class="language-plaintext highlighter-rouge">int</code>) (i.e., <code class="language-plaintext highlighter-rouge">4 bytes</code>), not just by one byte. Consider the example below to understand it better:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="kt">int</span><span class="o">*</span> <span class="n">ptrVar</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ptrVar</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">ptrVar</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>Here, in the first statement, it’ll print a memory address and in the second statement, it’ll add <code class="language-plaintext highlighter-rouge">4</code> bytes to the initial memory address. This is because the type of the pointer variable is integer and integer takes <code class="language-plaintext highlighter-rouge">4</code> bytes of memory. Therefore, the next memory address will be at <code class="language-plaintext highlighter-rouge">(previous memory address + 4 bytes)</code>. <strong><em>We’ll get a random value if we try to dereference <code class="language-plaintext highlighter-rouge">*(p+1)</code> because we don’t know what happened with that memory address. Maybe some other programs stored that value at some points in that memory address.</em></strong></p>
+
+<blockquote>
+  <p>You can check the size of a data type using <code class="language-plaintext highlighter-rouge">sizeof</code> operator. For example - <code class="language-plaintext highlighter-rouge">sizeof(int)</code>.</p>
+</blockquote>
+
+<h3 id="decrement-">Decrement (–)</h3>
+<p>The decrement operator (<code class="language-plaintext highlighter-rouge">--</code>) moves the pointer to the previous memory location:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1"> </span><span class="cp">
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span> 
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span> 
+    <span class="kt">int</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">};</span>  
+    <span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">arr</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="c1">// Points to arr[2]  </span>
+    <span class="n">ptr</span><span class="o">--</span><span class="p">;</span>                         <span class="c1">// Now points to arr[1]  </span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span> 
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> 
+<span class="p">}</span>
+</code></pre></div></div>
+<p>The output will be:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>20
+</code></pre></div></div>
+
+<h3 id="addition">Addition</h3>
+<p>The addition operator (<code class="language-plaintext highlighter-rouge">+</code>) can be used with pointers to move them forward in memory. When we add an integer <code class="language-plaintext highlighter-rouge">n</code> to a pointer, the pointer advances by <code class="language-plaintext highlighter-rouge">n</code> elements, not raw bytes. The actual number of bytes skipped depends on the size of the type the pointer refers to:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1"> </span><span class="cp">
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span> 
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span> 
+    <span class="kt">int</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">};</span>  
+    <span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">arr</span><span class="p">;</span>  
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="p">(</span><span class="n">ptr</span> <span class="o">+</span> <span class="mi">2</span><span class="p">);</span> 
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> 
+<span class="p">}</span> 
+</code></pre></div></div>
+<p>The output will be:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>30
+</code></pre></div></div>
+<blockquote>
+  <p><strong>NOTE:</strong> If we increment a pointer beyond the valid range of the array (or object) it points to, we invoke undefined behavior. This can lead to memory corruption, program crashes, or unpredictable results. Always ensure your pointer arithmetic stays within the allocated bounds.</p>
+</blockquote>
+
+<h3 id="subtraction">Subtraction</h3>
+<p>The subtraction operator (<code class="language-plaintext highlighter-rouge">-</code>) can be used with pointers to move them backward in memory. When we subtract an integer <code class="language-plaintext highlighter-rouge">n</code> from a pointer, the pointer moves back by <code class="language-plaintext highlighter-rouge">n</code> elements:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1"> </span><span class="cp">
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span> 
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span> 
+    <span class="kt">int</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">};</span>  
+    <span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">arr</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>        <span class="c1">// Points to arr[3] </span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="p">(</span><span class="n">ptr</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span>       <span class="c1">// Moves 2 elements back → arr[1] </span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> 
+<span class="p">}</span> 
+</code></pre></div></div>
+
+<p>The output will be:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>20
+</code></pre></div></div>
+<p>Just like the addition operator, subtracting too far can move the pointer outside the valid range of the array (or object) it belongs to, invoking undefined behavior.</p>
+
+<h3 id="pointer-difference">Pointer Difference</h3>
+<p>We can subtract one pointer from another (as long as they both point to the same array). The result is the number of elements between them, not the number of bytes:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1"> </span><span class="cp">
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span> 
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span> 
+    <span class="kt">int</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">};</span>  
+    <span class="kt">int</span><span class="o">*</span> <span class="n">p1</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>  
+    <span class="kt">int</span><span class="o">*</span> <span class="n">p2</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">arr</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>  
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">p2</span> <span class="o">-</span> <span class="n">p1</span><span class="p">);</span> 
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> 
+<span class="p">}</span> 
+</code></pre></div></div>
+
+<p>The output will be:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3
+</code></pre></div></div>
+<p>The output indicates that there are <code class="language-plaintext highlighter-rouge">3</code> elements between the pointers <code class="language-plaintext highlighter-rouge">p1</code> and <code class="language-plaintext highlighter-rouge">p2</code>.</p>
+
+<h3 id="pointers-and-functions">Pointers and Functions</h3>
+<p>One of the most powerful applications of pointers in C++ is their use with functions. Normally, when we pass variables to a function, they are passed by value, meaning the function receives a copy of the variable. Changes inside the function don’t affect the original variable.</p>
+
+<p>Pointers solve this limitation by enabling pass-by-reference. Unlike C++’s built-in pass-by-reference (<code class="language-plaintext highlighter-rouge">&amp;</code>), pointers allow more flexibility—for example, passing <code class="language-plaintext highlighter-rouge">nullptr</code>, handling arrays dynamically, or modifying multiple variables through a single pointer. They also make it clear that a function may change the original data, improving both clarity and efficiency.</p>
+
+<h3 id="passing-pointer-to-function">Passing Pointer to Function</h3>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1"> </span><span class="cp">
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span> 
+ 
+<span class="kt">void</span> <span class="nf">updateValue</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">*</span><span class="n">p</span> <span class="o">+</span> <span class="mi">10</span><span class="p">;</span> <span class="c1">// Modifies the original variable </span>
+<span class="p">}</span> 
+ 
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span> 
+    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> 
+    <span class="n">updateValue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">num</span><span class="p">);</span> <span class="c1">// Pass address of num </span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Updated value: "</span> <span class="o">&lt;&lt;</span> <span class="n">num</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> 
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> 
+<span class="p">}</span> 
+</code></pre></div></div>
+
+<p>The output will be:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Updated value: 15 
+</code></pre></div></div>
+<p>Here, <code class="language-plaintext highlighter-rouge">updateValue()</code> receives the address of <code class="language-plaintext highlighter-rouge">num</code>, and by dereferencing the pointer (<code class="language-plaintext highlighter-rouge">*p</code>), it changes the original variable.</p>
+
+<h3 id="pointers-to-functions">Pointers to Functions</h3>
+<p>C++ also allows pointers to point to functions themselves. This lets us store the address of a function in a pointer and call it indirectly, which is useful for callback mechanisms or passing functions as arguments:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="c1"> </span><span class="cp">
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span> 
+ 
+<span class="kt">void</span> <span class="nf">greet</span><span class="p">()</span> <span class="p">{</span> 
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Hello from a function!"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> 
+<span class="p">}</span> 
+ 
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span> 
+    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">funcPtr</span><span class="p">)()</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">greet</span><span class="p">;</span> <span class="c1">// Pointer to function </span>
+    <span class="n">funcPtr</span><span class="p">();</span> <span class="c1">// Call function via pointer </span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> 
+<span class="p">}</span> 
+</code></pre></div></div>
+<p>In this example, (<code class="language-plaintext highlighter-rouge">*funcPtr</code>) declares <code class="language-plaintext highlighter-rouge">funcPtr</code> as a pointer to a function. The parentheses are necessary as without them, C++ would interpret it as a function returning <code class="language-plaintext highlighter-rouge">void</code> instead of a pointer. The <code class="language-plaintext highlighter-rouge">()</code> after <code class="language-plaintext highlighter-rouge">(*funcPtr)</code> indicates that the function takes no parameters.</p>
+
+<p>As a whole, the <code class="language-plaintext highlighter-rouge">void (*funcPtr)() = &amp;greet;</code> line assigns the address of the <code class="language-plaintext highlighter-rouge">greet</code> function to the <code class="language-plaintext highlighter-rouge">(*funcPtr)</code> pointer. The <code class="language-plaintext highlighter-rouge">&amp;</code> is optional, as the function name alone also represents its address.</p>
+
+<p>The output will be:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello from a function! 
+</code></pre></div></div>
+
+<p>Pointer can be used to write <code class="language-plaintext highlighter-rouge">callback</code> function. You can learn more about function pointer <a href="">here</a>.</p>
+
+<h2 id="advantages-and-disadvantages-of-pointers">Advantages and Disadvantages of Pointers</h2>
+<h3 id="advantages">Advantages</h3>
+<ul>
+  <li>
+    <p><strong>Efficient memory management:</strong> Pointers allow us to allocate and deallocate memory dynamically, which is essential for managing resources effectively.</p>
+  </li>
+  <li>
+    <p><strong>Faster execution:</strong> By giving direct access to memory addresses, pointers reduce overhead and make programs more efficient.</p>
+  </li>
+  <li>
+    <p><strong>Support for complex data structures:</strong> Pointers are the foundation for implementing linked lists, trees, graphs, and other advanced data structures.</p>
+  </li>
+  <li>
+    <p><strong>Pass by reference:</strong> Pointers make it possible to modify variables directly inside functions without returning values.</p>
+  </li>
+</ul>
+
+<h3 id="disadvantages">Disadvantages:</h3>
+<ul>
+  <li>
+    <p><strong>Risk of memory leaks:</strong> If dynamically allocated memory is not properly freed, it can lead to wasted memory.</p>
+  </li>
+  <li>
+    <p><strong>Dangling and wild pointers:</strong> Mismanagement of pointers (e.g., using freed or uninitialized pointers) can cause crashes or undefined behavior.</p>
+  </li>
+  <li>
+    <p><strong>Increased complexity:</strong> Pointer syntax and logic can be difficult for beginners to understand and debug.</p>
+  </li>
+  <li>
+    <p><strong>Security issues:</strong> Improper use of pointers can expose vulnerabilities like buffer overflows, leading to potential exploits.</p>
+  </li>
+</ul>
+
+<h2 id="best-practices-for-using-c-pointers">Best Practices for Using C++ Pointers</h2>
+<p>Applying these best practices will ensure effective usage of C++ pointers:</p>
+
+<ul>
+  <li>
+    <p><strong>Always initialize pointers:</strong> Set pointers to a valid address or nullptr to avoid wild pointers.</p>
+  </li>
+  <li>
+    <p><strong>Limit pointer arithmetic:</strong> Keep arithmetic minimal and always stay within array bounds to avoid undefined behavior.</p>
+  </li>
+  <li>
+    <p><strong>Validate pointers before use:</strong> Check for nullptr before dereferencing to ensure safe access.</p>
+  </li>
+  <li>
+    <p><strong>Use references when possible:</strong> For function parameters, prefer references over raw pointers if ownership transfer is not required.</p>
+  </li>
+</ul>
+
+<h2 id="references">References:</h2>
+<ul>
+  <li>CodeAcademy and GeeksForGeeks</li>
+</ul>
+
+    </div>
+  </article><div id="giscus_thread" style="max-width: 800px; margin: 0 auto;">
+  <script>
+    let giscusTheme = localStorage.getItem("theme");
+    let giscusAttributes = {
+        "src": "https://giscus.app/client.js",
+        "data-repo": "sabbir-ahmed12/sabbir-ahmed12.github.io",
+        "data-repo-id": "R_kgDOJwEP_g",
+        "data-category": "Comments",
+        "data-category-id": "DIC_kwDOJwEP_s4CXSNz",
+        "data-mapping": "title",
+        "data-strict": "1",
+        "data-reactions-enabled": "1",
+        "data-emit-metadata": "0",
+        "data-input-position": "bottom",
+        "data-theme": giscusTheme,
+        "data-lang": "en",
+        "crossorigin": "anonymous",
+        "async": "",
+    };
+
+
+    let giscusScript = document.createElement("script");
+    Object.entries(giscusAttributes).forEach(([key, value]) => giscusScript.setAttribute(key, value));
+    document.getElementById("giscus_thread").appendChild(giscusScript);
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://giscus.app/?ref_noscript" rel="external nofollow noopener" target="_blank">comments powered by giscus.</a>
+</noscript>
+</div>
+</div>
+ 
+    </div>
+
+    <!-- Footer -->
+<footer class="fixed-bottom">
+  <div class="container mt-0 text-center">
+    © Copyright 2026 Sabbir  Ahmed. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>.
+Last updated: June 27, 2026.
+  </div>
+</footer>
+
+
+    <!-- JavaScripts -->
+    <!-- jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+ <!-- Bootsrap & MDB scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha256-fgLAgv7fyCGopR/gBNq2iW3ZKIdqIcyshnUULC4vex8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script>
+ <!-- Masonry & imagesLoaded -->
+  <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+  <script defer src="/assets/js/masonry.js" type="text/javascript"></script> 
+  <!-- Medium Zoom JS -->
+  <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.8/dist/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+  <script defer src="/assets/js/zoom.js"></script>
+
+  <!-- Bootstrap Table -->
+  <script defer src="https://unpkg.com/bootstrap-table@1.21.4/dist/bootstrap-table.min.js"></script>
+
+  <!-- Load Common JS -->
+  <script src="/assets/js/no_defer.js"></script>
+  <script defer src="/assets/js/common.js"></script>
+  <script defer src="/assets/js/copy_code.js" type="text/javascript"></script>
+ 
+  <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
+  <script async src="https://badge.dimensions.ai/badge.js"></script>
+ <!-- MathJax -->
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+  <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  
+
+<!-- Scrolling Progress Bar -->
+<script type="text/javascript">
+  /*
+   * This JavaScript code has been adapted from the article 
+   * https://css-tricks.com/reading-position-indicator/ authored by Pankaj Parashar, 
+   * published on the website https://css-tricks.com on the 7th of May, 2014.
+   * Couple of changes were made to the original code to make it compatible 
+   * with the `al-foio` theme.
+   */
+  const progressBar = $("#progress");
+  /*
+   * We set up the bar after all elements are done loading.
+   * In some cases, if the images in the page are larger than the intended
+   * size they'll have on the page, they'll be resized via CSS to accomodate
+   * the desired size. This mistake, however, breaks the computations as the
+   * scroll size is computed as soon as the elements finish loading.
+   * To account for this, a minimal delay was introduced before computing the
+   * values.
+   */
+  window.onload = function () {
+    setTimeout(progressBarSetup, 50);
+  };
+  /*
+   * We set up the bar according to the browser.
+   * If the browser supports the progress element we use that.
+   * Otherwise, we resize the bar thru CSS styling
+   */
+  function progressBarSetup() {
+    if ("max" in document.createElement("progress")) {
+      initializeProgressElement();
+      $(document).on("scroll", function() {
+        progressBar.attr({ value: getCurrentScrollPosition() });
+      });
+      $(window).on("resize", initializeProgressElement);
+    } else {
+      resizeProgressBar();
+      $(document).on("scroll", resizeProgressBar);
+      $(window).on("resize", resizeProgressBar);
+    }
+  }
+  /*
+   * The vertical scroll position is the same as the number of pixels that
+   * are hidden from view above the scrollable area. Thus, a value > 0 is
+   * how much the user has scrolled from the top
+   */
+  function getCurrentScrollPosition() {
+    return $(window).scrollTop();
+  }
+
+  function initializeProgressElement() {
+    let navbarHeight = $("#navbar").outerHeight(true);
+    $("body").css({ "padding-top": navbarHeight });
+    $("progress-container").css({ "padding-top": navbarHeight });
+    progressBar.css({ top: navbarHeight });
+    progressBar.attr({
+      max: getDistanceToScroll(),
+      value: getCurrentScrollPosition(),
+    });
+  }
+  /*
+   * The offset between the html document height and the browser viewport
+   * height will be greater than zero if vertical scroll is possible.
+   * This is the distance the user can scroll
+   */
+  function getDistanceToScroll() {
+    return $(document).height() - $(window).height();
+  }
+
+  function resizeProgressBar() {
+    progressBar.css({ width: getWidthPercentage() + "%" });
+  }
+  // The scroll ratio equals the percentage to resize the bar
+  function getWidthPercentage() {
+    return (getCurrentScrollPosition() / getDistanceToScroll()) * 100;
+  }
+</script>
+
+  </body>
+</html>

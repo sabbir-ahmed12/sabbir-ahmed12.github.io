@@ -9,9 +9,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Non-Cartesian MR Image Reconstruction | Sabbir  Ahmed</title>
+    <title>Function Pointer in C++ | Sabbir  Ahmed</title>
     <meta name="author" content="Sabbir  Ahmed">
-    <meta name="description" content="Tutorial post on non-cartesian MR image reconstruction.">
+    <meta name="description" content="Learn about function pointer and it's application">
     <meta name="keywords" content="sabbir-ahmed, uiowa, ece, radiology, portfolio, cuet, ete">
 
 
@@ -37,7 +37,7 @@
     <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%A7%94&lt;/text&gt;&lt;/svg&gt;">
     
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="https://sabbir-ahmed12.github.io/blog/2025/non-cartesian-mr-image-reconstruction/">
+    <link rel="canonical" href="https://sabbir-ahmed12.github.io/blog/2026/function-pointer-in-c++/">
 
     <!-- Dark Mode -->
     
@@ -127,13 +127,13 @@
 <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Non-Cartesian MR Image Reconstruction</h1>
-    <p class="post-meta">January 30, 2025</p>
+    <h1 class="post-title">Function Pointer in C++</h1>
+    <p class="post-meta">June 27, 2026</p>
     <p class="post-tags">
-      <a href="/blog/2025"> <i class="fas fa-calendar fa-sm"></i> 2025 </a>
+      <a href="/blog/2026"> <i class="fas fa-calendar fa-sm"></i> 2026 </a>
         ·  
-        <a href="/blog/tag/linux">
-          <i class="fas fa-hashtag fa-sm"></i> linux</a>  
+        <a href="/blog/tag/c">
+          <i class="fas fa-hashtag fa-sm"></i> C++</a>  
           
         ·  
         <a href="/blog/category/tutorial">
@@ -146,16 +146,105 @@
   <article class="post-content">
     
     <div id="markdown-content">
-      
+      <h1 id="what-is-function-pointer">What is Function Pointer?</h1>
+<p>In C++, pointers store memory address. While they are commonly used to store memory address of variables or objects, they can also store the address of a function. A function pointer allows a program to call a function indirectly or pass a function as an argument, enabling flexible and dynamic behavior.</p>
 
+<p>Consider the example below to find the address of a function:</p>
 
-<div class="jupyter-notebook" style="position: relative; width: 100%; margin: 0 auto;">
-  <div class="jupyter-notebook-iframe-container">
-    <iframe src="/assets/jupyter/non_cartesian_MR_recon.ipynb.html" style="position: absolute; top: 0; left: 0; border-style: none;" width="100%" height="100%" onload="this.parentElement.style.paddingBottom = (this.contentWindow.document.documentElement.scrollHeight + 10) + 'px'"></iframe>
-  </div>
-</div>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span>
+<span class="n">ing</span> <span class="nf">getNumber</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">num</span><span class="p">;</span>
+<span class="p">}</span>
 
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">getNumber</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>Note that the function is not called here, we just put the function name without <code class="language-plaintext highlighter-rouge">()</code>.</p>
 
+<p>So, a function pointer is a pointer variable that stores the address of a function with specific return type and parameter list.</p>
+
+<h2 id="how-to-create-a-function-pointer-and-invoke-a-function-using-function-pointer">How to Create a Function Pointer and Invoke a Function Using Function Pointer?</h2>
+<p>Consider the example below where we create the <code class="language-plaintext highlighter-rouge">add</code> function. It takes two integers and return the sum of the integers. To create a function pointer of that function we need to follow the synax below:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>return_type(*functionPtr)(parameter_type);
+</code></pre></div></div>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">num1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">num2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">num1</span> <span class="o">+</span> <span class="n">num2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Creating a pointer to the add function</span>
+    <span class="kt">int</span><span class="p">(</span><span class="o">*</span><span class="n">addFuncPtr</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span> <span class="o">=</span> <span class="n">add</span><span class="p">;</span>
+
+    <span class="c1">// Invoke using the function pointer</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">addFuncPtr</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="c1">// Invoke the function directly</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="applications-of-function-pointer">Applications of Function Pointer:</h2>
+<h3 id="passing-functions-as-argument-callback-function">Passing functions as argument (Callback Function)</h3>
+<p>If you’re familiar with Python or Javascript, you may know that you can pass a function as an argument of another function. That’s one of reasons why functions are called first class citizen or object in Python. We can implement that using function pointer in C++. Consider the example below where we want to write a sort function. Depending on the function we pass as argument to the sort function, it sorts a list of number either in ascending or descending order.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span><span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cm">/*
+* Sort into ascending oder
+*/</span>
+<span class="kt">bool</span> <span class="nf">ascendingCompare</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*
+* Sort into descending order
+*/</span>
+<span class="kt">bool</span> <span class="nf">descendingCompare</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">sort</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">intVector</span><span class="p">,</span> <span class="kt">bool</span><span class="p">(</span><span class="o">*</span><span class="n">compareFuncPtr</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">startIdx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">startIdx</span> <span class="o">&lt;</span> <span class="n">intVector</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">startIdx</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="kt">int</span> <span class="n">bestIdx</span> <span class="o">=</span> <span class="n">startIdx</span><span class="p">;</span>
+
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">currentIdx</span><span class="o">=</span><span class="n">startIdx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">currentIdx</span> <span class="o">&lt;</span> <span class="n">intVector</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">currentIdx</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">compareFuncPtr</span><span class="p">(</span><span class="n">intVector</span><span class="p">[</span><span class="n">currentIdx</span><span class="p">],</span> <span class="n">intVector</span><span class="p">[</span><span class="n">bestIdx</span><span class="p">]))</span> <span class="p">{</span>
+                <span class="n">bestIdx</span> <span class="o">=</span> <span class="n">currentIdx</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">swap</span><span class="p">(</span><span class="n">intVector</span><span class="p">[</span><span class="n">startIdx</span><span class="p">],</span> <span class="n">intVector</span><span class="p">[</span><span class="n">bestIdx</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/*
+* Prints the numbers in a vector
+*/</span>
+<span class="kt">void</span> <span class="nf">printVector</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">intVector</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">intVector</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">intVector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">numbers</span> <span class="o">=</span> <span class="p">{</span><span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">};</span>
+    <span class="n">printVector</span><span class="p">(</span><span class="n">numbers</span><span class="p">);</span>
+    <span class="kt">bool</span><span class="p">(</span><span class="o">*</span><span class="n">functionPtr</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span> <span class="o">=</span> <span class="n">ascendingCompare</span><span class="p">;</span>
+    <span class="n">sort</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">ascendingCompare</span><span class="p">);</span>
+    <span class="n">printVector</span><span class="p">(</span><span class="n">numbers</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
     </div>
   </article><div id="giscus_thread" style="max-width: 800px; margin: 0 auto;">
