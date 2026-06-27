@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Function Pointer in C++
-date: 2026-06-027 00:57:00-0400
+date: 2026-06-27 00:57:00-0400
 description: Learn about function pointer and it's application
 tags: C++
 categories: tutorial

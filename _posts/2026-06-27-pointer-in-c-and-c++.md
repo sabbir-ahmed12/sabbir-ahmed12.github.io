@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Pointer in C/C++
-date: 2026-06-027 00:57:00-0400
+date: 2026-06-27 00:57:00-0400
 description: Learn about pointer and it's application in C/C++
 tags: C++
 categories: tutorial
