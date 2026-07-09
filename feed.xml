@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://sabbir-ahmed12.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sabbir-ahmed12.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-07-09T17:01:49+00:00</updated><id>https://sabbir-ahmed12.github.io/feed.xml</id><title type="html">blank</title><subtitle>This is Sabbir Ahmed&apos;s personal website.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://sabbir-ahmed12.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sabbir-ahmed12.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-07-09T17:09:16+00:00</updated><id>https://sabbir-ahmed12.github.io/feed.xml</id><title type="html">blank</title><subtitle>This is Sabbir Ahmed&apos;s personal website.
 </subtitle><entry><title type="html">Function Pointer in C++</title><link href="https://sabbir-ahmed12.github.io/blog/2026/function-pointer-in-c++/" rel="alternate" type="text/html" title="Function Pointer in C++" /><published>2026-06-27T04:57:00+00:00</published><updated>2026-06-27T04:57:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2026/function-pointer-in-c++</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2026/function-pointer-in-c++/"><![CDATA[<h1 id="what-is-function-pointer">What is Function Pointer?</h1>
 <p>In C++, pointers store memory address. While they are commonly used to store memory address of variables or objects, they can also store the address of a function. A function pointer allows a program to call a function indirectly or pass a function as an argument, enabling flexible and dynamic behavior.</p>
 
@@ -596,6 +596,8 @@ int main() {
 
 <p>CMake’s primary job is to find and control a toolchain. It needs to know which compiler to use, where to find libraries, and how to invoke the linker correctly for your target platform.</p>
 
+<hr />
+
 <h3 id="compiler">Compiler</h3>
 
 <p>There are several C++ compilers available, but three stand out as the most widely used in the industry - GCC, Clang, and MSVC. CMake is designed to work with all of them. We’ll use GCC in our examples in this introductory chapter, but the choice isn’t that important. CMake will take care of the compiler interactions for us.</p>
@@ -615,6 +617,8 @@ int main() {
 <p>If you’re a Windows developer, you’re likely familiar with Visual Studio. The compiler that powers it is MSVC (<code class="language-plaintext highlighter-rouge">cl.exe</code>). It’s a highly optimizing compiler with excellent integration into the Windows ecosystem.</p>
 
 <p>While we’ll focus on setting up GCC or Clang for a consistent command-line experience across platforms, rest assured that CMake has first-class support for MSVC. In fact, installing Visual Studio is often the easiest way to get a complete C++ toolchain on Windows. We’ll primarilly use <code class="language-plaintext highlighter-rouge">g++</code> or <code class="language-plaintext highlighter-rouge">clang++</code> in our command-line examples, as their syntax is consistent across all operating systems.</p>
+
+<hr />
 
 <h3 id="setting-up-a-build-environment-on-windows">Setting Up a Build Environment on Windows</h3>
 
@@ -686,8 +690,9 @@ int main() {
 <p>That’s it! We’ll confirm everything is working correctly in the “Verifying Your Setup” section below.</p>
 
 <blockquote>
-  <p><strong>What’s the deal with ucrt64?</strong>
-When you install a toolchain in MSYS2, you might see several options like mingw64, ucrt64, and clang64.</p>
+  <p><strong>What’s the deal with ucrt64?</strong></p>
+
+  <p>When you install a toolchain in MSYS2, you might see several options like mingw64, ucrt64, and clang64.</p>
 
   <ul>
     <li>ucrt64 uses the modern Universal C Runtime (UCRT) from Microsoft, which is the current standard. This is generally the one you want.</li>
@@ -721,8 +726,9 @@ When you install a toolchain in MSYS2, you might see several options like mingw6
 <p>This will download and install Apple’s Command Line Tools package, which includes clang, clang++, make, and other necessary utilities. It’s the official, Apple-supported way to get a C++ compiler on macOS.</p>
 
 <blockquote>
-  <p><strong>Using Homebrew</strong>
-If you’re a power user, you might prefer using the <a href="https://brew.sh/">Homebrew</a> package manager. Homebrew can install the very latest versions of GCC or Clang/LLVM, which might be newer than the versions provided by Apple.</p>
+  <p><strong>Using Homebrew</strong></p>
+
+  <p>If you’re a power user, you might prefer using the <a href="https://brew.sh/">Homebrew</a> package manager. Homebrew can install the very latest versions of GCC or Clang/LLVM, which might be newer than the versions provided by Apple.</p>
 
   <ul>
     <li>To install the latest GCC: <code class="language-plaintext highlighter-rouge">brew install gcc</code></li>
@@ -755,6 +761,8 @@ If you’re a power user, you might prefer using the <a href="https://brew.sh/">
 <div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>clang
 </code></pre></div></div>
 
+<hr />
+
 <h3 id="verifying-setup">Verifying Setup</h3>
 
 <p>Once you’ve completed the installation for your platform, it’s a good idea to verify that the compiler is correctly installed and accessible from your terminal. Open a new terminal window and try one of the following commands, based on the compiler you installed:</p>
@@ -777,6 +785,8 @@ If you’re a power user, you might prefer using the <a href="https://brew.sh/">
 </code></pre>
 
 <p>If you see output that includes a version number, congratulations! Your compiler is installed and ready.</p>
+
+<hr />
 
 <h3 id="an-example-of-manual-builds">An Example of Manual Builds</h3>
 
@@ -822,12 +832,15 @@ If you’re a power user, you might prefer using the <a href="https://brew.sh/">
 <p>It should print <code class="language-plaintext highlighter-rouge">Hello World!</code>.</p>
 
 <blockquote>
-  <p>[!WARNING]
-**Entry Point Not Found
+  <p>[!WARNING]</p>
+
+  <p><strong>Entry Point Not Found</strong>
 When we compile our project for a specifc platform, it may not work correctly outside of that platform. For example, if we compile our project within the MSYS2 UCRT64 terminal, it is only likely to work when run from that same environment.</p>
 
   <p>If we run it from a different terminal, or just double-click its icon within Windows, it’s unlikely to run. We’ll learn how to create cross-platform projects later in the course. For now, we’ll just ensure we’re running the program in the same environment it was compiled in.</p>
 </blockquote>
+
+<hr />
 
 <h3 id="building-multi-file-projects">Building Multi-File Projects</h3>
 
@@ -884,11 +897,12 @@ When we compile our project for a specifc platform, it may not work correctly ou
 
 <p>The complexity spirals out of control. Manually maintaining build commands or writing platform-specific scripts (like Makefiles or batch files) is a tedious and error-prone nightmare.</p>
 
-<p><em>This is the problem CMake solves.</em></p>
+<p><strong><em>This is the problem CMake solves.</em></strong></p>
 
 <blockquote>
-  <p><strong>But My IDE Handles This Already?</strong>
-You might be thinking, “I use Visual Studio, and when I add a file, it just works. Why do I need another tool?” It’s a great question.</p>
+  <p><strong>But My IDE Handles This Already?</strong></p>
+
+  <p>You might be thinking, “I use Visual Studio, and when I add a file, it just works. Why do I need another tool?” It’s a great question.</p>
 
   <p>IDEs like Visual Studio have their own build systems based on Solution (<code class="language-plaintext highlighter-rouge">.sln</code>) and Project (<code class="language-plaintext highlighter-rouge">.vcxproj</code>) files. Behind the scenes, these files are automatically updated as you configure your project in your IDE, such as adding new files.</p>
 
@@ -907,6 +921,8 @@ You might be thinking, “I use Visual Studio, and when I add a file, it just wo
   <p>CMake separates these concerns: your CMakeLists.txt file is a pure, portable description of your project. This gives you the freedom to build it anywhere, with any tool, without being locked into a single vendor’s ecosystem.</p>
 </blockquote>
 
+<hr />
+
 <h3 id="whats-next">What’s Next?</h3>
 
 <p>We’ve successfully prepared our development environment and gotten a small taste of the build process. We have our tools, and we’ve seen a hint of the complexity that lies ahead.</p>
@@ -915,11 +931,15 @@ You might be thinking, “I use Visual Studio, and when I add a file, it just wo
 
 <p>We’ll explore the C++ compilation pipeline step-by-step, from preprocessing and compilation to the role of the linker. Understanding these fundamentals is the key to mastering any build system, especially <code class="language-plaintext highlighter-rouge">CMake</code>.</p>
 
+<hr />
+
 <h3 id="references">References</h3>
 
-<p>[1] STUDYPLAN.dev (https://www.studyplan.dev/)
-[2] GeeksForGeeks (https://www.geeksforgeeks.org/)
-[3] CMake.org (https://cmake.org/getting-started/)</p>]]></content><author><name></name></author><category term="tutorial" /><category term="C++" /><summary type="html"><![CDATA[Learn about the C++ toolchain]]></summary></entry><entry><title type="html">Pixi - Best Package Manager for Python and for Doing Reproducible Research</title><link href="https://sabbir-ahmed12.github.io/blog/2026/pixi-the-best-python-package-manager/" rel="alternate" type="text/html" title="Pixi - Best Package Manager for Python and for Doing Reproducible Research" /><published>2026-04-01T04:21:12+00:00</published><updated>2026-04-01T04:21:12+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2026/pixi-the-best-python-package-manager</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2026/pixi-the-best-python-package-manager/"><![CDATA[<h1 id="pixi">Pixi</h1>
+<p>[1] STUDYPLAN.dev (https://www.studyplan.dev/)</p>
+
+<p>[2] GeeksForGeeks (https://www.geeksforgeeks.org/)</p>
+
+<p>[3] CMake.org (https://cmake.org/getting-started/)</p>]]></content><author><name></name></author><category term="tutorial" /><category term="C++" /><summary type="html"><![CDATA[Learn about the C++ toolchain]]></summary></entry><entry><title type="html">Pixi - Best Package Manager for Python and for Doing Reproducible Research</title><link href="https://sabbir-ahmed12.github.io/blog/2026/pixi-the-best-python-package-manager/" rel="alternate" type="text/html" title="Pixi - Best Package Manager for Python and for Doing Reproducible Research" /><published>2026-04-01T04:21:12+00:00</published><updated>2026-04-01T04:21:12+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2026/pixi-the-best-python-package-manager</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2026/pixi-the-best-python-package-manager/"><![CDATA[<h1 id="pixi">Pixi</h1>
 <p>Pixi is a fast, modern, and reproducible package management tool for developers of all backgrounds.</p>
 
 <h2 id="introduction">Introduction</h2>
