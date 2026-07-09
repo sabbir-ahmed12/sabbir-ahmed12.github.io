@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://sabbir-ahmed12.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sabbir-ahmed12.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-07-09T23:11:29+00:00</updated><id>https://sabbir-ahmed12.github.io/feed.xml</id><title type="html">blank</title><subtitle>This is Sabbir Ahmed&apos;s personal website.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://sabbir-ahmed12.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sabbir-ahmed12.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-07-09T23:48:08+00:00</updated><id>https://sabbir-ahmed12.github.io/feed.xml</id><title type="html">blank</title><subtitle>This is Sabbir Ahmed&apos;s personal website.
 </subtitle><entry><title type="html">Learn to Manage C++ Projects Using CMake Like a Pro (Part 1 - Building C++ Programs)</title><link href="https://sabbir-ahmed12.github.io/blog/2026/learn-cmake-part1/" rel="alternate" type="text/html" title="Learn to Manage C++ Projects Using CMake Like a Pro (Part 1 - Building C++ Programs)" /><published>2026-07-09T16:00:00+00:00</published><updated>2026-07-09T16:00:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2026/learn-cmake-part1</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2026/learn-cmake-part1/"><![CDATA[<p>Building small C++ projects is straightforward, but large projects with multiple developers, external libraries, and cross-platform support require a more robust build system. CMake is a meta-build system that simplifies this process by describing your project’s structure and generating platform-specific build files (such as Visual Studio solutions or Makefiles). This course introduces the fundamentals of the C++ build process and gradually covers modern CMake techniques for developing large, cross-platform applications. Before using CMake, you’ll first learn about the tools involved in compiling and building C++ programs.</p>
 
 <hr />
@@ -55,7 +55,7 @@
 
 <ol>
   <li>
-    <p><strong>Download Visual Studio Installer:</strong> Go to the <a href="https://www.google.com/url?sa=E&amp;q=https%3A%2F%2Fvisualstudio.microsoft.com%2Fdownloads%2F">Visual Studio download page</a> and get the community edition, which is free for individuals and open-source projects.</p>
+    <p><strong>Download Visual Studio Installer:</strong> Go to the <a href="https://visualstudio.microsoft.com/downloads/">Visual Studio download page</a> and get the community edition, which is free for individuals and open-source projects.</p>
   </li>
   <li>
     <p><strong>Run the Installer:</strong> When the installer launches, it will show a list of workloads.</p>
@@ -93,7 +93,7 @@
 
 <ul>
   <li>
-    <p><strong>Install MSYS2:</strong> Go to the <a href="https://www.google.com/url?sa=E&amp;q=https%3A%2F%2Fwww.msys2.org%2F">MSYS2 website</a> and follow their installation instructions. This will install a package manager called pacman, and some terminals we can use. We’ll use the MSYS2 UCRT64 terminal in this example</p>
+    <p><strong>Install MSYS2:</strong> Go to the <a href="https://www.msys2.org/">MSYS2 website</a> and follow their installation instructions. This will install a package manager called pacman, and some terminals we can use. We’ll use the MSYS2 UCRT64 terminal in this example</p>
   </li>
   <li>
     <p><strong>Update MSYS2:</strong> Open the MSYS2 UCRT64 terminal and run the following command to make sure everything is up to date:</p>
@@ -127,10 +127,10 @@
     <li>clang64 provides a Clang-based toolchain.</li>
   </ul>
 
-  <p class="block-tip">For this course, sticking with the ucrt64 environment is the recommended path for GCC on Windows.</p>
+  <p>For this course, sticking with the ucrt64 environment is the recommended path for GCC on Windows.</p>
 </blockquote>
 
-<h3 id="setting-up-a-build-environment-on-macos">Setting Up a Build Environment on macOS</h3>
+<h3 class="block-tip" id="setting-up-a-build-environment-on-macos">Setting Up a Build Environment on macOS</h3>
 
 <p>macOS makes this process very easy. The operating system ships with stubs for common developer tools, and trying to use them will prompt an installation.</p>
 
@@ -162,10 +162,10 @@
     <li>To install the latest Clang/LLVM: <code class="language-plaintext highlighter-rouge">brew install llvm</code></li>
   </ul>
 
-  <p class="block-tip">If you do this, make sure you follow Homebrew’s instructions for setting your <code class="language-plaintext highlighter-rouge">PATH</code> so the system finds the Homebrew-installed versions first. For beginners, the <code class="language-plaintext highlighter-rouge">xcode-select</code> method is perfectly sufficient.</p>
+  <p>If you do this, make sure you follow Homebrew’s instructions for setting your <code class="language-plaintext highlighter-rouge">PATH</code> so the system finds the Homebrew-installed versions first. For beginners, the <code class="language-plaintext highlighter-rouge">xcode-select</code> method is perfectly sufficient.</p>
 </blockquote>
 
-<h3 id="setting-up-a-build-environment-on-linux-debianubuntu">Setting Up a Build Environment on Linux (Debian/Ubuntu)</h3>
+<h3 class="block-tip" id="setting-up-a-build-environment-on-linux-debianubuntu">Setting Up a Build Environment on Linux (Debian/Ubuntu)</h3>
 
 <p>Linux is a developer’s paradise. Getting a C++ toolchain is typically a single command away. The instructions here are for Debian-based distributions like Ubuntu, but the process is similar on other distros. This might involve using <code class="language-plaintext highlighter-rouge">dnf</code> on Fedora/CentOS or <code class="language-plaintext highlighter-rouge">pacman</code> on Arch.</p>
 
@@ -263,10 +263,10 @@
 
   <p>When we compile our project for a specifc platform, it may not work correctly outside of that platform. For example, if we compile our project within the MSYS2 UCRT64 terminal, it is only likely to work when run from that same environment.</p>
 
-  <p class="block-danger">If we run it from a different terminal, or just double-click its icon within Windows, it’s unlikely to run. We’ll learn how to create cross-platform projects later in the course. For now, we’ll just ensure we’re running the program in the same environment it was compiled in.</p>
+  <p>If we run it from a different terminal, or just double-click its icon within Windows, it’s unlikely to run. We’ll learn how to create cross-platform projects later in the course. For now, we’ll just ensure we’re running the program in the same environment it was compiled in.</p>
 </blockquote>
 
-<hr />
+<hr class="block-danger" />
 
 <h3 id="building-multi-file-projects">Building Multi-File Projects</h3>
 
@@ -344,10 +344,10 @@
 
   <p>Ultimately, an IDE’s project file mixes your project’s structure with IDE-specific settings.</p>
 
-  <p class="block-tip">CMake separates these concerns: your CMakeLists.txt file is a pure, portable description of your project. This gives you the freedom to build it anywhere, with any tool, without being locked into a single vendor’s ecosystem.</p>
+  <p>CMake separates these concerns: your CMakeLists.txt file is a pure, portable description of your project. This gives you the freedom to build it anywhere, with any tool, without being locked into a single vendor’s ecosystem.</p>
 </blockquote>
 
-<hr />
+<hr class="block-tip" />
 
 <h3 id="whats-next">What’s Next?</h3>
 
