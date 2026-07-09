@@ -6,7 +6,7 @@ description: Learn about the C++ toolchain
 tags: C++
 categories: tutorial
 giscus_comments: true
-related_posts: false
+related_posts: true
 ---
 
 Building small C++ projects is straightforward, but large projects with multiple developers, external libraries, and cross-platform support require a more robust build system. CMake is a meta-build system that simplifies this process by describing your project's structure and generating platform-specific build files (such as Visual Studio solutions or Makefiles). This course introduces the fundamentals of the C++ build process and gradually covers modern CMake techniques for developing large, cross-platform applications. Before using CMake, you'll first learn about the tools involved in compiling and building C++ programs.
@@ -106,7 +106,7 @@ That's it! We'll confirm everything is working correctly in the "Verifying Your 
 > - clang64 provides a Clang-based toolchain.
 >
 > For this course, sticking with the ucrt64 environment is the recommended path for GCC on Windows.
-{: .block-tip }
+> {: .block-tip }
 
 ### Setting Up a Build Environment on macOS
 
@@ -132,7 +132,7 @@ This will download and install Apple's Command Line Tools package, which include
 > - To install the latest Clang/LLVM: `brew install llvm`
 >
 > If you do this, make sure you follow Homebrew's instructions for setting your `PATH` so the system finds the Homebrew-installed versions first. For beginners, the `xcode-select` method is perfectly sufficient.
-{: .block-tip }
+> {: .block-tip }
 
 ### Setting Up a Build Environment on Linux (Debian/Ubuntu)
 
@@ -236,7 +236,7 @@ It should print `Hello World!`.
 > When we compile our project for a specifc platform, it may not work correctly outside of that platform. For example, if we compile our project within the MSYS2 UCRT64 terminal, it is only likely to work when run from that same environment.
 >
 > If we run it from a different terminal, or just double-click its icon within Windows, it's unlikely to run. We'll learn how to create cross-platform projects later in the course. For now, we'll just ensure we're running the program in the same environment it was compiled in.
-{: .block-danger }
+> {: .block-danger }
 
 ---
 
@@ -320,7 +320,7 @@ The complexity spirals out of control. Manually maintaining build commands or wr
 > Ultimately, an IDE's project file mixes your project's structure with IDE-specific settings.
 >
 > CMake separates these concerns: your CMakeLists.txt file is a pure, portable description of your project. This gives you the freedom to build it anywhere, with any tool, without being locked into a single vendor's ecosystem.
-{: .block-tip }
+> {: .block-tip }
 
 ---
 
