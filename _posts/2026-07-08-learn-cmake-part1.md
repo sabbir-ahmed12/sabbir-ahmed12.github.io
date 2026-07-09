@@ -25,6 +25,8 @@ A toolchain is a set of programming tools used to create a software product. For
 
 CMake's primary job is to find and control a toolchain. It needs to know which compiler to use, where to find libraries, and how to invoke the linker correctly for your target platform.
 
+---
+
 ### Compiler
 
 There are several C++ compilers available, but three stand out as the most widely used in the industry - GCC, Clang, and MSVC. CMake is designed to work with all of them. We'll use GCC in our examples in this introductory chapter, but the choice isn't that important. CMake will take care of the compiler interactions for us.
@@ -44,6 +46,8 @@ Clang is the default compiler on macOS (via Apple's toolchain) and is widely use
 If you're a Windows developer, you're likely familiar with Visual Studio. The compiler that powers it is MSVC (`cl.exe`). It's a highly optimizing compiler with excellent integration into the Windows ecosystem.
 
 While we'll focus on setting up GCC or Clang for a consistent command-line experience across platforms, rest assured that CMake has first-class support for MSVC. In fact, installing Visual Studio is often the easiest way to get a complete C++ toolchain on Windows. We'll primarilly use `g++` or `clang++` in our command-line examples, as their syntax is consistent across all operating systems.
+
+---
 
 ### Setting Up a Build Environment on Windows
 
@@ -92,6 +96,7 @@ This command is likely to install a lot of packages, as there's often a complex 
 That's it! We'll confirm everything is working correctly in the "Verifying Your Setup" section below.
 
 > **What's the deal with ucrt64?**
+>
 > When you install a toolchain in MSYS2, you might see several options like mingw64, ucrt64, and clang64.
 >
 > - ucrt64 uses the modern Universal C Runtime (UCRT) from Microsoft, which is the current standard. This is generally the one you want.
@@ -117,6 +122,7 @@ xcode-select --install
 This will download and install Apple's Command Line Tools package, which includes clang, clang++, make, and other necessary utilities. It's the official, Apple-supported way to get a C++ compiler on macOS.
 
 > **Using Homebrew**
+>
 > If you're a power user, you might prefer using the [Homebrew](https://brew.sh/) package manager. Homebrew can install the very latest versions of GCC or Clang/LLVM, which might be newer than the versions provided by Apple.
 >
 > - To install the latest GCC: `brew install gcc`
@@ -146,6 +152,8 @@ That's it! You now have a complete GCC toolchain ready to go. If you prefer to u
 sudo apt install clang
 ```
 
+---
+
 ### Verifying Setup
 
 Once you've completed the installation for your platform, it's a good idea to verify that the compiler is correctly installed and accessible from your terminal. Open a new terminal window and try one of the following commands, based on the compiler you installed:
@@ -171,6 +179,8 @@ cl
 ```
 
 If you see output that includes a version number, congratulations! Your compiler is installed and ready.
+
+---
 
 ### An Example of Manual Builds
 
@@ -218,10 +228,13 @@ We can run our program directly from the command line simply using it's name - `
 It should print `Hello World!`.
 
 > [!WARNING]
-> \*\*Entry Point Not Found
+>
+> **Entry Point Not Found**
 > When we compile our project for a specifc platform, it may not work correctly outside of that platform. For example, if we compile our project within the MSYS2 UCRT64 terminal, it is only likely to work when run from that same environment.
 >
 > If we run it from a different terminal, or just double-click its icon within Windows, it's unlikely to run. We'll learn how to create cross-platform projects later in the course. For now, we'll just ensure we're running the program in the same environment it was compiled in.
+
+---
 
 ### Building Multi-File Projects
 
@@ -284,9 +297,10 @@ Again, this tiny project with its two source files is manageable. But what if we
 
 The complexity spirals out of control. Manually maintaining build commands or writing platform-specific scripts (like Makefiles or batch files) is a tedious and error-prone nightmare.
 
-_This is the problem CMake solves._
+**_This is the problem CMake solves._**
 
 > **But My IDE Handles This Already?**
+>
 > You might be thinking, "I use Visual Studio, and when I add a file, it just works. Why do I need another tool?" It's a great question.
 >
 > IDEs like Visual Studio have their own build systems based on Solution (`.sln`) and Project (`.vcxproj`) files. Behind the scenes, these files are automatically updated as you configure your project in your IDE, such as adding new files.
@@ -303,6 +317,8 @@ _This is the problem CMake solves._
 >
 > CMake separates these concerns: your CMakeLists.txt file is a pure, portable description of your project. This gives you the freedom to build it anywhere, with any tool, without being locked into a single vendor's ecosystem.
 
+---
+
 ### What's Next?
 
 We've successfully prepared our development environment and gotten a small taste of the build process. We have our tools, and we've seen a hint of the complexity that lies ahead.
@@ -311,8 +327,12 @@ Now, we're ready to peel back the layers. In the next lesson, we will go deeper 
 
 We'll explore the C++ compilation pipeline step-by-step, from preprocessing and compilation to the role of the linker. Understanding these fundamentals is the key to mastering any build system, especially `CMake`.
 
+---
+
 ### References
 
 [1] STUDYPLAN.dev (https://www.studyplan.dev/)
+
 [2] GeeksForGeeks (https://www.geeksforgeeks.org/)
+
 [3] CMake.org (https://cmake.org/getting-started/)
