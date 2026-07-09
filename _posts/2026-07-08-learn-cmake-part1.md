@@ -227,12 +227,11 @@ We can run our program directly from the command line simply using it's name - `
 
 It should print `Hello World!`.
 
-> [!WARNING]
->
-> **Entry Point Not Found**
+> ##### Entry Point Not Found
 > When we compile our project for a specifc platform, it may not work correctly outside of that platform. For example, if we compile our project within the MSYS2 UCRT64 terminal, it is only likely to work when run from that same environment.
 >
 > If we run it from a different terminal, or just double-click its icon within Windows, it's unlikely to run. We'll learn how to create cross-platform projects later in the course. For now, we'll just ensure we're running the program in the same environment it was compiled in.
+{: .block-danger }
 
 ---
 
