@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://sabbir-ahmed12.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sabbir-ahmed12.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-07-09T03:12:57+00:00</updated><id>https://sabbir-ahmed12.github.io/feed.xml</id><title type="html">blank</title><subtitle>This is Sabbir Ahmed&apos;s personal website.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://sabbir-ahmed12.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sabbir-ahmed12.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-07-09T17:01:49+00:00</updated><id>https://sabbir-ahmed12.github.io/feed.xml</id><title type="html">blank</title><subtitle>This is Sabbir Ahmed&apos;s personal website.
 </subtitle><entry><title type="html">Function Pointer in C++</title><link href="https://sabbir-ahmed12.github.io/blog/2026/function-pointer-in-c++/" rel="alternate" type="text/html" title="Function Pointer in C++" /><published>2026-06-27T04:57:00+00:00</published><updated>2026-06-27T04:57:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2026/function-pointer-in-c++</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2026/function-pointer-in-c++/"><![CDATA[<h1 id="what-is-function-pointer">What is Function Pointer?</h1>
 <p>In C++, pointers store memory address. While they are commonly used to store memory address of variables or objects, they can also store the address of a function. A function pointer allows a program to call a function indirectly or pass a function as an argument, enabling flexible and dynamic behavior.</p>
 
@@ -574,7 +574,352 @@ int main() {
 <h2 id="references">References:</h2>
 <ul>
   <li>CodeAcademy and GeeksForGeeks</li>
-</ul>]]></content><author><name></name></author><category term="tutorial" /><category term="C++" /><summary type="html"><![CDATA[Learn about pointer and it's application in C/C++]]></summary></entry><entry><title type="html">Pixi - Best Package Manager for Python and for Doing Reproducible Research</title><link href="https://sabbir-ahmed12.github.io/blog/2026/pixi-the-best-python-package-manager/" rel="alternate" type="text/html" title="Pixi - Best Package Manager for Python and for Doing Reproducible Research" /><published>2026-04-01T04:21:12+00:00</published><updated>2026-04-01T04:21:12+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2026/pixi-the-best-python-package-manager</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2026/pixi-the-best-python-package-manager/"><![CDATA[<h1 id="pixi">Pixi</h1>
+</ul>]]></content><author><name></name></author><category term="tutorial" /><category term="C++" /><summary type="html"><![CDATA[Learn about pointer and it's application in C/C++]]></summary></entry><entry><title type="html">Learn to Manage C++ Projects Using CMake Like a Pro (Part 1 - Building C++ Programs)</title><link href="https://sabbir-ahmed12.github.io/blog/2026/learn-cmake-part1/" rel="alternate" type="text/html" title="Learn to Manage C++ Projects Using CMake Like a Pro (Part 1 - Building C++ Programs)" /><published>2026-06-27T04:57:00+00:00</published><updated>2026-06-27T04:57:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2026/learn-cmake-part1</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2026/learn-cmake-part1/"><![CDATA[<p>Building small C++ projects is straightforward, but large projects with multiple developers, external libraries, and cross-platform support require a more robust build system. CMake is a meta-build system that simplifies this process by describing your project’s structure and generating platform-specific build files (such as Visual Studio solutions or Makefiles). This course introduces the fundamentals of the C++ build process and gradually covers modern CMake techniques for developing large, cross-platform applications. Before using CMake, you’ll first learn about the tools involved in compiling and building C++ programs.</p>
+
+<h3 id="before-cmake-the-toolchain">Before CMake: The Toolchain</h3>
+
+<p>CMake is like a project manager. It generates the necessary build files to build a project. It knows how to organize tasks, handle dependencies, and give the right instructions. But it doesn’t do the physical work itself. For that, it needs a team of skilled workers. In the world of C++, that team is called a toolchain.</p>
+
+<p>A toolchain is a set of programming tools used to create a software product. For a C++ project, the essential components of a toolchain are:</p>
+
+<ul>
+  <li>
+    <p><strong>A Compiler:</strong> A program that translates human-readable high level C++ source code into low-level machine code that a computer’s processor can understand.</p>
+  </li>
+  <li>
+    <p><strong>A Linker:</strong> A program that takes the machine code from one or more sources (compiled files and any libraries) and combines them into a single executable program.</p>
+  </li>
+  <li>
+    <p><strong>Standard Libraries:</strong> A collection of pre-compiled code that provides fundamental functionality. Examples include input/output with <code class="language-plaintext highlighter-rouge">std::cout</code>, and containers like <code class="language-plaintext highlighter-rouge">std::vector</code>.</p>
+  </li>
+</ul>
+
+<p>CMake’s primary job is to find and control a toolchain. It needs to know which compiler to use, where to find libraries, and how to invoke the linker correctly for your target platform.</p>
+
+<h3 id="compiler">Compiler</h3>
+
+<p>There are several C++ compilers available, but three stand out as the most widely used in the industry - GCC, Clang, and MSVC. CMake is designed to work with all of them. We’ll use GCC in our examples in this introductory chapter, but the choice isn’t that important. CMake will take care of the compiler interactions for us.</p>
+
+<h4 id="gcc-gnu-compiler-collection">GCC (GNU Compiler Collection)</h4>
+
+<p>GCC is one of the oldest and most established compilers. It originated as part of the GNU Project and is the standard compiler on most Linux systems. When you see the <code class="language-plaintext highlighter-rouge">g++</code> command, you’re using GCC’s C++ compiler. It’s known for its broad platform support and adherence to standards.</p>
+
+<h4 id="clang">Clang</h4>
+
+<p>Clang is a newer compiler front-end, developed as part of the LLVM project. It was designed to be faster and use less memory than GCC, but its most popular feature is its incredibly clear and helpful error messages.</p>
+
+<p>Clang is the default compiler on macOS (via Apple’s toolchain) and is widely used on other platforms, including Windows and Linux. Its command-line interface, clang++, is designed to be a drop-in replacement for g++.</p>
+
+<h4 id="msvc-microsoft-visual-c">MSVC (Microsoft Visual C++)</h4>
+
+<p>If you’re a Windows developer, you’re likely familiar with Visual Studio. The compiler that powers it is MSVC (<code class="language-plaintext highlighter-rouge">cl.exe</code>). It’s a highly optimizing compiler with excellent integration into the Windows ecosystem.</p>
+
+<p>While we’ll focus on setting up GCC or Clang for a consistent command-line experience across platforms, rest assured that CMake has first-class support for MSVC. In fact, installing Visual Studio is often the easiest way to get a complete C++ toolchain on Windows. We’ll primarilly use <code class="language-plaintext highlighter-rouge">g++</code> or <code class="language-plaintext highlighter-rouge">clang++</code> in our command-line examples, as their syntax is consistent across all operating systems.</p>
+
+<h3 id="setting-up-a-build-environment-on-windows">Setting Up a Build Environment on Windows</h3>
+
+<h4 id="option-1-visual-studio-recommended-for-beginners">Option 1: Visual Studio (Recommended for Beginners)</h4>
+
+<p>This is the batteries-included approach and easiest way to get started.</p>
+
+<ol>
+  <li>
+    <p><strong>Download Visual Studio Installer:</strong> Go to the <a href="https://www.google.com/url?sa=E&amp;q=https%3A%2F%2Fvisualstudio.microsoft.com%2Fdownloads%2F">Visual Studio download page</a> and get the community edition, which is free for individuals and open-source projects.</p>
+  </li>
+  <li>
+    <p><strong>Run the Installer:</strong> When the installer launches, it will show a list of workloads.</p>
+  </li>
+  <li>
+    <p><strong>Select the C++ Workload:</strong> Check the box for “Desktop development with C++”. This single click will install everything you need: the MSVC compiler, the Windows SDK (which contains system headers and libraries), and a recent version of CMake.</p>
+  </li>
+  <li>
+    <p><strong>Install:</strong> Click the install button and wait for the process to complete.</p>
+  </li>
+</ol>
+
+<p>Once installed, you can access the compiler by opening the <strong>Developer Command Prompt for VS</strong>, which you can find in your Start Menu. This special terminal automatically configures the necessary environment variables.</p>
+
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/posts_img/2026_07_08_learn_cmake/vs-install-components.webp" class="img-fluid rounded z-depth-1" width="auto" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+    </div>
+</div>
+
+<h4 id="option-2-msys2-a-gnulinux-like-environment">Option 2: MSYS2 (A GNU/Linux-like Environment)</h4>
+
+<p>If you prefer a command-line experience similar to Linux, using GCC on Windows is a great option. The best way to do this is with MSYS2.</p>
+
+<ul>
+  <li>
+    <p><strong>Install MSYS2:</strong> Go to the <a href="https://www.google.com/url?sa=E&amp;q=https%3A%2F%2Fwww.msys2.org%2F">MSYS2 website</a> and follow their installation instructions. This will install a package manager called pacman, and some terminals we can use. We’ll use the MSYS2 UCRT64 terminal in this example</p>
+  </li>
+  <li>
+    <p><strong>Update MSYS2:</strong> Open the MSYS2 UCRT64 terminal and run the following command to make sure everything is up to date:</p>
+  </li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pacman -Syu
+</code></pre></div></div>
+
+<p>You may need to close and reopen the terminal and run it again to complete all updates.</p>
+
+<ul>
+  <li><strong>Install the Toolchain:</strong> Now, use pacman to install the MinGW-w64 toolchain, which includes GCC (g++), the linker, make, and other essential tools.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pacman -S --needed base-devel mingw-w64-ucrt-x86_64-toolchain
+</code></pre></div></div>
+
+<p>This command is likely to install a lot of packages, as there’s often a complex web of dependencies involved (that is, packages that require other packages to be installed)</p>
+
+<p>That’s it! We’ll confirm everything is working correctly in the “Verifying Your Setup” section below.</p>
+
+<blockquote>
+  <p><strong>What’s the deal with ucrt64?</strong>
+When you install a toolchain in MSYS2, you might see several options like mingw64, ucrt64, and clang64.</p>
+
+  <ul>
+    <li>ucrt64 uses the modern Universal C Runtime (UCRT) from Microsoft, which is the current standard. This is generally the one you want.</li>
+    <li>mingw64 uses the older MSVCRT runtime. It’s there for compatibility with older projects.</li>
+    <li>clang64 provides a Clang-based toolchain.</li>
+  </ul>
+
+  <p>For this course, sticking with the ucrt64 environment is the recommended path for GCC on Windows.</p>
+</blockquote>
+
+<h3 id="setting-up-a-build-environment-on-macos">Setting Up a Build Environment on macOS</h3>
+
+<p>macOS makes this process very easy. The operating system ships with stubs for common developer tools, and trying to use them will prompt an installation.</p>
+
+<ul>
+  <li>
+    <p><strong>Open the Terminal:</strong> You can find it in Applications/Utilities.</p>
+  </li>
+  <li>
+    <p><strong>Run the Installer Command:</strong> Type the following command and press Enter.</p>
+  </li>
+</ul>
+
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xcode-select <span class="nt">--install</span>
+</code></pre></div></div>
+
+<ul>
+  <li><strong>Confirm Installation:</strong> A dialog box will appear asking if you want to install the command line developer tools. Click “Install” and agree to the terms.</li>
+</ul>
+
+<p>This will download and install Apple’s Command Line Tools package, which includes clang, clang++, make, and other necessary utilities. It’s the official, Apple-supported way to get a C++ compiler on macOS.</p>
+
+<blockquote>
+  <p><strong>Using Homebrew</strong>
+If you’re a power user, you might prefer using the <a href="https://brew.sh/">Homebrew</a> package manager. Homebrew can install the very latest versions of GCC or Clang/LLVM, which might be newer than the versions provided by Apple.</p>
+
+  <ul>
+    <li>To install the latest GCC: <code class="language-plaintext highlighter-rouge">brew install gcc</code></li>
+    <li>To install the latest Clang/LLVM: <code class="language-plaintext highlighter-rouge">brew install llvm</code></li>
+  </ul>
+
+  <p>If you do this, make sure you follow Homebrew’s instructions for setting your <code class="language-plaintext highlighter-rouge">PATH</code> so the system finds the Homebrew-installed versions first. For beginners, the <code class="language-plaintext highlighter-rouge">xcode-select</code> method is perfectly sufficient.</p>
+</blockquote>
+
+<h3 id="setting-up-a-build-environment-on-linux-debianubuntu">Setting Up a Build Environment on Linux (Debian/Ubuntu)</h3>
+
+<p>Linux is a developer’s paradise. Getting a C++ toolchain is typically a single command away. The instructions here are for Debian-based distributions like Ubuntu, but the process is similar on other distros. This might involve using <code class="language-plaintext highlighter-rouge">dnf</code> on Fedora/CentOS or <code class="language-plaintext highlighter-rouge">pacman</code> on Arch.</p>
+
+<ul>
+  <li><strong>Update Your Package Lists:</strong> It’s always good practice to update your package manager’s index first.</li>
+</ul>
+
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update
+</code></pre></div></div>
+
+<ul>
+  <li><strong>Install build-essential:</strong> This is a special meta-package that installs everything you need for basic compilation, including gcc, g++, and make.</li>
+</ul>
+
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>build-essential g++
+</code></pre></div></div>
+
+<p>That’s it! You now have a complete GCC toolchain ready to go. If you prefer to use Clang, you can install it just as easily:</p>
+
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>clang
+</code></pre></div></div>
+
+<h3 id="verifying-setup">Verifying Setup</h3>
+
+<p>Once you’ve completed the installation for your platform, it’s a good idea to verify that the compiler is correctly installed and accessible from your terminal. Open a new terminal window and try one of the following commands, based on the compiler you installed:</p>
+
+<p>To check for GCC:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>g++ <span class="nt">--version</span>
+</code></pre></div></div>
+
+<p>It should print the version of gcc if it is installed correctly. If it says <code class="language-plaintext highlighter-rouge">command not found</code>, it means that the installation was not successful.</p>
+
+<p>To check for Clang:</p>
+
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>clang++ <span class="nt">--version</span>
+</code></pre></div></div>
+
+<p>If you’re on Windows using the Visual Studio Developer Command Prompt, check for MSVC:</p>
+
+<pre><code class="language-cmd">cl
+</code></pre>
+
+<p>If you see output that includes a version number, congratulations! Your compiler is installed and ready.</p>
+
+<h3 id="an-example-of-manual-builds">An Example of Manual Builds</h3>
+
+<p>Now that we have a working compiler, let’s see it in action. This will give us a taste of the manual build process and help us understand the problem that CMake was created to solve.</p>
+
+<p>Let’s create a new file named <code class="language-plaintext highlighter-rouge">hello.cpp</code> and add the following code:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Hello World!</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Let’s compile this program. We’re using the GCC compiler in our examples, and feel free to follow along if you are too, or adapt the steps to your own tools. But don’t feel like you need to follow along - eventually CMake will be handling the low-level compiler interactions for us,. We only need to understand the high level concepts.</p>
+
+<p>To compile our <code class="language-plaintext highlighter-rouge">hello.cpp</code> file using <code class="language-plaintext highlighter-rouge">g++</code>, we’d run the following command in the same directory as the file:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>g++ hello.cpp <span class="nt">-o</span> hello
+</code></pre></div></div>
+
+<p>If you want to use <code class="language-plaintext highlighter-rouge">clang</code>, use the following command:</p>
+
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>clang++ hello.cpp <span class="nt">-o</span> hello
+</code></pre></div></div>
+
+<p>Let’s break down the command:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">g++</code>: The C++ compiler program</li>
+  <li><code class="language-plaintext highlighter-rouge">hello.cpp</code>: The input source file we want to compile.</li>
+  <li><code class="language-plaintext highlighter-rouge">-o hello</code>: An option that specifies the name of the output file. If you omit this, the compiler will default to <code class="language-plaintext highlighter-rouge">a.out</code> on Linux/macOS or <code class="language-plaintext highlighter-rouge">a.exe</code> on Windows.</li>
+</ul>
+
+<p>If all goes well, there will be no output. Instead, you’ll find a new file in your directory: <code class="language-plaintext highlighter-rouge">hello</code> on Linux/macOS, or <code class="language-plaintext highlighter-rouge">hello.exe</code> on Windows. This is your executable program!</p>
+
+<p>We can run our program directly from the command line simply using it’s name - <code class="language-plaintext highlighter-rouge">hello</code>, in this example. We may need to prepend <code class="language-plaintext highlighter-rouge">./</code> (as in <code class="language-plaintext highlighter-rouge">./hello</code>) to clarify to our terminal that the program we’re trying to run is in the current directory:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./hello
+</code></pre></div></div>
+
+<p>It should print <code class="language-plaintext highlighter-rouge">Hello World!</code>.</p>
+
+<blockquote>
+  <p>[!WARNING]
+**Entry Point Not Found
+When we compile our project for a specifc platform, it may not work correctly outside of that platform. For example, if we compile our project within the MSYS2 UCRT64 terminal, it is only likely to work when run from that same environment.</p>
+
+  <p>If we run it from a different terminal, or just double-click its icon within Windows, it’s unlikely to run. We’ll learn how to create cross-platform projects later in the course. For now, we’ll just ensure we’re running the program in the same environment it was compiled in.</p>
+</blockquote>
+
+<h3 id="building-multi-file-projects">Building Multi-File Projects</h3>
+
+<p>In this case, our program is a single source file, which makes it fairly easy to build. But let’s create a project with two source files - <code class="language-plaintext highlighter-rouge">greeter.cpp</code> and <code class="language-plaintext highlighter-rouge">main.cpp</code>, and one header file - <code class="language-plaintext highlighter-rouge">greeter.h</code>. Now write the following lines in the respective files:</p>
+
+<p><code class="language-plaintext highlighter-rouge">geeter.h</code>:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#pragma once
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="kt">void</span> <span class="nf">greet</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">greeter.cpp</code>:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">"greeter.h"</span><span class="cp">
+#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span>
+<span class="kt">void</span> <span class="nf">greet</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Hello, "</span> <span class="o">&lt;&lt;</span> <span class="n">name</span> <span class="o">&lt;&lt;</span> <span class="s">"!</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">main.cpp</code>:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">"greeter.h"</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">greet</span><span class="p">(</span><span class="s">"second file"</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To build this, we now need to give both of our source files to the compiler:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>g++ main.cpp greeter.cpp <span class="nt">-o</span> app
+</code></pre></div></div>
+
+<p>For <code class="language-plaintext highlighter-rouge">clang</code> users:</p>
+
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>clang++ main.cpp greeter.cpp <span class="nt">-o</span> app
+</code></pre></div></div>
+
+<p>We don’t need to provide our header file in this example, as its contents are already getting inserted into <code class="language-plaintext highlighter-rouge">main.cpp</code> because of the <code class="language-plaintext highlighter-rouge">#include</code> directive. We’ll talk more about header files in the next lesson.</p>
+
+<p>If our program compiled, we can run it in the usual way:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./app
+</code></pre></div></div>
+
+<p>It should print <code class="language-plaintext highlighter-rouge">Hello, second file!</code>.</p>
+
+<p>Again, this tiny project with its two source files is manageable. But what if we had 20 files? Or 200? What if some files needed special compiler flags for optimization, while others needed flags for debugging? What if we wanted to build on Windows with MSVC, which uses completely different commands and flags?</p>
+
+<p>The complexity spirals out of control. Manually maintaining build commands or writing platform-specific scripts (like Makefiles or batch files) is a tedious and error-prone nightmare.</p>
+
+<p><em>This is the problem CMake solves.</em></p>
+
+<blockquote>
+  <p><strong>But My IDE Handles This Already?</strong>
+You might be thinking, “I use Visual Studio, and when I add a file, it just works. Why do I need another tool?” It’s a great question.</p>
+
+  <p>IDEs like Visual Studio have their own build systems based on Solution (<code class="language-plaintext highlighter-rouge">.sln</code>) and Project (<code class="language-plaintext highlighter-rouge">.vcxproj</code>) files. Behind the scenes, these files are automatically updated as you configure your project in your IDE, such as adding new files.</p>
+
+  <p>This is convenient, particularly for beginners, but they lock you into a specific ecosystem.</p>
+
+  <p>Here’s why CMake is often a better choice, especially for large or collaborative projects:</p>
+
+  <ul>
+    <li><strong>Portability is King:</strong> The primary advantage of CMake is portability. A Visual Studio solution file (<code class="language-plaintext highlighter-rouge">.sln</code>) is specific to Windows and Visual Studio. You can’t give it to a colleague on a Mac using Xcode or a Linux user with a command-line setup. However, CMake configuration files (<code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>) are universal. The same file can generate a native Visual Studio project, an Xcode project, or a Linux Makefile without any changes.</li>
+    <li><strong>A Single Source of Truth:</strong> With CMake, your <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> file is the single, authoritative description of your project. Everyone on the team using and updating the same build definition is important for consistency. It avoids the “works on my machine” problems.</li>
+    <li><strong>Automation and CI/CD:</strong> CMake is designed for automation. Because it’s a command-line tool, it’s perfect for Continuous Integration (CI) pipelines on build servers like GitHub Actions or Jenkins. You can’t easily run the Visual Studio GUI on a build server, but you can easily run <code class="language-plaintext highlighter-rouge">cmake</code> and <code class="language-plaintext highlighter-rouge">cmake --build</code> commands in a script. We’ll cover build automation and its advantages in a dedicated chapter later in the course.</li>
+  </ul>
+
+  <p>Ultimately, an IDE’s project file mixes your project’s structure with IDE-specific settings.</p>
+
+  <p>CMake separates these concerns: your CMakeLists.txt file is a pure, portable description of your project. This gives you the freedom to build it anywhere, with any tool, without being locked into a single vendor’s ecosystem.</p>
+</blockquote>
+
+<h3 id="whats-next">What’s Next?</h3>
+
+<p>We’ve successfully prepared our development environment and gotten a small taste of the build process. We have our tools, and we’ve seen a hint of the complexity that lies ahead.</p>
+
+<p>Now, we’re ready to peel back the layers. In the next lesson, we will go deeper into what actually happens when you run that <code class="language-plaintext highlighter-rouge">g++</code> command.</p>
+
+<p>We’ll explore the C++ compilation pipeline step-by-step, from preprocessing and compilation to the role of the linker. Understanding these fundamentals is the key to mastering any build system, especially <code class="language-plaintext highlighter-rouge">CMake</code>.</p>
+
+<h3 id="references">References</h3>
+
+<p>[1] STUDYPLAN.dev (https://www.studyplan.dev/)
+[2] GeeksForGeeks (https://www.geeksforgeeks.org/)
+[3] CMake.org (https://cmake.org/getting-started/)</p>]]></content><author><name></name></author><category term="tutorial" /><category term="C++" /><summary type="html"><![CDATA[Learn about the C++ toolchain]]></summary></entry><entry><title type="html">Pixi - Best Package Manager for Python and for Doing Reproducible Research</title><link href="https://sabbir-ahmed12.github.io/blog/2026/pixi-the-best-python-package-manager/" rel="alternate" type="text/html" title="Pixi - Best Package Manager for Python and for Doing Reproducible Research" /><published>2026-04-01T04:21:12+00:00</published><updated>2026-04-01T04:21:12+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2026/pixi-the-best-python-package-manager</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2026/pixi-the-best-python-package-manager/"><![CDATA[<h1 id="pixi">Pixi</h1>
 <p>Pixi is a fast, modern, and reproducible package management tool for developers of all backgrounds.</p>
 
 <h2 id="introduction">Introduction</h2>
@@ -1856,16 +2201,4 @@ When you say that a distribution is “derived” from another, the newer distro
   </li>
 </ul>
 
-<p>Voila! Your pendrive should work just fine now. Exit the command prompt and check the pendrive again.</p>]]></content><author><name></name></author><category term="tutorial" /><category term="misc" /><summary type="html"><![CDATA[Tutorial post on formatting an external storage forcefully.]]></summary></entry><entry><title type="html">How to Install App in Linux?</title><link href="https://sabbir-ahmed12.github.io/blog/2023/managing-package-in-linux/" rel="alternate" type="text/html" title="How to Install App in Linux?" /><published>2023-06-19T08:00:00+00:00</published><updated>2023-06-19T08:00:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2023/managing-package-in-linux</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2023/managing-package-in-linux/"><![CDATA[<p>Unlike windows, linux and unix operating systems (OS) uses package managers to install app. Development platforms like <code class="language-plaintext highlighter-rouge">Node.js</code>, <code class="language-plaintext highlighter-rouge">Python</code> also use package managers (e.g., <code class="language-plaintext highlighter-rouge">npm</code>, <code class="language-plaintext highlighter-rouge">pip</code>) to install packages. A package manager keeps track of what package is installed and helps automate the process of installing, upgrading, configuring, and removing packages in a consistent mannner. Linux uses a package manager called <code class="language-plaintext highlighter-rouge">apt</code> in short form. It stands for <code class="language-plaintext highlighter-rouge">advanced packaging tool</code>. <code class="language-plaintext highlighter-rouge">apt</code> is the newer package manager for linux. We can also use <code class="language-plaintext highlighter-rouge">apt-get</code> which is mostly seen in online tutorials. We’ll use <code class="language-plaintext highlighter-rouge">apt</code> as it is easier to use.</p>
-
-<p>Let’s say we want to install a package called <code class="language-plaintext highlighter-rouge">nano</code>. Nano is an editor mostly used in linux for editing text or code. If <code class="language-plaintext highlighter-rouge">nano</code> is already installed in your system, it will open when you type <code class="language-plaintext highlighter-rouge">nano</code> in your terminal and hit enter. However, if <code class="language-plaintext highlighter-rouge">nano</code> is not available in your system, an error <code class="language-plaintext highlighter-rouge">nano: command not found</code> will appear.</p>
-
-<p>Now if you type <code class="language-plaintext highlighter-rouge">apt install nano</code> in your terminal and hit enter, you’re most likely to get an error such as <code class="language-plaintext highlighter-rouge">Unable to locate package nano</code>. This is because linux did not find that package in the package index list. Apt packages index is a database that stores the list of software packages from the repository. You can check the list of packages by running the command <code class="language-plaintext highlighter-rouge">apt list</code> in your terminal.</p>
-
-<p>To get the updated list of packages, either run <code class="language-plaintext highlighter-rouge">apt update</code> or <code class="language-plaintext highlighter-rouge">sudo apt update</code> to run under the sudo privileges. It will collect the latest packages information from all configured sources defined in the <code class="language-plaintext highlighter-rouge">/etc/apt/sources.list</code> file and the <code class="language-plaintext highlighter-rouge">/etc/apt/sources.list.d</code> directory and download the information about all packages for your repository and PPA’s from the internet. The <code class="language-plaintext highlighter-rouge">apt update</code> command only updates the list of packages, and no package is upgraded by it.</p>
-
-<p>We have an updated list of packages. You can always check whether the list contains <code class="language-plaintext highlighter-rouge">nano</code> package using the <code class="language-plaintext highlighter-rouge">apt list</code> command. In order to install the <code class="language-plaintext highlighter-rouge">nano</code> package, you need to run the <code class="language-plaintext highlighter-rouge">sudo apt install nano</code> command. It will download and install the nano editor. After that you can verify that by typing <code class="language-plaintext highlighter-rouge">nano</code> in the terminal and pressing enter to open the nano editor.</p>
-
-<p>Finally, to remove nano, you need to use the command <code class="language-plaintext highlighter-rouge">sudo apt remove nano</code>. It will remove the package along with its dependencies. To check the list of available <code class="language-plaintext highlighter-rouge">apt</code> soft commands, you can run the <code class="language-plaintext highlighter-rouge">apt</code> command in your terminal.</p>
-
-<p>That’s it. You should now be comfortable with the <code class="language-plaintext highlighter-rouge">apt</code> package manager. Best of luck!</p>]]></content><author><name></name></author><category term="tutorial" /><category term="linux" /><summary type="html"><![CDATA[Tutorial on installing and removing package in linux.]]></summary></entry></feed>
+<p>Voila! Your pendrive should work just fine now. Exit the command prompt and check the pendrive again.</p>]]></content><author><name></name></author><category term="tutorial" /><category term="misc" /><summary type="html"><![CDATA[Tutorial post on formatting an external storage forcefully.]]></summary></entry></feed>
