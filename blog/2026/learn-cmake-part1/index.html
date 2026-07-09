@@ -148,6 +148,8 @@
     <div id="markdown-content">
       <p>Building small C++ projects is straightforward, but large projects with multiple developers, external libraries, and cross-platform support require a more robust build system. CMake is a meta-build system that simplifies this process by describing your project’s structure and generating platform-specific build files (such as Visual Studio solutions or Makefiles). This course introduces the fundamentals of the C++ build process and gradually covers modern CMake techniques for developing large, cross-platform applications. Before using CMake, you’ll first learn about the tools involved in compiling and building C++ programs.</p>
 
+<hr>
+
 <h3 id="before-cmake-the-toolchain">Before CMake: The Toolchain</h3>
 
 <p>CMake is like a project manager. It generates the necessary build files to build a project. It knows how to organize tasks, handle dependencies, and give the right instructions. But it doesn’t do the physical work itself. For that, it needs a team of skilled workers. In the world of C++, that team is called a toolchain.</p>
@@ -262,8 +264,8 @@
 
 <p>That’s it! We’ll confirm everything is working correctly in the “Verifying Your Setup” section below.</p>
 
-<blockquote>
-  <p><strong>What’s the deal with ucrt64?</strong></p>
+<blockquote class="block-tip">
+  <h5 id="whats-the-deal-with-ucrt64">What’s the deal with ucrt64?*</h5>
 
   <p>When you install a toolchain in MSYS2, you might see several options like mingw64, ucrt64, and clang64.</p>
 
@@ -299,7 +301,7 @@
 
 <p>This will download and install Apple’s Command Line Tools package, which includes clang, clang++, make, and other necessary utilities. It’s the official, Apple-supported way to get a C++ compiler on macOS.</p>
 
-<blockquote>
+<blockquote class="block-tip">
   <h5 id="using-homebrew">Using Homebrew</h5>
 
   <p>If you’re a power user, you might prefer using the <a href="https://brew.sh/" rel="external nofollow noopener" target="_blank">Homebrew</a> package manager. Homebrew can install the very latest versions of GCC or Clang/LLVM, which might be newer than the versions provided by Apple.</p>
@@ -412,12 +414,12 @@
 
 <p>It should print <code class="language-plaintext highlighter-rouge">Hello World!</code>.</p>
 
-<blockquote>
+<blockquote class="block-danger">
   <h5 id="entry-point-not-found">Entry Point Not Found</h5>
 
   <p>When we compile our project for a specifc platform, it may not work correctly outside of that platform. For example, if we compile our project within the MSYS2 UCRT64 terminal, it is only likely to work when run from that same environment.</p>
 
-  <p class="block-danger">If we run it from a different terminal, or just double-click its icon within Windows, it’s unlikely to run. We’ll learn how to create cross-platform projects later in the course. For now, we’ll just ensure we’re running the program in the same environment it was compiled in.</p>
+  <p>If we run it from a different terminal, or just double-click its icon within Windows, it’s unlikely to run. We’ll learn how to create cross-platform projects later in the course. For now, we’ll just ensure we’re running the program in the same environment it was compiled in.</p>
 </blockquote>
 
 <hr>
@@ -479,7 +481,7 @@
 
 <p><strong><em>This is the problem CMake solves.</em></strong></p>
 
-<blockquote>
+<blockquote class="block-tip">
   <h5 id="but-my-ide-handles-this-already">But My IDE Handles This Already?</h5>
 
   <p>You might be thinking, “I use Visual Studio, and when I add a file, it just works. Why do I need another tool?” It’s a great question.</p>
