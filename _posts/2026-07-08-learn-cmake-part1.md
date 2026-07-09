@@ -97,7 +97,7 @@ This command is likely to install a lot of packages, as there's often a complex 
 
 That's it! We'll confirm everything is working correctly in the "Verifying Your Setup" section below.
 
-> ##### What's the deal with ucrt64?*
+> ##### What's the deal with ucrt64?
 >
 > When you install a toolchain in MSYS2, you might see several options like mingw64, ucrt64, and clang64.
 >
