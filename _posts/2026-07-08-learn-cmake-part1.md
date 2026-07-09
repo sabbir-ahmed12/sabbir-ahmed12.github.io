@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Learn to Manage C++ Projects Using CMake Like a Pro (Part 1 - Building C++ Programs)
-date: 2026-06-27 00:57:00-0400
+date: 2026-07-09 12:00:00-0400
 description: Learn about the C++ toolchain
 tags: C++
 categories: tutorial
@@ -121,7 +121,7 @@ xcode-select --install
 
 This will download and install Apple's Command Line Tools package, which includes clang, clang++, make, and other necessary utilities. It's the official, Apple-supported way to get a C++ compiler on macOS.
 
-> **Using Homebrew**
+> ##### Using Homebrew
 >
 > If you're a power user, you might prefer using the [Homebrew](https://brew.sh/) package manager. Homebrew can install the very latest versions of GCC or Clang/LLVM, which might be newer than the versions provided by Apple.
 >
@@ -229,7 +229,7 @@ It should print `Hello World!`.
 
 > ##### Entry Point Not Found
 >
-> When we compile our project for a specifc platform, it may not work correctly outside of that platform. For example, if we compile our project within the MSYS2 UCRT64 terminal, it is only likely to work when run from that same environment.\
+> When we compile our project for a specifc platform, it may not work correctly outside of that platform. For example, if we compile our project within the MSYS2 UCRT64 terminal, it is only likely to work when run from that same environment.
 >
 > If we run it from a different terminal, or just double-click its icon within Windows, it's unlikely to run. We'll learn how to create cross-platform projects later in the course. For now, we'll just ensure we're running the program in the same environment it was compiled in.
 > {: .block-danger }
@@ -299,21 +299,21 @@ The complexity spirals out of control. Manually maintaining build commands or wr
 
 **_This is the problem CMake solves._**
 
-> **But My IDE Handles This Already?**
+> ##### But My IDE Handles This Already?
 >
-> You might be thinking, "I use Visual Studio, and when I add a file, it just works. Why do I need another tool?" It's a great question.\
+> You might be thinking, "I use Visual Studio, and when I add a file, it just works. Why do I need another tool?" It's a great question.
 >
-> IDEs like Visual Studio have their own build systems based on Solution (`.sln`) and Project (`.vcxproj`) files. Behind the scenes, these files are automatically updated as you configure your project in your IDE, such as adding new files.\
+> IDEs like Visual Studio have their own build systems based on Solution (`.sln`) and Project (`.vcxproj`) files. Behind the scenes, these files are automatically updated as you configure your project in your IDE, such as adding new files.
 >
-> This is convenient, particularly for beginners, but they lock you into a specific ecosystem.\
+> This is convenient, particularly for beginners, but they lock you into a specific ecosystem.
 >
 > Here's why CMake is often a better choice, especially for large or collaborative projects:
 >
 > - **Portability is King:** The primary advantage of CMake is portability. A Visual Studio solution file (`.sln`) is specific to Windows and Visual Studio. You can't give it to a colleague on a Mac using Xcode or a Linux user with a command-line setup. However, CMake configuration files (`CMakeLists.txt`) are universal. The same file can generate a native Visual Studio project, an Xcode project, or a Linux Makefile without any changes.
 > - **A Single Source of Truth:** With CMake, your `CMakeLists.txt` file is the single, authoritative description of your project. Everyone on the team using and updating the same build definition is important for consistency. It avoids the "works on my machine" problems.
-> - **Automation and CI/CD:** CMake is designed for automation. Because it's a command-line tool, it's perfect for Continuous Integration (CI) pipelines on build servers like GitHub Actions or Jenkins. You can't easily run the Visual Studio GUI on a build server, but you can easily run `cmake` and `cmake --build` commands in a script. We'll cover build automation and its advantages in a dedicated chapter later in the course.\
+> - **Automation and CI/CD:** CMake is designed for automation. Because it's a command-line tool, it's perfect for Continuous Integration (CI) pipelines on build servers like GitHub Actions or Jenkins. You can't easily run the Visual Studio GUI on a build server, but you can easily run `cmake` and `cmake --build` commands in a script. We'll cover build automation and its advantages in a dedicated chapter later in the course.
 >
-> Ultimately, an IDE's project file mixes your project's structure with IDE-specific settings.\
+> Ultimately, an IDE's project file mixes your project's structure with IDE-specific settings.
 >
 > CMake separates these concerns: your CMakeLists.txt file is a pure, portable description of your project. This gives you the freedom to build it anywhere, with any tool, without being locked into a single vendor's ecosystem.
 
