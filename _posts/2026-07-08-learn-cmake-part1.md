@@ -57,7 +57,7 @@ While we'll focus on setting up GCC or Clang for a consistent command-line exper
 
 This is the batteries-included approach and easiest way to get started.
 
-1. **Download Visual Studio Installer:** Go to the [Visual Studio download page](https://www.google.com/url?sa=E&q=https%3A%2F%2Fvisualstudio.microsoft.com%2Fdownloads%2F) and get the community edition, which is free for individuals and open-source projects.
+1. **Download Visual Studio Installer:** Go to the [Visual Studio download page](https://visualstudio.microsoft.com/downloads/) and get the community edition, which is free for individuals and open-source projects.
 
 2. **Run the Installer:** When the installer launches, it will show a list of workloads.
 
@@ -77,7 +77,7 @@ Once installed, you can access the compiler by opening the **Developer Command P
 
 If you prefer a command-line experience similar to Linux, using GCC on Windows is a great option. The best way to do this is with MSYS2.
 
-- **Install MSYS2:** Go to the [MSYS2 website](https://www.google.com/url?sa=E&q=https%3A%2F%2Fwww.msys2.org%2F) and follow their installation instructions. This will install a package manager called pacman, and some terminals we can use. We'll use the MSYS2 UCRT64 terminal in this example
+- **Install MSYS2:** Go to the [MSYS2 website](https://www.msys2.org/) and follow their installation instructions. This will install a package manager called pacman, and some terminals we can use. We'll use the MSYS2 UCRT64 terminal in this example
 
 - **Update MSYS2:** Open the MSYS2 UCRT64 terminal and run the following command to make sure everything is up to date:
 
@@ -106,7 +106,8 @@ That's it! We'll confirm everything is working correctly in the "Verifying Your 
 > - clang64 provides a Clang-based toolchain.
 >
 > For this course, sticking with the ucrt64 environment is the recommended path for GCC on Windows.
-> {: .block-tip }
+
+{: .block-tip }
 
 ### Setting Up a Build Environment on macOS
 
@@ -132,7 +133,8 @@ This will download and install Apple's Command Line Tools package, which include
 > - To install the latest Clang/LLVM: `brew install llvm`
 >
 > If you do this, make sure you follow Homebrew's instructions for setting your `PATH` so the system finds the Homebrew-installed versions first. For beginners, the `xcode-select` method is perfectly sufficient.
-> {: .block-tip }
+
+{: .block-tip }
 
 ### Setting Up a Build Environment on Linux (Debian/Ubuntu)
 
@@ -236,7 +238,8 @@ It should print `Hello World!`.
 > When we compile our project for a specifc platform, it may not work correctly outside of that platform. For example, if we compile our project within the MSYS2 UCRT64 terminal, it is only likely to work when run from that same environment.
 >
 > If we run it from a different terminal, or just double-click its icon within Windows, it's unlikely to run. We'll learn how to create cross-platform projects later in the course. For now, we'll just ensure we're running the program in the same environment it was compiled in.
-> {: .block-danger }
+
+{: .block-danger }
 
 ---
 
@@ -320,7 +323,8 @@ The complexity spirals out of control. Manually maintaining build commands or wr
 > Ultimately, an IDE's project file mixes your project's structure with IDE-specific settings.
 >
 > CMake separates these concerns: your CMakeLists.txt file is a pure, portable description of your project. This gives you the freedom to build it anywhere, with any tool, without being locked into a single vendor's ecosystem.
-> {: .block-tip }
+
+{: .block-tip }
 
 ---
 
