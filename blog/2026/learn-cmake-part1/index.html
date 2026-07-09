@@ -412,11 +412,12 @@
 
 <p>It should print <code class="language-plaintext highlighter-rouge">Hello World!</code>.</p>
 
-<blockquote class="block-danger">
+<blockquote>
   <h5 id="entry-point-not-found">Entry Point Not Found</h5>
-  <p>When we compile our project for a specifc platform, it may not work correctly outside of that platform. For example, if we compile our project within the MSYS2 UCRT64 terminal, it is only likely to work when run from that same environment.</p>
 
-  <p>If we run it from a different terminal, or just double-click its icon within Windows, it’s unlikely to run. We’ll learn how to create cross-platform projects later in the course. For now, we’ll just ensure we’re running the program in the same environment it was compiled in.</p>
+  <p>When we compile our project for a specifc platform, it may not work correctly outside of that platform. For example, if we compile our project within the MSYS2 UCRT64 terminal, it is only likely to work when run from that same environment.\</p>
+
+  <p class="block-danger">If we run it from a different terminal, or just double-click its icon within Windows, it’s unlikely to run. We’ll learn how to create cross-platform projects later in the course. For now, we’ll just ensure we’re running the program in the same environment it was compiled in.</p>
 </blockquote>
 
 <hr>
@@ -481,11 +482,11 @@
 <blockquote>
   <p><strong>But My IDE Handles This Already?</strong></p>
 
-  <p>You might be thinking, “I use Visual Studio, and when I add a file, it just works. Why do I need another tool?” It’s a great question.</p>
+  <p>You might be thinking, “I use Visual Studio, and when I add a file, it just works. Why do I need another tool?” It’s a great question.\</p>
 
-  <p>IDEs like Visual Studio have their own build systems based on Solution (<code class="language-plaintext highlighter-rouge">.sln</code>) and Project (<code class="language-plaintext highlighter-rouge">.vcxproj</code>) files. Behind the scenes, these files are automatically updated as you configure your project in your IDE, such as adding new files.</p>
+  <p>IDEs like Visual Studio have their own build systems based on Solution (<code class="language-plaintext highlighter-rouge">.sln</code>) and Project (<code class="language-plaintext highlighter-rouge">.vcxproj</code>) files. Behind the scenes, these files are automatically updated as you configure your project in your IDE, such as adding new files.\</p>
 
-  <p>This is convenient, particularly for beginners, but they lock you into a specific ecosystem.</p>
+  <p>This is convenient, particularly for beginners, but they lock you into a specific ecosystem.\</p>
 
   <p>Here’s why CMake is often a better choice, especially for large or collaborative projects:</p>
 
@@ -495,10 +496,10 @@
     <li>
 <strong>A Single Source of Truth:</strong> With CMake, your <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> file is the single, authoritative description of your project. Everyone on the team using and updating the same build definition is important for consistency. It avoids the “works on my machine” problems.</li>
     <li>
-<strong>Automation and CI/CD:</strong> CMake is designed for automation. Because it’s a command-line tool, it’s perfect for Continuous Integration (CI) pipelines on build servers like GitHub Actions or Jenkins. You can’t easily run the Visual Studio GUI on a build server, but you can easily run <code class="language-plaintext highlighter-rouge">cmake</code> and <code class="language-plaintext highlighter-rouge">cmake --build</code> commands in a script. We’ll cover build automation and its advantages in a dedicated chapter later in the course.</li>
+<strong>Automation and CI/CD:</strong> CMake is designed for automation. Because it’s a command-line tool, it’s perfect for Continuous Integration (CI) pipelines on build servers like GitHub Actions or Jenkins. You can’t easily run the Visual Studio GUI on a build server, but you can easily run <code class="language-plaintext highlighter-rouge">cmake</code> and <code class="language-plaintext highlighter-rouge">cmake --build</code> commands in a script. We’ll cover build automation and its advantages in a dedicated chapter later in the course.\</li>
   </ul>
 
-  <p>Ultimately, an IDE’s project file mixes your project’s structure with IDE-specific settings.</p>
+  <p>Ultimately, an IDE’s project file mixes your project’s structure with IDE-specific settings.\</p>
 
   <p>CMake separates these concerns: your CMakeLists.txt file is a pure, portable description of your project. This gives you the freedom to build it anywhere, with any tool, without being locked into a single vendor’s ecosystem.</p>
 </blockquote>
