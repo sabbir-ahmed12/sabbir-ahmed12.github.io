@@ -49,7 +49,7 @@ This is where the concept of a translation unit comes in. A translation unit is 
 
 <p>A translation unit is the input to the compiler's compile step. It consists of a C++ source file after all of the preprocessor directives have been handled.</p>
 
-</p>The translation unit is the complete, self-contained C++ code that the compiler uses to generate a single object file.</p>
+<p>The translation unit is the complete, self-contained C++ code that the compiler uses to generate a single object file.</p>
 </div>
 
 Each source file results in one translation unit and yields one object file when compiled. If you have, say, `main.cpp` and `util.cpp` in your project, the compiler will produce something like `main.o` and `util.o` separately (or `main.obj` and `util.obj` on Windows). It's then the linker's job to combine those object files, but we'll get to that later.
