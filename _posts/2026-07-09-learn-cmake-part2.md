@@ -15,7 +15,7 @@ In this lesson, we'll explore the early stages of that pipeline: taking C++ sour
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/posts_img/2026_07_08_learn_cmake/part2-compilation-steps.svg" class="img-fluid rounded z-depth-1" zoomable=true %}
+        {% include figure.html path="assets/posts_img/2026_07_08_learn_cmake/part2-compilation-steps.webp" class="img-fluid rounded z-depth-1" zoomable=true %}
     </div>
 </div>
 
@@ -43,12 +43,14 @@ When you compile a C++ program, you usually compile each source file independent
 
 This is where the concept of a translation unit comes in. A translation unit is essentially one source file after it has been preprocessed, meaning all the headers it includes are literally inserted and all macros are expanded.
 
-> #### Translation Unit
->
-> A translation unit is the input to the compiler's compile step. It consists of a C++ source file after all of the preprocessor directives have been handled.
->
-> The translation unit is the complete, self-contained C++ code that the compiler uses to generate a single object file.
-{: .block-tip }
+
+<div class="alert alert-info" role="alert">
+<h5> Translation Unit
+
+<p>A translation unit is the input to the compiler's compile step. It consists of a C++ source file after all of the preprocessor directives have been handled.</p>
+
+</p>The translation unit is the complete, self-contained C++ code that the compiler uses to generate a single object file.</p>
+</div>
 
 Each source file results in one translation unit and yields one object file when compiled. If you have, say, `main.cpp` and `util.cpp` in your project, the compiler will produce something like `main.o` and `util.o` separately (or `main.obj` and `util.obj` on Windows). It's then the linker's job to combine those object files, but we'll get to that later.
 
@@ -198,16 +200,18 @@ During this stage, the compiler will perform several tasks:
 It's at this stage you encounter compile-time errors if something is wrong with your C++ code's structure or rules. For instance, forgetting a semicolon, calling a function with the wrong number of arguments, or violating C++ syntax will cause errors here.
 
 
-> #### Viewing Object Files
->
-> Typically, you don't run the compiler manually for each stage; you use a compiler driver like the `g++` or `clang++` command, or Visual Studio's build system. This runs all necessary stages for you.
->
-> For instance, invoking `g++ main.cpp util.cpp` will internally preprocess and compile both, producing `main.o` and `util.o`, then link them.
->
-> If you only want to compile to object files without linking, you can use a flag like `-c`. For example, running `g++ -c main.cpp` should create a `main.o` or `main.obj` file.
->
-> These files are not meant to be human-readable, but we'll explain what they contain in the next section.
-{: .block-tip }
+<div class="alert alert-info" role="alert">
+<h5>Viewing Object Files</h5>
+
+<p>Typically, you don't run the compiler manually for each stage; you use a compiler driver like the <code>g++</code> or <code>clang++</code> command, or Visual Studio's build system. This runs all necessary stages for you.
+</p>
+
+<p>For instance, invoking <code>g++ main.cpp util.cpp</code> will internally preprocess and compile both, producing <code>main.o</code> and <code>util.o</code>, then link them.</p>
+
+<p>If you only want to compile to object files without linking, you can use a flag like <code>-c</code>. For example, running <code>g++ -c main.cpp</code> should create a <code>main.o</code> or <code>main.obj</code> file.</p>
+
+<p>These files are not meant to be human-readable, but we'll explain what they contain in the next section.</p>
+</div>
 
 ---
 
