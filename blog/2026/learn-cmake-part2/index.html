@@ -158,7 +158,7 @@
     
 
     <!-- Fallback to the original file -->
-    <img src="/assets/posts_img/2026_07_08_learn_cmake/part2-compilation-steps.svg" class="img-fluid rounded z-depth-1" width="auto" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
+    <img src="/assets/posts_img/2026_07_08_learn_cmake/part2-compilation-steps.webp" class="img-fluid rounded z-depth-1" width="auto" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
 
   </picture>
 
@@ -196,123 +196,122 @@
 
 <p>This is where the concept of a translation unit comes in. A translation unit is essentially one source file after it has been preprocessed, meaning all the headers it includes are literally inserted and all macros are expanded.</p>
 
-<blockquote class="block-tip">
-  <h4 id="translation-unit">Translation Unit</h4>
+<div class="alert alert-info" role="alert">
+<h5> Translation Unit
 
-  <p>A translation unit is the input to the compiler’s compile step. It consists of a C++ source file after all of the preprocessor directives have been handled.</p>
+</h5>
+<p>A translation unit is the input to the compiler's compile step. It consists of a C++ source file after all of the preprocessor directives have been handled.</p>
 
-  <p>The translation unit is the complete, self-contained C++ code that the compiler uses to generate a single object file.</p>
-</blockquote>
+&lt;/p&gt;The translation unit is the complete, self-contained C++ code that the compiler uses to generate a single object file.&lt;/p&gt;
+&lt;/div&gt;
 
-<p>Each source file results in one translation unit and yields one object file when compiled. If you have, say, <code class="language-plaintext highlighter-rouge">main.cpp</code> and <code class="language-plaintext highlighter-rouge">util.cpp</code> in your project, the compiler will produce something like <code class="language-plaintext highlighter-rouge">main.o</code> and <code class="language-plaintext highlighter-rouge">util.o</code> separately (or <code class="language-plaintext highlighter-rouge">main.obj</code> and <code class="language-plaintext highlighter-rouge">util.obj</code> on Windows). It’s then the linker’s job to combine those object files, but we’ll get to that later.</p>
+Each source file results in one translation unit and yields one object file when compiled. If you have, say, `main.cpp` and `util.cpp` in your project, the compiler will produce something like `main.o` and `util.o` separately (or `main.obj` and `util.obj` on Windows). It's then the linker's job to combine those object files, but we'll get to that later.
 
-<p>The key point is that the only way code from one file is seen while compiling another is either via an <code class="language-plaintext highlighter-rouge">#include</code> directive. <a href="#">C++20 modules</a> are another way but, because they’re not yet widely supported or used, we’ll ignore those for now.</p>
+The key point is that the only way code from one file is seen while compiling another is either via an `#include` directive. [C++20 modules](#) are another way but, because they're not yet widely supported or used, we'll ignore those for now.
 
-<p>So, if <code class="language-plaintext highlighter-rouge">main.cpp</code> needs something from <code class="language-plaintext highlighter-rouge">util.cpp</code>, it must include a header that describes what is in <code class="language-plaintext highlighter-rouge">util.cpp</code>. Otherwise, the compiler processing <code class="language-plaintext highlighter-rouge">main.cpp</code> has no knowledge of <code class="language-plaintext highlighter-rouge">util.cpp</code>’s contents. This is why missing includes lead to compile errors like “identifier not found” if you forgot to include a header with a needed declaration.</p>
+So, if `main.cpp` needs something from `util.cpp`, it must include a header that describes what is in `util.cpp`. Otherwise, the compiler processing `main.cpp` has no knowledge of `util.cpp`'s contents. This is why missing includes lead to compile errors like "identifier not found" if you forgot to include a header with a needed declaration.
 
-<hr>
+---
 
-<h3 id="preprocessing-stage">Preprocessing Stage</h3>
+### Preprocessing Stage
 
-<p>The first stage of building a C++ program is preprocessing. The preprocessor is a tool that runs before the compiler’s proper analysis of the C++ code.</p>
+The first stage of building a C++ program is preprocessing. The preprocessor is a tool that runs before the compiler's proper analysis of the C++ code.
 
-<p>It works at the textual level, performing simple text substitutions and conditional removals according to directives that start with <code class="language-plaintext highlighter-rouge">#</code>. These changes broadly fall into three categories: include resolution, macro expansion, and conditional compilation.</p>
+It works at the textual level, performing simple text substitutions and conditional removals according to directives that start with `#`. These changes broadly fall into three categories: include resolution, macro expansion, and conditional compilation.
 
-<h4 id="include-resolution">Include Resolution</h4>
+#### Include Resolution
 
-<p>When it encounters <code class="language-plaintext highlighter-rouge">#include &lt;...&gt;</code> or <code class="language-plaintext highlighter-rouge">#include "..."</code>, it will literally replace that line with the contents of the referenced file, which is usually a header file.</p>
+When it encounters `#include &lt;...&gt;` or `#include "..."`, it will literally replace that line with the contents of the referenced file, which is usually a header file.
 
-<p>In other words, it pastes the header file’s code into the source. This is recursive - if that header includes other headers, those get expanded too. By the end, it’s as if you wrote one big file containing your source and all the headers it needs.</p>
+In other words, it pastes the header file's code into the source. This is recursive - if that header includes other headers, those get expanded too. By the end, it's as if you wrote one big file containing your source and all the headers it needs.
 
-<p>For instance, if <code class="language-plaintext highlighter-rouge">main.cpp</code> has <code class="language-plaintext highlighter-rouge">#include "util.h"</code>, the preprocessor will insert everything from <code class="language-plaintext highlighter-rouge">util.h</code> into <code class="language-plaintext highlighter-rouge">main.cpp</code>’s code. It will recursively do the same for any includes inside <code class="language-plaintext highlighter-rouge">util.h</code>, and so on.</p>
+For instance, if `main.cpp` has `#include "util.h"`, the preprocessor will insert everything from `util.h` into `main.cpp`'s code. It will recursively do the same for any includes inside `util.h`, and so on.
 
-<h4 id="macro-expansion">Macro Expansion</h4>
+#### Macro Expansion
 
-<p>The preprocessor handles <code class="language-plaintext highlighter-rouge">#define</code> macros. A macro definition like <code class="language-plaintext highlighter-rouge">#define MAX_SIZE 100</code> tells the preprocessor to replace every occurrence of <code class="language-plaintext highlighter-rouge">MAX_SIZE</code> in the code with <code class="language-plaintext highlighter-rouge">100</code> before compilation. Function-like macros can also take arguments, for example:</p>
+The preprocessor handles `#define` macros. A macro definition like `#define MAX_SIZE 100` tells the preprocessor to replace every occurrence of `MAX_SIZE` in the code with `100` before compilation. Function-like macros can also take arguments, for example:
 
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define SQUARE(x) ((x) * (x))
-</span><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">SQUARE</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
-</code></pre></div></div>
+```c++
+#define SQUARE(x) ((x) * (x))
+int a = SQUARE(5);
+```
 
-<p>Here, the preprocessor will replace <code class="language-plaintext highlighter-rouge">SQUARE(5)</code> with <code class="language-plaintext highlighter-rouge">((5) * (5))</code> wherever it appears. The compiler never sees <code class="language-plaintext highlighter-rouge">SQUARE</code> - by the time we get to actual compilation, that symbol is expanded into its replacement code.</p>
+Here, the preprocessor will replace `SQUARE(5)` with `((5) * (5))` wherever it appears. The compiler never sees `SQUARE` - by the time we get to actual compilation, that symbol is expanded into its replacement code.
 
-<p>This can lead to pitfalls if not carefully used - e.g., macro expansions don’t follow normal function call rules - but that’s beyond our scope here. Check the <a href="#">preprocessor definitions</a> lesson for more about writing macros.</p>
+This can lead to pitfalls if not carefully used - e.g., macro expansions don't follow normal function call rules - but that's beyond our scope here. Check the [preprocessor definitions](#) lesson for more about writing macros.
 
-<h4 id="conditional-compilation">Conditional Compilation</h4>
+#### Conditional Compilation
 
-<p>Directives like <code class="language-plaintext highlighter-rouge">#if</code>, <code class="language-plaintext highlighter-rouge">#ifdef</code>, <code class="language-plaintext highlighter-rouge">#ifndef</code>, and <code class="language-plaintext highlighter-rouge">#endif</code> let the preprocessor include or exclude parts of code based on condition.</p>
+Directives like `#if`, `#ifdef`, `#ifndef`, and `#endif` let the preprocessor include or exclude parts of code based on condition.
 
-<p>For instance, you might wrap debug code in <code class="language-plaintext highlighter-rouge">#ifdef DEBUG</code> so that it’s included only when you define a <code class="language-plaintext highlighter-rouge">DEBUG</code> macro. The preprocessor evaluates these conditions and strips out any code in <code class="language-plaintext highlighter-rouge">#if</code> blocks that evaluate to false. For example:</p>
+For instance, you might wrap debug code in `#ifdef DEBUG` so that it's included only when you define a `DEBUG` macro. The preprocessor evaluates these conditions and strips out any code in `#if` blocks that evaluate to false. For example:
 
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define DEBUG 1
-</span>
-<span class="c1">// ...</span>
+```c++
+#define DEBUG 1
 
-<span class="cp">#if DEBUG
-</span>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Debug mode</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
-<span class="cp">#endif
-</span></code></pre></div></div>
+// ...
 
-<p>Here, if <code class="language-plaintext highlighter-rouge">DEBUG</code> is 1 (true), the line will remain; if we had <code class="language-plaintext highlighter-rouge">#define DEBUG 0</code> or no definition, the <code class="language-plaintext highlighter-rouge">std::cout &lt;&lt; ...</code> line would be removed entirely from the code seen by the compiler.</p>
+#if DEBUG
+  std::cout &lt;&lt; "Debug mode\n";
+#endif
+```
 
-<p>After preprocessing, what we have is the translation unit mentioned earlier - a single, combined source file with no <code class="language-plaintext highlighter-rouge">#include</code> or <code class="language-plaintext highlighter-rouge">#define</code> or <code class="language-plaintext highlighter-rouge">#if</code> directives anymore. All those have been acted upon:</p>
+Here, if `DEBUG` is 1 (true), the line will remain; if we had `#define DEBUG 0` or no definition, the `std::cout &lt;&lt; ...` line would be removed entirely from the code seen by the compiler.
 
-<ul>
-  <li>Every include file’s contents is present - often many thousands of lines once you include standard headers like <code class="language-plaintext highlighter-rouge">&lt;iostream&gt;</code>.</li>
-  <li>Every macro is expanded or eliminated.</li>
-  <li>Every conditional block is either kept or cut out.</li>
-</ul>
+After preprocessing, what we have is the translation unit mentioned earlier - a single, combined source file with no `#include` or `#define` or `#if` directives anymore. All those have been acted upon:
 
-<hr>
+- Every include file's contents is present - often many thousands of lines once you include standard headers like `<iostream>`.
+- Every macro is expanded or eliminated.
+- Every conditional block is either kept or cut out.
 
-<h3 id="viewing-preprocessor-output">Viewing Preprocessor Output</h3>
+---
 
-<p>You can try running the preprocessor on a small program to see what it produces. Save the following in <code class="language-plaintext highlighter-rouge">example.cpp</code>:</p>
+### Viewing Preprocessor Output
 
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+You can try running the preprocessor on a small program to see what it produces. Save the following in `example.cpp`:
+
+```c++
+#include<iostream>
 #define MESSAGE "Hello, world!"
-</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c">#if 0
+
+int main() {
+    #if 0
         std::cout &lt;&lt; "Debug mode\n";
     #endif
-</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">MESSAGE</span><span class="p">;</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
 
-<p>Now run the command below to get the preprocessor output.</p>
+    std::cout &lt;&lt; MESSAGE;
+    return 0;
+}
+```
 
-<p>For GCC:</p>
+Now run the command below to get the preprocessor output.
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>g++ <span class="nt">-E</span> <span class="nt">-P</span> example.cpp <span class="nt">-o</span> example.i
-</code></pre></div></div>
+For GCC:
 
-<p>For Clang:</p>
+```bash
+g++ -E -P example.cpp -o example.i
+```
 
-<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>clang++ <span class="nt">-E</span> <span class="nt">-P</span> example.cpp <span class="nt">-o</span> example.i
-</code></pre></div></div>
+For Clang:
 
-<p>In this case, <code class="language-plaintext highlighter-rouge">-E</code> asks <code class="language-plaintext highlighter-rouge">g++</code> to only run the preprocessor, and <code class="language-plaintext highlighter-rouge">-P</code> asks it to exclude line markers from the output. We’ll explain line markers soon. If you want to learn more about different flags, you can try running <code class="language-plaintext highlighter-rouge">g++ --help</code> or <code class="language-plaintext highlighter-rouge">clang++ --help</code>.</p>
+```zsh
+clang++ -E -P example.cpp -o example.i
+```
 
-<p>After running the command, we can open <code class="language-plaintext highlighter-rouge">example.i</code> in a text editor. We should see that:</p>
+In this case, `-E` asks `g++` to only run the preprocessor, and `-P` asks it to exclude line markers from the output. We'll explain line markers soon. If you want to learn more about different flags, you can try running `g++ --help` or `clang++ --help`.
 
-<ul>
-  <li>
-    <p>The line <code class="language-plaintext highlighter-rouge">#include &lt;iostream&gt;</code> has been replaced by a huge amount of code - tens of thousands of lines. This is the entire contents of the <code class="language-plaintext highlighter-rouge">iostream</code> header and all headers it includes. The code we wrote in our original source file will be at the bottom of the file, below all of this stuff.</p>
-  </li>
-  <li>
-    <p>The macro <code class="language-plaintext highlighter-rouge">MESSAGE</code> is gone, and its occurrences have been replaced with <code class="language-plaintext highlighter-rouge">"Hello, world!"</code>.</p>
-  </li>
-  <li>
-    <p>The block under <code class="language-plaintext highlighter-rouge">#if 0</code> is completely removed - it won’t appear in the output at all.</p>
-  </li>
-</ul>
+After running the command, we can open `example.i` in a text editor. We should see that:
 
-<p>This can be an eye-opening experiment to understand how much work the preprocessor does and why the resulting translation unit is often much larger than your initial source file.</p>
+- The line `#include <iostream>` has been replaced by a huge amount of code - tens of thousands of lines. This is the entire contents of the `iostream` header and all headers it includes. The code we wrote in our original source file will be at the bottom of the file, below all of this stuff.
 
-<p>Once preprocessing is done, we have our translation unit ready. Now the heavy lifting begins: the compiler will translate this (potentially enormous) code into machine code. That happens in the next stage.</p>
+- The macro `MESSAGE` is gone, and its occurrences have been replaced with `"Hello, world!"`.
+
+- The block under `#if 0` is completely removed - it won't appear in the output at all.
+
+This can be an eye-opening experiment to understand how much work the preprocessor does and why the resulting translation unit is often much larger than your initial source file.
+
+Once preprocessing is done, we have our translation unit ready. Now the heavy lifting begins: the compiler will translate this (potentially enormous) code into machine code. That happens in the next stage.
+
 
 <div class="alert alert-info" role="alert">
 <b>Line Markers</b>
@@ -323,104 +322,98 @@
 <p>Line markers are not required - the compiler can complete it's work perfectly fine without them. However, if the compiler encounters an error in the translation unit, it can use the line marker to report the original source of the error. For example, it lets the compiler report that the error came from line 15 of <code>SomeHeaderFile.h</code> rather than line 25,461 of some translation unit. This makes it easier for us to find and fix the original source of the problem.</p>
 </div>
 
-<hr>
+---
 
-<h3 id="compilation-to-object-code">Compilation to Object Code</h3>
-<p>After preprocessing, the compiler proper takes over. This stage is what we usually think of as “compiling”: the compiler reads the preprocessed C++ code - the translation unit - and converts it to machine code instructions.</p>
+### Compilation to Object Code
+After preprocessing, the compiler proper takes over. This stage is what we usually think of as "compiling": the compiler reads the preprocessed C++ code - the translation unit - and converts it to machine code instructions.
 
-<p>However, it doesn’t immediately make a full program out of it - it produces an object file containing the machine code for just this translation unit.</p>
+However, it doesn't immediately make a full program out of it - it produces an object file containing the machine code for just this translation unit.
 
-<h4 id="object-files">Object Files</h4>
-<p>What exactly is an object file? It’s a file that contains binary machine code and some extra information needed for later linking. The machine code in an object file corresponds to the functions and code in your source, but if your code calls a function that’s defined in another file, the call is left as a placeholder that the linker will fill in.</p>
+#### Object Files
+What exactly is an object file? It's a file that contains binary machine code and some extra information needed for later linking. The machine code in an object file corresponds to the functions and code in your source, but if your code calls a function that's defined in another file, the call is left as a placeholder that the linker will fill in.
 
-<p>Think of an object file as “half a puzzle” - it has pieces of the program, but references to other pieces are not resolved yet.</p>
+Think of an object file as "half a puzzle" - it has pieces of the program, but references to other pieces are not resolved yet.
 
-<p>For example, if <code class="language-plaintext highlighter-rouge">main.cpp</code> calls a function <code class="language-plaintext highlighter-rouge">utilFunc()</code> that’s defined in <code class="language-plaintext highlighter-rouge">util.cpp</code>, when compiling <code class="language-plaintext highlighter-rouge">main.cpp</code> the compiler will include a call instruction to <code class="language-plaintext highlighter-rouge">utilFunc</code> but mark it as an external symbol. The actual address for <code class="language-plaintext highlighter-rouge">utilFunc</code> isn’t known at this point and will be fixed when linking <code class="language-plaintext highlighter-rouge">main.o</code> with <code class="language-plaintext highlighter-rouge">util.o</code>.</p>
+For example, if `main.cpp` calls a function `utilFunc()` that's defined in `util.cpp`, when compiling `main.cpp` the compiler will include a call instruction to `utilFunc` but mark it as an external symbol. The actual address for `utilFunc` isn't known at this point and will be fixed when linking `main.o` with `util.o`.
 
-<p>Object files typically have the extension <code class="language-plaintext highlighter-rouge">.o</code> on Unix-like systems and <code class="language-plaintext highlighter-rouge">.obj</code> on Windows.</p>
+Object files typically have the extension `.o` on Unix-like systems and `.obj` on Windows.
 
-<p>They are often in a format like <code class="language-plaintext highlighter-rouge">ELF</code> (on Linux/macOS) or <code class="language-plaintext highlighter-rouge">COFF/PE</code> (on Windows), which specifies how machine code and data are stored, and includes tables for unresolved symbols - things to link later - and other metadata. You generally don’t need to inspect object files directly as they’re not meant to be human-readable, but it’s useful to know they exist and are the output of the compilation stage.</p>
+They are often in a format like `ELF` (on Linux/macOS) or `COFF/PE` (on Windows), which specifies how machine code and data are stored, and includes tables for unresolved symbols - things to link later - and other metadata. You generally don't need to inspect object files directly as they're not meant to be human-readable, but it's useful to know they exist and are the output of the compilation stage.
 
-<p>During this stage, the compiler will perform several tasks:</p>
+During this stage, the compiler will perform several tasks:
 
-<ul>
-  <li>
-    <p><strong>Syntax and Semantic Analysis:</strong> It checks that the code is valid C++ now that macros have been expanded. It ensures types match, variables are declared, etc.</p>
-  </li>
-  <li>
-    <p><strong>Code Generation:</strong> It translates C++ constructs to equivalent lower-level operations. For instance, a simple arithmetic operation or a loop gets translated into a sequence of machine instructions that achieve the same effect.</p>
-  </li>
-  <li>
-    <p><strong>Optimization:</strong> If you have optimization enabled - that is, using <code class="language-plaintext highlighter-rouge">O2</code> or <code class="language-plaintext highlighter-rouge">O3</code> flags in GCC/Clang, or default “Release” mode in MSVC - then the compiler will try to improve the machine code. It can do this by removing unused code, inlining functions, unrolling loops, etc. This doesn’t change the program’s behavior but can make it faster or smaller.</p>
-  </li>
-  <li>
-    <p><strong>Generate Object File:</strong> Finally, the compiler writes out the machine code and data to the object file, along with symbol tables listing things like “this object provides function X” or “this object needs a definition for function Y from elsewhere.”</p>
-  </li>
-</ul>
+- **Syntax and Semantic Analysis:** It checks that the code is valid C++ now that macros have been expanded. It ensures types match, variables are declared, etc.
 
-<p>It’s at this stage you encounter compile-time errors if something is wrong with your C++ code’s structure or rules. For instance, forgetting a semicolon, calling a function with the wrong number of arguments, or violating C++ syntax will cause errors here.</p>
+- **Code Generation:** It translates C++ constructs to equivalent lower-level operations. For instance, a simple arithmetic operation or a loop gets translated into a sequence of machine instructions that achieve the same effect.
 
-<blockquote class="block-tip">
-  <h4 id="viewing-object-files">Viewing Object Files</h4>
+- **Optimization:** If you have optimization enabled - that is, using `O2` or `O3` flags in GCC/Clang, or default "Release" mode in MSVC - then the compiler will try to improve the machine code. It can do this by removing unused code, inlining functions, unrolling loops, etc. This doesn't change the program's behavior but can make it faster or smaller.
 
-  <p>Typically, you don’t run the compiler manually for each stage; you use a compiler driver like the <code class="language-plaintext highlighter-rouge">g++</code> or <code class="language-plaintext highlighter-rouge">clang++</code> command, or Visual Studio’s build system. This runs all necessary stages for you.</p>
+- **Generate Object File:** Finally, the compiler writes out the machine code and data to the object file, along with symbol tables listing things like "this object provides function X" or "this object needs a definition for function Y from elsewhere."
 
-  <p>For instance, invoking <code class="language-plaintext highlighter-rouge">g++ main.cpp util.cpp</code> will internally preprocess and compile both, producing <code class="language-plaintext highlighter-rouge">main.o</code> and <code class="language-plaintext highlighter-rouge">util.o</code>, then link them.</p>
+It's at this stage you encounter compile-time errors if something is wrong with your C++ code's structure or rules. For instance, forgetting a semicolon, calling a function with the wrong number of arguments, or violating C++ syntax will cause errors here.
 
-  <p>If you only want to compile to object files without linking, you can use a flag like <code class="language-plaintext highlighter-rouge">-c</code>. For example, running <code class="language-plaintext highlighter-rouge">g++ -c main.cpp</code> should create a <code class="language-plaintext highlighter-rouge">main.o</code> or <code class="language-plaintext highlighter-rouge">main.obj</code> file.</p>
 
-  <p>These files are not meant to be human-readable, but we’ll explain what they contain in the next section.</p>
-</blockquote>
+<div class="alert alert-info" role="alert">
+<h5>Viewing Object Files</h5>
 
-<hr>
+<p>Typically, you don't run the compiler manually for each stage; you use a compiler driver like the <code>g++</code> or <code>clang++</code> command, or Visual Studio's build system. This runs all necessary stages for you.
+</p>
 
-<h3 id="the-assembler-and-machine-code">The Assembler and Machine Code</h3>
+<p>For instance, invoking <code>g++ main.cpp util.cpp</code> will internally preprocess and compile both, producing <code>main.o</code> and <code>util.o</code>, then link them.</p>
 
-<p>You might wonder how exactly the human-readable C++ source turns into the binary 0s and 1s that the CPU executes. The compiler doesn’t directly write binary machine code into the object file in many cases - it often goes through an intermediate step: assembly language.</p>
+<p>If you only want to compile to object files without linking, you can use a flag like <code>-c</code>. For example, running <code>g++ -c main.cpp</code> should create a <code>main.o</code> or <code>main.obj</code> file.</p>
 
-<p>Assembly language is a human-readable representation of machine code. Each CPU instruction like “add two registers” or “jump to address if zero” has a textual mnemonic (like <code class="language-plaintext highlighter-rouge">ADD</code> or <code class="language-plaintext highlighter-rouge">JZ</code>) and operands (register names, immediate values, memory addresses).</p>
+<p>These files are not meant to be human-readable, but we'll explain what they contain in the next section.</p>
+</div>
 
-<p>Assembly is specific to the processor architecture. For example, x86-64 assembly differs from ARM assembly. However, it’s much simpler than C++ as it’s basically a direct mapping to machine instructions.</p>
+---
 
-<p>In many compilers, the process looks like this:</p>
+### The Assembler and Machine Code
 
-<ol>
-  <li>
-    <p>The compiler’s code generation phase writes out an assembly file, often with a <code class="language-plaintext highlighter-rouge">.s</code> extension, from the C++ source.</p>
-  </li>
-  <li>
-    <p>An assembler program then reads the assembly file and produces an object file with actual machine code bytes.</p>
-  </li>
-</ol>
+You might wonder how exactly the human-readable C++ source turns into the binary 0s and 1s that the CPU executes. The compiler doesn't directly write binary machine code into the object file in many cases - it often goes through an intermediate step: assembly language.
 
-<p>This two-step approach has historical and practical reasons.</p>
+Assembly language is a human-readable representation of machine code. Each CPU instruction like "add two registers" or "jump to address if zero" has a textual mnemonic (like `ADD` or `JZ`) and operands (register names, immediate values, memory addresses).
 
-<p>Historically, it was simpler to implement the complex high-level language translation in the compiler and then delegate the well-understood task of turning assembly into object code to an assembler.</p>
+Assembly is specific to the processor architecture. For example, x86-64 assembly differs from ARM assembly. However, it's much simpler than C++ as it's basically a direct mapping to machine instructions.
 
-<p>Practically, it also allows developers to inspect the assembly output for optimization or debugging. Some compilers still make it easy to get the assembly output with a flag like <code class="language-plaintext highlighter-rouge">-S</code>.</p>
+In many compilers, the process looks like this:
 
-<p>Additionally, using an assembler abstracts away the details of the object file format and relocation for the compiler writers - the assembler knows how to produce a correct <code class="language-plaintext highlighter-rouge">.o/.obj</code> file for the platform, so the compiler can focus on generating correct assembly.</p>
+1. The compiler's code generation phase writes out an assembly file, often with a `.s` extension, from the C++ source.
 
-<h4 id="viewing-assembly-output">Viewing Assembly Output</h4>
-<p>Most compilers include an option to stop after compilation and output the assembly code, rather than an object file or executable. In GCC/Clang, this can be done using the uppercase <code class="language-plaintext highlighter-rouge">-S</code> flag:</p>
+2. An assembler program then reads the assembly file and produces an object file with actual machine code bytes.
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>g++ <span class="nt">-S</span> some_file.cpp
-<span class="c"># Or,</span>
-clang++ <span class="nt">-S</span> some_file.cpp
-</code></pre></div></div>
-<p>Once it finishes, you’ll see a file saved as <code class="language-plaintext highlighter-rouge">some_file.s</code> in the same directory. You can read the file from terminal using <code class="language-plaintext highlighter-rouge">cat some_file.s</code> and you may notice some memory locations called registers and some other commands like <code class="language-plaintext highlighter-rouge">movq</code>, <code class="language-plaintext highlighter-rouge">movl</code> etc. Understanding assembly is not required, but there are many free resources available online. <a href="https://gpfault.net/posts/asm-tut-0.txt.html" rel="external nofollow noopener" target="_blank">Check this</a> four part series to understand assembly code.</p>
+This two-step approach has historical and practical reasons.
 
-<p>For now, the key point is that each high-level C++ statement corresponds to a handful of assembly instructions. The compiler will translate each of our C++ lines into this assembly, and the assembler will then translate these assembly instructions into machine code. This will be output as our object file.</p>
+Historically, it was simpler to implement the complex high-level language translation in the compiler and then delegate the well-understood task of turning assembly into object code to an assembler.
 
-<p>It’s worth noting that not all compilers invoke a separate assembler program these days.</p>
+Practically, it also allows developers to inspect the assembly output for optimization or debugging. Some compilers still make it easy to get the assembly output with a flag like `-S`.
 
-<p>For instance, MSVC on Windows generates object files directly, and LLVM’s back-end can directly emit machine code without writing an assembly file.</p>
+Additionally, using an assembler abstracts away the details of the object file format and relocation for the compiler writers - the assembler knows how to produce a correct `.o/.obj` file for the platform, so the compiler can focus on generating correct assembly.
 
-<p>But conceptually, even in those cases, there is an “assembly generation phase” internally followed by an encoding to object file format. The result is the same: we get an object file with machine code.</p>
 
-<p>In the next lesson, we’ll learn about object files and the linking process.</p>
+#### Viewing Assembly Output
+Most compilers include an option to stop after compilation and output the assembly code, rather than an object file or executable. In GCC/Clang, this can be done using the uppercase `-S` flag:
 
-<p><strong><em>Note: This cmake tutorial series will be mostly copied contents from studyplan.dev website. I’ve written them as I was going through all the chapters so that I can revise the materials later if needed.</em></strong></p>
+```bash
+g++ -S some_file.cpp
+# Or,
+clang++ -S some_file.cpp
+```
+Once it finishes, you'll see a file saved as `some_file.s` in the same directory. You can read the file from terminal using `cat some_file.s` and you may notice some memory locations called registers and some other commands like `movq`, `movl` etc. Understanding assembly is not required, but there are many free resources available online. [Check this](https://gpfault.net/posts/asm-tut-0.txt.html) four part series to understand assembly code.
+
+For now, the key point is that each high-level C++ statement corresponds to a handful of assembly instructions. The compiler will translate each of our C++ lines into this assembly, and the assembler will then translate these assembly instructions into machine code. This will be output as our object file.
+
+It's worth noting that not all compilers invoke a separate assembler program these days.
+
+For instance, MSVC on Windows generates object files directly, and LLVM's back-end can directly emit machine code without writing an assembly file.
+
+But conceptually, even in those cases, there is an "assembly generation phase" internally followed by an encoding to object file format. The result is the same: we get an object file with machine code.
+
+In the next lesson, we'll learn about object files and the linking process.
+
+***Note: This cmake tutorial series will be mostly copied contents from studyplan.dev website. I've written them as I was going through all the chapters so that I can revise the materials later if needed.***
+</iostream></iostream></iostream>
+</div>
 
     </div>
   </article>
