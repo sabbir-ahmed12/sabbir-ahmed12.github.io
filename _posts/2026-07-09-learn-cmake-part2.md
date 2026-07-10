@@ -45,7 +45,7 @@ This is where the concept of a translation unit comes in. A translation unit is 
 
 
 <div class="alert alert-info" role="alert">
-<h5> Translation Unit
+<h5> Translation Unit</h5>
 
 <p>A translation unit is the input to the compiler's compile step. It consists of a C++ source file after all of the preprocessor directives have been handled.</p>
 
@@ -161,7 +161,7 @@ Once preprocessing is done, we have our translation unit ready. Now the heavy li
 
 
 <div class='alert alert-info' role='alert'>
-<b>Line Markers</b>
+<h5>Line Markers</h5>
 <p>Line markers are added to translation units to help the compiler and debuggers understand where each line of code in the translation unit originally came from.</p>
 
 <p>For example, if a line of code was originally in <code>SomeHeaderFile.h</code> and got added to our <code>example.cpp</code> translation unit through an <code>#include</code> directive, the line marker keeps track of that. It also keeps track of where the line was within that original header file - that is, it's line number within <code>SomeHeaderFile.h</code> before the preprocessor modified it.</p>
