@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Head -->
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    <!-- Metadata, OpenGraph and Schema.org -->
+    
+
+    <!-- Standard metadata -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Learn to Manage C++ Projects Using CMake Like a Pro (Part 2 - Understanding the Compilation Pipeline) | Sabbir  Ahmed</title>
+    <meta name="author" content="Sabbir  Ahmed">
+    <meta name="description" content="Steps of the C++ compilation process, from source code to machine code.">
+    <meta name="keywords" content="sabbir-ahmed, uiowa, ece, radiology, portfolio, cuet, ete">
+
+
+    <!-- Bootstrap & MDB -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-DF7Zhf293AJxJNTmh5zhoYYIMs2oXitRfBjY+9L//AY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous">
+
+    <!-- Bootstrap Table -->
+    <link defer rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.21.4/dist/bootstrap-table.min.css">
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+
+    <!-- Code Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/github.css" media="" id="highlight_theme_light">
+
+    
+
+    <!-- Styles -->
+    
+    <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%A7%94&lt;/text&gt;&lt;/svg&gt;">
+    
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="canonical" href="https://sabbir-ahmed12.github.io/blog/2026/learn-cmake-part2/">
+
+    <!-- Dark Mode -->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/native.css" media="none" id="highlight_theme_dark">
+
+    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/dark_mode.js"></script>
+    
+
+  </head>
+
+  <!-- Body -->
+  <body class="fixed-top-nav ">
+    <!-- Header -->
+    <header>
+
+      <!-- Nav Bar -->
+      <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+        <div class="container">
+          <a class="navbar-brand title font-weight-lighter" href="/"><span class="font-weight-bold">Sabbir </span>Ahmed</a>
+          <!-- Navbar Toggle -->
+          <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar top-bar"></span>
+            <span class="icon-bar middle-bar"></span>
+            <span class="icon-bar bottom-bar"></span>
+          </button>
+
+          <div class="collapse navbar-collapse text-right" id="navbarNav">
+            <ul class="navbar-nav ml-auto flex-nowrap">
+
+              <!-- About -->
+              <li class="nav-item ">
+                <a class="nav-link" href="/">About</a>
+              </li>
+              
+              <!-- Blog -->
+              <li class="nav-item active">
+                <a class="nav-link" href="/blog/">Blog<span class="sr-only">(current)</span></a>
+              </li>
+
+              <!-- Other pages -->
+              <li class="nav-item ">
+                <a class="nav-link" href="/education/">Education</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/experiences/">Experiences</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/research/">Research</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/skills/">Skills</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/projects/">Projects</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/misc/">Misc</a>
+              </li>
+
+              <!-- Toogle theme mode -->
+              <li class="toggle-container">
+                <button id="light-toggle" title="Change theme">
+                  <i class="fas fa-moon"></i>
+                  <i class="fas fa-sun"></i>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Scrolling Progress Bar -->
+      <progress id="progress" value="0">
+        <div class="progress-container">
+          <span class="progress-bar"></span>
+        </div>
+      </progress>
+    </header>
+
+
+    <!-- Content -->
+    <div class="container mt-5">
+       <!-- _layouts/post.html -->
+
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Learn to Manage C++ Projects Using CMake Like a Pro (Part 2 - Understanding the Compilation Pipeline)</h1>
+    <p class="post-meta">July 9, 2026</p>
+    <p class="post-tags">
+      <a href="/blog/2026"> <i class="fas fa-calendar fa-sm"></i> 2026 </a>
+        ·  
+        <a href="/blog/tag/c">
+          <i class="fas fa-hashtag fa-sm"></i> C++</a>  
+          
+        ·  
+        <a href="/blog/category/tutorial">
+          <i class="fas fa-tag fa-sm"></i> tutorial</a>  
+          
+
+    </p>
+  </header>
+
+  <article class="post-content">
+    
+    <div id="markdown-content">
+      <p>C++ program building is a multi step process where source code turns into an executable. Each step transforms the code closer to the machine language.</p>
+
+<p>In this lesson, we’ll explore the early stages of that pipeline: taking C++ source and header files through preprocessing, compilation, and assembly to produce object files.</p>
+
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/posts_img/2026_07_08_learn_cmake/part2-compilation-steps.svg" class="img-fluid rounded z-depth-1" width="auto" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
+
+  </picture>
+
+</figure>
+
+    </div>
+</div>
+
+<p>These object files contain the machine code output for our program, and serve as the input for the next stage (linking) to create the final executable.</p>
+
+<p>By understanding this compilation pipeline, you’ll gain insight into why we structure C++ projects with header (<code class="language-plaintext highlighter-rouge">.h/.hpp</code>) and source (<code class="language-plaintext highlighter-rouge">.cpp</code>) files, why certain errors like missing symbols or multiple definitions occur, and how tools like build systems (and later CMake) orchestrate these steps.</p>
+
+<p>We’ll cover translation units, macro expansion, include directives, the generation of <code class="language-plaintext highlighter-rouge">.obj/.o</code> files, and the role of the assembler in converting human-readable assembly to machine code.</p>
+
+<p>The final linking step, which combines object files into an executable or library, will be discussed in the next lesson.</p>
+
+<hr>
+
+<h3 id="source-files-headers-and-translation-units">Source Files, Headers, and Translation Units</h3>
+
+<p>C++ programs are typically spread across multiple files.</p>
+
+<ul>
+  <li>
+    <p>Source files, often with <code class="language-plaintext highlighter-rouge">.cpp</code> or <code class="language-plaintext highlighter-rouge">.cc</code> extensions, contain function and class definitions - the actual code logic.</p>
+  </li>
+  <li>
+    <p>Header files, usually with <code class="language-plaintext highlighter-rouge">.h</code> or <code class="language-plaintext highlighter-rouge">.hpp</code> extensions, typically focus on declations - interfaces, function prototypes, class definitions without method bodies, constants etc.</p>
+  </li>
+</ul>
+
+<p>This separation is a long-standing C++ convention that helps organize code and manage compilation dependencies. If you’re not familiar, you can learn more about <a href="#">header files</a> and their rationale.</p>
+
+<p>When you compile a C++ program, you usually compile each source file independently. The compiler doesn’t immediately know about all parts of your program - it only looks at one source file at a time, plus whatever that source brings in via <code class="language-plaintext highlighter-rouge">#include</code>.</p>
+
+<p>This is where the concept of a translation unit comes in. A translation unit is essentially one source file after it has been preprocessed, meaning all the headers it includes are literally inserted and all macros are expanded.</p>
+
+<blockquote class="block-tip">
+  <h4 id="translation-unit">Translation Unit</h4>
+
+  <p>A translation unit is the input to the compiler’s compile step. It consists of a C++ source file after all of the preprocessor directives have been handled.</p>
+
+  <p>The translation unit is the complete, self-contained C++ code that the compiler uses to generate a single object file.</p>
+</blockquote>
+
+<p>Each source file results in one translation unit and yields one object file when compiled. If you have, say, <code class="language-plaintext highlighter-rouge">main.cpp</code> and <code class="language-plaintext highlighter-rouge">util.cpp</code> in your project, the compiler will produce something like <code class="language-plaintext highlighter-rouge">main.o</code> and <code class="language-plaintext highlighter-rouge">util.o</code> separately (or <code class="language-plaintext highlighter-rouge">main.obj</code> and <code class="language-plaintext highlighter-rouge">util.obj</code> on Windows). It’s then the linker’s job to combine those object files, but we’ll get to that later.</p>
+
+<p>The key point is that the only way code from one file is seen while compiling another is either via an <code class="language-plaintext highlighter-rouge">#include</code> directive. <a href="#">C++20 modules</a> are another way but, because they’re not yet widely supported or used, we’ll ignore those for now.</p>
+
+<p>So, if <code class="language-plaintext highlighter-rouge">main.cpp</code> needs something from <code class="language-plaintext highlighter-rouge">util.cpp</code>, it must include a header that describes what is in <code class="language-plaintext highlighter-rouge">util.cpp</code>. Otherwise, the compiler processing <code class="language-plaintext highlighter-rouge">main.cpp</code> has no knowledge of <code class="language-plaintext highlighter-rouge">util.cpp</code>’s contents. This is why missing includes lead to compile errors like “identifier not found” if you forgot to include a header with a needed declaration.</p>
+
+<hr>
+
+<h3 id="preprocessing-stage">Preprocessing Stage</h3>
+
+<p>The first stage of building a C++ program is preprocessing. The preprocessor is a tool that runs before the compiler’s proper analysis of the C++ code.</p>
+
+<p>It works at the textual level, performing simple text substitutions and conditional removals according to directives that start with <code class="language-plaintext highlighter-rouge">#</code>. These changes broadly fall into three categories: include resolution, macro expansion, and conditional compilation.</p>
+
+<h4 id="include-resolution">Include Resolution</h4>
+
+<p>When it encounters <code class="language-plaintext highlighter-rouge">#include &lt;...&gt;</code> or <code class="language-plaintext highlighter-rouge">#include "..."</code>, it will literally replace that line with the contents of the referenced file, which is usually a header file.</p>
+
+<p>In other words, it pastes the header file’s code into the source. This is recursive - if that header includes other headers, those get expanded too. By the end, it’s as if you wrote one big file containing your source and all the headers it needs.</p>
+
+<p>For instance, if <code class="language-plaintext highlighter-rouge">main.cpp</code> has <code class="language-plaintext highlighter-rouge">#include "util.h"</code>, the preprocessor will insert everything from <code class="language-plaintext highlighter-rouge">util.h</code> into <code class="language-plaintext highlighter-rouge">main.cpp</code>’s code. It will recursively do the same for any includes inside <code class="language-plaintext highlighter-rouge">util.h</code>, and so on.</p>
+
+<h4 id="macro-expansion">Macro Expansion</h4>
+
+<p>The preprocessor handles <code class="language-plaintext highlighter-rouge">#define</code> macros. A macro definition like <code class="language-plaintext highlighter-rouge">#define MAX_SIZE 100</code> tells the preprocessor to replace every occurrence of <code class="language-plaintext highlighter-rouge">MAX_SIZE</code> in the code with <code class="language-plaintext highlighter-rouge">100</code> before compilation. Function-like macros can also take arguments, for example:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define SQUARE(x) ((x) * (x))
+</span><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">SQUARE</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Here, the preprocessor will replace <code class="language-plaintext highlighter-rouge">SQUARE(5)</code> with <code class="language-plaintext highlighter-rouge">((5) * (5))</code> wherever it appears. The compiler never sees <code class="language-plaintext highlighter-rouge">SQUARE</code> - by the time we get to actual compilation, that symbol is expanded into its replacement code.</p>
+
+<p>This can lead to pitfalls if not carefully used - e.g., macro expansions don’t follow normal function call rules - but that’s beyond our scope here. Check the <a href="#">preprocessor definitions</a> lesson for more about writing macros.</p>
+
+<h4 id="conditional-compilation">Conditional Compilation</h4>
+
+<p>Directives like <code class="language-plaintext highlighter-rouge">#if</code>, <code class="language-plaintext highlighter-rouge">#ifdef</code>, <code class="language-plaintext highlighter-rouge">#ifndef</code>, and <code class="language-plaintext highlighter-rouge">#endif</code> let the preprocessor include or exclude parts of code based on condition.</p>
+
+<p>For instance, you might wrap debug code in <code class="language-plaintext highlighter-rouge">#ifdef DEBUG</code> so that it’s included only when you define a <code class="language-plaintext highlighter-rouge">DEBUG</code> macro. The preprocessor evaluates these conditions and strips out any code in <code class="language-plaintext highlighter-rouge">#if</code> blocks that evaluate to false. For example:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define DEBUG 1
+</span>
+<span class="c1">// ...</span>
+
+<span class="cp">#if DEBUG
+</span>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Debug mode</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="cp">#endif
+</span></code></pre></div></div>
+
+<p>Here, if <code class="language-plaintext highlighter-rouge">DEBUG</code> is 1 (true), the line will remain; if we had <code class="language-plaintext highlighter-rouge">#define DEBUG 0</code> or no definition, the <code class="language-plaintext highlighter-rouge">std::cout &lt;&lt; ...</code> line would be removed entirely from the code seen by the compiler.</p>
+
+<p>After preprocessing, what we have is the translation unit mentioned earlier - a single, combined source file with no <code class="language-plaintext highlighter-rouge">#include</code> or <code class="language-plaintext highlighter-rouge">#define</code> or <code class="language-plaintext highlighter-rouge">#if</code> directives anymore. All those have been acted upon:</p>
+
+<ul>
+  <li>Every include file’s contents is present - often many thousands of lines once you include standard headers like <code class="language-plaintext highlighter-rouge">&lt;iostream&gt;</code>.</li>
+  <li>Every macro is expanded or eliminated.</li>
+  <li>Every conditional block is either kept or cut out.</li>
+</ul>
+
+<hr>
+
+<h3 id="viewing-preprocessor-output">Viewing Preprocessor Output</h3>
+
+<p>You can try running the preprocessor on a small program to see what it produces. Save the following in <code class="language-plaintext highlighter-rouge">example.cpp</code>:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#define MESSAGE "Hello, world!"
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c">#if 0
+        std::cout &lt;&lt; "Debug mode\n";
+    #endif
+</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">MESSAGE</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now run the command below to get the preprocessor output.</p>
+
+<p>For GCC:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>g++ <span class="nt">-E</span> <span class="nt">-P</span> example.cpp <span class="nt">-o</span> example.i
+</code></pre></div></div>
+
+<p>For Clang:</p>
+
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>clang++ <span class="nt">-E</span> <span class="nt">-P</span> example.cpp <span class="nt">-o</span> example.i
+</code></pre></div></div>
+
+<p>In this case, <code class="language-plaintext highlighter-rouge">-E</code> asks <code class="language-plaintext highlighter-rouge">g++</code> to only run the preprocessor, and <code class="language-plaintext highlighter-rouge">-P</code> asks it to exclude line markers from the output. We’ll explain line markers soon. If you want to learn more about different flags, you can try running <code class="language-plaintext highlighter-rouge">g++ --help</code> or <code class="language-plaintext highlighter-rouge">clang++ --help</code>.</p>
+
+<p>After running the command, we can open <code class="language-plaintext highlighter-rouge">example.i</code> in a text editor. We should see that:</p>
+
+<ul>
+  <li>
+    <p>The line <code class="language-plaintext highlighter-rouge">#include &lt;iostream&gt;</code> has been replaced by a huge amount of code - tens of thousands of lines. This is the entire contents of the <code class="language-plaintext highlighter-rouge">iostream</code> header and all headers it includes. The code we wrote in our original source file will be at the bottom of the file, below all of this stuff.</p>
+  </li>
+  <li>
+    <p>The macro <code class="language-plaintext highlighter-rouge">MESSAGE</code> is gone, and its occurrences have been replaced with <code class="language-plaintext highlighter-rouge">"Hello, world!"</code>.</p>
+  </li>
+  <li>
+    <p>The block under <code class="language-plaintext highlighter-rouge">#if 0</code> is completely removed - it won’t appear in the output at all.</p>
+  </li>
+</ul>
+
+<p>This can be an eye-opening experiment to understand how much work the preprocessor does and why the resulting translation unit is often much larger than your initial source file.</p>
+
+<p>Once preprocessing is done, we have our translation unit ready. Now the heavy lifting begins: the compiler will translate this (potentially enormous) code into machine code. That happens in the next stage.</p>
+
+<div class="alert alert-info" role="alert">
+<b>Line Markers</b>
+<p>Line markers are added to translation units to help the compiler and debuggers understand where each line of code in the translation unit originally came from.</p>
+
+<p>For example, if a line of code was originally in <code>SomeHeaderFile.h</code> and got added to our <code>example.cpp</code> translation unit through an <code>#include</code> directive, the line marker keeps track of that. It also keeps track of where the line was within that original header file - that is, it's line number within <code>SomeHeaderFile.h</code> before the preprocessor modified it.</p>
+
+<p>Line markers are not required - the compiler can complete it's work perfectly fine without them. However, if the compiler encounters an error in the translation unit, it can use the line marker to report the original source of the error. For example, it lets the compiler report that the error came from line 15 of <code>SomeHeaderFile.h</code> rather than line 25,461 of some translation unit. This makes it easier for us to find and fix the original source of the problem.</p>
+</div>
+
+<hr>
+
+<h3 id="compilation-to-object-code">Compilation to Object Code</h3>
+<p>After preprocessing, the compiler proper takes over. This stage is what we usually think of as “compiling”: the compiler reads the preprocessed C++ code - the translation unit - and converts it to machine code instructions.</p>
+
+<p>However, it doesn’t immediately make a full program out of it - it produces an object file containing the machine code for just this translation unit.</p>
+
+<h4 id="object-files">Object Files</h4>
+<p>What exactly is an object file? It’s a file that contains binary machine code and some extra information needed for later linking. The machine code in an object file corresponds to the functions and code in your source, but if your code calls a function that’s defined in another file, the call is left as a placeholder that the linker will fill in.</p>
+
+<p>Think of an object file as “half a puzzle” - it has pieces of the program, but references to other pieces are not resolved yet.</p>
+
+<p>For example, if <code class="language-plaintext highlighter-rouge">main.cpp</code> calls a function <code class="language-plaintext highlighter-rouge">utilFunc()</code> that’s defined in <code class="language-plaintext highlighter-rouge">util.cpp</code>, when compiling <code class="language-plaintext highlighter-rouge">main.cpp</code> the compiler will include a call instruction to <code class="language-plaintext highlighter-rouge">utilFunc</code> but mark it as an external symbol. The actual address for <code class="language-plaintext highlighter-rouge">utilFunc</code> isn’t known at this point and will be fixed when linking <code class="language-plaintext highlighter-rouge">main.o</code> with <code class="language-plaintext highlighter-rouge">util.o</code>.</p>
+
+<p>Object files typically have the extension <code class="language-plaintext highlighter-rouge">.o</code> on Unix-like systems and <code class="language-plaintext highlighter-rouge">.obj</code> on Windows.</p>
+
+<p>They are often in a format like <code class="language-plaintext highlighter-rouge">ELF</code> (on Linux/macOS) or <code class="language-plaintext highlighter-rouge">COFF/PE</code> (on Windows), which specifies how machine code and data are stored, and includes tables for unresolved symbols - things to link later - and other metadata. You generally don’t need to inspect object files directly as they’re not meant to be human-readable, but it’s useful to know they exist and are the output of the compilation stage.</p>
+
+<p>During this stage, the compiler will perform several tasks:</p>
+
+<ul>
+  <li>
+    <p><strong>Syntax and Semantic Analysis:</strong> It checks that the code is valid C++ now that macros have been expanded. It ensures types match, variables are declared, etc.</p>
+  </li>
+  <li>
+    <p><strong>Code Generation:</strong> It translates C++ constructs to equivalent lower-level operations. For instance, a simple arithmetic operation or a loop gets translated into a sequence of machine instructions that achieve the same effect.</p>
+  </li>
+  <li>
+    <p><strong>Optimization:</strong> If you have optimization enabled - that is, using <code class="language-plaintext highlighter-rouge">O2</code> or <code class="language-plaintext highlighter-rouge">O3</code> flags in GCC/Clang, or default “Release” mode in MSVC - then the compiler will try to improve the machine code. It can do this by removing unused code, inlining functions, unrolling loops, etc. This doesn’t change the program’s behavior but can make it faster or smaller.</p>
+  </li>
+  <li>
+    <p><strong>Generate Object File:</strong> Finally, the compiler writes out the machine code and data to the object file, along with symbol tables listing things like “this object provides function X” or “this object needs a definition for function Y from elsewhere.”</p>
+  </li>
+</ul>
+
+<p>It’s at this stage you encounter compile-time errors if something is wrong with your C++ code’s structure or rules. For instance, forgetting a semicolon, calling a function with the wrong number of arguments, or violating C++ syntax will cause errors here.</p>
+
+<blockquote class="block-tip">
+  <h4 id="viewing-object-files">Viewing Object Files</h4>
+
+  <p>Typically, you don’t run the compiler manually for each stage; you use a compiler driver like the <code class="language-plaintext highlighter-rouge">g++</code> or <code class="language-plaintext highlighter-rouge">clang++</code> command, or Visual Studio’s build system. This runs all necessary stages for you.</p>
+
+  <p>For instance, invoking <code class="language-plaintext highlighter-rouge">g++ main.cpp util.cpp</code> will internally preprocess and compile both, producing <code class="language-plaintext highlighter-rouge">main.o</code> and <code class="language-plaintext highlighter-rouge">util.o</code>, then link them.</p>
+
+  <p>If you only want to compile to object files without linking, you can use a flag like <code class="language-plaintext highlighter-rouge">-c</code>. For example, running <code class="language-plaintext highlighter-rouge">g++ -c main.cpp</code> should create a <code class="language-plaintext highlighter-rouge">main.o</code> or <code class="language-plaintext highlighter-rouge">main.obj</code> file.</p>
+
+  <p>These files are not meant to be human-readable, but we’ll explain what they contain in the next section.</p>
+</blockquote>
+
+<hr>
+
+<h3 id="the-assembler-and-machine-code">The Assembler and Machine Code</h3>
+
+<p>You might wonder how exactly the human-readable C++ source turns into the binary 0s and 1s that the CPU executes. The compiler doesn’t directly write binary machine code into the object file in many cases - it often goes through an intermediate step: assembly language.</p>
+
+<p>Assembly language is a human-readable representation of machine code. Each CPU instruction like “add two registers” or “jump to address if zero” has a textual mnemonic (like <code class="language-plaintext highlighter-rouge">ADD</code> or <code class="language-plaintext highlighter-rouge">JZ</code>) and operands (register names, immediate values, memory addresses).</p>
+
+<p>Assembly is specific to the processor architecture. For example, x86-64 assembly differs from ARM assembly. However, it’s much simpler than C++ as it’s basically a direct mapping to machine instructions.</p>
+
+<p>In many compilers, the process looks like this:</p>
+
+<ol>
+  <li>
+    <p>The compiler’s code generation phase writes out an assembly file, often with a <code class="language-plaintext highlighter-rouge">.s</code> extension, from the C++ source.</p>
+  </li>
+  <li>
+    <p>An assembler program then reads the assembly file and produces an object file with actual machine code bytes.</p>
+  </li>
+</ol>
+
+<p>This two-step approach has historical and practical reasons.</p>
+
+<p>Historically, it was simpler to implement the complex high-level language translation in the compiler and then delegate the well-understood task of turning assembly into object code to an assembler.</p>
+
+<p>Practically, it also allows developers to inspect the assembly output for optimization or debugging. Some compilers still make it easy to get the assembly output with a flag like <code class="language-plaintext highlighter-rouge">-S</code>.</p>
+
+<p>Additionally, using an assembler abstracts away the details of the object file format and relocation for the compiler writers - the assembler knows how to produce a correct <code class="language-plaintext highlighter-rouge">.o/.obj</code> file for the platform, so the compiler can focus on generating correct assembly.</p>
+
+<h4 id="viewing-assembly-output">Viewing Assembly Output</h4>
+<p>Most compilers include an option to stop after compilation and output the assembly code, rather than an object file or executable. In GCC/Clang, this can be done using the uppercase <code class="language-plaintext highlighter-rouge">-S</code> flag:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>g++ <span class="nt">-S</span> some_file.cpp
+<span class="c"># Or,</span>
+clang++ <span class="nt">-S</span> some_file.cpp
+</code></pre></div></div>
+<p>Once it finishes, you’ll see a file saved as <code class="language-plaintext highlighter-rouge">some_file.s</code> in the same directory. You can read the file from terminal using <code class="language-plaintext highlighter-rouge">cat some_file.s</code> and you may notice some memory locations called registers and some other commands like <code class="language-plaintext highlighter-rouge">movq</code>, <code class="language-plaintext highlighter-rouge">movl</code> etc. Understanding assembly is not required, but there are many free resources available online. <a href="https://gpfault.net/posts/asm-tut-0.txt.html" rel="external nofollow noopener" target="_blank">Check this</a> four part series to understand assembly code.</p>
+
+<p>For now, the key point is that each high-level C++ statement corresponds to a handful of assembly instructions. The compiler will translate each of our C++ lines into this assembly, and the assembler will then translate these assembly instructions into machine code. This will be output as our object file.</p>
+
+<p>It’s worth noting that not all compilers invoke a separate assembler program these days.</p>
+
+<p>For instance, MSVC on Windows generates object files directly, and LLVM’s back-end can directly emit machine code without writing an assembly file.</p>
+
+<p>But conceptually, even in those cases, there is an “assembly generation phase” internally followed by an encoding to object file format. The result is the same: we get an object file with machine code.</p>
+
+<p>In the next lesson, we’ll learn about object files and the linking process.</p>
+
+<p><strong><em>Note: This cmake tutorial series will be mostly copied contents from studyplan.dev website. I’ve written them as I was going through all the chapters so that I can revise the materials later if needed.</em></strong></p>
+
+    </div>
+  </article>
+
+
+  
+    
+    <br>
+    <hr>
+    <br>
+    <ul class="list-disc pl-8"></ul>
+
+    <!-- Adds related posts to the end of an article -->
+    <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2>
+    <p class="mb-2">Here are some more articles you might like to read next:</p>
+  
+
+  <li class="my-2">
+    <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2026/learn-cmake-part1/">Learn to Manage C++ Projects Using CMake Like a Pro (Part 1 - Building C++ Programs)</a>
+  </li>
+
+  
+
+  <li class="my-2">
+    <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2026/pointer-in-c-and-c++/">Pointer in C/C++</a>
+  </li>
+
+  
+
+  <li class="my-2">
+    <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2026/function-pointer-in-c++/">Function Pointer in C++</a>
+  </li>
+
+  
+
+  <li class="my-2">
+    <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2026/pixi-the-best-python-package-manager/">Pixi - Best Package Manager for Python and for Doing Reproducible Research</a>
+  </li>
+
+  
+
+  <li class="my-2">
+    <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2026/building-a-simple-thresholding-filter-module-for-3D-slicer/">Building a 3D Slicer CLI Module from Scratch Using ITK and SlicerExecutionModel</a>
+  </li>
+
+  
+
+  <li class="my-2">
+    <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2026/python-code-formatting-and-linting-using-ruff/">Python Code Formatting and Linting Using Ruff</a>
+  </li>
+
+  
+
+  <li class="my-2">
+    <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2025/python-project-setup-using-uv/">Python Project Setup Using UV</a>
+  </li>
+
+  
+
+  <li class="my-2">
+    <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2025/non-cartesian-mr-image-reconstruction/">Non-Cartesian MR Image Reconstruction</a>
+  </li>
+
+  
+
+  <li class="my-2">
+    <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2024/learning-linux-from-basics-to-advanced/">Learning Linux from Basics to Advanced</a>
+  </li>
+
+  
+
+  <li class="my-2">
+    <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2023/managing-package-in-linux/">How to Install App in Linux?</a>
+  </li>
+
+<div id="giscus_thread" style="max-width: 800px; margin: 0 auto;">
+  <script>
+    let giscusTheme = localStorage.getItem("theme");
+    let giscusAttributes = {
+        "src": "https://giscus.app/client.js",
+        "data-repo": "sabbir-ahmed12/sabbir-ahmed12.github.io",
+        "data-repo-id": "R_kgDOJwEP_g",
+        "data-category": "Comments",
+        "data-category-id": "DIC_kwDOJwEP_s4CXSNz",
+        "data-mapping": "title",
+        "data-strict": "1",
+        "data-reactions-enabled": "1",
+        "data-emit-metadata": "0",
+        "data-input-position": "bottom",
+        "data-theme": giscusTheme,
+        "data-lang": "en",
+        "crossorigin": "anonymous",
+        "async": "",
+    };
+
+
+    let giscusScript = document.createElement("script");
+    Object.entries(giscusAttributes).forEach(([key, value]) => giscusScript.setAttribute(key, value));
+    document.getElementById("giscus_thread").appendChild(giscusScript);
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://giscus.app/?ref_noscript" rel="external nofollow noopener" target="_blank">comments powered by giscus.</a>
+</noscript>
+</div>
+</div>
+ 
+    </div>
+
+    <!-- Footer -->
+<footer class="fixed-bottom">
+  <div class="container mt-0 text-center">
+    © Copyright 2026 Sabbir  Ahmed. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>.
+Last updated: July 10, 2026.
+  </div>
+</footer>
+
+
+    <!-- JavaScripts -->
+    <!-- jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+ <!-- Bootsrap & MDB scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha256-fgLAgv7fyCGopR/gBNq2iW3ZKIdqIcyshnUULC4vex8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script>
+ <!-- Masonry & imagesLoaded -->
+  <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+  <script defer src="/assets/js/masonry.js" type="text/javascript"></script> 
+  <!-- Medium Zoom JS -->
+  <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.8/dist/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+  <script defer src="/assets/js/zoom.js"></script>
+
+  <!-- Bootstrap Table -->
+  <script defer src="https://unpkg.com/bootstrap-table@1.21.4/dist/bootstrap-table.min.js"></script>
+
+  <!-- Load Common JS -->
+  <script src="/assets/js/no_defer.js"></script>
+  <script defer src="/assets/js/common.js"></script>
+  <script defer src="/assets/js/copy_code.js" type="text/javascript"></script>
+ 
+  <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
+  <script async src="https://badge.dimensions.ai/badge.js"></script>
+ <!-- MathJax -->
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+  <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  
+
+<!-- Scrolling Progress Bar -->
+<script type="text/javascript">
+  /*
+   * This JavaScript code has been adapted from the article 
+   * https://css-tricks.com/reading-position-indicator/ authored by Pankaj Parashar, 
+   * published on the website https://css-tricks.com on the 7th of May, 2014.
+   * Couple of changes were made to the original code to make it compatible 
+   * with the `al-foio` theme.
+   */
+  const progressBar = $("#progress");
+  /*
+   * We set up the bar after all elements are done loading.
+   * In some cases, if the images in the page are larger than the intended
+   * size they'll have on the page, they'll be resized via CSS to accomodate
+   * the desired size. This mistake, however, breaks the computations as the
+   * scroll size is computed as soon as the elements finish loading.
+   * To account for this, a minimal delay was introduced before computing the
+   * values.
+   */
+  window.onload = function () {
+    setTimeout(progressBarSetup, 50);
+  };
+  /*
+   * We set up the bar according to the browser.
+   * If the browser supports the progress element we use that.
+   * Otherwise, we resize the bar thru CSS styling
+   */
+  function progressBarSetup() {
+    if ("max" in document.createElement("progress")) {
+      initializeProgressElement();
+      $(document).on("scroll", function() {
+        progressBar.attr({ value: getCurrentScrollPosition() });
+      });
+      $(window).on("resize", initializeProgressElement);
+    } else {
+      resizeProgressBar();
+      $(document).on("scroll", resizeProgressBar);
+      $(window).on("resize", resizeProgressBar);
+    }
+  }
+  /*
+   * The vertical scroll position is the same as the number of pixels that
+   * are hidden from view above the scrollable area. Thus, a value > 0 is
+   * how much the user has scrolled from the top
+   */
+  function getCurrentScrollPosition() {
+    return $(window).scrollTop();
+  }
+
+  function initializeProgressElement() {
+    let navbarHeight = $("#navbar").outerHeight(true);
+    $("body").css({ "padding-top": navbarHeight });
+    $("progress-container").css({ "padding-top": navbarHeight });
+    progressBar.css({ top: navbarHeight });
+    progressBar.attr({
+      max: getDistanceToScroll(),
+      value: getCurrentScrollPosition(),
+    });
+  }
+  /*
+   * The offset between the html document height and the browser viewport
+   * height will be greater than zero if vertical scroll is possible.
+   * This is the distance the user can scroll
+   */
+  function getDistanceToScroll() {
+    return $(document).height() - $(window).height();
+  }
+
+  function resizeProgressBar() {
+    progressBar.css({ width: getWidthPercentage() + "%" });
+  }
+  // The scroll ratio equals the percentage to resize the bar
+  function getWidthPercentage() {
+    return (getCurrentScrollPosition() / getDistanceToScroll()) * 100;
+  }
+</script>
+
+  </body>
+</html>
