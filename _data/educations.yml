@@ -44,10 +44,10 @@
         - title: Learning Outcomes
           contents:
             - Got familiar with real-world software development methodologies, utilizing team-based collaboration to simulate corporate culture and industry standard practices.
-            - Learnt about SDLC and MVP delivery after each sprint, Agile project management and scrum methodology.
-            - Learnt about writing user stories, preparing test plan and project management using kanban board.
-            - Learnt about github workflows to automate test, create PR for code reviewing and merge code with production branch.
-            - [In-Progress]
+            - Learned about SDLC and MVP delivery after each sprint, Agile project management and scrum methodology.
+            - Learned about writing user stories, preparing test plan and project management using kanban board.
+            - Learned about github workflows to automate test, create PR for code reviewing and merge code with production branch.
+            - Learned to about team-based project management and project development.
 
     - title: ECE 5490 Multi-Dimensional Image Analysis Tools
       institution: UIowa
@@ -56,8 +56,11 @@
         - title: Learning Outcomes
           contents:
             - Got familiar with multi-dimensional medical image analysis tools and techniques for applying in clinical and research settings.
-            - Learnt about building ITK libraries using CMake and writing C++ application linking a pre-built ITK.
-            - [In-Progress]
+            - Learned about building ITK libraries using CMake and writing C++ application linking a pre-built ITK.
+            - Learned about creating 3D Slicer extension using Slicer Execution Model (SEM) and ITK.
+            - Got hands-on experience with working on large medical image dataset and project development from PRD writing to reproducible code and proper documentation.
+
+            - Worked on a project to detect landmarks in multi-site brain MRI and perform ACPC alignment.
 
     - title: BME 6230 Principles of Magnetic Resonance Imaging
       institution: UIowa
@@ -65,8 +68,12 @@
       description:
         - title: Learning Outcomes
           contents:
-            - Learnt about the principles of MRI and the source of different artifacts in MRI.
-            - [In-Progress]
+            - Learned about the principles of MRI and the source of different artifacts in MRI.
+            - Got familiar with different pulse sequences in MRI.
+            - Got hands-on experience of acquiring data from MR scanner (GE Signa Magnus 3T) and explored different protocols and their advantages and disadvantages.
+            - Got familiar with advanced concepts in the field of MRI and the current trends in MRI research.
+            - Visited GE's headquarter at Waukesha, WI to learn about how an idea is implemented in a product as part of the course.
+            - Got familiar with Orchestra and pulse sequence programming.
 
     - title: ECE 5460 Digital Signal Processing
       institution: UIowa

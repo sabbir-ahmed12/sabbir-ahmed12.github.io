@@ -18,6 +18,7 @@ nav_order: 5
 #### **Honors and Awards**
 
 ---
+- **Trainee Stipend**: Awarded trainee (educational) stipend to attend 2026 ISMRM-ISMRT Annual Meeting and Exhibition in Cape Town, South Africa.
 
 - **Higher Secondary School Merit Scholarship** (2017-2022): Awarded Talent Pool scholarship for obtaining 9th position in Cumilla Board at Higher Secondary School Certificate (HSC) examination.
 
