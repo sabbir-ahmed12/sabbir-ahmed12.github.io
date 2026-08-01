@@ -1,5 +1,165 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://sabbir-ahmed12.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sabbir-ahmed12.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-07-30T17:02:55+00:00</updated><id>https://sabbir-ahmed12.github.io/feed.xml</id><title type="html">blank</title><subtitle>This is Sabbir Ahmed&apos;s personal website.
-</subtitle><entry><title type="html">Learn to Manage C++ Projects Using CMake Like a Pro (Part 1 - Building C++ Programs)</title><link href="https://sabbir-ahmed12.github.io/blog/2026/learn-cmake-part1/" rel="alternate" type="text/html" title="Learn to Manage C++ Projects Using CMake Like a Pro (Part 1 - Building C++ Programs)" /><published>2026-07-09T16:00:00+00:00</published><updated>2026-07-09T16:00:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2026/learn-cmake-part1</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2026/learn-cmake-part1/"><![CDATA[<p>Building small C++ projects is straightforward, but large projects with multiple developers, external libraries, and cross-platform support require a more robust build system. CMake is a meta-build system that simplifies this process by describing your project’s structure and generating platform-specific build files (such as Visual Studio solutions or Makefiles). This course introduces the fundamentals of the C++ build process and gradually covers modern CMake techniques for developing large, cross-platform applications. Before using CMake, you’ll first learn about the tools involved in compiling and building C++ programs.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://sabbir-ahmed12.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sabbir-ahmed12.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-08-01T00:25:38+00:00</updated><id>https://sabbir-ahmed12.github.io/feed.xml</id><title type="html">blank</title><subtitle>This is Sabbir Ahmed&apos;s personal website.
+</subtitle><entry><title type="html">Demystifying C++ Memory - Lvalues, Rvalues, and the Magic of `std::move`</title><link href="https://sabbir-ahmed12.github.io/blog/2026/lvalue-rvalue-and-move-semantics-in-cpp/" rel="alternate" type="text/html" title="Demystifying C++ Memory - Lvalues, Rvalues, and the Magic of `std::move`" /><published>2026-07-31T11:04:00+00:00</published><updated>2026-07-31T11:04:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2026/lvalue-rvalue-and-move-semantics-in-cpp</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2026/lvalue-rvalue-and-move-semantics-in-cpp/"><![CDATA[<p>If you’ve spent any time with modern C++, you’ve probably seen a lot of ampersands (<code class="language-plaintext highlighter-rouge">&amp;</code> and <code class="language-plaintext highlighter-rouge">&amp;&amp;</code>) and heard whispers about “move semantics.” It can feel like an entirely different language! But at its core, this entire system was designed to solve one simple problem: making C++ blazing fast by eliminating unnecessary copying.</p>
+
+<p>To understand how it works, we need to take a step back and look at how C++ actually views the data in your program. We need to talk about <code class="language-plaintext highlighter-rouge">lvalues</code> and <code class="language-plaintext highlighter-rouge">rvalues</code>.</p>
+
+<hr />
+
+<h3 id="the-post-office-box-analogy">The “Post Office Box” Analogy</h3>
+
+<p>Before diving into jargon, let’s talk about how computer memory works in the simplest terms possible.</p>
+
+<p>Imagine your computer’s RAM is a massive post office wall filled with millions of tiny P.O. boxes.</p>
+<ul>
+  <li>Every box has a physical location on the wall (a <strong>memory address</strong>).</li>
+  <li>Every box has a sticky note on the outside with a name (a <strong>variable name</strong>).</li>
+  <li>Every box contains something inside it (the <strong>value</strong> or <strong>data</strong>).</li>
+</ul>
+
+<p>When you write a simple line of C++ code like this:</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</code></pre></div></div>
+<p>You are doing two distinct things:</p>
+<ol>
+  <li><strong><code class="language-plaintext highlighter-rouge">int x</code>:</strong> You are asking the compiler to find an empty box on the wall and put a sticky note labeled <code class="language-plaintext highlighter-rouge">x</code> on it.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">= 10</code>:</strong> You are taking the literal 10 and stuffing it inside the box. So, you can ask for the physical address of the box (<code class="language-plaintext highlighter-rouge">x</code>) but not the address of the literal <code class="language-plaintext highlighter-rouge">10</code>.</li>
+</ol>
+
+<p>This simple distinction between “the box” and “the contents” is the entire foundation of lvalues and rvalues.</p>
+
+<p><em>Why can’t you ask for the address of the literal <code class="language-plaintext highlighter-rouge">10</code>?</em></p>
+
+<p>When the C++ compiler translates your code into machine code, it doesn’t allocate a special piece of RAM to hold the number <code class="language-plaintext highlighter-rouge">10</code>. Instead, it bakes the number <code class="language-plaintext highlighter-rouge">10</code> directly into the CPU instruction itself.</p>
+
+<p>If you were to look at the assembly code generated by int x = 10;, it would look something like this:</p>
+
+<pre><code class="language-assembly">MOV DWORD PTR [x], 10
+</code></pre>
+<p>This instruction tells the CPU: “Move the value 10 directly into the memory address belonging to <code class="language-plaintext highlighter-rouge">x</code>.”</p>
+
+<p>Because the <code class="language-plaintext highlighter-rouge">10</code> is baked right into the instruction code, it never lives in the standard data memory (RAM) where variables live. Therefore, there is no memory address to point to, which is why taking the address of a literal (<code class="language-plaintext highlighter-rouge">&amp;10</code>) results in a compiler error. It is a pure rvalue.</p>
+
+<p><em>The One Exception: String Literals</em></p>
+
+<p>It is worth noting that string literals (like “Hello World”) actually do get stored in a specific memory location. Because a string is an array of characters (and can be quite large), the compiler cannot bake it directly into a single CPU instruction. Instead, it stores the text in a read-only section of the program’s memory. This is why you can take the address of a string literal!</p>
+
+<hr />
+
+<h3 id="1-what-is-an-lvalue-the-box">1. What is an Lvalue? (The Box)</h3>
+
+<p>An lvalue is the box itself. It is an object that occupies a specific, identifiable location in memory.</p>
+
+<p>Because it represents a physical box on the wall, it has permanence. It exists beyond the single line of code it was written on. Because it has a physical location, you can ask the computer where it is using the “address-of” operator (<code class="language-plaintext highlighter-rouge">&amp;</code>).</p>
+
+<p><strong>Examples of lvalues:</strong></p>
+<ul>
+  <li>Variables (<code class="language-plaintext highlighter-rouge">x</code>, <code class="language-plaintext highlighter-rouge">myString</code>, <code class="language-plaintext highlighter-rouge">userList</code>)</li>
+  <li>Array elements (<code class="language-plaintext highlighter-rouge">arr[0]</code>)</li>
+  <li>Dereferenced pointers (<code class="language-plaintext highlighter-rouge">*ptr</code>)</li>
+</ul>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>    <span class="c1">// 'x' is an lvalue. It's a box.</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>        <span class="c1">// Valid: We can open the box and replace the contents.</span>
+<span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">;</span> <span class="c1">// Valid: We can find the exact physical location of the box.</span>
+</code></pre></div></div>
+
+<h3 id="2-what-is-an-rvalue-the-contents--temporaries">2. What is an Rvalue? (The Contents &amp; Temporaries)</h3>
+
+<p>An rvalue is the stuff that goes inside the box, or temporary scratchpad data that the computer calculates on the fly.</p>
+
+<p>Rvalues do not have a permanent, identifiable memory address. They exist only for the exact fraction of a second that the current line of code is executing, and then they vanish.</p>
+
+<p><strong>Examples of rvalues:</strong></p>
+<ul>
+  <li>Literal numbers (<code class="language-plaintext highlighter-rouge">10</code>, <code class="language-plaintext highlighter-rouge">3.14</code>)</li>
+  <li>The result of math equations (<code class="language-plaintext highlighter-rouge">x + 5</code>)</li>
+  <li>Values returned by functions (<code class="language-plaintext highlighter-rouge">calculateTotal()</code>)</li>
+</ul>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> 
+<span class="c1">// 10 is an rvalue. It's raw data, not a box. </span>
+<span class="c1">// You cannot take the memory address of the number 10! (&amp;10 is an error)</span>
+
+<span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span> 
+<span class="c1">// The math result (15) is calculated in the CPU's temporary scratchpad. </span>
+<span class="c1">// It is an rvalue. It vanishes as soon as it is poured into the box 'y'.</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="lvalue-and-rvalue-references--vs-">Lvalue and Rvalue References: <code class="language-plaintext highlighter-rouge">&amp;</code> vs <code class="language-plaintext highlighter-rouge">&amp;&amp;</code></h3>
+
+<p>In C++, a reference is a way to create an alias—a second sticky note for an existing box. C++ gives us two types of references so we can handle permanent boxes and temporary data differently.</p>
+
+<h4 id="lvalue-references-">Lvalue References (<code class="language-plaintext highlighter-rouge">&amp;</code>)</h4>
+<p>An lvalue reference (a single ampersand) is your standard, everyday reference. It can only attach to a permanent box (an lvalue). It refuses to attach to temporary data because temporary data is about to vanish!</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="kt">int</span><span class="o">&amp;</span> <span class="n">alias</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>    <span class="c1">// Valid: 'alias' is a second sticky note for box 'x'.</span>
+<span class="c1">// int&amp; bad = 20;  // ERROR: 20 is an rvalue. You can't put a sticky note on thin air!</span>
+</code></pre></div></div>
+
+<h4 id="rvalue-references-">Rvalue References (<code class="language-plaintext highlighter-rouge">&amp;&amp;</code>)</h4>
+<p>Introduced in C++11, an rvalue reference (a double ampersand) is special. It is designed to catch temporary, fleeting data (rvalues) <em>just</em> before they vanish into thin air. It cannot attach to a permanent box.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="kt">int</span><span class="o">&amp;&amp;</span> <span class="n">tempAlias</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>     <span class="c1">// Valid! We caught the temporary rvalue '20'.</span>
+<span class="kt">int</span><span class="o">&amp;&amp;</span> <span class="n">mathAlias</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>  <span class="c1">// Valid! We caught the temporary result of the math.</span>
+<span class="c1">// int&amp;&amp; bad = x;         // ERROR: 'x' is a permanent box (lvalue).</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="why-does-this-matter-the-magic-of-move-semantics">Why does this matter? The Magic of Move Semantics</h3>
+
+<p>Why would C++ go through all the trouble of creating a special reference just to catch vanishing temporary data? To prevent massive, slow data copying.</p>
+
+<p>Imagine you have a function that generates a massive <code class="language-plaintext highlighter-rouge">std::string</code> containing a 1-gigabyte text file.</p>
+
+<p>Before C++11, if you returned that giant string from a function, the computer would say: <em>“Okay, here is your temporary 1GB string. Now, I will copy all 1-billion characters into your new variable, and then I will destroy the temporary one.”</em></p>
+
+<p>It was incredibly slow and wasteful.</p>
+
+<p>But with rvalue references (<code class="language-plaintext highlighter-rouge">&amp;&amp;</code>), the compiler can look at that temporary 1GB string and say: <em>“Wait, this is an rvalue. It’s about to be destroyed anyway! Instead of copying it, I’m just going to STEAL its underlying data pointers and give them to the new variable.”</em></p>
+
+<p>This is called a <strong>Move</strong>, and it is instantaneous.</p>
+
+<hr />
+
+<h3 id="stdmove-function"><code class="language-plaintext highlighter-rouge">std::move</code> Function:</h3>
+
+<p>This brings us to the most misunderstood function in C++: <code class="language-plaintext highlighter-rouge">std::move</code>.</p>
+
+<p>The biggest secret of <code class="language-plaintext highlighter-rouge">std::move</code> is that it doesn’t actually move anything. Instead, <code class="language-plaintext highlighter-rouge">std::move</code> is simply a disguise.</p>
+
+<p>Sometimes, you have a permanent box (an lvalue) that contains a ton of data, but you are completely done using it. You <em>want</em> the computer to steal its data to avoid a slow copy, but the computer refuses because it sees a permanent lvalue box.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">myHugeString</span> <span class="o">=</span> <span class="s">"One gigabyte of text..."</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">target</span> <span class="o">=</span> <span class="n">myHugeString</span><span class="p">;</span> <span class="c1">// This forces a slow, massive 1GB copy!</span>
+</code></pre></div></div>
+
+<p>We use <code class="language-plaintext highlighter-rouge">std::move</code> to temporarily strip the permanent box of its “lvalue” status and disguise it as an “rvalue”.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">myHugeString</span> <span class="o">=</span> <span class="s">"One gigabyte of text..."</span><span class="p">;</span>
+
+<span class="c1">// std::move casts the lvalue into an rvalue reference (&amp;&amp;)</span>
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">target</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">myHugeString</span><span class="p">);</span> 
+
+<span class="c1">// The computer sees the rvalue disguise, realizes it is allowed to steal, </span>
+<span class="c1">// and instantly transfers ownership of the 1GB of text to 'target'.</span>
+</code></pre></div></div>
+
+<p>After you use <code class="language-plaintext highlighter-rouge">std::move</code> on <code class="language-plaintext highlighter-rouge">myHugeString</code>, the physical box still exists, but its contents have been completely hollowed out and stolen by <code class="language-plaintext highlighter-rouge">target</code>. <code class="language-plaintext highlighter-rouge">myHugeString</code> is now empty!</p>
+
+<h3 id="summary">Summary</h3>
+
+<ol>
+  <li><strong>Lvalues</strong> are permanent boxes in memory (<code class="language-plaintext highlighter-rouge">x</code>, <code class="language-plaintext highlighter-rouge">myString</code>).</li>
+  <li><strong>Rvalues</strong> are the temporary contents or fleeting math results (<code class="language-plaintext highlighter-rouge">10</code>, <code class="language-plaintext highlighter-rouge">x + 5</code>).</li>
+  <li><strong>Lvalue References (<code class="language-plaintext highlighter-rouge">&amp;</code>)</strong> let us share permanent boxes safely.</li>
+  <li><strong>Rvalue References (<code class="language-plaintext highlighter-rouge">&amp;&amp;</code>)</strong> let us catch temporary data so we can steal its resources instantly instead of copying them.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">std::move</code></strong> is just a clever disguise that forces the compiler to treat a permanent box like temporary data, unlocking the blazing speed of move semantics!</li>
+</ol>]]></content><author><name></name></author><category term="tutorial" /><category term="C++" /><summary type="html"><![CDATA[Learn about lvalue, rvalue, lvalue reference, rvalue reference and move semantics in C++]]></summary></entry><entry><title type="html">Learn to Manage C++ Projects Using CMake Like a Pro (Part 1 - Building C++ Programs)</title><link href="https://sabbir-ahmed12.github.io/blog/2026/learn-cmake-part1/" rel="alternate" type="text/html" title="Learn to Manage C++ Projects Using CMake Like a Pro (Part 1 - Building C++ Programs)" /><published>2026-07-09T16:00:00+00:00</published><updated>2026-07-09T16:00:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2026/learn-cmake-part1</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2026/learn-cmake-part1/"><![CDATA[<p>Building small C++ projects is straightforward, but large projects with multiple developers, external libraries, and cross-platform support require a more robust build system. CMake is a meta-build system that simplifies this process by describing your project’s structure and generating platform-specific build files (such as Visual Studio solutions or Makefiles). This course introduces the fundamentals of the C++ build process and gradually covers modern CMake techniques for developing large, cross-platform applications. Before using CMake, you’ll first learn about the tools involved in compiling and building C++ programs.</p>
 
 <hr />
 
@@ -2380,98 +2540,4 @@ git clone https://github.com/Slicer/SlicerExecutionModel.git
       height="100%"
       onload="this.parentElement.style.paddingBottom = (this.contentWindow.document.documentElement.scrollHeight + 10) + 'px'"></iframe>
   </div>
-</div>]]></content><author><name></name></author><category term="tutorial" /><category term="linux" /><summary type="html"><![CDATA[Tutorial post on non-cartesian MR image reconstruction.]]></summary></entry><entry><title type="html">Learning Linux from Basics to Advanced</title><link href="https://sabbir-ahmed12.github.io/blog/2024/learning-linux-from-basics-to-advanced/" rel="alternate" type="text/html" title="Learning Linux from Basics to Advanced" /><published>2024-07-14T15:03:00+00:00</published><updated>2024-07-14T15:03:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2024/learning-linux-from-basics-to-advanced</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2024/learning-linux-from-basics-to-advanced/"><![CDATA[<p>Learning Linux is one of the most valuable skills in the tech industry. It helps doing things faster and more efficiently. Many of the world’s powerful servers and supercomputers run on Linux.</p>
-
-<p>In this post, we’ll learn the basics of Linux command line, and then transition to more advanced topics like shell scripting and system administration.</p>
-
-<p><strong>Important Note:</strong> All examples of this post are demonstrated in Ubuntu 22.04 LTS. This blog was written assuming that you’ve a Linux OS already setup for you.</p>
-
-<h2 id="part-1-introduction-to-linux">Part 1: Introduction to Linux</h2>
-
-<h3 id="11-getting-started-with-linux">1.1. Getting Started with Linux</h3>
-
-<h4 id="what-is-linux">What is Linux?</h4>
-
-<p>Linux is an open-source operating system that is based on the Unix Operating System (OS). It was created by Linus Torvalds in 1991. Open source means that the source code of the operating system is available to the public. This allows you to modify the original code, customize it, and distribute the new operating system to potential users.</p>
-
-<h4 id="why-should-you-learn-linux">Why should you learn linux?</h4>
-
-<p>In today’s data center landscape, Linux and Microsoft Windows stand out as the primary contenders, with Linux having a major share.</p>
-
-<p>Some of the compelling reasons to learn Linux are:</p>
-
-<ul>
-  <li>
-    <p>Given the prevalence of Linux hosting, there is a high chance that your application will be hosted on Linux. So, learning Linux as a developer becomes increasingly valuable.</p>
-  </li>
-  <li>
-    <p>With cloud computing becoming the norm, chances are high that your cloud instance will rely on Linux.</p>
-  </li>
-  <li>
-    <p>Linux serves as the foundation for many operating systems for the Internet of Things (IoT) and mobile applications.</p>
-  </li>
-  <li>
-    <p>Most of the commands you’ll learn can also used in MacOS. Moreover, knowledge of Linux will open many opportunities for you.</p>
-  </li>
-</ul>
-
-<h4 id="what-is-a-linux-kernel">What is a Linux Kernel?</h4>
-
-<p>The kernel is the central component of an operating system that manages the computer and its hardware operations. It handles memory operations and CPU time. It acts as a bridge between applications and the hardware-level data processing using inter-process communication and system calls.</p>
-
-<p>The kernel is loaded into memory first when an operating system starts and remains there until the system shuts down. It is responsible for tasks like disk management, task management, and memory management.</p>
-
-<div class="row mt-3">
-    <div class="col-sm mt-3 mt-md-0">
-        <figure>
-
-  <picture>
-    
-
-    <!-- Fallback to the original file -->
-    <img src="/assets/posts_img/2024_07_14_learning_linux/kernel_layout.png" class="img-fluid rounded z-depth-1" width="auto" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
-
-  </picture>
-
-</figure>
-
-    </div>
-</div>
-
-<p>If you’re curious about learning Linux kernel, you can check the GitHub link [here].(https://github.com/torvalds/linux)</p>
-
-<h4 id="what-is-a-linux-distribution">What is a Linux Distribution?</h4>
-
-<p>By this point, you know that you can re-use the Linux kernel code, modify it, and create a new kernel. You can further combine different utilities and software to create a completely new operating system. A Linux distribution or distro is a version of the Linux operating system that includes the Linux kernel, system utilities, and other software. Being open source, a Linux distribution is a collaborative effort involving multiple independent open-source development communities. So, Linux distributions are different flavors of the Linux OS.</p>
-
-<p><strong><em>What does it mean that a distribution is derived?</em></strong>
-When you say that a distribution is “derived” from another, the newer distro is built upon the base or foundation of the original distro. This derivation can include using the same package management system (more on this later), kernel version, and sometimes the same configuration tools. Today, there are thousands of Linux distributions to choose from, offering differing goals and criteria for selecting and supporting the software provided by their distribution.</p>
-
-<p>Distributions vary from one to the other, but they generally have several common characteristics:</p>
-
-<ul>
-  <li>A distribution consists of a Linux kernel.</li>
-  <li>It supports user space programs.</li>
-  <li>A distribution may be small and single-purpose or include thousands of open-source programs.</li>
-  <li>Some means of installing and updating the distribution and its components should be provided.</li>
-</ul>
-
-<p>If you view the <a href="https://upload.wikimedia.org/wikipedia/commons/1/1b/Linux_Distribution_Timeline.svg">Linux Distributions Timeline</a>, you’ll see two major distros: Slackware and Debian. Several distributions are derived from them. For example, Ubuntu and Kali are derived from Debian.</p>
-
-<p>There are various advantages of derivation. Derived distributions can leverage the stability, security, and large software repositories of the parent distribution.</p>
-
-<p>When building on an existing foundation, developers can drive their focus and effort entirely on the specialized features of the new distribution. Users of derived distributions can benefit from the documentation, community support, and resources already available for the parent distribution.</p>
-
-<p>Some popular Linux distributions are: <code class="language-plaintext highlighter-rouge">Ubuntu</code>, <code class="language-plaintext highlighter-rouge">Linux Mint</code>, <code class="language-plaintext highlighter-rouge">Arch Linux</code>, <code class="language-plaintext highlighter-rouge">Manjaro</code>, <code class="language-plaintext highlighter-rouge">Kali Linux</code> etc.</p>
-
-<h2 id="part-2-introduction-to-terminal-console-shell-and-system-commands">Part 2: Introduction to Terminal, Console, Shell and System Commands</h2>
-
-<h3 id="21-introduction-to-terminal-console-and-shell">2.1. Introduction to Terminal, Console and Shell</h3>
-
-<h4 id="what-is-a-terminal">What is a Terminal?</h4>
-
-<p>A terminal is a text-based user interface that allows users to interact with a computer by entering commands and viewing the results. A terminal can be connected to a local or a remote system, depending on the protocol of the network.</p>
-
-<h4 id="what-is-console">What is Console?</h4>
-
-<p>A console is a special type of terminal that is directly attached to the computer system. It is usually the primary interface for system administration and maintenance. It can be a physical device such as a keyboard and a monitor, or a virtual device such as a serial port or graphical window. A console gives you access to the low-level functions and settings of the computer system such as the BIOS, the boot loader or the kernel.</p>]]></content><author><name></name></author><category term="tutorial" /><category term="linux" /><summary type="html"><![CDATA[Tutorial post on linux operating system.]]></summary></entry></feed>
+</div>]]></content><author><name></name></author><category term="tutorial" /><category term="linux" /><summary type="html"><![CDATA[Tutorial post on non-cartesian MR image reconstruction.]]></summary></entry></feed>
