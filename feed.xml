@@ -1,5 +1,156 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://sabbir-ahmed12.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sabbir-ahmed12.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-09-07T06:16:17+00:00</updated><id>https://sabbir-ahmed12.github.io/feed.xml</id><title type="html">blank</title><subtitle>This is Sabbir Ahmed&apos;s personal website.
-</subtitle><entry><title type="html">Demystifying C++ Memory - Lvalues, Rvalues, and the Magic of `std::move`</title><link href="https://sabbir-ahmed12.github.io/blog/2026/lvalue-rvalue-and-move-semantics-in-cpp/" rel="alternate" type="text/html" title="Demystifying C++ Memory - Lvalues, Rvalues, and the Magic of `std::move`" /><published>2026-07-31T11:04:00+00:00</published><updated>2026-07-31T11:04:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2026/lvalue-rvalue-and-move-semantics-in-cpp</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2026/lvalue-rvalue-and-move-semantics-in-cpp/"><![CDATA[<p>If you’ve spent any time with modern C++, you’ve probably seen a lot of ampersands (<code class="language-plaintext highlighter-rouge">&amp;</code> and <code class="language-plaintext highlighter-rouge">&amp;&amp;</code>) and heard whispers about “move semantics.” It can feel like an entirely different language! But at its core, this entire system was designed to solve one simple problem: making C++ blazing fast by eliminating unnecessary copying.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://sabbir-ahmed12.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sabbir-ahmed12.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-09-08T04:37:21+00:00</updated><id>https://sabbir-ahmed12.github.io/feed.xml</id><title type="html">blank</title><subtitle>This is Sabbir Ahmed&apos;s personal website.
+</subtitle><entry><title type="html">Modern C++ - Using Modules</title><link href="https://sabbir-ahmed12.github.io/blog/2026/cpp-modules/" rel="alternate" type="text/html" title="Modern C++ - Using Modules" /><published>2026-09-07T05:14:00+00:00</published><updated>2026-09-07T05:14:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2026/cpp-modules</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2026/cpp-modules/"><![CDATA[<h1 id="overcoming-apple-clang-a-guide-to-c20-modules-on-macos">Overcoming Apple Clang: A Guide to C++20 Modules on macOS</h1>
+
+<p>If you are diving into modern C++ software engineering, you have likely encountered the promise of <strong>C++ Modules</strong>. Introduced in C++20 and refined in C++23, modules aim to replace the decades-old <code class="language-plaintext highlighter-rouge">#include</code> preprocessor mechanism. They offer significant improvements in build times, isolation from macro pollution, and a cleaner way to structure high-performance C++ applications.</p>
+
+<p>However, if you develop on a Mac, you might hit a brick wall when trying to build a module-based project with standard tools like CMake.</p>
+
+<p>This guide breaks down exactly why macOS struggles with C++ modules out of the box, how to set up the correct toolchain, and how to build a standard module-based project using CMake and Ninja.</p>
+
+<hr />
+
+<h2 id="the-problem-apple-clang-vs-upstream-llvm">The Problem: Apple Clang vs. Upstream LLVM</h2>
+
+<p>If you install Xcode or the macOS Command Line Tools, your default compiler is <strong>Apple Clang</strong>. While Apple Clang is fantastic for building iOS apps with Swift and Objective-C, it lags significantly behind the global C++ standard.</p>
+
+<p>When CMake (version 3.28+) configures a C++ module project, it doesn’t just compile files blindly. It must scan your source code to map out the dependency graph (which module imports which) to ensure they are compiled in the exact right order.</p>
+
+<p>To do this, CMake relies on a background tool called <code class="language-plaintext highlighter-rouge">clang-scan-deps</code>.</p>
+
+<p><strong>The catch:</strong> Apple strips <code class="language-plaintext highlighter-rouge">clang-scan-deps</code> out of their Apple Clang distribution because their internal Xcode build system doesn’t rely on it. As a result, when you run CMake on a Mac, you get a fatal error complaining that the compiler cannot discover the import graph dependencies.</p>
+
+<h2 id="the-solution-installing-the-upstream-toolchain">The Solution: Installing the Upstream Toolchain</h2>
+
+<p>To fix this, we need to bypass Apple Clang entirely and use the industry-standard upstream <strong>LLVM</strong> toolchain, alongside the <strong>Ninja</strong> build system (which is highly optimized for complex module dependencies).</p>
+
+<h3 id="1-install-the-tools">1. Install the Tools</h3>
+
+<p>We will use Homebrew to install the official LLVM package and Ninja:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>llvm ninja
+</code></pre></div></div>
+
+<h3 id="2-configure-your-environment">2. Configure Your Environment</h3>
+
+<p>Homebrew installs LLVM as “keg-only” so it doesn’t break macOS system tools. To make your terminal use this modern toolchain by default, add the following to your <code class="language-plaintext highlighter-rouge">~/.zshrc</code> (or <code class="language-plaintext highlighter-rouge">~/.bash_profile</code>):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Prioritize Homebrew LLVM over Apple Clang</span>
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"</span><span class="si">$(</span>brew <span class="nt">--prefix</span> llvm<span class="si">)</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">"</span>
+
+<span class="c"># Set global compiler variables for CMake</span>
+<span class="nb">export </span><span class="nv">CC</span><span class="o">=</span><span class="s2">"</span><span class="si">$(</span>brew <span class="nt">--prefix</span> llvm<span class="si">)</span><span class="s2">/bin/clang"</span>
+<span class="nb">export </span><span class="nv">CXX</span><span class="o">=</span><span class="s2">"</span><span class="si">$(</span>brew <span class="nt">--prefix</span> llvm<span class="si">)</span><span class="s2">/bin/clang++"</span>
+
+<span class="c"># Linker and Include flags</span>
+<span class="nb">export </span><span class="nv">LDFLAGS</span><span class="o">=</span><span class="s2">"-L</span><span class="si">$(</span>brew <span class="nt">--prefix</span> llvm<span class="si">)</span><span class="s2">/lib"</span>
+<span class="nb">export </span><span class="nv">CPPFLAGS</span><span class="o">=</span><span class="s2">"-I</span><span class="si">$(</span>brew <span class="nt">--prefix</span> llvm<span class="si">)</span><span class="s2">/include"</span>
+</code></pre></div></div>
+
+<p>Reload your shell configuration:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">source</span> ~/.zshrc
+</code></pre></div></div>
+
+<p>Verify you are now using the correct compiler (it should say “Homebrew clang version…”, not “AppleClang”):</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>clang++ <span class="nt">--version</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="a-standard-project-walkthrough">A Standard Project Walkthrough</h2>
+
+<p>Let’s build a minimal, standard C++ project utilizing modules, CMake, and our new LLVM toolchain.</p>
+
+<h3 id="project-structure">Project Structure</h3>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MathApp/
+├── CMakeLists.txt
+├── MathModule.cppm    # The module interface
+└── main.cpp           # The main executable importing the module
+</code></pre></div></div>
+
+<p><em>(Note: We use <code class="language-plaintext highlighter-rouge">.cppm</code> for the module interface to clearly distinguish it from standard <code class="language-plaintext highlighter-rouge">.cpp</code> source files). However, it is not a mandatory requirement but a community convention favored within the Clang and GCC open-source community. You can absolutely use <code class="language-plaintext highlighter-rouge">.cpp</code> or <code class="language-plaintext highlighter-rouge">.cxx</code> extensions for modules as long as the file contains an <code class="language-plaintext highlighter-rouge">export module</code> declaration. <code class="language-plaintext highlighter-rouge">.ixx</code> is the default and most common extension used by Microsoft’s MSVC toolchain.</em></p>
+
+<h3 id="1-the-module-interface-mathmodulecppm">1. The Module Interface (<code class="language-plaintext highlighter-rouge">MathModule.cppm</code>)</h3>
+
+<p>This file defines our module and exports a simple math function.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="k">module</span> <span class="n">MathModule</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">namespace</span> <span class="n">math</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">square</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span> 
+        <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">a</span><span class="p">;</span> 
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="2-the-main-application-maincpp">2. The Main Application (<code class="language-plaintext highlighter-rouge">main.cpp</code>)</h3>
+
+<p>Notice how we use <code class="language-plaintext highlighter-rouge">import</code> instead of <code class="language-plaintext highlighter-rouge">#include</code> for our custom module.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span>
+<span class="k">import</span> <span class="n">MathModule</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"The square of "</span> <span class="o">&lt;&lt;</span> <span class="n">value</span> <span class="o">&lt;&lt;</span> <span class="s">" is: "</span> 
+              <span class="o">&lt;&lt;</span> <span class="n">math</span><span class="o">::</span><span class="n">square</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="3-the-build-system-cmakeliststxt">3. The Build System (<code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>)</h3>
+
+<p>CMake 3.28 introduced native support for <code class="language-plaintext highlighter-rouge">FILE_SET CXX_MODULES</code>, which handles all the complex precompilation under the hood.</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.28<span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span>MathAppProject CXX<span class="p">)</span>
+
+<span class="c1"># Enforce modern C++ standards</span>
+<span class="nb">set</span><span class="p">(</span>CMAKE_CXX_STANDARD 23<span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>CMAKE_CXX_STANDARD_REQUIRED ON<span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>CMAKE_CXX_EXTENSIONS OFF<span class="p">)</span>
+
+<span class="c1"># Define the executable</span>
+<span class="nb">add_executable</span><span class="p">(</span>MathApp main.cpp<span class="p">)</span>
+
+<span class="c1"># Register the module interfaces for dependency scanning</span>
+<span class="nb">target_sources</span><span class="p">(</span>MathApp
+  PRIVATE
+    FILE_SET CXX_MODULES FILES 
+      MathModule.cppm
+<span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="building-and-running-the-application">Building and Running the Application</h2>
+
+<p>With our files in place and our terminal environment pointing to the Homebrew LLVM compiler, we can now configure and build the project flawlessly.</p>
+
+<p><strong>Step 1: Configure with Ninja</strong>
+Run this in the root of your <code class="language-plaintext highlighter-rouge">MathApp</code> directory. The Ninja generator is crucial here, as it perfectly handles the dynamic dependency scanning required by C++ modules.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">-G</span> Ninja <span class="nt">-S</span> <span class="nb">.</span> <span class="nt">-B</span> build
+</code></pre></div></div>
+
+<p><strong>Step 2: Build the Executable</strong>
+CMake will utilize <code class="language-plaintext highlighter-rouge">clang-scan-deps</code> (now available via LLVM) to build the <code class="language-plaintext highlighter-rouge">.pcm</code> (Precompiled Module) files first, followed by the main executable.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">--build</span> build
+</code></pre></div></div>
+
+<p><strong>Step 3: Run the App</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/MathApp
+</code></pre></div></div>
+
+<p><strong>Expected Output:</strong></p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The square of 4 is: 16
+</code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Transitioning to C++ modules on macOS requires a slight detour from Apple’s default ecosystem. By equipping your workstation with the upstream LLVM toolchain and Ninja, you unlock the full capability of modern C++23 features, robust dependency scanning, and scalable build infrastructure.</p>]]></content><author><name></name></author><category term="tutorial" /><category term="C++" /><summary type="html"><![CDATA[Learn about using modern C++ module]]></summary></entry><entry><title type="html">Demystifying C++ Memory - Lvalues, Rvalues, and the Magic of `std::move`</title><link href="https://sabbir-ahmed12.github.io/blog/2026/lvalue-rvalue-and-move-semantics-in-cpp/" rel="alternate" type="text/html" title="Demystifying C++ Memory - Lvalues, Rvalues, and the Magic of `std::move`" /><published>2026-07-31T11:04:00+00:00</published><updated>2026-07-31T11:04:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2026/lvalue-rvalue-and-move-semantics-in-cpp</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2026/lvalue-rvalue-and-move-semantics-in-cpp/"><![CDATA[<p>If you’ve spent any time with modern C++, you’ve probably seen a lot of ampersands (<code class="language-plaintext highlighter-rouge">&amp;</code> and <code class="language-plaintext highlighter-rouge">&amp;&amp;</code>) and heard whispers about “move semantics.” It can feel like an entirely different language! But at its core, this entire system was designed to solve one simple problem: making C++ blazing fast by eliminating unnecessary copying.</p>
 
 <p>To understand how it works, we need to take a step back and look at how C++ actually views the data in your program. We need to talk about <code class="language-plaintext highlighter-rouge">lvalues</code> and <code class="language-plaintext highlighter-rouge">rvalues</code>.</p>
 
@@ -2529,15 +2680,4 @@ git clone https://github.com/Slicer/SlicerExecutionModel.git
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uvx ruff check
 </code></pre></div></div>
 
-<p>That’s all for this blog. Although <code class="language-plaintext highlighter-rouge">uv</code> has a lot of functionalities which weren’t covered in this blog, I’ll try to add them as I become more familiar with the other functionalities.</p>]]></content><author><name></name></author><category term="tutorial" /><category term="python" /><summary type="html"><![CDATA[Tutorial Post on Python Project Setup Using UV]]></summary></entry><entry><title type="html">Non-Cartesian MR Image Reconstruction</title><link href="https://sabbir-ahmed12.github.io/blog/2025/non-cartesian-mr-image-reconstruction/" rel="alternate" type="text/html" title="Non-Cartesian MR Image Reconstruction" /><published>2025-01-30T13:24:00+00:00</published><updated>2025-01-30T13:24:00+00:00</updated><id>https://sabbir-ahmed12.github.io/blog/2025/non-cartesian-mr-image-reconstruction</id><content type="html" xml:base="https://sabbir-ahmed12.github.io/blog/2025/non-cartesian-mr-image-reconstruction/"><![CDATA[<div
-  class="jupyter-notebook"
-  style="position: relative; width: 100%; margin: 0 auto;">
-  <div class="jupyter-notebook-iframe-container">
-    <iframe
-      src="/assets/jupyter/non_cartesian_MR_recon.ipynb.html"
-      style="position: absolute; top: 0; left: 0; border-style: none;"
-      width="100%"
-      height="100%"
-      onload="this.parentElement.style.paddingBottom = (this.contentWindow.document.documentElement.scrollHeight + 10) + 'px'"></iframe>
-  </div>
-</div>]]></content><author><name></name></author><category term="tutorial" /><category term="linux" /><summary type="html"><![CDATA[Tutorial post on non-cartesian MR image reconstruction.]]></summary></entry></feed>
+<p>That’s all for this blog. Although <code class="language-plaintext highlighter-rouge">uv</code> has a lot of functionalities which weren’t covered in this blog, I’ll try to add them as I become more familiar with the other functionalities.</p>]]></content><author><name></name></author><category term="tutorial" /><category term="python" /><summary type="html"><![CDATA[Tutorial Post on Python Project Setup Using UV]]></summary></entry></feed>
